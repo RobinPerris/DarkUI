@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DarkUI
 {
-    public class ControlScrollFilter : IMessageFilter
+    public class DarkControlScrollFilter : IMessageFilter
     {
         public bool PreFilterMessage(ref Message m)
         {

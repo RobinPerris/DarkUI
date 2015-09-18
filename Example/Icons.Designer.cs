@@ -63,6 +63,16 @@ namespace Example {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Close_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("Close_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap files {
             get {
                 object obj = ResourceManager.GetObject("files", resourceCulture);
@@ -86,6 +96,36 @@ namespace Example {
         internal static System.Drawing.Bitmap folder_open {
             get {
                 object obj = ResourceManager.GetObject("folder_open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NewFile_6276 {
+            get {
+                object obj = ResourceManager.GetObject("NewFile_6276", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap StatusAnnotations_Information_16xLG_color {
+            get {
+                object obj = ResourceManager.GetObject("StatusAnnotations_Information_16xLG_color", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap StatusAnnotations_Information_16xMD_color {
+            get {
+                object obj = ResourceManager.GetObject("StatusAnnotations_Information_16xMD_color", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

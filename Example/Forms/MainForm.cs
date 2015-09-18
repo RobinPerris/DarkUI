@@ -5,6 +5,8 @@ namespace Example
 {
     public partial class MainForm : DarkForm
     {
+        #region Constructor Region
+
         public MainForm()
         {
             InitializeComponent();
@@ -13,42 +15,33 @@ namespace Example
             // to the control the user is currently hovering over with their cursor.
             Application.AddMessageFilter(new ControlScrollFilter());
 
-            // Build dummy list data
-            for (var i = 0; i < 100; i++)
+            // Add the dock panel message filter to filter through for dock panel splitter
+            // input before letting events pass through to the rest of the application.
+            Application.AddMessageFilter(DockPanel.MessageFilter);
+
+            // Hook in all the UI events manually for clarity.
+            HookEvents();
+        }
+
+        #endregion
+
+        #region Method Region
+
+        private void HookEvents()
+        {
+            mnuDialog.Click += delegate
             {
-                var item = new DarkListItem(string.Format("List item #{0}", i));
-                darkListView1.Items.Add(item);
-            }
-
-            // Build dummy nodes
-            var childCount = 0;
-            for (var i = 0; i < 20; i++)
-            {
-                var node = new DarkTreeNode(string.Format("Root node #{0}", i));
-                node.ExpandedIcon = Icons.folder_open;
-                node.Icon = Icons.folder_closed;
-
-                for (var x = 0; x < 10; x++)
-                {
-                    var childNode = new DarkTreeNode(string.Format("Child node #{0}", childCount));
-                    childNode.Icon = Icons.files;
-                    childCount++;
-                    node.Nodes.Add(childNode);
-                }
-
-                darkTreeView1.Nodes.Add(node);
-            }
-
-            // Hook dialog button events
-            btnDialog.Click += delegate
-            {
-                DarkMessageBox.ShowError("This is an error", "Dark UI - Example");
+                var test = new DialogTest();
+                test.ShowDialog();
             };
 
-            btnMessageBox.Click += delegate
+            mnuAbout.Click += delegate
             {
-                DarkMessageBox.ShowInformation("This is some information, except it is much bigger, so there we go. I wonder how this is going to go. I hope it resizes properly. It probably will.", "Dark UI - Example");
+                var about = new DialogAbout();
+                about.ShowDialog();
             };
         }
+
+        #endregion
     }
 }
