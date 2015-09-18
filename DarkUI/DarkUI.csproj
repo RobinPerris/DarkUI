@@ -58,6 +58,9 @@
     <Compile Include="Controls\DarkStatusStrip.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkToolStrip.cs">
       <SubType>Component</SubType>
     </Compile>
