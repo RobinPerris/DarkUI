@@ -41,6 +41,10 @@
     <Compile Include="Config\Colors.cs" />
     <Compile Include="Config\Consts.cs" />
     <Compile Include="Config\Enums.cs" />
+    <Compile Include="Controls\Classes\DarkListItem.cs" />
+    <Compile Include="Controls\DarkListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkScrollBase.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -57,6 +61,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DarkScrollView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkSectionPanel.cs">

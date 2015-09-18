@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -29,6 +30,8 @@ namespace DarkUI
 
         #region Property Region
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Rectangle Viewport
         {
             get { return _viewport; }
@@ -41,6 +44,8 @@ namespace DarkUI
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Size ContentSize
         {
             get { return _contentSize; }
@@ -54,6 +59,8 @@ namespace DarkUI
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Point OffsetMousePosition
         {
             get { return _offsetMousePosition; }

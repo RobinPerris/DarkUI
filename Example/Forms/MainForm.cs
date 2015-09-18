@@ -8,6 +8,12 @@ namespace Example
         {
             InitializeComponent();
 
+            for (var i = 0; i < 100; i++)
+            {
+                var item = new DarkListItem(string.Format("List item {0}", i));
+                darkListView1.Items.Add(item);
+            }
+
             btnDialog.Click += delegate
             {
                 DarkMessageBox.ShowError("This is an error", "Dark UI - Example");

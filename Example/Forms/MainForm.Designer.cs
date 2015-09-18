@@ -84,11 +84,14 @@
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moreTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.test3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkSectionPanel2 = new DarkUI.DarkSectionPanel();
+            this.darkListView1 = new DarkUI.DarkListView();
             this.mnuMain.SuspendLayout();
             this.toolMain.SuspendLayout();
             this.darkStatusStrip1.SuspendLayout();
             this.darkSectionPanel1.SuspendLayout();
             this.darkContextMenu1.SuspendLayout();
+            this.darkSectionPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuMain
@@ -590,7 +593,7 @@
             // 
             this.testToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.testToolStripMenuItem.Text = "Test";
             // 
             // moreTestToolStripMenuItem
@@ -607,11 +610,31 @@
             this.test3ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.test3ToolStripMenuItem.Text = "Test 3";
             // 
+            // darkSectionPanel2
+            // 
+            this.darkSectionPanel2.Controls.Add(this.darkListView1);
+            this.darkSectionPanel2.Location = new System.Drawing.Point(204, 157);
+            this.darkSectionPanel2.Name = "darkSectionPanel2";
+            this.darkSectionPanel2.SectionHeader = "List view test";
+            this.darkSectionPanel2.Size = new System.Drawing.Size(221, 224);
+            this.darkSectionPanel2.TabIndex = 7;
+            // 
+            // darkListView1
+            // 
+            this.darkListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.darkListView1.Location = new System.Drawing.Point(1, 25);
+            this.darkListView1.MultiSelect = true;
+            this.darkListView1.Name = "darkListView1";
+            this.darkListView1.Size = new System.Drawing.Size(219, 198);
+            this.darkListView1.TabIndex = 7;
+            this.darkListView1.Text = "darkListView1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.darkSectionPanel2);
             this.Controls.Add(this.darkSectionPanel1);
             this.Controls.Add(this.btnDialog);
             this.Controls.Add(this.darkStatusStrip1);
@@ -631,6 +654,7 @@
             this.darkStatusStrip1.PerformLayout();
             this.darkSectionPanel1.ResumeLayout(false);
             this.darkContextMenu1.ResumeLayout(false);
+            this.darkSectionPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -693,6 +717,8 @@
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moreTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem test3ToolStripMenuItem;
+        private DarkUI.DarkSectionPanel darkSectionPanel2;
+        private DarkUI.DarkListView darkListView1;
     }
 }
 
