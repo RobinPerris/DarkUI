@@ -35,6 +35,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\Colors.cs" />
@@ -66,13 +67,30 @@
     </Compile>
     <Compile Include="Controls\EventArgs\ScrollValueEventArgs.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
+    <Compile Include="Forms\DarkDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DarkDialog.Designer.cs">
+      <DependentUpon>DarkDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DarkForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DarkMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DarkMessageBox.Designer.cs">
+      <DependentUpon>DarkMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Icons\MenuIcons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MenuIcons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\MessageBoxIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageBoxIcons.resx</DependentUpon>
     </Compile>
     <Compile Include="Icons\ScrollIcons.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -84,9 +102,20 @@
     <Compile Include="Renderers\DarkToolStripRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\DarkDialog.resx">
+      <DependentUpon>DarkDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DarkMessageBox.resx">
+      <DependentUpon>DarkMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Icons\MenuIcons.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MenuIcons.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DarkUI</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icons\MessageBoxIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageBoxIcons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DarkUI</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\ScrollIcons.resx">
@@ -112,6 +141,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\scrollbar_arrow_standard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

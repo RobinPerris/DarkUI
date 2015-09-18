@@ -77,6 +77,8 @@
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnDialog = new DarkUI.DarkButton();
+            this.btnMessageBox = new DarkUI.DarkButton();
             this.mnuMain.SuspendLayout();
             this.toolMain.SuspendLayout();
             this.darkStatusStrip1.SuspendLayout();
@@ -538,16 +540,35 @@
             this.toolStripStatusLabel5.Text = "120 MB";
             this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btnDialog
+            // 
+            this.btnDialog.Location = new System.Drawing.Point(25, 73);
+            this.btnDialog.Name = "btnDialog";
+            this.btnDialog.Padding = new System.Windows.Forms.Padding(5);
+            this.btnDialog.Size = new System.Drawing.Size(97, 30);
+            this.btnDialog.TabIndex = 3;
+            this.btnDialog.Text = "Dialog";
+            // 
+            // btnMessageBox
+            // 
+            this.btnMessageBox.Location = new System.Drawing.Point(128, 73);
+            this.btnMessageBox.Name = "btnMessageBox";
+            this.btnMessageBox.Padding = new System.Windows.Forms.Padding(5);
+            this.btnMessageBox.Size = new System.Drawing.Size(97, 30);
+            this.btnMessageBox.TabIndex = 4;
+            this.btnMessageBox.Text = "Message Box";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.btnMessageBox);
+            this.Controls.Add(this.btnDialog);
             this.Controls.Add(this.darkStatusStrip1);
             this.Controls.Add(this.toolMain);
             this.Controls.Add(this.mnuMain);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.mnuMain;
             this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "MainForm";
@@ -614,6 +635,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private DarkUI.DarkButton btnDialog;
+        private DarkUI.DarkButton btnMessageBox;
     }
 }
 

@@ -25,4 +25,23 @@
         Vertical,
         Horizontal
     }
+
+    public enum DarkDialogButton
+    {
+        Ok,
+        Close,
+        OkCancel,
+        YesNo,
+        YesNoCancel,
+        AbortRetryIgnore,
+        RetryCancel
+    }
+
+    public enum DarkMessageBoxIcon
+    {
+        None,
+        Information,
+        Warning,
+        Error
+    }
 }

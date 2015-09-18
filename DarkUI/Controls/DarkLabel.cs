@@ -34,9 +34,6 @@ namespace DarkUI
             }
         }
 
-        [Category("Layout")]
-        [Description("Enables automatic resizing based on font size. Note that this is only valid for label controls that do not wrap text.")]
-        [DefaultValue(true)]
         public new bool AutoSize
         {
             get { return base.AutoSize; }
