@@ -52,6 +52,9 @@
     <Compile Include="Controls\DarkScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkSeparator.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkStatusStrip.cs">
       <SubType>Component</SubType>
     </Compile>
