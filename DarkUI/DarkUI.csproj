@@ -43,7 +43,10 @@
     <Compile Include="Config\Colors.cs" />
     <Compile Include="Config\Consts.cs" />
     <Compile Include="Config\Enums.cs" />
-    <Compile Include="Controls\Classes\DarkListItem.cs" />
+    <Compile Include="Controls\DarkTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Items\DarkListItem.cs" />
     <Compile Include="Controls\DarkListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -84,6 +87,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\EventArgs\ScrollValueEventArgs.cs" />
+    <Compile Include="Controls\Items\DarkTreeNode.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Forms\DarkDialog.cs">
       <SubType>Form</SubType>
@@ -115,6 +119,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ScrollIcons.resx</DependentUpon>
     </Compile>
+    <Compile Include="Icons\TreeViewIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TreeViewIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\DarkMenuRenderer.cs" />
     <Compile Include="Renderers\DarkToolStripRenderer.cs" />
@@ -139,6 +148,11 @@
     <EmbeddedResource Include="Icons\ScrollIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScrollIcons.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DarkUI</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icons\TreeViewIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TreeViewIcons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DarkUI</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
@@ -168,6 +182,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\node_closed_empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\node_closed_full.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\node_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\node_open_empty.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

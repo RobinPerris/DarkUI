@@ -77,8 +77,8 @@
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnDialog = new DarkUI.DarkButton();
             this.darkSectionPanel1 = new DarkUI.DarkSectionPanel();
+            this.btnDialog = new DarkUI.DarkButton();
             this.btnMessageBox = new DarkUI.DarkButton();
             this.darkContextMenu1 = new DarkUI.DarkContextMenu();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,12 +86,15 @@
             this.test3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkSectionPanel2 = new DarkUI.DarkSectionPanel();
             this.darkListView1 = new DarkUI.DarkListView();
+            this.darkSectionPanel3 = new DarkUI.DarkSectionPanel();
+            this.darkTreeView1 = new DarkUI.DarkTreeView();
             this.mnuMain.SuspendLayout();
             this.toolMain.SuspendLayout();
             this.darkStatusStrip1.SuspendLayout();
             this.darkSectionPanel1.SuspendLayout();
             this.darkContextMenu1.SuspendLayout();
             this.darkSectionPanel2.SuspendLayout();
+            this.darkSectionPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuMain
@@ -550,23 +553,24 @@
             this.toolStripStatusLabel5.Text = "120 MB";
             this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btnDialog
-            // 
-            this.btnDialog.Location = new System.Drawing.Point(25, 73);
-            this.btnDialog.Name = "btnDialog";
-            this.btnDialog.Padding = new System.Windows.Forms.Padding(5);
-            this.btnDialog.Size = new System.Drawing.Size(97, 30);
-            this.btnDialog.TabIndex = 3;
-            this.btnDialog.Text = "Dialog";
-            // 
             // darkSectionPanel1
             // 
+            this.darkSectionPanel1.Controls.Add(this.btnDialog);
             this.darkSectionPanel1.Controls.Add(this.btnMessageBox);
-            this.darkSectionPanel1.Location = new System.Drawing.Point(431, 157);
+            this.darkSectionPanel1.Location = new System.Drawing.Point(12, 69);
             this.darkSectionPanel1.Name = "darkSectionPanel1";
             this.darkSectionPanel1.SectionHeader = "Section test";
             this.darkSectionPanel1.Size = new System.Drawing.Size(221, 224);
             this.darkSectionPanel1.TabIndex = 5;
+            // 
+            // btnDialog
+            // 
+            this.btnDialog.Location = new System.Drawing.Point(10, 71);
+            this.btnDialog.Name = "btnDialog";
+            this.btnDialog.Padding = new System.Windows.Forms.Padding(5);
+            this.btnDialog.Size = new System.Drawing.Size(97, 30);
+            this.btnDialog.TabIndex = 6;
+            this.btnDialog.Text = "Dialog";
             // 
             // btnMessageBox
             // 
@@ -613,7 +617,7 @@
             // darkSectionPanel2
             // 
             this.darkSectionPanel2.Controls.Add(this.darkListView1);
-            this.darkSectionPanel2.Location = new System.Drawing.Point(204, 157);
+            this.darkSectionPanel2.Location = new System.Drawing.Point(239, 69);
             this.darkSectionPanel2.Name = "darkSectionPanel2";
             this.darkSectionPanel2.SectionHeader = "List view test";
             this.darkSectionPanel2.Size = new System.Drawing.Size(221, 224);
@@ -629,14 +633,34 @@
             this.darkListView1.TabIndex = 7;
             this.darkListView1.Text = "darkListView1";
             // 
+            // darkSectionPanel3
+            // 
+            this.darkSectionPanel3.Controls.Add(this.darkTreeView1);
+            this.darkSectionPanel3.Location = new System.Drawing.Point(466, 69);
+            this.darkSectionPanel3.Name = "darkSectionPanel3";
+            this.darkSectionPanel3.SectionHeader = "Tree view test";
+            this.darkSectionPanel3.Size = new System.Drawing.Size(221, 224);
+            this.darkSectionPanel3.TabIndex = 8;
+            // 
+            // darkTreeView1
+            // 
+            this.darkTreeView1.AllowMoveNodes = true;
+            this.darkTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.darkTreeView1.Location = new System.Drawing.Point(1, 25);
+            this.darkTreeView1.MultiSelect = true;
+            this.darkTreeView1.Name = "darkTreeView1";
+            this.darkTreeView1.Size = new System.Drawing.Size(219, 198);
+            this.darkTreeView1.TabIndex = 0;
+            this.darkTreeView1.Text = "darkTreeView1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.darkSectionPanel3);
             this.Controls.Add(this.darkSectionPanel2);
             this.Controls.Add(this.darkSectionPanel1);
-            this.Controls.Add(this.btnDialog);
             this.Controls.Add(this.darkStatusStrip1);
             this.Controls.Add(this.toolMain);
             this.Controls.Add(this.mnuMain);
@@ -655,6 +679,7 @@
             this.darkSectionPanel1.ResumeLayout(false);
             this.darkContextMenu1.ResumeLayout(false);
             this.darkSectionPanel2.ResumeLayout(false);
+            this.darkSectionPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -710,7 +735,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private DarkUI.DarkButton btnDialog;
         private DarkUI.DarkSectionPanel darkSectionPanel1;
         private DarkUI.DarkButton btnMessageBox;
         private DarkUI.DarkContextMenu darkContextMenu1;
@@ -719,6 +743,9 @@
         private System.Windows.Forms.ToolStripMenuItem test3ToolStripMenuItem;
         private DarkUI.DarkSectionPanel darkSectionPanel2;
         private DarkUI.DarkListView darkListView1;
+        private DarkUI.DarkButton btnDialog;
+        private DarkUI.DarkSectionPanel darkSectionPanel3;
+        private DarkUI.DarkTreeView darkTreeView1;
     }
 }
 
