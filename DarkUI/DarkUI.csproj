@@ -41,6 +41,9 @@
     <Compile Include="Config\Colors.cs" />
     <Compile Include="Config\Consts.cs" />
     <Compile Include="Config\Enums.cs" />
+    <Compile Include="Controls\DarkScrollBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkButton.cs">
       <SubType>Component</SubType>
     </Compile>
