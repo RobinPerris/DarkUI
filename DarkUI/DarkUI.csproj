@@ -46,6 +46,9 @@
     <Compile Include="Controls\DarkMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkStatusStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkToolStrip.cs">
       <SubType>Component</SubType>
     </Compile>
