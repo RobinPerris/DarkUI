@@ -24,8 +24,6 @@ namespace DarkUI
 
         #region Designer Property Region
 
-        [Category("Appearance")]
-        [Description("The text associated with this control.")]
         public new string Text
         {
             get { return base.Text; }
@@ -35,9 +33,6 @@ namespace DarkUI
                 Invalidate();
             }
         }
-
-        [Category("Behavior")]
-        [Description("Indicates whether the control is enabled.")]
         public new bool Enabled
         {
             get { return base.Enabled; }

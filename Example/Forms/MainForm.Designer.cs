@@ -77,9 +77,6 @@
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.darkLabel1 = new DarkUI.DarkLabel();
-            this.darkScrollBar1 = new DarkUI.DarkScrollBar();
-            this.darkScrollBar2 = new DarkUI.DarkScrollBar();
             this.mnuMain.SuspendLayout();
             this.toolMain.SuspendLayout();
             this.darkStatusStrip1.SuspendLayout();
@@ -541,51 +538,11 @@
             this.toolStripStatusLabel5.Text = "120 MB";
             this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // darkLabel1
-            // 
-            this.darkLabel1.AutoSize = false;
-            this.darkLabel1.AutoUpdateHeight = true;
-            this.darkLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.darkLabel1.Location = new System.Drawing.Point(281, 143);
-            this.darkLabel1.Name = "darkLabel1";
-            this.darkLabel1.Size = new System.Drawing.Size(149, 15);
-            this.darkLabel1.TabIndex = 3;
-            this.darkLabel1.Text = "dfsafsa";
-            // 
-            // darkScrollBar1
-            // 
-            this.darkScrollBar1.Location = new System.Drawing.Point(545, 93);
-            this.darkScrollBar1.Maximum = 100;
-            this.darkScrollBar1.Minimum = 0;
-            this.darkScrollBar1.Name = "darkScrollBar1";
-            this.darkScrollBar1.ScrollOrientation = DarkUI.DarkOrientation.Vertical;
-            this.darkScrollBar1.Size = new System.Drawing.Size(15, 251);
-            this.darkScrollBar1.TabIndex = 4;
-            this.darkScrollBar1.Text = "darkScrollBar1";
-            this.darkScrollBar1.Value = 0;
-            this.darkScrollBar1.ViewSize = 0;
-            // 
-            // darkScrollBar2
-            // 
-            this.darkScrollBar2.Location = new System.Drawing.Point(249, 329);
-            this.darkScrollBar2.Maximum = 100;
-            this.darkScrollBar2.Minimum = 0;
-            this.darkScrollBar2.Name = "darkScrollBar2";
-            this.darkScrollBar2.ScrollOrientation = DarkUI.DarkOrientation.Horizontal;
-            this.darkScrollBar2.Size = new System.Drawing.Size(290, 15);
-            this.darkScrollBar2.TabIndex = 5;
-            this.darkScrollBar2.Text = "darkScrollBar2";
-            this.darkScrollBar2.Value = 0;
-            this.darkScrollBar2.ViewSize = 0;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.darkScrollBar2);
-            this.Controls.Add(this.darkScrollBar1);
-            this.Controls.Add(this.darkLabel1);
             this.Controls.Add(this.darkStatusStrip1);
             this.Controls.Add(this.toolMain);
             this.Controls.Add(this.mnuMain);
@@ -656,9 +613,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private DarkUI.DarkLabel darkLabel1;
-        private DarkUI.DarkScrollBar darkScrollBar1;
-        private DarkUI.DarkScrollBar darkScrollBar2;
     }
 }
 
