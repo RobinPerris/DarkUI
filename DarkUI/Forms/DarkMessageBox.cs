@@ -40,8 +40,6 @@ namespace DarkUI
         public DarkMessageBox(string message, string title, DarkMessageBoxIcon icon, DarkDialogButton buttons)
             : this()
         {
-            var offsetHeight = Height - picIcon.Height;
-
             Text = title;
             _message = message;
 
