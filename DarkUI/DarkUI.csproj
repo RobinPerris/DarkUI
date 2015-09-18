@@ -43,6 +43,12 @@
     <Compile Include="Controls\DarkButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DarkToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Forms\DarkForm.cs">
       <SubType>Form</SubType>
