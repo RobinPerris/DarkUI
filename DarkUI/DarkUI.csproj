@@ -49,12 +49,16 @@
     <Compile Include="Controls\DarkMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkStatusStrip.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkToolStrip.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\EventArgs\ScrollValueEventArgs.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Forms\DarkForm.cs">
       <SubType>Form</SubType>
@@ -63,6 +67,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MenuIcons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\ScrollIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScrollIcons.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\DarkMenuRenderer.cs" />
@@ -74,12 +83,29 @@
       <LastGenOutput>MenuIcons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DarkUI</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Icons\ScrollIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScrollIcons.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DarkUI</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\grip.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scrollbar_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scrollbar_arrow_clicked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scrollbar_arrow_hot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scrollbar_arrow_standard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

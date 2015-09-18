@@ -16,8 +16,8 @@ namespace DarkUI
 
         #region Property Region
 
-        [Category("Appearance")]
-        [Description("Determines whether the label will automatically update height based on content.")]
+        [Category("Layout")]
+        [Description("Enables automatic height sizing based on the contents of the label.")]
         [DefaultValue(false)]
         public bool AutoUpdateHeight
         {
@@ -31,6 +31,21 @@ namespace DarkUI
                     AutoSize = false;
                     ResizeLabel();
                 }
+            }
+        }
+
+        [Category("Layout")]
+        [Description("Enables automatic resizing based on font size. Note that this is only valid for label controls that do not wrap text.")]
+        [DefaultValue(true)]
+        public new bool AutoSize
+        {
+            get { return base.AutoSize; }
+            set
+            {
+                base.AutoSize = value;
+
+                if (AutoSize)
+                    AutoUpdateHeight = false;
             }
         }
 

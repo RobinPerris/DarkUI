@@ -19,4 +19,10 @@
         Left,
         Right
     }
+
+    public enum DarkOrientation
+    {
+        Vertical,
+        Horizontal
+    }
 }
