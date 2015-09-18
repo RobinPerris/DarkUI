@@ -8,18 +8,15 @@ namespace Example
         {
             InitializeComponent();
 
-            btnDialog.Click += delegate {
-                    var msgBox = new DarkMessageBox("This is small",
-                        "Dark UI Example", DarkMessageBoxIcon.Information, DarkDialogButton.AbortRetryIgnore);
-                    msgBox.ShowDialog();
-                };
+            btnDialog.Click += delegate
+            {
+                DarkMessageBox.ShowError("This is an error", "Dark UI - Example");
+            };
 
-            btnMessageBox.Click += delegate {
-                    var msgBox = new DarkMessageBox("This is a test of the dark message box. It's cool, isn't it? You can have really quite a lot of text in here and the message box will size itself appropriately. I dislike how the default .NET message box handled this, so hopefully this will be a better option for you. :)", 
-                        "Dark UI Example", DarkMessageBoxIcon.Information, DarkDialogButton.AbortRetryIgnore);
-                    msgBox.MaximumWidth = 350;
-                    msgBox.ShowDialog();
-                };
+            btnMessageBox.Click += delegate
+            {
+                DarkMessageBox.ShowInformation("This is some information, except it is much bigger, so there we go. I wonder how this is going to go. I hope it resizes properly. It probably will.", "Dark UI - Example");
+            };
         }
     }
 }

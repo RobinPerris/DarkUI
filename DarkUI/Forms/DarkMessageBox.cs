@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace DarkUI
 {
@@ -63,6 +64,34 @@ namespace DarkUI
         public DarkMessageBox(string message, string title, DarkMessageBoxIcon icon)
             : this(message, title, icon, DarkDialogButton.Ok)
         { }
+
+        #endregion
+
+        #region Static Method Region
+
+        public static DialogResult ShowInformation(string message, string caption, DarkDialogButton buttons = DarkDialogButton.Ok)
+        {
+            return ShowDialog(message, caption, DarkMessageBoxIcon.Information, buttons);
+        }
+
+        public static DialogResult ShowWarning(string message, string caption, DarkDialogButton buttons = DarkDialogButton.Ok)
+        {
+            return ShowDialog(message, caption, DarkMessageBoxIcon.Warning, buttons);
+        }
+
+        public static DialogResult ShowError(string message, string caption, DarkDialogButton buttons = DarkDialogButton.Ok)
+        {
+            return ShowDialog(message, caption, DarkMessageBoxIcon.Error, buttons);
+        }
+
+        private static DialogResult ShowDialog(string message, string caption, DarkMessageBoxIcon icon, DarkDialogButton buttons)
+        {
+            using (var dlg = new DarkMessageBox(message, caption, icon, buttons))
+            {
+                var result = dlg.ShowDialog();
+                return result;
+            }
+        }
 
         #endregion
 
