@@ -1,8 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using DarkUI;
+using System.Windows.Forms;
 
 namespace Example
 {
-    public partial class MainForm : Form
+    public partial class MainForm : DarkForm
     {
         public MainForm()
         {

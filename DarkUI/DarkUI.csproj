@@ -43,6 +43,9 @@
     <Compile Include="Controls\DarkButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\DarkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
