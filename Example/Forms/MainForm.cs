@@ -1,4 +1,5 @@
 ﻿using DarkUI;
+using System.Windows.Forms;
 
 namespace Example
 {
@@ -7,6 +8,10 @@ namespace Example
         public MainForm()
         {
             InitializeComponent();
+
+            // Add the control scroll message filter to re-route all mousewheel events
+            // to the control the user is currently hovering over with their cursor.
+            Application.AddMessageFilter(new ControlScrollFilter());
 
             // Build dummy list data
             for (var i = 0; i < 100; i++)
