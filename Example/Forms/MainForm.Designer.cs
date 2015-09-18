@@ -78,10 +78,17 @@
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnDialog = new DarkUI.DarkButton();
+            this.darkSectionPanel1 = new DarkUI.DarkSectionPanel();
             this.btnMessageBox = new DarkUI.DarkButton();
+            this.darkContextMenu1 = new DarkUI.DarkContextMenu();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moreTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.test3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.toolMain.SuspendLayout();
             this.darkStatusStrip1.SuspendLayout();
+            this.darkSectionPanel1.SuspendLayout();
+            this.darkContextMenu1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuMain
@@ -549,21 +556,63 @@
             this.btnDialog.TabIndex = 3;
             this.btnDialog.Text = "Dialog";
             // 
+            // darkSectionPanel1
+            // 
+            this.darkSectionPanel1.Controls.Add(this.btnMessageBox);
+            this.darkSectionPanel1.Location = new System.Drawing.Point(431, 157);
+            this.darkSectionPanel1.Name = "darkSectionPanel1";
+            this.darkSectionPanel1.SectionHeader = "Section test";
+            this.darkSectionPanel1.Size = new System.Drawing.Size(221, 224);
+            this.darkSectionPanel1.TabIndex = 5;
+            // 
             // btnMessageBox
             // 
-            this.btnMessageBox.Location = new System.Drawing.Point(128, 73);
+            this.btnMessageBox.ContextMenuStrip = this.darkContextMenu1;
+            this.btnMessageBox.Location = new System.Drawing.Point(10, 35);
             this.btnMessageBox.Name = "btnMessageBox";
             this.btnMessageBox.Padding = new System.Windows.Forms.Padding(5);
             this.btnMessageBox.Size = new System.Drawing.Size(97, 30);
-            this.btnMessageBox.TabIndex = 4;
+            this.btnMessageBox.TabIndex = 5;
             this.btnMessageBox.Text = "Message Box";
+            // 
+            // darkContextMenu1
+            // 
+            this.darkContextMenu1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            this.darkContextMenu1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.darkContextMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testToolStripMenuItem,
+            this.moreTestToolStripMenuItem,
+            this.test3ToolStripMenuItem});
+            this.darkContextMenu1.Name = "darkContextMenu1";
+            this.darkContextMenu1.Size = new System.Drawing.Size(125, 70);
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.testToolStripMenuItem.Text = "Test";
+            // 
+            // moreTestToolStripMenuItem
+            // 
+            this.moreTestToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.moreTestToolStripMenuItem.Name = "moreTestToolStripMenuItem";
+            this.moreTestToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.moreTestToolStripMenuItem.Text = "More test";
+            // 
+            // test3ToolStripMenuItem
+            // 
+            this.test3ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.test3ToolStripMenuItem.Name = "test3ToolStripMenuItem";
+            this.test3ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.test3ToolStripMenuItem.Text = "Test 3";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.btnMessageBox);
+            this.Controls.Add(this.darkSectionPanel1);
             this.Controls.Add(this.btnDialog);
             this.Controls.Add(this.darkStatusStrip1);
             this.Controls.Add(this.toolMain);
@@ -580,6 +629,8 @@
             this.toolMain.PerformLayout();
             this.darkStatusStrip1.ResumeLayout(false);
             this.darkStatusStrip1.PerformLayout();
+            this.darkSectionPanel1.ResumeLayout(false);
+            this.darkContextMenu1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -636,7 +687,12 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private DarkUI.DarkButton btnDialog;
+        private DarkUI.DarkSectionPanel darkSectionPanel1;
         private DarkUI.DarkButton btnMessageBox;
+        private DarkUI.DarkContextMenu darkContextMenu1;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moreTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem test3ToolStripMenuItem;
     }
 }
 

@@ -44,6 +44,9 @@
     <Compile Include="Controls\DarkButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkLabel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -51,6 +54,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DarkSectionPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkSeparator.cs">
