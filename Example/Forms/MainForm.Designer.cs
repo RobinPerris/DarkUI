@@ -649,6 +649,7 @@
             this.darkTreeView1.Location = new System.Drawing.Point(1, 25);
             this.darkTreeView1.MultiSelect = true;
             this.darkTreeView1.Name = "darkTreeView1";
+            this.darkTreeView1.ShowIcons = true;
             this.darkTreeView1.Size = new System.Drawing.Size(219, 198);
             this.darkTreeView1.TabIndex = 0;
             this.darkTreeView1.Text = "darkTreeView1";

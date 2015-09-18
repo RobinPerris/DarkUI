@@ -125,6 +125,11 @@ namespace DarkUI
         [DefaultValue(false)]
         public bool AllowMoveNodes { get; set; }
 
+        [Category("Appearance")]
+        [Description("Determines whether icons are rendered with the tree nodes.")]
+        [DefaultValue(false)]
+        public bool ShowIcons { get; set; }
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int VisibleNodeCount { get; private set; }
@@ -624,7 +629,11 @@ namespace DarkUI
             node.ExpandArea = new Rectangle(indent + 3, expandTop, _expandAreaSize, _expandAreaSize);
 
             var iconTop = yOffset + (ItemHeight / 2) - (_iconSize / 2);
-            node.IconArea = new Rectangle(node.ExpandArea.Right + 2, iconTop, _iconSize, _iconSize);
+
+            if (ShowIcons)
+                node.IconArea = new Rectangle(node.ExpandArea.Right + 2, iconTop, _iconSize, _iconSize);
+            else
+                node.IconArea = new Rectangle(node.ExpandArea.Right, iconTop, 0, 0);
 
             using (var g = CreateGraphics())
             {
@@ -1241,7 +1250,7 @@ namespace DarkUI
             }
 
             // 3. Draw icon
-            if (node.Icon != null)
+            if (ShowIcons && node.Icon != null)
             {
                 if (node.Expanded && node.ExpandedIcon != null)
                     g.DrawImageUnscaled(node.ExpandedIcon, node.IconArea.Location);
