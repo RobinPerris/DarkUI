@@ -10,6 +10,7 @@ namespace DarkUI
 
         private DarkDockPanel _dockPanel;
 
+        private Timer _dragTimer;
         private bool _isDragging;
         private Point _initialContact;
         private DarkDockSplitter _activeSplitter;
@@ -21,6 +22,10 @@ namespace DarkUI
         public DarkDockResizeFilter(DarkDockPanel dockPanel)
         {
             _dockPanel = dockPanel;
+
+            _dragTimer = new Timer();
+            _dragTimer.Interval = 1;
+            _dragTimer.Tick += DragTimer_Tick;
         }
 
         #endregion
@@ -100,22 +105,45 @@ namespace DarkUI
 
         #endregion
 
+        #region Event Handler Region
+
+        private void DragTimer_Tick(object sender, EventArgs e)
+        {
+            if (_dockPanel.MouseButtonState != MouseButtons.Left)
+                _isDragging = false;
+
+            if (!_isDragging)
+            {
+                _activeSplitter.HideOverlay();
+                _dragTimer.Stop();
+                ResetCursor();
+                return;
+            }
+
+            var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
+            _activeSplitter.UpdateOverlay(difference);
+        }
+
+        #endregion
+
         #region Method Region
 
         private void StartDrag(DarkDockSplitter splitter)
         {
-            Console.WriteLine("Start drag");
-
             _activeSplitter = splitter;
             Cursor.Current = _activeSplitter.ResizeCursor;
 
             _initialContact = Cursor.Position;
             _isDragging = true;
+
+            _activeSplitter.ShowOverlay();
+            _dragTimer.Start();
         }
 
         private void StopDrag()
         {
-            Console.WriteLine("Stop drag");
+            _activeSplitter.HideOverlay();
+            _dragTimer.Stop();
 
             var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
             _activeSplitter.Move(difference);

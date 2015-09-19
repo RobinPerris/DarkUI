@@ -9,6 +9,7 @@ namespace DarkUI
 
         private Control _control;
         private DarkSplitterType _splitterType;
+        private DarkTranslucentForm _overlayForm;
 
         #endregion
 
@@ -26,6 +27,7 @@ namespace DarkUI
         {
             _control = control;
             _splitterType = splitterType;
+            _overlayForm = new DarkTranslucentForm(Color.Black);
 
             switch (_splitterType)
             {
@@ -43,6 +45,41 @@ namespace DarkUI
         #endregion
 
         #region Method Region
+
+        public void ShowOverlay()
+        {
+            _overlayForm.Show();
+            UpdateOverlay(new Point(0, 0));
+        }
+
+        public void HideOverlay()
+        {
+            _overlayForm.Hide();
+        }
+
+        public void UpdateOverlay(Point difference)
+        {
+            var bounds = _control.RectangleToScreen(Bounds);
+
+            switch (_splitterType)
+            {
+                case DarkSplitterType.Left:
+                    bounds.Location = new Point(bounds.Location.X - difference.X, bounds.Location.Y);
+                    break;
+                case DarkSplitterType.Right:
+                    bounds.Location = new Point(bounds.Location.X - difference.X, bounds.Location.Y);
+                    break;
+                case DarkSplitterType.Top:
+                    bounds.Location = new Point(bounds.Location.X, bounds.Location.Y - difference.Y);
+                    break;
+                case DarkSplitterType.Bottom:
+                    bounds.Location = new Point(bounds.Location.X, bounds.Location.Y - difference.Y);
+                    break;
+            }
+
+            _overlayForm.Location = bounds.Location;
+            _overlayForm.Size = bounds.Size;
+        }
 
         public void Move(Point difference)
         {
