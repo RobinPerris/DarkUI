@@ -140,6 +140,8 @@ namespace DarkUI
 
         private void BuildProperties()
         {
+            MinimumSize = new Size(50, 50);
+
             switch (DockArea)
             {
                 default:
