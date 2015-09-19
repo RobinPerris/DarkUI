@@ -44,4 +44,13 @@
         Warning,
         Error
     }
+
+    public enum DarkDockArea
+    {
+        None,
+        Document,
+        Left,
+        Right,
+        Bottom
+    }
 }

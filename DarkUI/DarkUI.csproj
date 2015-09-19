@@ -91,7 +91,19 @@
     <Compile Include="Docking\DarkDockContent.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Docking\DarkDockGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Docking\DarkDockPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Docking\DarkDockRegion.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DarkDocument.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Docking\DarkToolWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Extensions\BitmapExtensions.cs" />

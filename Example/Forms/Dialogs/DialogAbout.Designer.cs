@@ -49,7 +49,7 @@
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Padding = new System.Windows.Forms.Padding(15, 15, 15, 5);
-            this.pnlMain.Size = new System.Drawing.Size(343, 272);
+            this.pnlMain.Size = new System.Drawing.Size(343, 229);
             this.pnlMain.TabIndex = 2;
             // 
             // lblVersion
@@ -59,10 +59,10 @@
             this.lblVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.lblVersion.Location = new System.Drawing.Point(15, 192);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(313, 77);
+            this.lblVersion.Size = new System.Drawing.Size(313, 36);
             this.lblVersion.TabIndex = 7;
             this.lblVersion.Text = "Version: [version]";
-            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // darkLabel3
             // 
@@ -119,7 +119,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 317);
+            this.ClientSize = new System.Drawing.Size(343, 274);
             this.Controls.Add(this.pnlMain);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

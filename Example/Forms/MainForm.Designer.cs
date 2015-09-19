@@ -31,22 +31,25 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mnuMain = new DarkUI.DarkMenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNewFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuClose = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuView = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDialog = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTools = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolMain = new DarkUI.DarkToolStrip();
+            this.btnNewFile = new System.Windows.Forms.ToolStripButton();
             this.stripMain = new DarkUI.DarkStatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.DockPanel = new DarkUI.DarkDockPanel();
-            this.btnNewFile = new System.Windows.Forms.ToolStripButton();
-            this.mnuNewFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuProject = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuProperties = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.toolMain.SuspendLayout();
             this.stripMain.SuspendLayout();
@@ -74,11 +77,36 @@
             this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuNewFile,
             this.toolStripSeparator1,
-            this.closeToolStripMenuItem});
+            this.mnuClose});
             this.mnuFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(37, 20);
             this.mnuFile.Text = "&File";
+            // 
+            // mnuNewFile
+            // 
+            this.mnuNewFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.mnuNewFile.Image = global::Example.Icons.NewFile_6276;
+            this.mnuNewFile.Name = "mnuNewFile";
+            this.mnuNewFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.mnuNewFile.Size = new System.Drawing.Size(160, 22);
+            this.mnuNewFile.Text = "&New file";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+            // 
+            // mnuClose
+            // 
+            this.mnuClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.mnuClose.Image = global::Example.Icons.Close_16xLG;
+            this.mnuClose.Name = "mnuClose";
+            this.mnuClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.mnuClose.Size = new System.Drawing.Size(160, 22);
+            this.mnuClose.Text = "&Close";
             // 
             // mnuView
             // 
@@ -92,8 +120,9 @@
             // mnuDialog
             // 
             this.mnuDialog.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.mnuDialog.Image = global::Example.Icons.properties_16xLG;
             this.mnuDialog.Name = "mnuDialog";
-            this.mnuDialog.Size = new System.Drawing.Size(152, 22);
+            this.mnuDialog.Size = new System.Drawing.Size(130, 22);
             this.mnuDialog.Text = "&Dialog test";
             // 
             // mnuTools
@@ -105,6 +134,10 @@
             // 
             // mnuWindow
             // 
+            this.mnuWindow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuProject,
+            this.mnuProperties,
+            this.mnuConsole});
             this.mnuWindow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.mnuWindow.Name = "mnuWindow";
             this.mnuWindow.Size = new System.Drawing.Size(63, 20);
@@ -118,6 +151,14 @@
             this.mnuHelp.Name = "mnuHelp";
             this.mnuHelp.Size = new System.Drawing.Size(44, 20);
             this.mnuHelp.Text = "&Help";
+            // 
+            // mnuAbout
+            // 
+            this.mnuAbout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.mnuAbout.Image = global::Example.Icons.StatusAnnotations_Information_16xLG_color;
+            this.mnuAbout.Name = "mnuAbout";
+            this.mnuAbout.Size = new System.Drawing.Size(145, 22);
+            this.mnuAbout.Text = "&About DarkUI";
             // 
             // toolMain
             // 
@@ -133,6 +174,17 @@
             this.toolMain.Size = new System.Drawing.Size(784, 28);
             this.toolMain.TabIndex = 1;
             this.toolMain.Text = "darkToolStrip1";
+            // 
+            // btnNewFile
+            // 
+            this.btnNewFile.AutoSize = false;
+            this.btnNewFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnNewFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.btnNewFile.Image = global::Example.Icons.NewFile_6276;
+            this.btnNewFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNewFile.Name = "btnNewFile";
+            this.btnNewFile.Size = new System.Drawing.Size(24, 24);
+            this.btnNewFile.Text = "New file";
             // 
             // stripMain
             // 
@@ -176,13 +228,6 @@
             this.toolStripStatusLabel5.Text = "120 MB";
             this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
             // DockPanel
             // 
             this.DockPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
@@ -192,40 +237,29 @@
             this.DockPanel.Size = new System.Drawing.Size(784, 486);
             this.DockPanel.TabIndex = 3;
             // 
-            // btnNewFile
+            // mnuProject
             // 
-            this.btnNewFile.AutoSize = false;
-            this.btnNewFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNewFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.btnNewFile.Image = global::Example.Icons.NewFile_6276;
-            this.btnNewFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNewFile.Name = "btnNewFile";
-            this.btnNewFile.Size = new System.Drawing.Size(24, 24);
-            this.btnNewFile.Text = "New file";
+            this.mnuProject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.mnuProject.Image = global::Example.Icons.application_16x;
+            this.mnuProject.Name = "mnuProject";
+            this.mnuProject.Size = new System.Drawing.Size(156, 22);
+            this.mnuProject.Text = "&Project Explorer";
             // 
-            // mnuNewFile
+            // mnuProperties
             // 
-            this.mnuNewFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.mnuNewFile.Image = global::Example.Icons.NewFile_6276;
-            this.mnuNewFile.Name = "mnuNewFile";
-            this.mnuNewFile.Size = new System.Drawing.Size(152, 22);
-            this.mnuNewFile.Text = "&New file";
+            this.mnuProperties.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.mnuProperties.Image = global::Example.Icons.properties_16xLG;
+            this.mnuProperties.Name = "mnuProperties";
+            this.mnuProperties.Size = new System.Drawing.Size(156, 22);
+            this.mnuProperties.Text = "P&roperties";
             // 
-            // closeToolStripMenuItem
+            // mnuConsole
             // 
-            this.closeToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.closeToolStripMenuItem.Image = global::Example.Icons.Close_16xLG;
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.closeToolStripMenuItem.Text = "&Close";
-            // 
-            // mnuAbout
-            // 
-            this.mnuAbout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.mnuAbout.Image = global::Example.Icons.StatusAnnotations_Information_16xLG_color;
-            this.mnuAbout.Name = "mnuAbout";
-            this.mnuAbout.Size = new System.Drawing.Size(152, 22);
-            this.mnuAbout.Text = "&About DarkUI";
+            this.mnuConsole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.mnuConsole.Image = global::Example.Icons.Console;
+            this.mnuConsole.Name = "mnuConsole";
+            this.mnuConsole.Size = new System.Drawing.Size(156, 22);
+            this.mnuConsole.Text = "&Console";
             // 
             // MainForm
             // 
@@ -265,7 +299,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
         private System.Windows.Forms.ToolStripMenuItem mnuView;
         private System.Windows.Forms.ToolStripMenuItem mnuDialog;
-        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuClose;
         private System.Windows.Forms.ToolStripMenuItem mnuTools;
         private System.Windows.Forms.ToolStripMenuItem mnuWindow;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp;
@@ -274,6 +308,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuNewFile;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private DarkUI.DarkDockPanel DockPanel;
+        private System.Windows.Forms.ToolStripMenuItem mnuProject;
+        private System.Windows.Forms.ToolStripMenuItem mnuProperties;
+        private System.Windows.Forms.ToolStripMenuItem mnuConsole;
     }
 }
 
