@@ -11,6 +11,8 @@ namespace Example
         private DockProject _dockProject;
         private DockProperties _dockProperties;
         private DockConsole _dockConsole;
+        private DockLayers _dockLayers;
+        private DockHistory _dockHistory;
 
         #endregion
 
@@ -32,15 +34,21 @@ namespace Example
             _dockProject = new DockProject();
             _dockProperties = new DockProperties();
             _dockConsole = new DockConsole();
+            _dockLayers = new DockLayers();
+            _dockHistory = new DockHistory();
 
             DockPanel.AddContent(_dockProject);
             DockPanel.AddContent(_dockProperties);
             DockPanel.AddContent(_dockConsole);
+            DockPanel.AddContent(_dockLayers);
+            DockPanel.AddContent(_dockHistory);
 
             // Show the tool windows as visible in the 'Window' menu
             mnuProject.Checked = true;
             mnuProperties.Checked = true;
             mnuConsole.Checked = true;
+            mnuLayers.Checked = true;
+            mnuHistory.Checked = true;
 
             // Hook in all the UI events manually for clarity.
             HookEvents();
@@ -62,8 +70,24 @@ namespace Example
             mnuProject.Click += Project_Click;
             mnuProperties.Click += Properties_Click;
             mnuConsole.Click += Console_Click;
+            mnuLayers.Click += Layers_Click;
+            mnuHistory.Click += History_Click;
 
             mnuAbout.Click += About_Click;
+        }
+
+        private void ToggleToolWindow(DarkToolWindow toolWindow, ToolStripMenuItem menuItem)
+        {
+            if (toolWindow.DockPanel == null)
+            {
+                DockPanel.AddContent(toolWindow);
+                menuItem.Checked = true;
+            }
+            else
+            {
+                DockPanel.RemoveContent(toolWindow);
+                menuItem.Checked = false;
+            }
         }
 
         #endregion
@@ -89,44 +113,27 @@ namespace Example
 
         private void Project_Click(object sender, EventArgs e)
         {
-            if (_dockProject.DockPanel == null)
-            {
-                DockPanel.AddContent(_dockProject);
-                mnuProject.Checked = true;
-            }
-            else
-            {
-                DockPanel.RemoveContent(_dockProject);
-                mnuProject.Checked = false;
-            }
+            ToggleToolWindow(_dockProject, mnuProject);
         }
 
         private void Properties_Click(object sender, EventArgs e)
         {
-            if (_dockProperties.DockPanel == null)
-            {
-                DockPanel.AddContent(_dockProperties);
-                mnuProperties.Checked = true;
-            }
-            else
-            {
-                DockPanel.RemoveContent(_dockProperties);
-                mnuProperties.Checked = false;
-            }
+            ToggleToolWindow(_dockProperties, mnuProperties);
         }
 
         private void Console_Click(object sender, EventArgs e)
         {
-            if (_dockConsole.DockPanel == null)
-            {
-                DockPanel.AddContent(_dockConsole);
-                mnuConsole.Checked = true;
-            }
-            else
-            {
-                DockPanel.RemoveContent(_dockConsole);
-                mnuConsole.Checked = false;
-            }
+            ToggleToolWindow(_dockConsole, mnuConsole);
+        }
+
+        private void Layers_Click(object sender, EventArgs e)
+        {
+            ToggleToolWindow(_dockLayers, mnuLayers);
+        }
+
+        private void History_Click(object sender, EventArgs e)
+        {
+            ToggleToolWindow(_dockHistory, mnuHistory);
         }
 
         private void About_Click(object sender, EventArgs e)

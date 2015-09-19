@@ -65,6 +65,18 @@
     <Compile Include="Forms\Docking\DockConsole.Designer.cs">
       <DependentUpon>DockConsole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Docking\DockHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Docking\DockHistory.Designer.cs">
+      <DependentUpon>DockHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Docking\DockLayers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Docking\DockLayers.Designer.cs">
+      <DependentUpon>DockLayers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Docking\DockProperties.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +113,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Docking\DockConsole.resx">
       <DependentUpon>DockConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Docking\DockHistory.resx">
+      <DependentUpon>DockHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Docking\DockLayers.resx">
+      <DependentUpon>DockLayers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Docking\DockProperties.resx">
       <DependentUpon>DockProperties.cs</DependentUpon>
@@ -170,6 +188,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Console.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Collection_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RefactoringLog_12810.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

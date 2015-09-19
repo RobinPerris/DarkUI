@@ -84,6 +84,7 @@ namespace DarkUI
             var newGroup = new DarkDockGroup(DockPanel, this);
             _groups.Add(newGroup);
             Controls.Add(newGroup);
+            newGroup.BringToFront();
 
             PositionGroups();
 

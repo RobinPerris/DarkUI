@@ -83,6 +83,16 @@ namespace Example {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Collection_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("Collection_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Console {
             get {
                 object obj = ResourceManager.GetObject("Console", resourceCulture);
@@ -136,6 +146,16 @@ namespace Example {
         internal static System.Drawing.Bitmap properties_16xLG {
             get {
                 object obj = ResourceManager.GetObject("properties_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RefactoringLog_12810 {
+            get {
+                object obj = ResourceManager.GetObject("RefactoringLog_12810", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

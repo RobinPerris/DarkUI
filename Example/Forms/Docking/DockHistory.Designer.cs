@@ -1,6 +1,6 @@
 ﻿namespace Example
 {
-    partial class DockProperties
+    partial class DockHistory
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,22 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.lstHistory = new DarkUI.DarkListView();
             this.SuspendLayout();
             // 
-            // DockProperties
+            // lstHistory
+            // 
+            this.lstHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstHistory.Location = new System.Drawing.Point(0, 25);
+            this.lstHistory.Name = "lstHistory";
+            this.lstHistory.Size = new System.Drawing.Size(280, 425);
+            this.lstHistory.TabIndex = 0;
+            this.lstHistory.Text = "darkListView1";
+            // 
+            // DockHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.DockArea = DarkUI.DarkDockArea.Right;
-            this.DockText = "Properties";
+            this.Controls.Add(this.lstHistory);
+            this.DockArea = DarkUI.DarkDockArea.Bottom;
+            this.DockText = "History";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = global::Example.Icons.properties_16xLG;
-            this.Name = "DockProperties";
+            this.Icon = global::Example.Icons.RefactoringLog_12810;
+            this.Name = "DockHistory";
             this.Size = new System.Drawing.Size(280, 450);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private DarkUI.DarkListView lstHistory;
     }
 }
