@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DarkUI
@@ -7,6 +8,7 @@ namespace DarkUI
     {
         #region Field Region
 
+        private Control _parentControl;
         private Control _control;
         private DarkSplitterType _splitterType;
         private DarkTranslucentForm _overlayForm;
@@ -23,8 +25,9 @@ namespace DarkUI
 
         #region Constructor Region
 
-        public DarkDockSplitter(Control control, DarkSplitterType splitterType)
+        public DarkDockSplitter(Control parentControl, Control control, DarkSplitterType splitterType)
         {
+            _parentControl = parentControl;
             _control = control;
             _splitterType = splitterType;
             _overlayForm = new DarkTranslucentForm(Color.Black);
@@ -91,23 +94,22 @@ namespace DarkUI
                     _control.Width += difference.X;
                     break;
                 case DarkSplitterType.Right:
-                    _control.Width += difference.X;
+                    _control.Width -= difference.X;
                     break;
                 case DarkSplitterType.Top:
-                    _control.Height -= difference.Y;
+                    _control.Height += difference.Y;
                     break;
                 case DarkSplitterType.Bottom:
                     _control.Height -= difference.Y;
                     break;
             }
+
+            UpdateBounds();
         }
 
-        public void UpdateBounds(Control rootControl)
+        public void UpdateBounds()
         {
-            if (rootControl == null)
-                rootControl = _control;
-
-            var bounds = rootControl.RectangleToScreen(_control.Bounds);
+            var bounds = _parentControl.RectangleToScreen(_control.Bounds);
 
             switch (_splitterType)
             {

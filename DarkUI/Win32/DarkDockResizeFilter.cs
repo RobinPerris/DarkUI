@@ -40,6 +40,16 @@ namespace DarkUI
                   m.Msg == (int)WM.RBUTTONDOWN || m.Msg == (int)WM.RBUTTONUP || m.Msg == (int)WM.RBUTTONDBLCLK))
                 return false;
 
+            // Stop drag.
+            if (m.Msg == (int)WM.LBUTTONUP)
+            {
+                if (_isDragging)
+                {
+                    StopDrag();
+                    return true;
+                }
+            }
+
             // Exit out early if we're simply releasing a non-splitter drag over the area
             if (m.Msg == (int)WM.LBUTTONUP && !_isDragging)
                 return false;
@@ -77,16 +87,6 @@ namespace DarkUI
                 }
             }
 
-            // Stop drag.
-            if (m.Msg == (int)WM.LBUTTONUP)
-            {
-                if (_isDragging)
-                {
-                    StopDrag();
-                    return true;
-                }
-            }
-
             // Stop events passing through if we're hovering over a splitter
             if (HotSplitter() != null)
                 return true;
@@ -104,17 +104,6 @@ namespace DarkUI
 
         private void DragTimer_Tick(object sender, EventArgs e)
         {
-            if (_dockPanel.MouseButtonState != MouseButtons.Left)
-                _isDragging = false;
-
-            if (!_isDragging)
-            {
-                _activeSplitter.HideOverlay();
-                _dragTimer.Stop();
-                ResetCursor();
-                return;
-            }
-
             var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
             _activeSplitter.UpdateOverlay(difference);
         }

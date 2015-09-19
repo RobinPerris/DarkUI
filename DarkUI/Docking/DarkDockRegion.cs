@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -169,13 +170,13 @@ namespace DarkUI
             switch (DockArea)
             {
                 case DarkDockArea.Left:
-                    _splitter = new DarkDockSplitter(this, DarkSplitterType.Right);
+                    _splitter = new DarkDockSplitter(DockPanel, this, DarkSplitterType.Right);
                     break;
                 case DarkDockArea.Right:
-                    _splitter = new DarkDockSplitter(this, DarkSplitterType.Left);
+                    _splitter = new DarkDockSplitter(DockPanel, this, DarkSplitterType.Left);
                     break;
                 case DarkDockArea.Bottom:
-                    _splitter = new DarkDockSplitter(this, DarkSplitterType.Top);
+                    _splitter = new DarkDockSplitter(DockPanel, this, DarkSplitterType.Top);
                     break;
                 default:
                     return;
@@ -193,7 +194,7 @@ namespace DarkUI
             base.OnLayout(e);
 
             if (_splitter != null)
-                _splitter.UpdateBounds(DockPanel);
+                _splitter.UpdateBounds();
         }
 
         #endregion
