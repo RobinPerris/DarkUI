@@ -28,12 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.lstConsole = new DarkUI.DarkListView();
             this.SuspendLayout();
+            // 
+            // lstConsole
+            // 
+            this.lstConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstConsole.Location = new System.Drawing.Point(0, 25);
+            this.lstConsole.MultiSelect = true;
+            this.lstConsole.Name = "lstConsole";
+            this.lstConsole.Size = new System.Drawing.Size(500, 175);
+            this.lstConsole.TabIndex = 0;
+            this.lstConsole.Text = "darkListView1";
             // 
             // DockConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lstConsole);
             this.DockArea = DarkUI.DarkDockArea.Bottom;
             this.DockText = "Console";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -45,5 +57,7 @@
         }
 
         #endregion
+
+        private DarkUI.DarkListView lstConsole;
     }
 }

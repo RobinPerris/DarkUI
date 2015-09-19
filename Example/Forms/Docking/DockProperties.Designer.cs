@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.DockArea = DarkUI.DarkDockArea.Right;
+            this.DockArea = DarkUI.DarkDockArea.Left;
             this.DockText = "Properties";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.properties_16xLG;

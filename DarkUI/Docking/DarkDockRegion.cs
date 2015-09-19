@@ -72,13 +72,10 @@ namespace DarkUI
 
             // If that was the final content in the group then remove the group
             if (group.ContentCount == 0)
-            {
-                _groups.Remove(group);
-                PositionGroups();
-            }
+                RemoveGroup(group);
 
-            // Check if we have any groups left. If not then hide the region
-            if (_groups.Count == 0)
+            // If we just removed the final group, and this isn't the document region, then hide
+            if (_groups.Count == 0 && DockArea != DarkDockArea.Document)
                 Visible = false;
         }
 
@@ -91,6 +88,14 @@ namespace DarkUI
             PositionGroups();
 
             return newGroup;
+        }
+
+        private void RemoveGroup(DarkDockGroup group)
+        {
+            _groups.Remove(group);
+            Controls.Remove(group);
+
+            PositionGroups();
         }
 
         private void PositionGroups()
