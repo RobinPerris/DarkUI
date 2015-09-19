@@ -69,13 +69,11 @@ namespace DarkUI
             // Start drag.
             if (m.Msg == (int)WM.LBUTTONDOWN)
             {
-                foreach (var splitter in _dockPanel.Splitters)
+                var hotSplitter = HotSplitter();
+                if (hotSplitter != null)
                 {
-                    if (splitter.Bounds.Contains(_dockPanel.PointToClient(Cursor.Position)))
-                    {
-                        StartDrag(splitter);
-                        return true;
-                    }
+                    StartDrag(hotSplitter);
+                    return true;
                 }
             }
 
@@ -90,11 +88,8 @@ namespace DarkUI
             }
 
             // Stop events passing through if we're hovering over a splitter
-            foreach (var splitter in _dockPanel.Splitters)
-            {
-                if (splitter.Bounds.Contains(_dockPanel.PointToClient(Cursor.Position)))
-                    return true;
-            }
+            if (HotSplitter() != null)
+                return true;
 
             // Stop all events from going through if we're dragging a splitter.
             if (_isDragging)
@@ -142,8 +137,8 @@ namespace DarkUI
 
         private void StopDrag()
         {
-            _activeSplitter.HideOverlay();
             _dragTimer.Stop();
+            _activeSplitter.HideOverlay();
 
             var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
             _activeSplitter.Move(difference);
@@ -151,19 +146,25 @@ namespace DarkUI
             _isDragging = false;
         }
 
+        private DarkDockSplitter HotSplitter()
+        {
+            foreach (var splitter in _dockPanel.Splitters)
+            {
+                if (splitter.Bounds.Contains(Cursor.Position))
+                    return splitter;
+            }
+
+            return null;
+        }
+
         private void CheckCursor()
         {
             if (_isDragging)
                 return;
 
-            foreach (var splitter in _dockPanel.Splitters)
-            {
-                if (splitter.Bounds.Contains(_dockPanel.PointToClient(Cursor.Position)))
-                {
-                    Cursor.Current = splitter.ResizeCursor;
-                    return;
-                }
-            }
+            var hotSplitter = HotSplitter();
+            if (hotSplitter != null)
+                Cursor.Current = hotSplitter.ResizeCursor;
         }
 
         private void ResetCursor()

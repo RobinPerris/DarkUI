@@ -193,7 +193,7 @@ namespace DarkUI
             base.OnLayout(e);
 
             if (_splitter != null)
-                _splitter.UpdateBounds();
+                _splitter.UpdateBounds(DockPanel);
         }
 
         #endregion

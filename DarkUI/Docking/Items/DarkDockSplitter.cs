@@ -48,8 +48,10 @@ namespace DarkUI
 
         public void ShowOverlay()
         {
-            _overlayForm.Show();
             UpdateOverlay(new Point(0, 0));
+
+            _overlayForm.Show();
+            _overlayForm.BringToFront();
         }
 
         public void HideOverlay()
@@ -59,7 +61,7 @@ namespace DarkUI
 
         public void UpdateOverlay(Point difference)
         {
-            var bounds = _control.RectangleToScreen(Bounds);
+            var bounds = new Rectangle(Bounds.Location, Bounds.Size);
 
             switch (_splitterType)
             {
@@ -89,10 +91,10 @@ namespace DarkUI
                     _control.Width += difference.X;
                     break;
                 case DarkSplitterType.Right:
-                    _control.Width -= difference.X;
+                    _control.Width += difference.X;
                     break;
                 case DarkSplitterType.Top:
-                    _control.Height += difference.Y;
+                    _control.Height -= difference.Y;
                     break;
                 case DarkSplitterType.Bottom:
                     _control.Height -= difference.Y;
@@ -100,21 +102,26 @@ namespace DarkUI
             }
         }
 
-        public void UpdateBounds()
+        public void UpdateBounds(Control rootControl)
         {
+            if (rootControl == null)
+                rootControl = _control;
+
+            var bounds = rootControl.RectangleToScreen(_control.Bounds);
+
             switch (_splitterType)
             {
                 case DarkSplitterType.Left:
-                    Bounds = new Rectangle(_control.Left - 2, _control.Top, 5, _control.Height);
+                    Bounds = new Rectangle(bounds.Left - 2, bounds.Top, 5, bounds.Height);
                     break;
                 case DarkSplitterType.Right:
-                    Bounds = new Rectangle(_control.Right - 3, _control.Top, 5, _control.Height);
+                    Bounds = new Rectangle(bounds.Right - 3, bounds.Top, 5, bounds.Height);
                     break;
                 case DarkSplitterType.Top:
-                    Bounds = new Rectangle(_control.Left, _control.Top - 2, _control.Width, 5);
+                    Bounds = new Rectangle(bounds.Left, bounds.Top - 2, bounds.Width, 5);
                     break;
                 case DarkSplitterType.Bottom:
-                    Bounds = new Rectangle(_control.Left, _control.Bottom - 5, _control.Width, 5);
+                    Bounds = new Rectangle(bounds.Left, bounds.Bottom - 5, bounds.Width, 5);
                     break;
             }
         }
