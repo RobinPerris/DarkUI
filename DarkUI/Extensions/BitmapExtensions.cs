@@ -2,9 +2,9 @@
 
 namespace DarkUI
 {
-    public static class BitmapExtensions
+    internal static class BitmapExtensions
     {
-        public static Bitmap SetColor(this Bitmap bitmap, Color color)
+        internal static Bitmap SetColor(this Bitmap bitmap, Color color)
         {
             var newBitmap = new Bitmap(bitmap.Width, bitmap.Height);
             for (int i = 0; i < bitmap.Width; i++)
@@ -19,7 +19,7 @@ namespace DarkUI
             return newBitmap;
         }
 
-        public static Bitmap ChangeColor(this Bitmap bitmap, Color oldColor, Color newColor)
+        internal static Bitmap ChangeColor(this Bitmap bitmap, Color oldColor, Color newColor)
         {
             var newBitmap = new Bitmap(bitmap.Width, bitmap.Height);
             for (int i = 0; i < bitmap.Width; i++)

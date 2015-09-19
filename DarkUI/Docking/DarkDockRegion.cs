@@ -86,7 +86,6 @@ namespace DarkUI
             var newGroup = new DarkDockGroup(DockPanel, this);
             _groups.Add(newGroup);
             Controls.Add(newGroup);
-            newGroup.BringToFront();
 
             PositionGroups();
 
@@ -121,10 +120,21 @@ namespace DarkUI
             }
 
             if (_groups.Count == 1)
+            {
                 _groups[0].Dock = DockStyle.Fill;
+            }
             else if (_groups.Count > 1)
+            {
                 foreach (var group in _groups)
-                    group.Dock = dockStyle;
+                {
+                    group.SendToBack();
+
+                    if (_groups.IsLast(group))
+                        group.Dock = dockStyle;
+                    else
+                        group.Dock = DockStyle.Fill;
+                }
+            }
         }
 
         private void BuildProperties()

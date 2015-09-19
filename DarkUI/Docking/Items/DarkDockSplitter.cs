@@ -44,6 +44,25 @@ namespace DarkUI
 
         #region Method Region
 
+        public void Move(Point difference)
+        {
+            switch (_splitterType)
+            {
+                case DarkSplitterType.Left:
+                    _control.Width += difference.X;
+                    break;
+                case DarkSplitterType.Right:
+                    _control.Width -= difference.X;
+                    break;
+                case DarkSplitterType.Top:
+                    _control.Height += difference.Y;
+                    break;
+                case DarkSplitterType.Bottom:
+                    _control.Height -= difference.Y;
+                    break;
+            }
+        }
+
         public void UpdateBounds()
         {
             switch (_splitterType)

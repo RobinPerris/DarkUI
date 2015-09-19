@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DarkUI
@@ -10,6 +11,7 @@ namespace DarkUI
         private DarkDockPanel _dockPanel;
 
         private bool _isDragging;
+        private Point _initialContact;
         private DarkDockSplitter _activeSplitter;
 
         #endregion
@@ -33,16 +35,13 @@ namespace DarkUI
                   m.Msg == (int)WM.RBUTTONDOWN || m.Msg == (int)WM.RBUTTONUP || m.Msg == (int)WM.RBUTTONDBLCLK))
                 return false;
 
-            // Exit out early if we're simply releasing a drag over the area
+            // Exit out early if we're simply releasing a non-splitter drag over the area
             if (m.Msg == (int)WM.LBUTTONUP && !_isDragging)
                 return false;
 
             // Force cursor if already dragging.
-            ForceDraggingCursor();
-
-            // Stop all events from going through if we're dragging a splitter.
             if (_isDragging)
-                return true;
+                Cursor.Current = _activeSplitter.ResizeCursor;
 
             // Return out early if we're dragging something that's not a splitter.
             if (m.Msg == (int)WM.MOUSEMOVE && !_isDragging && _dockPanel.MouseButtonState != MouseButtons.None)
@@ -65,16 +64,25 @@ namespace DarkUI
             // Start drag.
             if (m.Msg == (int)WM.LBUTTONDOWN)
             {
+                foreach (var splitter in _dockPanel.Splitters)
+                {
+                    if (splitter.Bounds.Contains(_dockPanel.PointToClient(Cursor.Position)))
+                    {
+                        StartDrag(splitter);
+                        return true;
+                    }
+                }
             }
 
             // Stop drag.
             if (m.Msg == (int)WM.LBUTTONUP)
             {
+                if (_isDragging)
+                {
+                    StopDrag();
+                    return true;
+                }
             }
-
-            // Stop events passing through if we just started to drag something
-            if (_isDragging)
-            return true;
 
             // Stop events passing through if we're hovering over a splitter
             foreach (var splitter in _dockPanel.Splitters)
@@ -83,6 +91,10 @@ namespace DarkUI
                     return true;
             }
 
+            // Stop all events from going through if we're dragging a splitter.
+            if (_isDragging)
+                return true;
+
             return false;
         }
 
@@ -90,19 +102,25 @@ namespace DarkUI
 
         #region Method Region
 
-        private void ForceDraggingCursor()
+        private void StartDrag(DarkDockSplitter splitter)
         {
-            if (_isDragging)
-            {
-                SetCursor(_activeSplitter.ResizeCursor);
-                return;
-            }
+            Console.WriteLine("Start drag");
+
+            _activeSplitter = splitter;
+            Cursor.Current = _activeSplitter.ResizeCursor;
+
+            _initialContact = Cursor.Position;
+            _isDragging = true;
         }
 
-        private void ResetCursor()
+        private void StopDrag()
         {
-            Cursor.Current = Cursors.Default;
-            CheckCursor();
+            Console.WriteLine("Stop drag");
+
+            var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
+            _activeSplitter.Move(difference);
+
+            _isDragging = false;
         }
 
         private void CheckCursor()
@@ -114,15 +132,16 @@ namespace DarkUI
             {
                 if (splitter.Bounds.Contains(_dockPanel.PointToClient(Cursor.Position)))
                 {
-                    SetCursor(splitter.ResizeCursor);
+                    Cursor.Current = splitter.ResizeCursor;
                     return;
                 }
             }
         }
 
-        private void SetCursor(Cursor cursor)
+        private void ResetCursor()
         {
-            Cursor.Current = cursor;
+            Cursor.Current = Cursors.Default;
+            CheckCursor();
         }
 
         #endregion
