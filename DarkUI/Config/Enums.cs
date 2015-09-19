@@ -53,4 +53,12 @@
         Right,
         Bottom
     }
+
+    public enum DarkSplitterType
+    {
+        Left,
+        Right,
+        Top,
+        Bottom
+    }
 }

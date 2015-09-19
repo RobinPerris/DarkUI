@@ -11,6 +11,7 @@ namespace DarkUI
         #region Field Region
 
         private List<DarkDockGroup> _groups;
+        private DarkDockSplitter _splitter;
 
         #endregion
 
@@ -32,6 +33,7 @@ namespace DarkUI
             DockArea = dockArea;
 
             BuildProperties();
+            CreateSplitter();
         }
 
         #endregion
@@ -150,6 +152,38 @@ namespace DarkUI
                     Visible = false;
                     break;
             }
+        }
+
+        private void CreateSplitter()
+        {
+            switch (DockArea)
+            {
+                case DarkDockArea.Left:
+                    _splitter = new DarkDockSplitter(this, DarkSplitterType.Right);
+                    break;
+                case DarkDockArea.Right:
+                    _splitter = new DarkDockSplitter(this, DarkSplitterType.Left);
+                    break;
+                case DarkDockArea.Bottom:
+                    _splitter = new DarkDockSplitter(this, DarkSplitterType.Top);
+                    break;
+                default:
+                    return;
+            }
+
+            DockPanel.Splitters.Add(_splitter);
+        }
+
+        #endregion
+
+        #region Event Handler Region
+
+        protected override void OnLayout(LayoutEventArgs e)
+        {
+            base.OnLayout(e);
+
+            if (_splitter != null)
+                _splitter.UpdateBounds();
         }
 
         #endregion

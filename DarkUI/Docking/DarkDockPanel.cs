@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace DarkUI
@@ -14,7 +15,24 @@ namespace DarkUI
 
         #region Property Region
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IMessageFilter MessageFilter { get; private set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public List<DarkDockSplitter> Splitters { get; private set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public MouseButtons MouseButtonState
+        {
+            get
+            {
+                var buttonState = MouseButtons;
+                return buttonState;
+            }
+        }
 
         #endregion
 
@@ -22,6 +40,7 @@ namespace DarkUI
 
         public DarkDockPanel()
         {
+            Splitters = new List<DarkDockSplitter>();
             MessageFilter = new DarkDockResizeFilter(this);
 
             _regions = new Dictionary<DarkDockArea, DarkDockRegion>();
