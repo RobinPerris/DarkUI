@@ -72,16 +72,36 @@ namespace DarkUI
             switch (_splitterType)
             {
                 case DarkSplitterType.Left:
-                    bounds.Location = new Point(bounds.Location.X - difference.X, bounds.Location.Y);
+                    var leftX = Math.Max(bounds.Location.X - difference.X, _minimum);
+
+                    if (_maximum != 0 && leftX > _maximum)
+                        leftX = _maximum;
+
+                    bounds.Location = new Point(leftX, bounds.Location.Y);
                     break;
                 case DarkSplitterType.Right:
-                    bounds.Location = new Point(bounds.Location.X - difference.X, bounds.Location.Y);
+                    var rightX = Math.Max(bounds.Location.X - difference.X, _minimum);
+
+                    if (_maximum != 0 && rightX > _maximum)
+                        rightX = _maximum;
+
+                    bounds.Location = new Point(rightX, bounds.Location.Y);
                     break;
                 case DarkSplitterType.Top:
-                    bounds.Location = new Point(bounds.Location.X, bounds.Location.Y - difference.Y);
+                    var topY = Math.Max(bounds.Location.Y - difference.Y, _minimum);
+
+                    if (_maximum != 0 && topY > _maximum)
+                        topY = _maximum;
+
+                    bounds.Location = new Point(bounds.Location.X, topY);
                     break;
                 case DarkSplitterType.Bottom:
-                    bounds.Location = new Point(bounds.Location.X, bounds.Location.Y - difference.Y);
+                    var bottomY = Math.Max(bounds.Location.Y - difference.Y, _minimum);
+
+                    if (_maximum != 0 && bottomY > _maximum)
+                        topY = _maximum;
+
+                    bounds.Location = new Point(bounds.Location.X, bottomY);
                     break;
             }
 
@@ -117,15 +137,19 @@ namespace DarkUI
             {
                 case DarkSplitterType.Left:
                     Bounds = new Rectangle(bounds.Left - 2, bounds.Top, 5, bounds.Height);
+                    _maximum = bounds.Right - 2 - _control.MinimumSize.Width;
                     break;
                 case DarkSplitterType.Right:
-                    Bounds = new Rectangle(bounds.Right - 3, bounds.Top, 5, bounds.Height);
+                    Bounds = new Rectangle(bounds.Right - 2, bounds.Top, 5, bounds.Height);
+                    _minimum = bounds.Left - 2 + _control.MinimumSize.Width;
                     break;
                 case DarkSplitterType.Top:
                     Bounds = new Rectangle(bounds.Left, bounds.Top - 2, bounds.Width, 5);
+                    _maximum = bounds.Bottom - 2 - _control.MinimumSize.Height;
                     break;
                 case DarkSplitterType.Bottom:
-                    Bounds = new Rectangle(bounds.Left, bounds.Bottom - 5, bounds.Width, 5);
+                    Bounds = new Rectangle(bounds.Left, bounds.Bottom - 2, bounds.Width, 5);
+                    _minimum = bounds.Top - 2 + _control.MinimumSize.Height;
                     break;
             }
         }
