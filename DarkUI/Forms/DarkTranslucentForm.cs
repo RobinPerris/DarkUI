@@ -19,6 +19,7 @@ namespace DarkUI
         public DarkTranslucentForm(Color backColor, double opacity = 0.6)
         {
             FormBorderStyle = FormBorderStyle.None;
+            Size = new Size(0, 0);
             ShowInTaskbar = false;
             AllowTransparency = true;
             Opacity = opacity;

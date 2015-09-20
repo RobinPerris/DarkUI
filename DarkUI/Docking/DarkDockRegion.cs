@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -12,6 +11,8 @@ namespace DarkUI
         #region Field Region
 
         private List<DarkDockGroup> _groups;
+
+        private Form _parentForm;
         private DarkDockSplitter _splitter;
 
         #endregion
@@ -190,6 +191,20 @@ namespace DarkUI
         #endregion
 
         #region Event Handler Region
+
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+
+            _parentForm = FindForm();
+            _parentForm.ResizeEnd += ParentForm_ResizeEnd;
+        }
+
+        private void ParentForm_ResizeEnd(object sender, System.EventArgs e)
+        {
+            if (_splitter != null)
+                _splitter.UpdateBounds();
+        }
 
         protected override void OnLayout(LayoutEventArgs e)
         {
