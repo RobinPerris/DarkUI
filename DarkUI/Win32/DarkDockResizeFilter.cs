@@ -104,6 +104,12 @@ namespace DarkUI
 
         private void DragTimer_Tick(object sender, EventArgs e)
         {
+            if (_dockPanel.MouseButtonState != MouseButtons.Left)
+            {
+                StopDrag();
+                return;
+            }
+
             var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
             _activeSplitter.UpdateOverlay(difference);
         }
