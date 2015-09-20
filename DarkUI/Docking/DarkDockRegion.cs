@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -131,10 +132,10 @@ namespace DarkUI
                 {
                     group.SendToBack();
 
-                    if (_groups.IsLast(group))
-                        group.Dock = dockStyle;
-                    else
+                    if (_groups.IsFirst(group))
                         group.Dock = DockStyle.Fill;
+                    else
+                        group.Dock = dockStyle;
                 }
             }
         }
@@ -200,7 +201,7 @@ namespace DarkUI
             _parentForm.ResizeEnd += ParentForm_ResizeEnd;
         }
 
-        private void ParentForm_ResizeEnd(object sender, System.EventArgs e)
+        private void ParentForm_ResizeEnd(object sender, EventArgs e)
         {
             if (_splitter != null)
                 _splitter.UpdateBounds();
