@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DarkUI
 {
@@ -12,7 +10,7 @@ namespace DarkUI
             var last = items.LastOrDefault();
             if (last == null)
                 return false;
-            return item.Equals(last); // OR Object.ReferenceEquals(last, item)
+            return item.Equals(last);
         }
 
         internal static bool IsFirst<T>(this IEnumerable<T> items, T item)

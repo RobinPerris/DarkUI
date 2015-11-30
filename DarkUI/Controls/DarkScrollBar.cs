@@ -205,7 +205,7 @@ namespace DarkUI
 
             if (_trackArea.Contains(e.Location) && e.Button == MouseButtons.Left)
             {
-                // Check if our input is at least aligned with the thumb
+                // Step 1. Check if our input is at least aligned with the thumb
                 if (_scrollOrientation == DarkOrientation.Vertical)
                 {
                     var modRect = new Rectangle(_thumbArea.Left, _trackArea.Top, _thumbArea.Width, _trackArea.Height);
@@ -219,7 +219,7 @@ namespace DarkUI
                         return;
                 }
 
-                // Step 1. Scroll to the area initially clicked.
+                // Step 2. Scroll to the area initially clicked.
                 if (_scrollOrientation == DarkOrientation.Vertical)
                 {
                     var loc = e.Location.Y;
@@ -235,7 +235,7 @@ namespace DarkUI
                     ScrollToPhysical(loc);
                 }
 
-                // Step 2. Initiate a thumb drag.
+                // Step 3. Initiate a thumb drag.
                 _isScrolling = true;
                 _initialContact = e.Location;
                 _thumbHot = true;
@@ -246,7 +246,6 @@ namespace DarkUI
                     _initialValue = _thumbArea.Left;
 
                 Invalidate();
-
                 return;
             }
         }

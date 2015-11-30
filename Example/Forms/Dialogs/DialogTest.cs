@@ -11,7 +11,7 @@ namespace Example
             // Build dummy list data
             for (var i = 0; i < 100; i++)
             {
-                var item = new DarkListItem(string.Format("List item #{0}", i));
+                var item = new DarkListItem($"List item #{i}");
                 lstTest.Items.Add(item);
             }
 
@@ -19,13 +19,13 @@ namespace Example
             var childCount = 0;
             for (var i = 0; i < 20; i++)
             {
-                var node = new DarkTreeNode(string.Format("Root node #{0}", i));
+                var node = new DarkTreeNode($"Root node #{i}");
                 node.ExpandedIcon = Icons.folder_open;
                 node.Icon = Icons.folder_closed;
 
                 for (var x = 0; x < 10; x++)
                 {
-                    var childNode = new DarkTreeNode(string.Format("Child node #{0}", childCount));
+                    var childNode = new DarkTreeNode($"Child node #{childCount}");
                     childNode.Icon = Icons.files;
                     childCount++;
                     node.Nodes.Add(childNode);

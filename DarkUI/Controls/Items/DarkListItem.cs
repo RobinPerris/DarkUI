@@ -7,8 +7,11 @@ namespace DarkUI
         #region Property Region
 
         public string Text { get; set; }
+
         public Rectangle Area { get; set; }
+
         public Color TextColor { get; set; }
+
         public FontStyle FontStyle { get; set; }
 
         #endregion

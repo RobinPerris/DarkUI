@@ -33,6 +33,7 @@ namespace DarkUI
                 Invalidate();
             }
         }
+
         public new bool Enabled
         {
             get { return base.Enabled; }

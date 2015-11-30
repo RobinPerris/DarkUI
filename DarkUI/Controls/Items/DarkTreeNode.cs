@@ -46,13 +46,17 @@ namespace DarkUI
         }
 
         public Rectangle ExpandArea { get; set; }
+
         public Rectangle IconArea { get; set; }
+
         public Rectangle TextArea { get; set; }
+
         public Rectangle FullArea { get; set; }
 
         public bool ExpandAreaHot { get; set; }
 
         public Bitmap Icon { get; set; }
+
         public Bitmap ExpandedIcon { get; set; }
 
         public bool Expanded

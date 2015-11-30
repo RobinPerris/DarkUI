@@ -208,7 +208,7 @@ namespace DarkUI
         public void SelectItem(int index)
         {
             if (index < 0 || index > Items.Count - 1)
-                throw new IndexOutOfRangeException(string.Format("Value '{0}' is outside of valid range.", index));
+                throw new IndexOutOfRangeException($"Value '{index}' is outside of valid range.");
 
             _selectedIndices.Clear();
             _selectedIndices.Add(index);
@@ -228,7 +228,7 @@ namespace DarkUI
             foreach (var index in list)
             {
                 if (index < 0 || index > Items.Count - 1)
-                    throw new IndexOutOfRangeException(string.Format("Value '{0}' is outside of valid range.", index));
+                    throw new IndexOutOfRangeException($"Value '{index}' is outside of valid range.");
 
                 _selectedIndices.Add(index);
             }
@@ -428,7 +428,6 @@ namespace DarkUI
             var top = range.Min();
             var bottom = range.Max();
 
-            // Draw items
             for (var i = top; i <= bottom; i++)
             {
                 var width = Math.Max(ContentSize.Width, Viewport.Width);
@@ -446,7 +445,7 @@ namespace DarkUI
                     g.FillRectangle(b, rect);
                 }
 
-                // Border
+                // DEBUG: Border
                 /*using (var p = new Pen(Colors.DarkBorder))
                 {
                     g.DrawLine(p, new Point(rect.Left, rect.Bottom - 1), new Point(rect.Right, rect.Bottom - 1));

@@ -14,9 +14,8 @@ namespace DarkUI
                     var hControlUnderMouse = Native.WindowFromPoint(new Point((int)m.LParam));
 
                     if (hControlUnderMouse == m.HWnd)
-                        return false; // Already headed for the right control.
+                        return false;
 
-                    // Redirect the message to the control under the mouse.
                     Native.SendMessage(hControlUnderMouse, (uint)m.Msg, m.WParam, m.LParam);
                     return true;
             }

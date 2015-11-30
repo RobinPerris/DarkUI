@@ -13,7 +13,7 @@ namespace Example
             // Build dummy list data
             for (var i = 0; i < 100; i++)
             {
-                var item = new DarkListItem(string.Format("List item #{0}", i));
+                var item = new DarkListItem($"List item #{i}");
                 lstLayers.Items.Add(item);
             }
         }

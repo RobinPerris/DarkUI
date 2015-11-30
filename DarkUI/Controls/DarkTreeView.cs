@@ -163,13 +163,6 @@ namespace DarkUI
         {
             if (!_disposed)
             {
-                if (disposing)
-                {
-                    // Release managed resources
-                }
-
-                // Release unmanaged resources.
-                // Set large fields to null.
                 DisposeIcons();
 
                 if (SelectedNodesChanged != null)
@@ -187,11 +180,9 @@ namespace DarkUI
                 if (_selectedNodes != null)
                     _selectedNodes.CollectionChanged -= SelectedNodes_CollectionChanged;
 
-                // Set disposed flag
                 _disposed = true;
             }
 
-            // Call Dispose on your base class.
             base.Dispose(disposing);
         }
 
@@ -1159,7 +1150,7 @@ namespace DarkUI
                 if (node == dropNode)
                 {
                     if (isMoving)
-                        DarkMessageBox.ShowError(String.Format(@"Cannot move {0}. The destination folder is the same as the source folder.", node.Text), Application.ProductName);
+                        DarkMessageBox.ShowError($"Cannot move {node.Text}. The destination folder is the same as the source folder.", Application.ProductName);
 
                     return false;
                 }
@@ -1167,7 +1158,7 @@ namespace DarkUI
                 if (node.ParentNode != null && node.ParentNode == dropNode)
                 {
                     if (isMoving)
-                        DarkMessageBox.ShowError(String.Format(@"Cannot move {0}. The destination folder is the same as the source folder.", node.Text), Application.ProductName);
+                        DarkMessageBox.ShowError($"Cannot move {node.Text}. The destination folder is the same as the source folder.", Application.ProductName);
 
                     return false;
                 }
@@ -1178,7 +1169,7 @@ namespace DarkUI
                     if (node == parentNode)
                     {
                         if (isMoving)
-                            DarkMessageBox.ShowError(String.Format(@"Cannot move {0}. The destination folder is a subfolder of the source folder.", node.Text), Application.ProductName);
+                            DarkMessageBox.ShowError($"Cannot move {node.Text}. The destination folder is a subfolder of the source folder.", Application.ProductName);
 
                         return false;
                     }

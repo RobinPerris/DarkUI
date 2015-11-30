@@ -11,7 +11,7 @@ namespace Example
         {
             InitializeComponent();
 
-            lblVersion.Text = string.Format("Version: {0}", Application.ProductVersion.ToString());
+            lblVersion.Text = $"Version: {Application.ProductVersion.ToString()}";
             btnOk.Text = "Close";
         }
 

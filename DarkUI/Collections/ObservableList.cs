@@ -40,20 +40,12 @@ namespace DarkUI
         {
             if (!_disposed)
             {
-                if (disposing)
-                {
-                    // Release managed resources
-                }
-
-                // Release unmanaged resources.
-                // Set large fields to null.
                 if (ItemsAdded != null)
                     ItemsAdded = null;
 
                 if (ItemsRemoved != null)
                     ItemsRemoved = null;
 
-                // Set disposed flag
                 _disposed = true;
             }
         }
