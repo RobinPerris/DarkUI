@@ -1,4 +1,6 @@
-﻿namespace Example
+﻿using DarkUI.Controls;
+
+namespace Example
 {
     partial class DialogAbout
     {
@@ -30,11 +32,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogAbout));
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.lblVersion = new DarkUI.DarkLabel();
-            this.darkLabel3 = new DarkUI.DarkLabel();
-            this.darkLabel2 = new DarkUI.DarkLabel();
-            this.darkLabel1 = new DarkUI.DarkLabel();
-            this.lblHeader = new DarkUI.DarkLabel();
+            this.lblVersion = new DarkLabel();
+            this.darkLabel3 = new DarkLabel();
+            this.darkLabel2 = new DarkLabel();
+            this.darkLabel1 = new DarkLabel();
+            this.lblHeader = new DarkLabel();
             this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,10 +139,10 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlMain;
-        private DarkUI.DarkLabel lblHeader;
-        private DarkUI.DarkLabel darkLabel1;
-        private DarkUI.DarkLabel darkLabel3;
-        private DarkUI.DarkLabel darkLabel2;
-        private DarkUI.DarkLabel lblVersion;
+        private DarkLabel lblHeader;
+        private DarkLabel darkLabel1;
+        private DarkLabel darkLabel3;
+        private DarkLabel darkLabel2;
+        private DarkLabel lblVersion;
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace Example
+﻿using DarkUI.Config;
+using DarkUI.Controls;
+
+namespace Example
 {
     partial class DockConsole
     {
@@ -28,7 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstConsole = new DarkUI.DarkListView();
+            this.lstConsole = new DarkListView();
             this.SuspendLayout();
             // 
             // lstConsole
@@ -46,7 +49,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lstConsole);
-            this.DockArea = DarkUI.DarkDockArea.Bottom;
+            this.DockArea = DarkDockArea.Bottom;
             this.DockText = "Console";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.Console;
@@ -58,6 +61,6 @@
 
         #endregion
 
-        private DarkUI.DarkListView lstConsole;
+        private DarkListView lstConsole;
     }
 }

@@ -1,4 +1,4 @@
-﻿using DarkUI;
+﻿using DarkUI.Docking;
 
 namespace Example
 {

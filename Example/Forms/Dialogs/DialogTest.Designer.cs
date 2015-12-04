@@ -1,4 +1,6 @@
-﻿namespace Example
+﻿using DarkUI.Controls;
+
+namespace Example
 {
     partial class DialogTest
     {
@@ -31,15 +33,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogTest));
             this.pnlMain = new System.Windows.Forms.Panel();
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlTreeView = new DarkUI.DarkSectionPanel();
-            this.treeTest = new DarkUI.DarkTreeView();
-            this.pnlListView = new DarkUI.DarkSectionPanel();
-            this.lstTest = new DarkUI.DarkListView();
-            this.pnlMessageBox = new DarkUI.DarkSectionPanel();
+            this.pnlTreeView = new DarkSectionPanel();
+            this.treeTest = new DarkTreeView();
+            this.pnlListView = new DarkSectionPanel();
+            this.lstTest = new DarkListView();
+            this.pnlMessageBox = new DarkSectionPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnMessageBox = new DarkUI.DarkButton();
+            this.btnMessageBox = new DarkButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnDialog = new DarkUI.DarkButton();
+            this.btnDialog = new DarkButton();
             this.pnlMain.SuspendLayout();
             this.tblMain.SuspendLayout();
             this.pnlTreeView.SuspendLayout();
@@ -198,14 +200,14 @@
 
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.TableLayoutPanel tblMain;
-        private DarkUI.DarkSectionPanel pnlTreeView;
-        private DarkUI.DarkTreeView treeTest;
-        private DarkUI.DarkSectionPanel pnlListView;
-        private DarkUI.DarkListView lstTest;
-        private DarkUI.DarkSectionPanel pnlMessageBox;
+        private DarkSectionPanel pnlTreeView;
+        private DarkTreeView treeTest;
+        private DarkSectionPanel pnlListView;
+        private DarkListView lstTest;
+        private DarkSectionPanel pnlMessageBox;
         private System.Windows.Forms.Panel panel1;
-        private DarkUI.DarkButton btnMessageBox;
+        private DarkButton btnMessageBox;
         private System.Windows.Forms.Panel panel2;
-        private DarkUI.DarkButton btnDialog;
+        private DarkButton btnDialog;
     }
 }

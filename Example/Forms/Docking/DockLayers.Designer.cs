@@ -1,4 +1,7 @@
-﻿namespace Example
+﻿using DarkUI.Config;
+using DarkUI.Controls;
+
+namespace Example
 {
     partial class DockLayers
     {
@@ -28,7 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstLayers = new DarkUI.DarkListView();
+            this.lstLayers = new DarkListView();
             this.SuspendLayout();
             // 
             // lstLayers
@@ -45,7 +48,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lstLayers);
-            this.DockArea = DarkUI.DarkDockArea.Right;
+            this.DockArea = DarkDockArea.Right;
             this.DockText = "Layers";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.Collection_16xLG;
@@ -57,6 +60,6 @@
 
         #endregion
 
-        private DarkUI.DarkListView lstLayers;
+        private DarkListView lstLayers;
     }
 }

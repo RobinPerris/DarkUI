@@ -1,4 +1,6 @@
-﻿using DarkUI;
+﻿using DarkUI.Config;
+using DarkUI.Docking;
+using DarkUI.Forms;
 using System.Windows.Forms;
 
 namespace Example

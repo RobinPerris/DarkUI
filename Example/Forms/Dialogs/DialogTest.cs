@@ -1,4 +1,5 @@
-﻿using DarkUI;
+﻿using DarkUI.Controls;
+using DarkUI.Forms;
 
 namespace Example
 {

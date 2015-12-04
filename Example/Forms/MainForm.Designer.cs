@@ -1,4 +1,7 @@
-﻿namespace Example
+﻿using DarkUI.Controls;
+using DarkUI.Docking;
+
+namespace Example
 {
     partial class MainForm
     {
@@ -29,7 +32,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.mnuMain = new DarkUI.DarkMenuStrip();
+            this.mnuMain = new DarkMenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuNewFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -45,14 +48,14 @@
             this.mnuHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolMain = new DarkUI.DarkToolStrip();
+            this.toolMain = new DarkToolStrip();
             this.btnNewFile = new System.Windows.Forms.ToolStripButton();
-            this.stripMain = new DarkUI.DarkStatusStrip();
+            this.stripMain = new DarkStatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.DockPanel = new DarkUI.DarkDockPanel();
-            this.darkSeparator1 = new DarkUI.DarkSeparator();
+            this.DockPanel = new DarkDockPanel();
+            this.darkSeparator1 = new DarkSeparator();
             this.mnuMain.SuspendLayout();
             this.toolMain.SuspendLayout();
             this.stripMain.SuspendLayout();
@@ -321,9 +324,9 @@
 
         #endregion
 
-        private DarkUI.DarkMenuStrip mnuMain;
-        private DarkUI.DarkToolStrip toolMain;
-        private DarkUI.DarkStatusStrip stripMain;
+        private DarkMenuStrip mnuMain;
+        private DarkToolStrip toolMain;
+        private DarkStatusStrip stripMain;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
@@ -338,13 +341,13 @@
         private System.Windows.Forms.ToolStripButton btnNewFile;
         private System.Windows.Forms.ToolStripMenuItem mnuNewFile;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private DarkUI.DarkDockPanel DockPanel;
+        private DarkDockPanel DockPanel;
         private System.Windows.Forms.ToolStripMenuItem mnuProject;
         private System.Windows.Forms.ToolStripMenuItem mnuProperties;
         private System.Windows.Forms.ToolStripMenuItem mnuConsole;
         private System.Windows.Forms.ToolStripMenuItem mnuLayers;
         private System.Windows.Forms.ToolStripMenuItem mnuHistory;
-        private DarkUI.DarkSeparator darkSeparator1;
+        private DarkSeparator darkSeparator1;
     }
 }
 

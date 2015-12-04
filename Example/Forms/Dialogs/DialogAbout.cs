@@ -1,4 +1,4 @@
-﻿using DarkUI;
+﻿using DarkUI.Forms;
 using System.Windows.Forms;
 
 namespace Example

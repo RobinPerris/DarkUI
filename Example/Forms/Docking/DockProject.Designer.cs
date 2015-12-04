@@ -1,4 +1,7 @@
-﻿namespace Example
+﻿using DarkUI.Config;
+using DarkUI.Controls;
+
+namespace Example
 {
     partial class DockProject
     {
@@ -28,7 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.treeProject = new DarkUI.DarkTreeView();
+            this.treeProject = new DarkTreeView();
             this.SuspendLayout();
             // 
             // treeProject
@@ -48,7 +51,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.treeProject);
-            this.DockArea = DarkUI.DarkDockArea.Left;
+            this.DockArea = DarkDockArea.Left;
             this.DockText = "Project Explorer";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.application_16x;
@@ -60,6 +63,6 @@
 
         #endregion
 
-        private DarkUI.DarkTreeView treeProject;
+        private DarkTreeView treeProject;
     }
 }

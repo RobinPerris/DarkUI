@@ -1,4 +1,6 @@
-﻿using DarkUI;
+﻿using DarkUI.Docking;
+using DarkUI.Forms;
+using DarkUI.Win32;
 using System;
 using System.Windows.Forms;
 
