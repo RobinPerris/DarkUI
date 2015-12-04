@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DarkUI {
+namespace DarkUI.Icons {
     using System;
     
     

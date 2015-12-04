@@ -1,7 +1,8 @@
-﻿using System.Drawing;
+﻿using DarkUI.Config;
+using System.Drawing;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Controls
 {
     public class DarkStatusStrip : StatusStrip
     {

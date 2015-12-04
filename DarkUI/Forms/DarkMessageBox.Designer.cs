@@ -1,4 +1,6 @@
-﻿namespace DarkUI
+﻿using DarkUI.Controls;
+
+namespace DarkUI.Forms
 {
     partial class DarkMessageBox
     {
@@ -29,7 +31,7 @@
         private void InitializeComponent()
         {
             this.picIcon = new System.Windows.Forms.PictureBox();
-            this.lblText = new DarkUI.DarkLabel();
+            this.lblText = new DarkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.SuspendLayout();
             // 

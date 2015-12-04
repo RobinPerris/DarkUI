@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using DarkUI.Config;
+using System.ComponentModel;
 
-namespace DarkUI
+namespace DarkUI.Docking
 {
     [ToolboxItem(false)]
     public class DarkDocument : DarkDockContent

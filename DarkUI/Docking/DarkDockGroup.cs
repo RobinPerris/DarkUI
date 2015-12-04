@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using DarkUI.Config;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Docking
 {
     [ToolboxItem(false)]
     public class DarkDockGroup : Panel

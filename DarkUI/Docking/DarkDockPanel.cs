@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using DarkUI.Config;
+using DarkUI.Win32;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Docking
 {
     public class DarkDockPanel : UserControl
     {

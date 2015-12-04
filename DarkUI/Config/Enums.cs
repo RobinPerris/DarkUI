@@ -1,4 +1,4 @@
-﻿namespace DarkUI
+﻿namespace DarkUI.Config
 {
     public enum DarkButtonStyle
     {

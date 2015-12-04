@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using DarkUI.Config;
+using DarkUI.Controls;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Forms
 {
     public partial class DarkDialog : DarkForm
     {
@@ -10,6 +12,19 @@ namespace DarkUI
 
         private DarkDialogButton _dialogButtons = DarkDialogButton.Ok;
         private List<DarkButton> _buttons;
+
+        #endregion
+
+        #region Button Region
+
+        protected DarkButton btnOk;
+        protected DarkButton btnCancel;
+        protected DarkButton btnClose;
+        protected DarkButton btnYes;
+        protected DarkButton btnNo;
+        protected DarkButton btnAbort;
+        protected DarkButton btnRetry;
+        protected DarkButton btnIgnore;
 
         #endregion
 

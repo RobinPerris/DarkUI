@@ -1,4 +1,9 @@
-﻿using System;
+﻿using DarkUI.Collections;
+using DarkUI.Config;
+using DarkUI.Extensions;
+using DarkUI.Forms;
+using DarkUI.Icons;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -7,7 +12,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Controls
 {
     public class DarkTreeView : DarkScrollView
     {

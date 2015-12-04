@@ -1,8 +1,8 @@
-﻿using DarkUI.Renderer;
+﻿using DarkUI.Renderers;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Controls
 {
     public class DarkToolStrip : ToolStrip
     {

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DarkUI.Docking;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Win32
 {
     public class DarkDockResizeFilter : IMessageFilter
     {

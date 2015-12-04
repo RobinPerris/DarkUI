@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace DarkUI
+namespace DarkUI.Config
 {
     public sealed class Colors
     {

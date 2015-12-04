@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DarkUI
+namespace DarkUI.Collections
 {
     public class ObservableList<T> : List<T>, IDisposable
     {

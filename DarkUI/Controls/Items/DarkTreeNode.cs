@@ -1,7 +1,8 @@
-﻿using System;
+﻿using DarkUI.Collections;
+using System;
 using System.Drawing;
 
-namespace DarkUI
+namespace DarkUI.Controls
 {
     public class DarkTreeNode
     {

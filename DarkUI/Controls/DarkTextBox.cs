@@ -1,6 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using DarkUI.Config;
+using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Controls
 {
     public class DarkTextBox : TextBox
     {

@@ -1,4 +1,6 @@
-﻿namespace DarkUI
+﻿using DarkUI.Controls;
+
+namespace DarkUI.Forms
 {
     partial class DarkDialog
     {
@@ -30,14 +32,14 @@
         {
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.flowInner = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnOk = new DarkUI.DarkButton();
-            this.btnCancel = new DarkUI.DarkButton();
-            this.btnClose = new DarkUI.DarkButton();
-            this.btnYes = new DarkUI.DarkButton();
-            this.btnNo = new DarkUI.DarkButton();
-            this.btnAbort = new DarkUI.DarkButton();
-            this.btnRetry = new DarkUI.DarkButton();
-            this.btnIgnore = new DarkUI.DarkButton();
+            this.btnOk = new DarkButton();
+            this.btnCancel = new DarkButton();
+            this.btnClose = new DarkButton();
+            this.btnYes = new DarkButton();
+            this.btnNo = new DarkButton();
+            this.btnAbort = new DarkButton();
+            this.btnRetry = new DarkButton();
+            this.btnIgnore = new DarkButton();
             this.pnlFooter.SuspendLayout();
             this.flowInner.SuspendLayout();
             this.SuspendLayout();
@@ -174,13 +176,5 @@
 
         private System.Windows.Forms.Panel pnlFooter;
         private System.Windows.Forms.FlowLayoutPanel flowInner;
-        protected DarkButton btnOk;
-        protected DarkButton btnCancel;
-        protected DarkButton btnClose;
-        protected DarkButton btnYes;
-        protected DarkButton btnNo;
-        protected DarkButton btnAbort;
-        protected DarkButton btnRetry;
-        protected DarkButton btnIgnore;
     }
 }

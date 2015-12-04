@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DarkUI
+namespace DarkUI.Win32
 {
     /// <summary>
     /// Windows Messages

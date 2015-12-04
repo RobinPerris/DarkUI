@@ -1,8 +1,9 @@
-﻿using System.ComponentModel;
+﻿using DarkUI.Config;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Controls
 {
     public class DarkSectionPanel : Panel
     {

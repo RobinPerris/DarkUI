@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DarkUI
+namespace DarkUI.Collections
 {
     public class ObservableListModified<T> : EventArgs
     {

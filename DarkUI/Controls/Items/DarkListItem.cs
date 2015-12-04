@@ -1,6 +1,7 @@
-﻿using System.Drawing;
+﻿using DarkUI.Config;
+using System.Drawing;
 
-namespace DarkUI
+namespace DarkUI.Controls
 {
     public class DarkListItem
     {

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Win32
 {
     public class DarkControlScrollFilter : IMessageFilter
     {

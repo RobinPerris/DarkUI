@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DarkUI.Config;
+using DarkUI.Icons;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Renderers
 {
     public class DarkMenuRenderer : ToolStripRenderer
     {

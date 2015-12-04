@@ -1,9 +1,10 @@
-﻿using System;
+﻿using DarkUI.Config;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DarkUI
+namespace DarkUI.Controls
 {
     [ToolboxBitmap(typeof(Button))]
     [DefaultEvent("Click")]
