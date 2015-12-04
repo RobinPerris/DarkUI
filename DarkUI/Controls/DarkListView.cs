@@ -205,6 +205,19 @@ namespace DarkUI
 
         #region Method Region
 
+        public int GetItemIndex(DarkListItem item)
+        {
+            var index = -1;
+            foreach (var otherItem in Items)
+            {
+                index++;
+                if (item == otherItem)
+                    break;
+            }
+
+            return index;
+        }
+
         public void SelectItem(int index)
         {
             if (index < 0 || index > Items.Count - 1)
