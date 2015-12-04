@@ -14,6 +14,8 @@ namespace DarkUI
 
         public FontStyle FontStyle { get; set; }
 
+        public object Tag { get; set; }
+
         #endregion
 
         #region Constructor Region
