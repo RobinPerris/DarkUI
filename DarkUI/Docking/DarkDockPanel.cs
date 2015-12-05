@@ -1,5 +1,6 @@
 ﻿using DarkUI.Config;
 using DarkUI.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,12 +9,19 @@ namespace DarkUI.Docking
 {
     public class DarkDockPanel : UserControl
     {
+        #region Event Region
+
+        public event EventHandler<DockContentEventArgs> ActiveContentChanged;
+
+        #endregion
+
         #region Field Region
 
         private List<DarkDockContent> _contents;
         private Dictionary<DarkDockArea, DarkDockRegion> _regions;
 
         private DarkDockContent _activeContent;
+        private bool _switchingContent = false;
 
         #endregion
 
@@ -24,6 +32,11 @@ namespace DarkUI.Docking
             get { return _activeContent; }
             internal set
             {
+                if (_switchingContent)
+                    return;
+
+                _switchingContent = true;
+
                 _activeContent = value;
 
                 ActiveGroup = _activeContent.DockGroup;
@@ -31,6 +44,11 @@ namespace DarkUI.Docking
 
                 foreach (var region in _regions.Values)
                     region.Redraw();
+
+                if (ActiveContentChanged != null)
+                    ActiveContentChanged(this, new DockContentEventArgs(_activeContent));
+
+                _switchingContent = false;
             }
         }
 

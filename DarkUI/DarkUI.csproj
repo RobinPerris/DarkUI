@@ -106,6 +106,7 @@
     <Compile Include="Docking\DarkToolWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Docking\EventArgs\DockContentEventArgs.cs" />
     <Compile Include="Docking\Items\DarkDockSplitter.cs" />
     <Compile Include="Docking\Items\DarkDockTab.cs" />
     <Compile Include="Docking\Items\DarkDockTabArea.cs" />

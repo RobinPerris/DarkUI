@@ -52,6 +52,8 @@ namespace DarkUI.Docking
             Order = order;
 
             _tabArea = new DarkDockTabArea(DockArea);
+
+            DockPanel.ActiveContentChanged += DockPanel_ActiveContentChanged;
         }
 
         #endregion
@@ -282,6 +284,10 @@ namespace DarkUI.Docking
 
             var width = ClientRectangle.Width - Padding.Horizontal - _tabArea.DropdownRectangle.Width;
             var offsetArea = new Rectangle(Padding.Left, 0, width, 0);
+
+            if (!_tabs.ContainsKey(DockPanel.ActiveContent))
+                return;
+
             var tab = _tabs[DockPanel.ActiveContent];
 
             if (tab.ClientRectangle.IsEmpty)
@@ -436,6 +442,23 @@ namespace DarkUI.Docking
                 return;
 
             DockPanel.ActiveContent = content;
+        }
+
+        private void DockPanel_ActiveContentChanged(object sender, DockContentEventArgs e)
+        {
+            if (!_contents.Contains(e.Content))
+                return;
+
+            if (e.Content == VisibleContent)
+                return;
+
+            VisibleContent = e.Content;
+
+            foreach (var content in _contents)
+                content.Visible = content == VisibleContent;
+
+            EnsureVisible();
+            Invalidate();
         }
 
         #endregion
