@@ -35,7 +35,7 @@ namespace DarkUI.Docking
 
         public int CalculateWidth(Graphics g, Font font)
         {
-            var width = (int)g.MeasureString(DockContent.DockText, font).Width;
+            var width = (int)g.MeasureString(DockContent.DockText, font, 0, StringFormat.GenericTypographic).Width;
             width += 10;
 
             return width;

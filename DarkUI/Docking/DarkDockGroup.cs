@@ -178,7 +178,13 @@ namespace DarkUI.Docking
                     width = tab.CalculateWidth(g, Font);
                 }
 
-                // Add area for the close button
+                // Add addition 5px width to tool window tabs
+                if (DockArea != DarkDockArea.Document)
+                {
+                    width += 5;
+                }
+
+                // Add additional width for document tab items
                 if (DockArea == DarkDockArea.Document)
                 {
                     width += closeButtonSize;
@@ -403,7 +409,7 @@ namespace DarkUI.Docking
 
             var tabTextFormat = new StringFormat
             {
-                Alignment = StringAlignment.Near,
+                Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center,
                 FormatFlags = StringFormatFlags.NoWrap
             };
@@ -412,7 +418,7 @@ namespace DarkUI.Docking
             var textColor = isVisibleTab ? Colors.LightText : Colors.DisabledText;
             using (var b = new SolidBrush(textColor))
             {
-                var textRect = new Rectangle(tabRect.Left + 5 + xOffset, tabRect.Top, tabRect.Width - tab.CloseButtonRectangle.Width - 7 - 5 - xOffset, tabRect.Height);
+                var textRect = new Rectangle(tabRect.Left + 2 + xOffset, tabRect.Top, tabRect.Width - tab.CloseButtonRectangle.Width - 7 - 5 - xOffset, tabRect.Height);
                 g.DrawString(tab.DockContent.DockText, Font, b, textRect, tabTextFormat);
             }
 
@@ -458,7 +464,7 @@ namespace DarkUI.Docking
 
             var tabTextFormat = new StringFormat
             {
-                Alignment = StringAlignment.Near,
+                Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center,
                 FormatFlags = StringFormatFlags.NoWrap,
                 Trimming = StringTrimming.EllipsisCharacter
@@ -467,7 +473,7 @@ namespace DarkUI.Docking
             var textColor = isVisibleTab ? Colors.BlueHighlight : Colors.DisabledText;
             using (var b = new SolidBrush(textColor))
             {
-                var textRect = new Rectangle(tabRect.Left + 5, tabRect.Top, tabRect.Width - 5, tabRect.Height);
+                var textRect = new Rectangle(tabRect.Left, tabRect.Top, tabRect.Width - 2, tabRect.Height);
                 g.DrawString(tab.DockContent.DockText, Font, b, textRect, tabTextFormat);
             }
         }
