@@ -14,8 +14,6 @@ namespace DarkUI.Docking
 
         public bool Hot { get; set; }
 
-        public bool Pressed { get; set; }
-
         public bool CloseButtonHot { get; set; }
 
         public bool ShowSeparator { get; set; }

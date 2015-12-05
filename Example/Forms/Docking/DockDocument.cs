@@ -9,9 +9,11 @@ namespace Example
     {
         #region Constructor Region
 
-        public DockDocument()
+        public DockDocument(string text)
         {
             InitializeComponent();
+
+            DockText = text;
 
             // Workaround to stop the textbox from highlight all text.
             txtDocument.SelectionStart = txtDocument.Text.Length;

@@ -46,9 +46,9 @@ namespace Example
             DockPanel.AddContent(_dockHistory, _dockLayers.DockGroup);
 
             // Add dummy documents to the main document area of the dock panel
-            DockPanel.AddContent(new DockDocument { DockText = "Document 1" });
-            DockPanel.AddContent(new DockDocument { DockText = "Document 2" });
-            DockPanel.AddContent(new DockDocument { DockText = "Document 3" });
+            DockPanel.AddContent(new DockDocument("Document 1"));
+            DockPanel.AddContent(new DockDocument("Document 2"));
+            DockPanel.AddContent(new DockDocument("Document 3"));
 
             // Show the tool windows as visible in the 'Window' menu
             mnuProject.Checked = true;
@@ -103,7 +103,7 @@ namespace Example
 
         private void NewFile_Click(object sender, EventArgs e)
         {
-            var newFile = new DockDocument();
+            var newFile = new DockDocument("New document");
             DockPanel.AddContent(newFile);
         }
 

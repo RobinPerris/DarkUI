@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace DarkUI.Docking
 {
-    public class DarkDockTabArea
+    internal class DarkDockTabArea
     {
         #region Field Region
 
@@ -23,11 +23,15 @@ namespace DarkUI.Docking
 
         public Rectangle DropdownRectangle { get; set; }
 
+        public bool DropdownHot { get; set; }
+
         public int Offset { get; set; }
 
         public bool Visible { get; set; }
 
         public DarkContextMenu TabMenu { get { return _tabMenu; } }
+
+        public DarkDockTab ClickedCloseButton { get; set; }
 
         #endregion
         

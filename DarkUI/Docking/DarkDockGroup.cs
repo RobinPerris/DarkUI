@@ -272,6 +272,29 @@ namespace DarkUI.Docking
             Invalidate();
         }
 
+        public void EnsureVisible()
+        {
+            if (DockArea != DarkDockArea.Document)
+                return;
+
+            if (DockPanel.ActiveContent == null)
+                return;
+
+            var width = ClientRectangle.Width - Padding.Horizontal - _tabArea.DropdownRectangle.Width;
+            var offsetArea = new Rectangle(Padding.Left, 0, width, 0);
+            var tab = _tabs[DockPanel.ActiveContent];
+
+            if (tab.ClientRectangle.IsEmpty)
+                return;
+
+            if (RectangleToTabArea(tab.ClientRectangle).Left < offsetArea.Left)
+                _tabArea.Offset = tab.ClientRectangle.Left;
+            else if (RectangleToTabArea(tab.ClientRectangle).Right > offsetArea.Right)
+                _tabArea.Offset = tab.ClientRectangle.Right - width;
+
+            Invalidate();
+        }
+
         private Point PointToTabArea(Point point)
         {
             return new Point(point.X - _tabArea.Offset, point.Y);
@@ -291,6 +314,115 @@ namespace DarkUI.Docking
             base.OnResize(eventargs);
 
             UpdateTabArea();
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            if (_tabArea.DropdownRectangle.Contains(e.Location))
+            {
+                _tabArea.DropdownHot = true;
+
+                foreach (var tab in _tabs.Values)
+                    tab.Hot = false;
+
+                Invalidate();
+                return;
+            }
+
+            _tabArea.DropdownHot = false;
+
+            foreach (var tab in _tabs.Values)
+            {
+                var rect = RectangleToTabArea(tab.ClientRectangle);
+                var hot = rect.Contains(e.Location);
+
+                if (tab.Hot != hot)
+                {
+                    tab.Hot = hot;
+                    Invalidate();
+                }
+
+                var closeRect = RectangleToTabArea(tab.CloseButtonRectangle);
+                var closeHot = closeRect.Contains(e.Location);
+
+                if (tab.CloseButtonHot != closeHot)
+                {
+                    tab.CloseButtonHot = closeHot;
+                    Invalidate();
+                }
+            }
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            if (_tabArea.DropdownRectangle.Contains(e.Location))
+            {
+                _tabArea.DropdownHot = true;
+                return;
+            }
+
+            foreach (var tab in _tabs.Values)
+            {
+                var rect = RectangleToTabArea(tab.ClientRectangle);
+                if (rect.Contains(e.Location))
+                {
+                    if (e.Button == MouseButtons.Middle)
+                    {
+                        tab.DockContent.Close();
+                        return;
+                    }
+
+                    var closeRect = RectangleToTabArea(tab.CloseButtonRectangle);
+                    if (closeRect.Contains(e.Location))
+                    {
+                        _tabArea.ClickedCloseButton = tab;
+                        return;
+                    }
+                    else
+                    {
+                        DockPanel.ActiveContent = tab.DockContent;
+                        EnsureVisible();
+                        return;
+                    }
+                }
+            }
+
+            if (VisibleContent != null)
+                DockPanel.ActiveContent = VisibleContent;
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+
+            if (_tabArea.DropdownRectangle.Contains(e.Location))
+            {
+                if (_tabArea.DropdownHot)
+                    _tabArea.TabMenu.Show(this, new Point(_tabArea.DropdownRectangle.Left, _tabArea.DropdownRectangle.Bottom - 2));
+
+                return;
+            }
+
+            if (_tabArea.ClickedCloseButton == null)
+                return;
+
+            var closeRect = RectangleToTabArea(_tabArea.ClickedCloseButton.CloseButtonRectangle);
+            if (closeRect.Contains(e.Location))
+                _tabArea.ClickedCloseButton.DockContent.Close();
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+
+            foreach (var tab in _tabs.Values)
+                tab.Hot = false;
+
+            Invalidate();
         }
 
         private void TabMenuItem_Select(object sender, EventArgs e)
