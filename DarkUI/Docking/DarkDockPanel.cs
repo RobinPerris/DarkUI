@@ -84,6 +84,11 @@ namespace DarkUI.Docking
 
         public void AddContent(DarkDockContent dockContent)
         {
+            AddContent(dockContent, null);
+        }
+
+        public void AddContent(DarkDockContent dockContent, DarkDockGroup dockGroup)
+        {
             if (_contents.Contains(dockContent))
                 return;
 
@@ -94,7 +99,7 @@ namespace DarkUI.Docking
             _contents.Add(dockContent);
 
             var region = _regions[dockContent.DockArea];
-            region.AddContent(dockContent);
+            region.AddContent(dockContent, dockGroup);
         }
 
         public void RemoveContent(DarkDockContent dockContent)

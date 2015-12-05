@@ -1,5 +1,4 @@
 ﻿using DarkUI.Config;
-using DarkUI.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,12 +45,12 @@ namespace DarkUI.Docking
 
         #region Method Region
 
-        public void AddContent(DarkDockContent dockContent)
+        internal void AddContent(DarkDockContent dockContent)
         {
             AddContent(dockContent, null);
         }
 
-        public void AddContent(DarkDockContent dockContent, DarkDockGroup dockGroup)
+        internal void AddContent(DarkDockContent dockContent, DarkDockGroup dockGroup)
         {
             // If no existing group is specified then create a new one
             if (dockGroup == null)
@@ -73,7 +72,7 @@ namespace DarkUI.Docking
             PositionGroups();
         }
 
-        public void RemoveContent(DarkDockContent dockContent)
+        internal void RemoveContent(DarkDockContent dockContent)
         {
             dockContent.DockRegion = null;
 

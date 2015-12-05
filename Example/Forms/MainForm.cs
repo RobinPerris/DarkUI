@@ -43,7 +43,7 @@ namespace Example
             DockPanel.AddContent(_dockProperties);
             DockPanel.AddContent(_dockConsole);
             DockPanel.AddContent(_dockLayers);
-            DockPanel.AddContent(_dockHistory);
+            DockPanel.AddContent(_dockHistory, _dockLayers.DockGroup);
 
             // Add dummy documents to the main document area of the dock panel
             DockPanel.AddContent(new DockDocument { DockText = "Document 1" });

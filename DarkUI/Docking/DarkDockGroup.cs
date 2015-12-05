@@ -1,6 +1,8 @@
 ﻿using DarkUI.Config;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DarkUI.Docking
@@ -11,6 +13,8 @@ namespace DarkUI.Docking
         #region Field Region
 
         private List<DarkDockContent> _contents;
+
+        private DarkDockTabArea _tabArea;
 
         #endregion
 
@@ -41,6 +45,8 @@ namespace DarkUI.Docking
             DockArea = dockRegion.DockArea;
 
             Order = order;
+
+            _tabArea = new DarkDockTabArea(DockArea);
         }
 
         #endregion
@@ -57,6 +63,14 @@ namespace DarkUI.Docking
 
             if (VisibleContent == null)
                 VisibleContent = dockContent;
+
+            var menuItem = new ToolStripMenuItem(dockContent.DockText);
+            menuItem.Tag = dockContent;
+            menuItem.Click += TabMenuItem_Select;
+            menuItem.Image = dockContent.Icon;
+            _tabArea.TabMenu.Items.Add(menuItem);
+
+            UpdateTabArea();
         }
 
         public void RemoveContent(DarkDockContent dockContent)
@@ -74,6 +88,115 @@ namespace DarkUI.Docking
                 foreach (var content in _contents)
                     VisibleContent = content;
             }
+
+            ToolStripMenuItem itemToRemove = null;
+            foreach (ToolStripMenuItem item in _tabArea.TabMenu.Items)
+            {
+                var menuContent = item.Tag as DarkDockContent;
+                if (menuContent == null)
+                    continue;
+
+                if (menuContent == dockContent)
+                    itemToRemove = item;
+            }
+
+            if (itemToRemove != null)
+            {
+                itemToRemove.Click -= TabMenuItem_Select;
+                _tabArea.TabMenu.Items.Remove(itemToRemove);
+            }
+
+            UpdateTabArea();
+        }
+
+        private void UpdateTabArea()
+        {
+            if (DockArea == DarkDockArea.Document)
+                _tabArea.Visible = (_contents.Count > 0);
+            else
+                _tabArea.Visible = (_contents.Count > 1);
+
+            var size = 0;
+
+            switch (DockArea)
+            {
+                case DarkDockArea.Document:
+                    size = _tabArea.Visible ? Consts.DocumentTabAreaSize : 0;
+                    Padding = new Padding(0, size, 0, 0);
+                    _tabArea.Area = new Rectangle(Padding.Left, 0, ClientRectangle.Width - Padding.Horizontal, size);
+                    break;
+                case DarkDockArea.Left:
+                case DarkDockArea.Right:
+                    size = _tabArea.Visible ? Consts.ToolWindowTabAreaSize : 0;
+                    Padding = new Padding(0, 0, 0, size);
+                    _tabArea.Area = new Rectangle(Padding.Left, ClientRectangle.Height - size, ClientRectangle.Width - Padding.Horizontal, size);
+                    break;
+                case DarkDockArea.Bottom:
+                    size = _tabArea.Visible ? Consts.ToolWindowTabAreaSize : 0;
+                    Padding = new Padding(1, 0, 0, size);
+                    _tabArea.Area = new Rectangle(Padding.Left, ClientRectangle.Height - size, ClientRectangle.Width - Padding.Horizontal, size);
+                    break;
+            }
+
+            BuildTabs();
+        }
+
+        private void BuildTabs()
+        {
+            if (!_tabArea.Visible)
+                return;
+
+            SuspendLayout();
+
+
+
+            ResumeLayout();
+
+            Invalidate();
+        }
+
+        #endregion
+
+        #region Event Handler Region
+
+        private void TabMenuItem_Select(object sender, EventArgs e)
+        {
+            var menuItem = sender as ToolStripMenuItem;
+            if (menuItem == null)
+                return;
+
+            var content = menuItem.Tag as DarkDockContent;
+            if (content == null)
+                return;
+
+            DockPanel.ActiveContent = content;
+        }
+
+        #endregion
+
+        #region Render Region
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            var g = e.Graphics;
+
+            using (var b = new SolidBrush(Colors.GreyBackground))
+            {
+                g.FillRectangle(b, ClientRectangle);
+            }
+
+            if (!_tabArea.Visible)
+                return;
+
+            using (var b = new SolidBrush(Colors.MediumBackground))
+            {
+                g.FillRectangle(b, _tabArea.Area);
+            }
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            // Absorb event
         }
 
         #endregion

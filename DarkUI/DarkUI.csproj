@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Docking\Items\DarkDockSplitter.cs" />
     <Compile Include="Docking\Items\DarkDockTab.cs" />
+    <Compile Include="Docking\Items\DarkDockTabArea.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Forms\DarkDialog.cs">
