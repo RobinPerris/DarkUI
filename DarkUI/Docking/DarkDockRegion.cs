@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DarkUI.Docking
@@ -68,6 +69,8 @@ namespace DarkUI.Docking
             // Show the region if it was previously hidden
             if (!Visible)
                 Visible = true;
+
+            PositionGroups();
         }
 
         public void RemoveContent(DarkDockContent dockContent)
@@ -84,25 +87,43 @@ namespace DarkUI.Docking
             // If we just removed the final group, and this isn't the document region, then hide
             if (_groups.Count == 0 && DockArea != DarkDockArea.Document)
                 Visible = false;
+
+            PositionGroups();
         }
 
         private DarkDockGroup CreateGroup()
         {
-            var newGroup = new DarkDockGroup(DockPanel, this);
+            var order = 0;
+
+            if (_groups.Count >= 1)
+            {
+                order = -1;
+                foreach (var group in _groups)
+                {
+                    if (group.Order >= order)
+                        order = group.Order + 1;
+                }
+            }
+
+            var newGroup = new DarkDockGroup(DockPanel, this, order);
             _groups.Add(newGroup);
             Controls.Add(newGroup);
-
-            PositionGroups();
 
             return newGroup;
         }
 
         private void RemoveGroup(DarkDockGroup group)
         {
+            var lastOrder = group.Order;
+
             _groups.Remove(group);
             Controls.Remove(group);
 
-            PositionGroups();
+            foreach (var otherGroup in _groups)
+            {
+                if (otherGroup.Order > lastOrder)
+                    otherGroup.Order--;
+            }
         }
 
         private void PositionGroups()
@@ -127,19 +148,50 @@ namespace DarkUI.Docking
             if (_groups.Count == 1)
             {
                 _groups[0].Dock = DockStyle.Fill;
+                return;
             }
-            else if (_groups.Count > 1)
+
+            if (_groups.Count > 1)
             {
-                foreach (var group in _groups)
+                var lastGroup = _groups.OrderByDescending(g => g.Order).First();
+
+                foreach (var group in _groups.OrderByDescending(g => g.Order))
                 {
                     group.SendToBack();
 
-                    if (_groups.IsFirst(group))
+                    if (group.Order == lastGroup.Order)
                         group.Dock = DockStyle.Fill;
                     else
                         group.Dock = dockStyle;
                 }
+
+                SizeGroups();
             }
+        }
+
+        private void SizeGroups()
+        {
+            if (_groups.Count <= 1)
+                return;
+
+            var size = new Size(0, 0);
+
+            switch (DockArea)
+            {
+                default:
+                case DarkDockArea.Document:
+                    return;
+                case DarkDockArea.Left:
+                case DarkDockArea.Right:
+                    size = new Size(Width, Height / _groups.Count);
+                    break;
+                case DarkDockArea.Bottom:
+                    size = new Size(Width / _groups.Count, Height);
+                    break;
+            }
+
+            foreach (var group in _groups)
+                group.Size = size;
         }
 
         private void BuildProperties()
@@ -205,6 +257,8 @@ namespace DarkUI.Docking
 
         private void ParentForm_ResizeEnd(object sender, EventArgs e)
         {
+            SizeGroups();
+
             if (_splitter != null)
                 _splitter.UpdateBounds();
         }
@@ -212,6 +266,8 @@ namespace DarkUI.Docking
         protected override void OnLayout(LayoutEventArgs e)
         {
             base.OnLayout(e);
+
+            SizeGroups();
 
             if (_splitter != null)
                 _splitter.UpdateBounds();

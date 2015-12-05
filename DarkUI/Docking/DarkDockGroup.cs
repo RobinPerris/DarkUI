@@ -1,7 +1,6 @@
 ﻿using DarkUI.Config;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace DarkUI.Docking
@@ -23,25 +22,25 @@ namespace DarkUI.Docking
 
         public DarkDockArea DockArea { get; private set; }
 
-        public int ContentCount
-        {
-            get
-            {
-                return _contents.Count;
-            }
-        }
+        public DarkDockContent VisibleContent { get; private set; }
+
+        public int Order { get; set; }
+
+        public int ContentCount { get { return _contents.Count; } }
 
         #endregion
 
         #region Constructor Region
 
-        public DarkDockGroup(DarkDockPanel dockPanel, DarkDockRegion dockRegion)
+        public DarkDockGroup(DarkDockPanel dockPanel, DarkDockRegion dockRegion, int order)
         {
             _contents = new List<DarkDockContent>();
 
             DockPanel = dockPanel;
             DockRegion = dockRegion;
             DockArea = dockRegion.DockArea;
+
+            Order = order;
         }
 
         #endregion
@@ -55,6 +54,9 @@ namespace DarkUI.Docking
 
             _contents.Add(dockContent);
             Controls.Add(dockContent);
+
+            if (VisibleContent == null)
+                VisibleContent = dockContent;
         }
 
         public void RemoveContent(DarkDockContent dockContent)
@@ -63,6 +65,15 @@ namespace DarkUI.Docking
 
             _contents.Remove(dockContent);
             Controls.Remove(dockContent);
+
+            if (VisibleContent == dockContent)
+            {
+                VisibleContent = null;
+
+                // todo: order?
+                foreach (var content in _contents)
+                    VisibleContent = content;
+            }
         }
 
         #endregion
