@@ -29,8 +29,8 @@ namespace DarkUI.Docking
                 ActiveGroup = _activeContent.DockGroup;
                 ActiveRegion = ActiveGroup.DockRegion;
 
-                foreach (var content in _contents)
-                    content.Invalidate();
+                foreach (var region in _regions.Values)
+                    region.Redraw();
             }
         }
 

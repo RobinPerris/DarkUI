@@ -129,6 +129,11 @@
     <Compile Include="Forms\DarkTranslucentForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Icons\DockIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DockIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Icons\MenuIcons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -163,6 +168,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DarkMessageBox.resx">
       <DependentUpon>DarkMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icons\DockIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DockIcons.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DarkUI</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\MenuIcons.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -224,7 +234,24 @@
   <ItemGroup>
     <None Include="Resources\node_open_empty.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\active-inactive-close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close-selected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inactive-close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inactive-close-selected.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

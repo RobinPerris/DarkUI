@@ -19,7 +19,9 @@ namespace DarkUI.Docking
 
         public DarkDockArea DockArea { get; private set; }
 
-        public Rectangle Area { get; set; }
+        public Rectangle ClientRectangle { get; set; }
+
+        public Rectangle DropdownRectangle { get; set; }
 
         public int Offset { get; set; }
 

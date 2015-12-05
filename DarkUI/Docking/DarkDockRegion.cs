@@ -182,10 +182,10 @@ namespace DarkUI.Docking
                     return;
                 case DarkDockArea.Left:
                 case DarkDockArea.Right:
-                    size = new Size(Width, Height / _groups.Count);
+                    size = new Size(ClientRectangle.Width, ClientRectangle.Height / _groups.Count);
                     break;
                 case DarkDockArea.Bottom:
-                    size = new Size(Width / _groups.Count, Height);
+                    size = new Size(ClientRectangle.Width / _groups.Count, ClientRectangle.Height);
                     break;
             }
 
@@ -276,6 +276,14 @@ namespace DarkUI.Docking
 
         #region Paint Region
 
+        public void Redraw()
+        {
+            Invalidate();
+
+            foreach (var group in _groups)
+                group.Redraw();
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
@@ -298,11 +306,11 @@ namespace DarkUI.Docking
 
                 // Left border
                 if (DockArea == DarkDockArea.Right)
-                    g.DrawLine(p, ClientRectangle.Left, 0, ClientRectangle.Left, Height);
+                    g.DrawLine(p, ClientRectangle.Left, 0, ClientRectangle.Left, ClientRectangle.Height);
 
                 // Right border
                 if (DockArea == DarkDockArea.Left)
-                    g.DrawLine(p, ClientRectangle.Right - 1, 0, ClientRectangle.Right - 1, Height);
+                    g.DrawLine(p, ClientRectangle.Right - 1, 0, ClientRectangle.Right - 1, ClientRectangle.Height);
             }
         }
 
