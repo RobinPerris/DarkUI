@@ -1,4 +1,5 @@
 ﻿using DarkUI.Config;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -59,10 +60,6 @@ namespace DarkUI.Docking
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DarkDockGroup DockGroup { get; internal set; }
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool IsActive { get; internal set; }
-
         #endregion
 
         #region Constructor Region
@@ -78,6 +75,20 @@ namespace DarkUI.Docking
         {
             if (DockPanel != null)
                 DockPanel.RemoveContent(this);
+        }
+
+        #endregion
+
+        #region Event Handler Region
+
+        protected override void OnEnter(EventArgs e)
+        {
+            base.OnEnter(e);
+
+            if (DockPanel == null)
+                return;
+
+            DockPanel.ActiveContent = this;
         }
 
         #endregion

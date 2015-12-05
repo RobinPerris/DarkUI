@@ -13,9 +13,34 @@ namespace DarkUI.Docking
         private List<DarkDockContent> _contents;
         private Dictionary<DarkDockArea, DarkDockRegion> _regions;
 
+        private DarkDockContent _activeContent;
+
         #endregion
 
         #region Property Region
+
+        public DarkDockContent ActiveContent
+        {
+            get { return _activeContent; }
+            internal set
+            {
+                _activeContent = value;
+
+                ActiveGroup = _activeContent.DockGroup;
+                ActiveRegion = ActiveGroup.DockRegion;
+
+                foreach (var content in _contents)
+                    content.Invalidate();
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DarkDockRegion ActiveRegion { get; internal set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DarkDockGroup ActiveGroup { get; internal set; }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

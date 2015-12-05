@@ -33,6 +33,18 @@ namespace DarkUI.Docking
 
         #endregion
 
+        #region Method Region
+
+        private bool IsActive()
+        {
+            if (DockPanel == null)
+                return false;
+
+            return DockPanel.ActiveContent == this;
+        }
+
+        #endregion
+
         #region Paint Region
 
         protected override void OnPaint(PaintEventArgs e)
@@ -45,10 +57,12 @@ namespace DarkUI.Docking
                 g.FillRectangle(b, ClientRectangle);
             }
 
+            var isActive = IsActive();
+
             // Draw header
-            var bgColor = IsActive ? Colors.BlueBackground : Colors.HeaderBackground;
-            var darkColor = IsActive ? Colors.DarkBlueBorder : Colors.DarkBorder;
-            var lightColor = IsActive ? Colors.LightBlueBorder : Colors.LightBorder;
+            var bgColor = isActive ? Colors.BlueBackground : Colors.HeaderBackground;
+            var darkColor = isActive ? Colors.DarkBlueBorder : Colors.DarkBorder;
+            var lightColor = isActive ? Colors.LightBlueBorder : Colors.LightBorder;
 
             using (var b = new SolidBrush(bgColor))
             {
