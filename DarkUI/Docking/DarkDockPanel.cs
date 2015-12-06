@@ -32,6 +32,7 @@ namespace DarkUI.Docking
             get { return _activeContent; }
             internal set
             {
+                // Don't let content visibility changes re-trigger event
                 if (_switchingContent)
                     return;
 

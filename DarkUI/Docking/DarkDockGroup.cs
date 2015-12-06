@@ -72,6 +72,8 @@ namespace DarkUI.Docking
 
             if (VisibleContent == null)
                 VisibleContent = dockContent;
+            else
+                dockContent.Visible = false;
 
             var menuItem = new ToolStripMenuItem(dockContent.DockText);
             menuItem.Tag = dockContent;
