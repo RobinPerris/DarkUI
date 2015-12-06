@@ -469,6 +469,8 @@ namespace DarkUI.Docking
             foreach (var content in _contents)
                 content.Visible = content == VisibleContent;
 
+            VisibleContent.Focus();
+
             EnsureVisible();
             Invalidate();
         }
