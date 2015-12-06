@@ -27,6 +27,8 @@ namespace DarkUI.Docking
 
         public int Offset { get; set; }
 
+        public int TotalTabSize { get; set; }
+
         public bool Visible { get; set; }
 
         public DarkContextMenu TabMenu { get { return _tabMenu; } }

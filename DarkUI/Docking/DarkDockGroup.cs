@@ -159,6 +159,8 @@ namespace DarkUI.Docking
             }
 
             BuildTabs();
+
+            EnsureVisible();
         }
 
         private void BuildTabs()
@@ -182,15 +184,10 @@ namespace DarkUI.Docking
                     width = tab.CalculateWidth(g, Font);
                 }
 
-                // Add addition 5px width to tool window tabs
-                if (DockArea != DarkDockArea.Document)
-                {
-                    width += 5;
-                }
-
                 // Add additional width for document tab items
                 if (DockArea == DarkDockArea.Document)
                 {
+                    width += 5;
                     width += closeButtonSize;
 
                     if (tab.DockContent.Icon != null)
@@ -271,6 +268,12 @@ namespace DarkUI.Docking
                 }
             }
 
+            // Update the tab area with the new total tab width
+            totalSize = 0;
+            foreach (var tab in _tabs.Values)
+                totalSize += tab.ClientRectangle.Width;
+            _tabArea.TotalTabSize = totalSize;
+
             ResumeLayout();
 
             Invalidate();
@@ -281,16 +284,10 @@ namespace DarkUI.Docking
             if (DockArea != DarkDockArea.Document)
                 return;
 
-            if (DockPanel.ActiveContent == null)
-                return;
-
             var width = ClientRectangle.Width - Padding.Horizontal - _tabArea.DropdownRectangle.Width;
             var offsetArea = new Rectangle(Padding.Left, 0, width, 0);
 
-            if (!_tabs.ContainsKey(DockPanel.ActiveContent))
-                return;
-
-            var tab = _tabs[DockPanel.ActiveContent];
+            var tab = _tabs[VisibleContent];
 
             if (tab.ClientRectangle.IsEmpty)
                 return;
@@ -299,6 +296,19 @@ namespace DarkUI.Docking
                 _tabArea.Offset = tab.ClientRectangle.Left;
             else if (RectangleToTabArea(tab.ClientRectangle).Right > offsetArea.Right)
                 _tabArea.Offset = tab.ClientRectangle.Right - width;
+
+            if (_tabArea.TotalTabSize < offsetArea.Width)
+                _tabArea.Offset = 0;
+
+            if (_tabArea.TotalTabSize > offsetArea.Width)
+            {
+                var lastTab = _tabs.Values.Last();
+                if (lastTab != null)
+                {
+                    if (RectangleToTabArea(lastTab.ClientRectangle).Right < offsetArea.Right)
+                        _tabArea.Offset = lastTab.ClientRectangle.Right - width;
+                }
+            }
 
             Invalidate();
         }
@@ -566,16 +576,17 @@ namespace DarkUI.Docking
 
             var tabTextFormat = new StringFormat
             {
-                Alignment = StringAlignment.Center,
+                Alignment = StringAlignment.Near,
                 LineAlignment = StringAlignment.Center,
-                FormatFlags = StringFormatFlags.NoWrap
+                FormatFlags = StringFormatFlags.NoWrap,
+                Trimming = StringTrimming.EllipsisCharacter
             };
 
             // Draw text
             var textColor = isVisibleTab ? Colors.LightText : Colors.DisabledText;
             using (var b = new SolidBrush(textColor))
             {
-                var textRect = new Rectangle(tabRect.Left + 2 + xOffset, tabRect.Top, tabRect.Width - tab.CloseButtonRectangle.Width - 7 - 5 - xOffset, tabRect.Height);
+                var textRect = new Rectangle(tabRect.Left + 5 + xOffset, tabRect.Top, tabRect.Width - tab.CloseButtonRectangle.Width - 7 - 5 - xOffset, tabRect.Height);
                 g.DrawString(tab.DockContent.DockText, Font, b, textRect, tabTextFormat);
             }
 
@@ -621,7 +632,7 @@ namespace DarkUI.Docking
 
             var tabTextFormat = new StringFormat
             {
-                Alignment = StringAlignment.Center,
+                Alignment = StringAlignment.Near,
                 LineAlignment = StringAlignment.Center,
                 FormatFlags = StringFormatFlags.NoWrap,
                 Trimming = StringTrimming.EllipsisCharacter
@@ -630,7 +641,7 @@ namespace DarkUI.Docking
             var textColor = isVisibleTab ? Colors.BlueHighlight : Colors.DisabledText;
             using (var b = new SolidBrush(textColor))
             {
-                var textRect = new Rectangle(tabRect.Left, tabRect.Top, tabRect.Width - 2, tabRect.Height);
+                var textRect = new Rectangle(tabRect.Left + 5, tabRect.Top, tabRect.Width - 5, tabRect.Height);
                 g.DrawString(tab.DockContent.DockText, Font, b, textRect, tabTextFormat);
             }
         }
