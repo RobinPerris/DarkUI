@@ -47,7 +47,6 @@
 
     public enum DarkDockArea
     {
-        None,
         Document,
         Left,
         Right,

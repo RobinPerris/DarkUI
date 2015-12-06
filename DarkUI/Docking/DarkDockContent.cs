@@ -45,7 +45,7 @@ namespace DarkUI.Docking
 
         [Category("Layout")]
         [Description("Determines which area of the dock panel this content will dock to.")]
-        [DefaultValue(DarkDockArea.None)]
+        [DefaultValue(DarkDockArea.Document)]
         public DarkDockArea DockArea { get; set; }
 
         [Browsable(false)]

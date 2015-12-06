@@ -12,6 +12,8 @@ namespace DarkUI.Docking
         #region Event Region
 
         public event EventHandler<DockContentEventArgs> ActiveContentChanged;
+        public event EventHandler<DockContentEventArgs> ContentAdded;
+        public event EventHandler<DockContentEventArgs> ContentRemoved;
 
         #endregion
 
@@ -111,14 +113,17 @@ namespace DarkUI.Docking
             if (_contents.Contains(dockContent))
                 return;
 
-            if (dockContent.DockArea == DarkDockArea.None)
-                return;
+            if (dockContent.DockArea != dockGroup.DockArea)
+                throw new Exception($"Attempting to add '{dockContent.DockArea}' content to '{dockGroup.DockArea}' group.");
 
             dockContent.DockPanel = this;
             _contents.Add(dockContent);
 
             var region = _regions[dockContent.DockArea];
             region.AddContent(dockContent, dockGroup);
+
+            if (ContentAdded != null)
+                ContentAdded(this, new DockContentEventArgs(dockContent));
         }
 
         public void RemoveContent(DarkDockContent dockContent)
@@ -131,6 +136,14 @@ namespace DarkUI.Docking
 
             var region = _regions[dockContent.DockArea];
             region.RemoveContent(dockContent);
+
+            if (ContentRemoved != null)
+                ContentRemoved(this, new DockContentEventArgs(dockContent));
+        }
+
+        public bool ContainsContent(DarkDockContent dockContent)
+        {
+            return _contents.Contains(dockContent);
         }
 
         private void CreateRegions()

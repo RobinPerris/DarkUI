@@ -2,6 +2,7 @@
 using DarkUI.Forms;
 using DarkUI.Win32;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Example
@@ -9,6 +10,8 @@ namespace Example
     public partial class MainForm : DarkForm
     {
         #region Field Region
+
+        private List<DarkDockContent> _toolWindows = new List<DarkDockContent>();
 
         private DockProject _dockProject;
         private DockProperties _dockProperties;
@@ -32,6 +35,9 @@ namespace Example
             // input before letting events pass through to the rest of the application.
             Application.AddMessageFilter(DockPanel.MessageFilter);
 
+            // Hook in all the UI events manually for clarity.
+            HookEvents();
+
             // Build the tool windows and add them to the dock panel
             _dockProject = new DockProject();
             _dockProperties = new DockProperties();
@@ -39,26 +45,24 @@ namespace Example
             _dockLayers = new DockLayers();
             _dockHistory = new DockHistory();
 
-            DockPanel.AddContent(_dockProject);
-            DockPanel.AddContent(_dockProperties);
-            DockPanel.AddContent(_dockConsole);
-            DockPanel.AddContent(_dockLayers);
-            DockPanel.AddContent(_dockHistory, _dockLayers.DockGroup);
+            // Add the tool windows to a list
+            _toolWindows.Add(_dockProject);
+            _toolWindows.Add(_dockProperties);
+            _toolWindows.Add(_dockConsole);
+            _toolWindows.Add(_dockLayers);
+            _toolWindows.Add(_dockHistory);
+
+            // Add the tool window list contents to the dock panel
+            foreach (var toolWindow in _toolWindows)
+                DockPanel.AddContent(toolWindow);
+
+            // Check window menu items which are contained in the dock panel
+            BuildWindowMenu();
 
             // Add dummy documents to the main document area of the dock panel
             DockPanel.AddContent(new DockDocument("Document 1"));
             DockPanel.AddContent(new DockDocument("Document 2"));
             DockPanel.AddContent(new DockDocument("Document 3"));
-
-            // Show the tool windows as visible in the 'Window' menu
-            mnuProject.Checked = true;
-            mnuProperties.Checked = true;
-            mnuConsole.Checked = true;
-            mnuLayers.Checked = true;
-            mnuHistory.Checked = true;
-
-            // Hook in all the UI events manually for clarity.
-            HookEvents();
         }
 
         #endregion
@@ -67,6 +71,9 @@ namespace Example
 
         private void HookEvents()
         {
+            DockPanel.ContentAdded += DockPanel_ContentAdded;
+            DockPanel.ContentRemoved += DockPanel_ContentRemoved;
+
             mnuNewFile.Click += NewFile_Click;
             mnuClose.Click += Close_Click;
 
@@ -83,23 +90,38 @@ namespace Example
             mnuAbout.Click += About_Click;
         }
 
-        private void ToggleToolWindow(DarkToolWindow toolWindow, ToolStripMenuItem menuItem)
+        private void ToggleToolWindow(DarkToolWindow toolWindow)
         {
             if (toolWindow.DockPanel == null)
-            {
                 DockPanel.AddContent(toolWindow);
-                menuItem.Checked = true;
-            }
             else
-            {
                 DockPanel.RemoveContent(toolWindow);
-                menuItem.Checked = false;
-            }
+        }
+
+        private void BuildWindowMenu()
+        {
+            mnuProject.Checked = DockPanel.ContainsContent(_dockProject);
+            mnuProperties.Checked = DockPanel.ContainsContent(_dockProperties);
+            mnuConsole.Checked = DockPanel.ContainsContent(_dockConsole);
+            mnuLayers.Checked = DockPanel.Contains(_dockLayers);
+            mnuHistory.Checked = DockPanel.Contains(_dockHistory);
         }
 
         #endregion
 
         #region Event Handler Region
+
+        private void DockPanel_ContentAdded(object sender, DockContentEventArgs e)
+        {
+            if (_toolWindows.Contains(e.Content))
+                BuildWindowMenu();
+        }
+
+        private void DockPanel_ContentRemoved(object sender, DockContentEventArgs e)
+        {
+            if (_toolWindows.Contains(e.Content))
+                BuildWindowMenu();
+        }
 
         private void NewFile_Click(object sender, EventArgs e)
         {
@@ -120,27 +142,27 @@ namespace Example
 
         private void Project_Click(object sender, EventArgs e)
         {
-            ToggleToolWindow(_dockProject, mnuProject);
+            ToggleToolWindow(_dockProject);
         }
 
         private void Properties_Click(object sender, EventArgs e)
         {
-            ToggleToolWindow(_dockProperties, mnuProperties);
+            ToggleToolWindow(_dockProperties);
         }
 
         private void Console_Click(object sender, EventArgs e)
         {
-            ToggleToolWindow(_dockConsole, mnuConsole);
+            ToggleToolWindow(_dockConsole);
         }
 
         private void Layers_Click(object sender, EventArgs e)
         {
-            ToggleToolWindow(_dockLayers, mnuLayers);
+            ToggleToolWindow(_dockLayers);
         }
 
         private void History_Click(object sender, EventArgs e)
         {
-            ToggleToolWindow(_dockHistory, mnuHistory);
+            ToggleToolWindow(_dockHistory);
         }
 
         private void About_Click(object sender, EventArgs e)

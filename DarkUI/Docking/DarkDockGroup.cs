@@ -233,7 +233,7 @@ namespace DarkUI.Docking
                         {
                             // Check if previous iteration of loop met the difference
                             if (differenceMadeUp >= difference)
-                                continue;
+                                break;
 
                             if (tab.ClientRectangle.Width >= largest)
                             {
