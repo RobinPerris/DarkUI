@@ -319,7 +319,7 @@ namespace DarkUI.Controls
 
             using (var p = new Pen(borderColor))
             {
-                var boxRect = new Rectangle(0, (rect.Height / 2) - (size / 2) - 1, size, size);
+                var boxRect = new Rectangle(0, (rect.Height / 2) - (size / 2), size, size);
                 g.DrawRectangle(p, boxRect);
             }
 
@@ -327,7 +327,7 @@ namespace DarkUI.Controls
             {
                 using (var b = new SolidBrush(fillColor))
                 {
-                    Rectangle boxRect = new Rectangle(2, (rect.Height / 2) - ((size - 4) / 2) - 1, size - 3, size - 3);
+                    Rectangle boxRect = new Rectangle(2, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
                     g.FillRectangle(b, boxRect);
                 }
             }
@@ -336,8 +336,8 @@ namespace DarkUI.Controls
             {
                 var stringFormat = new StringFormat
                 {
-                    LineAlignment = StringAlignment.Near,
-                    Alignment = StringAlignment.Center
+                    LineAlignment = StringAlignment.Center,
+                    Alignment = StringAlignment.Near
                 };
 
                 var modRect = new Rectangle(size + 4, 0, rect.Width - size, rect.Height);

@@ -168,7 +168,7 @@ namespace Example
             this.panel5.Controls.Add(this.darkRadioButton1);
             this.panel5.Controls.Add(this.darkTitle3);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(10, 190);
+            this.panel5.Location = new System.Drawing.Point(10, 185);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(200, 100);
             this.panel5.TabIndex = 12;
@@ -222,7 +222,7 @@ namespace Example
             this.panel4.Controls.Add(this.darkCheckBox1);
             this.panel4.Controls.Add(this.darkTitle2);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(10, 116);
+            this.panel4.Location = new System.Drawing.Point(10, 111);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.panel4.Size = new System.Drawing.Size(200, 74);
@@ -265,7 +265,7 @@ namespace Example
             this.panel3.AutoSize = true;
             this.panel3.Controls.Add(this.btnMessageBox);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(10, 76);
+            this.panel3.Location = new System.Drawing.Point(10, 71);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.panel3.Size = new System.Drawing.Size(200, 40);
@@ -289,8 +289,8 @@ namespace Example
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(10, 10);
             this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.panel2.Size = new System.Drawing.Size(200, 66);
+            this.panel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.panel2.Size = new System.Drawing.Size(200, 61);
             this.panel2.TabIndex = 5;
             // 
             // btnDialog
