@@ -7,7 +7,23 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public class DarkScrollBar : Control
+    public enum DarkScrollOrientation
+    {
+        Vertical,
+        Horizontal
+    }
+
+    public class ScrollValueEventArgs : EventArgs
+    {
+        public int Value { get; private set; }
+
+        public ScrollValueEventArgs(int value)
+        {
+            Value = value;
+        }
+    }
+
+    public class DarkScrollBar : DarkControl
     {
         #region Event Region
 
@@ -17,7 +33,7 @@ namespace DarkUI.Controls
 
         #region Field Region
 
-        private DarkOrientation _scrollOrientation;
+        private DarkScrollOrientation _scrollOrientation;
 
         private int _value;
         private int _minimum = 0;
@@ -52,8 +68,8 @@ namespace DarkUI.Controls
 
         [Category("Behavior")]
         [Description("The orientation type of the scrollbar.")]
-        [DefaultValue(DarkOrientation.Vertical)]
-        public DarkOrientation ScrollOrientation
+        [DefaultValue(DarkScrollOrientation.Vertical)]
+        public DarkScrollOrientation ScrollOrientation
         {
             get { return _scrollOrientation; }
             set
@@ -178,7 +194,7 @@ namespace DarkUI.Controls
                 _isScrolling = true;
                 _initialContact = e.Location;
 
-                if (_scrollOrientation == DarkOrientation.Vertical)
+                if (_scrollOrientation == DarkScrollOrientation.Vertical)
                     _initialValue = _thumbArea.Top;
                 else
                     _initialValue = _thumbArea.Left;
@@ -208,13 +224,13 @@ namespace DarkUI.Controls
             if (_trackArea.Contains(e.Location) && e.Button == MouseButtons.Left)
             {
                 // Step 1. Check if our input is at least aligned with the thumb
-                if (_scrollOrientation == DarkOrientation.Vertical)
+                if (_scrollOrientation == DarkScrollOrientation.Vertical)
                 {
                     var modRect = new Rectangle(_thumbArea.Left, _trackArea.Top, _thumbArea.Width, _trackArea.Height);
                     if (!modRect.Contains(e.Location))
                         return;
                 }
-                else if (_scrollOrientation == DarkOrientation.Horizontal)
+                else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
                 {
                     var modRect = new Rectangle(_trackArea.Left, _thumbArea.Top, _trackArea.Width, _thumbArea.Height);
                     if (!modRect.Contains(e.Location))
@@ -222,7 +238,7 @@ namespace DarkUI.Controls
                 }
 
                 // Step 2. Scroll to the area initially clicked.
-                if (_scrollOrientation == DarkOrientation.Vertical)
+                if (_scrollOrientation == DarkScrollOrientation.Vertical)
                 {
                     var loc = e.Location.Y;
                     loc -= _upArrowArea.Bottom - 1;
@@ -242,7 +258,7 @@ namespace DarkUI.Controls
                 _initialContact = e.Location;
                 _thumbHot = true;
 
-                if (_scrollOrientation == DarkOrientation.Vertical)
+                if (_scrollOrientation == DarkScrollOrientation.Vertical)
                     _initialValue = _thumbArea.Top;
                 else
                     _initialValue = _thumbArea.Left;
@@ -303,14 +319,14 @@ namespace DarkUI.Controls
 
                 var difference = new Point(e.Location.X - _initialContact.X, e.Location.Y - _initialContact.Y);
 
-                if (_scrollOrientation == DarkOrientation.Vertical)
+                if (_scrollOrientation == DarkScrollOrientation.Vertical)
                 {
                     var thumbPos = (_initialValue - _trackArea.Top);
                     var newPosition = thumbPos + difference.Y;
 
                     ScrollToPhysical(newPosition);
                 }
-                else if (_scrollOrientation == DarkOrientation.Horizontal)
+                else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
                 {
                     var thumbPos = (_initialValue - _trackArea.Left);
                     var newPosition = thumbPos + difference.X;
@@ -358,7 +374,7 @@ namespace DarkUI.Controls
 
         public void ScrollToPhysical(int positionInPixels)
         {
-            var isVert = _scrollOrientation == DarkOrientation.Vertical;
+            var isVert = _scrollOrientation == DarkScrollOrientation.Vertical;
 
             var trackAreaSize = isVert ? _trackArea.Height - _thumbArea.Height : _trackArea.Width - _thumbArea.Width;
 
@@ -377,7 +393,7 @@ namespace DarkUI.Controls
 
         public void ScrollByPhysical(int offsetInPixels)
         {
-            var isVert = _scrollOrientation == DarkOrientation.Vertical;
+            var isVert = _scrollOrientation == DarkScrollOrientation.Vertical;
 
             var thumbPos = isVert ? (_thumbArea.Top - _trackArea.Top) : (_thumbArea.Left - _trackArea.Left);
 
@@ -399,23 +415,23 @@ namespace DarkUI.Controls
                 Value = maximumValue;
 
             // Arrow buttons
-            if (_scrollOrientation == DarkOrientation.Vertical)
+            if (_scrollOrientation == DarkScrollOrientation.Vertical)
             {
                 _upArrowArea = new Rectangle(area.Left, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
                 _downArrowArea = new Rectangle(area.Left, area.Bottom - Consts.ArrowButtonSize, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
             }
-            else if (_scrollOrientation == DarkOrientation.Horizontal)
+            else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
             {
                 _upArrowArea = new Rectangle(area.Left, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
                 _downArrowArea = new Rectangle(area.Right - Consts.ArrowButtonSize, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
             }
 
             // Track
-            if (_scrollOrientation == DarkOrientation.Vertical)
+            if (_scrollOrientation == DarkScrollOrientation.Vertical)
             {
                 _trackArea = new Rectangle(area.Left, area.Top + Consts.ArrowButtonSize, area.Width, area.Height - (Consts.ArrowButtonSize * 2));
             }
-            else if (_scrollOrientation == DarkOrientation.Horizontal)
+            else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
             {
                 _trackArea = new Rectangle(area.Left + Consts.ArrowButtonSize, area.Top, area.Width - (Consts.ArrowButtonSize * 2), area.Height);
             }
@@ -434,7 +450,7 @@ namespace DarkUI.Controls
             var positionRatio = (float)Value / (float)viewAreaSize;
 
             // Update area
-            if (_scrollOrientation == DarkOrientation.Vertical)
+            if (_scrollOrientation == DarkScrollOrientation.Vertical)
             {
                 var thumbSize = (int)(_trackArea.Height * _viewContentRatio);
 
@@ -446,7 +462,7 @@ namespace DarkUI.Controls
 
                 _thumbArea = new Rectangle(_trackArea.Left + 3, _trackArea.Top + thumbPosition, Consts.ScrollBarSize - 6, thumbSize);
             }
-            else if (_scrollOrientation == DarkOrientation.Horizontal)
+            else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
             {
                 var thumbSize = (int)(_trackArea.Width * _viewContentRatio);
 
@@ -493,9 +509,9 @@ namespace DarkUI.Controls
             if (_upArrowClicked)
                 upIcon = ScrollIcons.scrollbar_arrow_clicked;
 
-            if (_scrollOrientation == DarkOrientation.Vertical)
+            if (_scrollOrientation == DarkScrollOrientation.Vertical)
                 upIcon.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            else if (_scrollOrientation == DarkOrientation.Horizontal)
+            else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
                 upIcon.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
             g.DrawImageUnscaled(upIcon,
@@ -508,7 +524,7 @@ namespace DarkUI.Controls
             if (_downArrowClicked)
                 downIcon = ScrollIcons.scrollbar_arrow_clicked;
 
-            if (_scrollOrientation == DarkOrientation.Horizontal)
+            if (_scrollOrientation == DarkScrollOrientation.Horizontal)
                 downIcon.RotateFlip(RotateFlipType.Rotate270FlipNone);
 
             g.DrawImageUnscaled(downIcon,

@@ -1,5 +1,6 @@
 ﻿using DarkUI.Config;
 using DarkUI.Controls;
+using DarkUI.Docking;
 
 namespace Example
 {

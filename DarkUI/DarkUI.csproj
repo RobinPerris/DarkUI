@@ -42,8 +42,10 @@
     <Compile Include="Collections\ObservableListModified.cs" />
     <Compile Include="Config\Colors.cs" />
     <Compile Include="Config\Consts.cs" />
-    <Compile Include="Config\Enums.cs" />
     <Compile Include="Controls\DarkCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DarkControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkRadioButton.cs">
@@ -55,7 +57,7 @@
     <Compile Include="Controls\DarkTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Items\DarkListItem.cs" />
+    <Compile Include="Controls\DarkListItem.cs" />
     <Compile Include="Controls\DarkListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -74,9 +76,7 @@
     <Compile Include="Controls\DarkMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DarkScrollBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\DarkScrollBar.cs" />
     <Compile Include="Controls\DarkScrollView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -95,11 +95,8 @@
     <Compile Include="Controls\DarkToolStrip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\EventArgs\ScrollValueEventArgs.cs" />
-    <Compile Include="Controls\Items\DarkTreeNode.cs" />
-    <Compile Include="Docking\DarkDockContent.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\DarkTreeNode.cs" />
+    <Compile Include="Docking\DarkDockContent.cs" />
     <Compile Include="Docking\DarkDockGroup.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -115,10 +112,9 @@
     <Compile Include="Docking\DarkToolWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Docking\EventArgs\DockContentEventArgs.cs" />
-    <Compile Include="Docking\Items\DarkDockSplitter.cs" />
-    <Compile Include="Docking\Items\DarkDockTab.cs" />
-    <Compile Include="Docking\Items\DarkDockTabArea.cs" />
+    <Compile Include="Docking\DarkDockSplitter.cs" />
+    <Compile Include="Docking\DarkDockTab.cs" />
+    <Compile Include="Docking\DarkDockTabArea.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Forms\DarkDialog.cs">
@@ -139,6 +135,7 @@
     <Compile Include="Forms\DarkTranslucentForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Enums.cs" />
     <Compile Include="Icons\DockIcons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

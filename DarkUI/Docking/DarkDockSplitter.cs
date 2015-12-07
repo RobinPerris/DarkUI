@@ -1,11 +1,18 @@
-﻿using DarkUI.Config;
-using DarkUI.Forms;
+﻿using DarkUI.Forms;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace DarkUI.Docking
 {
+    public enum DarkSplitterType
+    {
+        Left,
+        Right,
+        Top,
+        Bottom
+    }
+
     public class DarkDockSplitter
     {
         #region Field Region

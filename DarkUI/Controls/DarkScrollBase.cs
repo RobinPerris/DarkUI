@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public abstract class DarkScrollBase : Control
+    public abstract class DarkScrollBase : DarkControl
     {
         #region Event Region
 
@@ -97,8 +97,8 @@ namespace DarkUI.Controls
             SetStyle(ControlStyles.Selectable |
                      ControlStyles.UserMouse, true);
 
-            _vScrollBar = new DarkScrollBar { ScrollOrientation = DarkOrientation.Vertical };
-            _hScrollBar = new DarkScrollBar { ScrollOrientation = DarkOrientation.Horizontal };
+            _vScrollBar = new DarkScrollBar { ScrollOrientation = DarkScrollOrientation.Vertical };
+            _hScrollBar = new DarkScrollBar { ScrollOrientation = DarkScrollOrientation.Horizontal };
 
             Controls.Add(_vScrollBar);
             Controls.Add(_hScrollBar);

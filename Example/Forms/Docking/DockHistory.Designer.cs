@@ -1,5 +1,6 @@
 ﻿using DarkUI.Config;
 using DarkUI.Controls;
+using DarkUI.Docking;
 
 namespace Example
 {
@@ -48,7 +49,7 @@ namespace Example
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lstHistory);
-            this.DockArea = DarkUI.Config.DarkDockArea.Right;
+            this.DockArea = DarkDockArea.Right;
             this.DockText = "History";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.RefactoringLog_12810;
