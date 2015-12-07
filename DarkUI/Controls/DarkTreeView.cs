@@ -47,12 +47,10 @@ namespace DarkUI.Controls
         private Bitmap _nodeOpenHover;
         private Bitmap _nodeOpenHoverSelected;
 
-        private bool _isDragging;
         private DarkTreeNode _provisionalNode;
         private DarkTreeNode _dropNode;
         private bool _provisionalDragging;
         private List<DarkTreeNode> _dragNodes;
-        private Timer _dragTimer;
         private Point _dragPos;
 
         #endregion
@@ -103,6 +101,7 @@ namespace DarkUI.Controls
             set
             {
                 _itemHeight = value;
+                MaxDragChange = _itemHeight;
                 UpdateNodes();
             }
         }
@@ -153,9 +152,7 @@ namespace DarkUI.Controls
             _selectedNodes = new ObservableCollection<DarkTreeNode>();
             _selectedNodes.CollectionChanged += SelectedNodes_CollectionChanged;
 
-            _dragTimer = new Timer();
-            _dragTimer.Interval = 1;
-            _dragTimer.Tick += DragTimer_Tick;
+            MaxDragChange = _itemHeight;
 
             LoadIcons();
         }
@@ -284,7 +281,7 @@ namespace DarkUI.Controls
                 }
             }
 
-            if (_isDragging)
+            if (IsDragging)
             {
                 if (_dropNode != null)
                 {
@@ -299,7 +296,7 @@ namespace DarkUI.Controls
 
             CheckHover();
 
-            if (_isDragging)
+            if (IsDragging)
             {
                 HandleDrag();
             }
@@ -327,7 +324,7 @@ namespace DarkUI.Controls
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            if (_isDragging)
+            if (IsDragging)
             {
                 HandleDrop();
             }
@@ -374,7 +371,7 @@ namespace DarkUI.Controls
         {
             base.OnKeyDown(e);
 
-            if (_isDragging)
+            if (IsDragging)
                 return;
 
             if (Nodes.Count == 0)
@@ -469,7 +466,7 @@ namespace DarkUI.Controls
 
         private void DragTimer_Tick(object sender, EventArgs e)
         {
-            if (!_isDragging)
+            if (!IsDragging)
             {
                 StopDrag();
                 return;
@@ -566,7 +563,7 @@ namespace DarkUI.Controls
 
         private void UpdateNodes()
         {
-            if (_isDragging)
+            if (IsDragging)
                 return;
 
             if (Nodes.Count == 0)
@@ -680,7 +677,7 @@ namespace DarkUI.Controls
         {
             if (!ClientRectangle.Contains(PointToClient(MousePosition)))
             {
-                if (_isDragging)
+                if (IsDragging)
                 {
                     if (_dropNode != null)
                     {
@@ -708,7 +705,7 @@ namespace DarkUI.Controls
 
         private void CheckNodeHover(DarkTreeNode node, Point location)
         {
-            if (_isDragging)
+            if (IsDragging)
             {
                 var rect = GetNodeFullRowArea(node);
                 if (rect.Contains(OffsetMousePosition))
@@ -1019,7 +1016,7 @@ namespace DarkUI.Controls
 
         #region Drag & Drop Region
 
-        private void StartDrag()
+        protected override void StartDrag()
         {
             if (!AllowMoveNodes)
             {
@@ -1043,11 +1040,10 @@ namespace DarkUI.Controls
             }
 
             _provisionalDragging = false;
-            _isDragging = true;
-
-            _dragTimer.Start();
 
             Cursor = Cursors.SizeAll;
+
+            base.StartDrag();
         }
 
         private void HandleDrag()
@@ -1127,17 +1123,16 @@ namespace DarkUI.Controls
             UpdateNodes();
         }
 
-        private void StopDrag()
+        protected override void StopDrag()
         {
-            _isDragging = false;
             _dragNodes = null;
             _dropNode = null;
-
-            _dragTimer.Stop();
 
             Cursor = Cursors.Default;
 
             Invalidate();
+
+            base.StopDrag();
         }
 
         protected virtual bool ForceDropToParent(DarkTreeNode node)
@@ -1214,7 +1209,7 @@ namespace DarkUI.Controls
             if (SelectedNodes.Count > 0 && SelectedNodes.Contains(node))
                 bgColor = Focused ? Colors.BlueSelection : Colors.GreySelection;
 
-            if (_isDragging && _dropNode == node)
+            if (IsDragging && _dropNode == node)
                 bgColor = Focused ? Colors.BlueSelection : Colors.GreySelection;
 
             using (var b = new SolidBrush(bgColor))
