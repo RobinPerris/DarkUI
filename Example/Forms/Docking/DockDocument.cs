@@ -1,6 +1,7 @@
 ﻿using DarkUI.Config;
 using DarkUI.Docking;
 using DarkUI.Forms;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Example
@@ -9,14 +10,19 @@ namespace Example
     {
         #region Constructor Region
 
-        public DockDocument(string text)
+        public DockDocument()
         {
             InitializeComponent();
 
-            DockText = text;
-
             // Workaround to stop the textbox from highlight all text.
             txtDocument.SelectionStart = txtDocument.Text.Length;
+        }
+
+        public DockDocument(string text, Image icon)
+            : this()
+        {
+            DockText = text;
+            Icon = icon;
         }
 
         #endregion

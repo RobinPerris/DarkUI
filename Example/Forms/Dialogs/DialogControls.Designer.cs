@@ -2,7 +2,7 @@
 
 namespace Example
 {
-    partial class DialogTest
+    partial class DialogControls
     {
         /// <summary>
         /// Required designer variable.
@@ -30,18 +30,20 @@ namespace Example
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogTest));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogControls));
             this.pnlMain = new System.Windows.Forms.Panel();
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlTreeView = new DarkSectionPanel();
-            this.treeTest = new DarkTreeView();
-            this.pnlListView = new DarkSectionPanel();
-            this.lstTest = new DarkListView();
-            this.pnlMessageBox = new DarkSectionPanel();
+            this.pnlTreeView = new DarkUI.Controls.DarkSectionPanel();
+            this.treeTest = new DarkUI.Controls.DarkTreeView();
+            this.pnlListView = new DarkUI.Controls.DarkSectionPanel();
+            this.lstTest = new DarkUI.Controls.DarkListView();
+            this.pnlMessageBox = new DarkUI.Controls.DarkSectionPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnMessageBox = new DarkButton();
+            this.darkCheckBox2 = new DarkUI.Controls.DarkCheckBox();
+            this.darkCheckBox1 = new DarkUI.Controls.DarkCheckBox();
+            this.btnMessageBox = new DarkUI.Controls.DarkButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnDialog = new DarkButton();
+            this.btnDialog = new DarkUI.Controls.DarkButton();
             this.pnlMain.SuspendLayout();
             this.tblMain.SuspendLayout();
             this.pnlTreeView.SuspendLayout();
@@ -129,12 +131,14 @@ namespace Example
             this.pnlMessageBox.Location = new System.Drawing.Point(5, 0);
             this.pnlMessageBox.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.pnlMessageBox.Name = "pnlMessageBox";
-            this.pnlMessageBox.SectionHeader = "Section test";
+            this.pnlMessageBox.SectionHeader = "Controls test";
             this.pnlMessageBox.Size = new System.Drawing.Size(222, 400);
             this.pnlMessageBox.TabIndex = 12;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.darkCheckBox2);
+            this.panel1.Controls.Add(this.darkCheckBox1);
             this.panel1.Controls.Add(this.btnMessageBox);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -143,6 +147,27 @@ namespace Example
             this.panel1.Padding = new System.Windows.Forms.Padding(10);
             this.panel1.Size = new System.Drawing.Size(220, 374);
             this.panel1.TabIndex = 0;
+            // 
+            // darkCheckBox2
+            // 
+            this.darkCheckBox2.AutoSize = true;
+            this.darkCheckBox2.Checked = true;
+            this.darkCheckBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.darkCheckBox2.Enabled = false;
+            this.darkCheckBox2.Location = new System.Drawing.Point(10, 111);
+            this.darkCheckBox2.Name = "darkCheckBox2";
+            this.darkCheckBox2.Size = new System.Drawing.Size(124, 19);
+            this.darkCheckBox2.TabIndex = 9;
+            this.darkCheckBox2.Text = "Disabled checkbox";
+            // 
+            // darkCheckBox1
+            // 
+            this.darkCheckBox1.AutoSize = true;
+            this.darkCheckBox1.Location = new System.Drawing.Point(10, 86);
+            this.darkCheckBox1.Name = "darkCheckBox1";
+            this.darkCheckBox1.Size = new System.Drawing.Size(121, 19);
+            this.darkCheckBox1.TabIndex = 8;
+            this.darkCheckBox1.Text = "Enabled checkbox";
             // 
             // btnMessageBox
             // 
@@ -173,7 +198,7 @@ namespace Example
             this.btnDialog.TabIndex = 4;
             this.btnDialog.Text = "Dialog";
             // 
-            // DialogTest
+            // DialogControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -181,9 +206,9 @@ namespace Example
             this.Controls.Add(this.pnlMain);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "DialogTest";
+            this.Name = "DialogControls";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Dialog test";
+            this.Text = "Controls";
             this.Controls.SetChildIndex(this.pnlMain, 0);
             this.pnlMain.ResumeLayout(false);
             this.tblMain.ResumeLayout(false);
@@ -191,6 +216,7 @@ namespace Example
             this.pnlListView.ResumeLayout(false);
             this.pnlMessageBox.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -209,5 +235,7 @@ namespace Example
         private DarkButton btnMessageBox;
         private System.Windows.Forms.Panel panel2;
         private DarkButton btnDialog;
+        private DarkCheckBox darkCheckBox1;
+        private DarkCheckBox darkCheckBox2;
     }
 }

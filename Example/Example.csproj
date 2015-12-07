@@ -47,11 +47,11 @@
     <Compile Include="Forms\Dialogs\DialogAbout.Designer.cs">
       <DependentUpon>DialogAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Dialogs\DialogTest.cs">
+    <Compile Include="Forms\Dialogs\DialogControls.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Dialogs\DialogTest.Designer.cs">
-      <DependentUpon>DialogTest.cs</DependentUpon>
+    <Compile Include="Forms\Dialogs\DialogControls.Designer.cs">
+      <DependentUpon>DialogControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Docking\DockDocument.cs">
       <SubType>UserControl</SubType>
@@ -105,8 +105,8 @@
     <EmbeddedResource Include="Forms\Dialogs\DialogAbout.resx">
       <DependentUpon>DialogAbout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dialogs\DialogTest.resx">
-      <DependentUpon>DialogTest.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Dialogs\DialogControls.resx">
+      <DependentUpon>DialogControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Docking\DockDocument.resx">
       <DependentUpon>DockDocument.cs</DependentUpon>
@@ -194,6 +194,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RefactoringLog_12810.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

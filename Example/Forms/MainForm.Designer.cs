@@ -32,7 +32,7 @@ namespace Example
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.mnuMain = new DarkMenuStrip();
+            this.mnuMain = new DarkUI.Controls.DarkMenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuNewFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -48,14 +48,19 @@ namespace Example
             this.mnuHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolMain = new DarkToolStrip();
+            this.toolMain = new DarkUI.Controls.DarkToolStrip();
             this.btnNewFile = new System.Windows.Forms.ToolStripButton();
-            this.stripMain = new DarkStatusStrip();
+            this.stripMain = new DarkUI.Controls.DarkStatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.DockPanel = new DarkDockPanel();
-            this.darkSeparator1 = new DarkSeparator();
+            this.DockPanel = new DarkUI.Docking.DarkDockPanel();
+            this.darkSeparator1 = new DarkUI.Controls.DarkSeparator();
+            this.checkableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkableWithIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.checkedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkedWithIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.toolMain.SuspendLayout();
             this.stripMain.SuspendLayout();
@@ -133,6 +138,12 @@ namespace Example
             // 
             // mnuTools
             // 
+            this.mnuTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkableToolStripMenuItem,
+            this.checkableWithIconToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.checkedToolStripMenuItem,
+            this.checkedWithIconToolStripMenuItem});
             this.mnuTools.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.mnuTools.Name = "mnuTools";
             this.mnuTools.Size = new System.Drawing.Size(48, 20);
@@ -294,6 +305,49 @@ namespace Example
             this.darkSeparator1.TabIndex = 4;
             this.darkSeparator1.Text = "darkSeparator1";
             // 
+            // checkableToolStripMenuItem
+            // 
+            this.checkableToolStripMenuItem.CheckOnClick = true;
+            this.checkableToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.checkableToolStripMenuItem.Name = "checkableToolStripMenuItem";
+            this.checkableToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.checkableToolStripMenuItem.Text = "Checkable";
+            // 
+            // checkableWithIconToolStripMenuItem
+            // 
+            this.checkableWithIconToolStripMenuItem.CheckOnClick = true;
+            this.checkableWithIconToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.checkableWithIconToolStripMenuItem.Image = global::Example.Icons.properties_16xLG;
+            this.checkableWithIconToolStripMenuItem.Name = "checkableWithIconToolStripMenuItem";
+            this.checkableWithIconToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.checkableWithIconToolStripMenuItem.Text = "Checkable with icon";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.toolStripSeparator2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
+            // 
+            // checkedToolStripMenuItem
+            // 
+            this.checkedToolStripMenuItem.Checked = true;
+            this.checkedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkedToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.checkedToolStripMenuItem.Name = "checkedToolStripMenuItem";
+            this.checkedToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.checkedToolStripMenuItem.Text = "Checked";
+            // 
+            // checkedWithIconToolStripMenuItem
+            // 
+            this.checkedWithIconToolStripMenuItem.Checked = true;
+            this.checkedWithIconToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkedWithIconToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.checkedWithIconToolStripMenuItem.Image = global::Example.Icons.properties_16xLG;
+            this.checkedWithIconToolStripMenuItem.Name = "checkedWithIconToolStripMenuItem";
+            this.checkedWithIconToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.checkedWithIconToolStripMenuItem.Text = "Checked with icon";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -348,6 +402,11 @@ namespace Example
         private System.Windows.Forms.ToolStripMenuItem mnuLayers;
         private System.Windows.Forms.ToolStripMenuItem mnuHistory;
         private DarkSeparator darkSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem checkableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem checkableWithIconToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem checkedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem checkedWithIconToolStripMenuItem;
     }
 }
 

@@ -3,9 +3,9 @@ using DarkUI.Forms;
 
 namespace Example
 {
-    public partial class DialogTest : DarkDialog
+    public partial class DialogControls : DarkDialog
     {
-        public DialogTest()
+        public DialogControls()
         {
             InitializeComponent();
 

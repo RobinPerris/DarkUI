@@ -44,6 +44,11 @@ namespace DarkUI.Config
             get { return Color.FromArgb(95, 101, 102); }
         }
 
+        public static Color LightestBackground
+        {
+            get { return Color.FromArgb(178, 178, 178); }
+        }
+
         public static Color LightBorder
         {
             get { return Color.FromArgb(81, 81, 81); }

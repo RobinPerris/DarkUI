@@ -77,6 +77,13 @@ namespace DarkUI.Controls
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool AutoEllipsis
+        {
+            get { return false; }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DarkControlState ButtonState
         {
             get { return _buttonState; }
@@ -84,23 +91,9 @@ namespace DarkUI.Controls
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new ContentAlignment TextAlign
-        {
-            get { return base.TextAlign; }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new ContentAlignment ImageAlign
         {
             get { return base.ImageAlign; }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool AutoEllipsis
-        {
-            get { return false; }
         }
 
         [Browsable(false)]
@@ -115,6 +108,13 @@ namespace DarkUI.Controls
         public new FlatStyle FlatStyle
         {
             get { return base.FlatStyle; }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new ContentAlignment TextAlign
+        {
+            get { return base.TextAlign; }
         }
 
         [Browsable(false)]

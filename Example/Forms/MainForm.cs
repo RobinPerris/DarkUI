@@ -60,9 +60,9 @@ namespace Example
             BuildWindowMenu();
 
             // Add dummy documents to the main document area of the dock panel
-            DockPanel.AddContent(new DockDocument("Document 1"));
-            DockPanel.AddContent(new DockDocument("Document 2"));
-            DockPanel.AddContent(new DockDocument("Document 3"));
+            DockPanel.AddContent(new DockDocument("Document 1", Icons.document_16xLG));
+            DockPanel.AddContent(new DockDocument("Document 2", Icons.document_16xLG));
+            DockPanel.AddContent(new DockDocument("Document 3", Icons.document_16xLG));
         }
 
         #endregion
@@ -125,7 +125,7 @@ namespace Example
 
         private void NewFile_Click(object sender, EventArgs e)
         {
-            var newFile = new DockDocument("New document");
+            var newFile = new DockDocument("New document", Icons.document_16xLG);
             DockPanel.AddContent(newFile);
         }
 
@@ -136,7 +136,7 @@ namespace Example
 
         private void Dialog_Click(object sender, EventArgs e)
         {
-            var test = new DialogTest();
+            var test = new DialogControls();
             test.ShowDialog();
         }
 
