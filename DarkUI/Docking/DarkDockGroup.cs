@@ -462,7 +462,10 @@ namespace DarkUI.Docking
                 return;
 
             if (e.Content == VisibleContent)
+            {
+                VisibleContent.Focus();
                 return;
+            }
 
             VisibleContent = e.Content;
 
