@@ -2,11 +2,12 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public class DarkCheckBox : CheckBox
+    public class DarkRadioButton : RadioButton
     {
         #region Field Region
 
@@ -111,13 +112,6 @@ namespace DarkUI.Controls
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool ThreeState
-        {
-            get { return base.ThreeState; }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool UseCompatibleTextRendering
         {
             get { return false; }
@@ -134,7 +128,7 @@ namespace DarkUI.Controls
 
         #region Constructor Region
 
-        public DarkCheckBox()
+        public DarkRadioButton()
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor |
                      ControlStyles.OptimizedDoubleBuffer |
@@ -280,7 +274,7 @@ namespace DarkUI.Controls
             var g = e.Graphics;
             var rect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
 
-            var size = Consts.CheckBoxSize;
+            var size = Consts.RadioButtonSize;
 
             var textColor = Colors.LightText;
             var borderColor = Colors.LightText;
@@ -317,20 +311,24 @@ namespace DarkUI.Controls
                 g.FillRectangle(b, rect);
             }
 
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
             using (var p = new Pen(borderColor))
             {
                 var boxRect = new Rectangle(0, (rect.Height / 2) - (size / 2) - 1, size, size);
-                g.DrawRectangle(p, boxRect);
+                g.DrawEllipse(p, boxRect);
             }
 
             if (Checked)
             {
                 using (var b = new SolidBrush(fillColor))
                 {
-                    Rectangle boxRect = new Rectangle(2, (rect.Height / 2) - ((size - 4) / 2) - 1, size - 3, size - 3);
-                    g.FillRectangle(b, boxRect);
+                    Rectangle boxRect = new Rectangle(3, (rect.Height / 2) - ((size - 7) / 2) - 2, size - 6, size - 6);
+                    g.FillEllipse(b, boxRect);
                 }
             }
+
+            g.SmoothingMode = SmoothingMode.Default;
 
             using (var b = new SolidBrush(textColor))
             {

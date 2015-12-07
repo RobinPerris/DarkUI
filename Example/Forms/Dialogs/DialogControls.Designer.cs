@@ -39,8 +39,14 @@ namespace Example
             this.lstTest = new DarkUI.Controls.DarkListView();
             this.pnlMessageBox = new DarkUI.Controls.DarkSectionPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.darkRadioButton3 = new DarkUI.Controls.DarkRadioButton();
+            this.darkRadioButton2 = new DarkUI.Controls.DarkRadioButton();
+            this.darkRadioButton1 = new DarkUI.Controls.DarkRadioButton();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.darkCheckBox2 = new DarkUI.Controls.DarkCheckBox();
             this.darkCheckBox1 = new DarkUI.Controls.DarkCheckBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.btnMessageBox = new DarkUI.Controls.DarkButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDialog = new DarkUI.Controls.DarkButton();
@@ -50,6 +56,9 @@ namespace Example
             this.pnlListView.SuspendLayout();
             this.pnlMessageBox.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,9 +146,9 @@ namespace Example
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.darkCheckBox2);
-            this.panel1.Controls.Add(this.darkCheckBox1);
-            this.panel1.Controls.Add(this.btnMessageBox);
+            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(1, 25);
@@ -148,35 +157,99 @@ namespace Example
             this.panel1.Size = new System.Drawing.Size(220, 374);
             this.panel1.TabIndex = 0;
             // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.darkRadioButton3);
+            this.panel5.Controls.Add(this.darkRadioButton2);
+            this.panel5.Controls.Add(this.darkRadioButton1);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(10, 147);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(200, 100);
+            this.panel5.TabIndex = 12;
+            // 
+            // darkRadioButton3
+            // 
+            this.darkRadioButton3.AutoSize = true;
+            this.darkRadioButton3.Checked = true;
+            this.darkRadioButton3.Enabled = false;
+            this.darkRadioButton3.Location = new System.Drawing.Point(0, 50);
+            this.darkRadioButton3.Name = "darkRadioButton3";
+            this.darkRadioButton3.Size = new System.Drawing.Size(139, 19);
+            this.darkRadioButton3.TabIndex = 4;
+            this.darkRadioButton3.TabStop = true;
+            this.darkRadioButton3.Text = "Disabled radio button";
+            // 
+            // darkRadioButton2
+            // 
+            this.darkRadioButton2.AutoSize = true;
+            this.darkRadioButton2.Location = new System.Drawing.Point(0, 25);
+            this.darkRadioButton2.Name = "darkRadioButton2";
+            this.darkRadioButton2.Size = new System.Drawing.Size(94, 19);
+            this.darkRadioButton2.TabIndex = 3;
+            this.darkRadioButton2.Text = "Radio button";
+            // 
+            // darkRadioButton1
+            // 
+            this.darkRadioButton1.AutoSize = true;
+            this.darkRadioButton1.Location = new System.Drawing.Point(0, 0);
+            this.darkRadioButton1.Name = "darkRadioButton1";
+            this.darkRadioButton1.Size = new System.Drawing.Size(94, 19);
+            this.darkRadioButton1.TabIndex = 2;
+            this.darkRadioButton1.Text = "Radio button";
+            // 
+            // panel4
+            // 
+            this.panel4.AutoSize = true;
+            this.panel4.Controls.Add(this.darkCheckBox2);
+            this.panel4.Controls.Add(this.darkCheckBox1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(10, 90);
+            this.panel4.Name = "panel4";
+            this.panel4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.panel4.Size = new System.Drawing.Size(200, 57);
+            this.panel4.TabIndex = 11;
+            // 
             // darkCheckBox2
             // 
             this.darkCheckBox2.AutoSize = true;
             this.darkCheckBox2.Checked = true;
             this.darkCheckBox2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.darkCheckBox2.Enabled = false;
-            this.darkCheckBox2.Location = new System.Drawing.Point(10, 111);
+            this.darkCheckBox2.Location = new System.Drawing.Point(0, 25);
             this.darkCheckBox2.Name = "darkCheckBox2";
             this.darkCheckBox2.Size = new System.Drawing.Size(124, 19);
-            this.darkCheckBox2.TabIndex = 9;
+            this.darkCheckBox2.TabIndex = 13;
             this.darkCheckBox2.Text = "Disabled checkbox";
             // 
             // darkCheckBox1
             // 
             this.darkCheckBox1.AutoSize = true;
-            this.darkCheckBox1.Location = new System.Drawing.Point(10, 86);
+            this.darkCheckBox1.Location = new System.Drawing.Point(0, 0);
             this.darkCheckBox1.Name = "darkCheckBox1";
             this.darkCheckBox1.Size = new System.Drawing.Size(121, 19);
-            this.darkCheckBox1.TabIndex = 8;
+            this.darkCheckBox1.TabIndex = 12;
             this.darkCheckBox1.Text = "Enabled checkbox";
+            // 
+            // panel3
+            // 
+            this.panel3.AutoSize = true;
+            this.panel3.Controls.Add(this.btnMessageBox);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(10, 50);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.panel3.Size = new System.Drawing.Size(200, 40);
+            this.panel3.TabIndex = 10;
             // 
             // btnMessageBox
             // 
             this.btnMessageBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnMessageBox.Location = new System.Drawing.Point(10, 50);
+            this.btnMessageBox.Location = new System.Drawing.Point(0, 0);
             this.btnMessageBox.Name = "btnMessageBox";
             this.btnMessageBox.Padding = new System.Windows.Forms.Padding(5);
             this.btnMessageBox.Size = new System.Drawing.Size(200, 30);
-            this.btnMessageBox.TabIndex = 6;
+            this.btnMessageBox.TabIndex = 12;
             this.btnMessageBox.Text = "Message Box";
             // 
             // panel2
@@ -217,6 +290,11 @@ namespace Example
             this.pnlMessageBox.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -232,10 +310,16 @@ namespace Example
         private DarkListView lstTest;
         private DarkSectionPanel pnlMessageBox;
         private System.Windows.Forms.Panel panel1;
-        private DarkButton btnMessageBox;
         private System.Windows.Forms.Panel panel2;
         private DarkButton btnDialog;
-        private DarkCheckBox darkCheckBox1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
+        private DarkButton btnMessageBox;
         private DarkCheckBox darkCheckBox2;
+        private DarkCheckBox darkCheckBox1;
+        private System.Windows.Forms.Panel panel5;
+        private DarkRadioButton darkRadioButton2;
+        private DarkRadioButton darkRadioButton1;
+        private DarkRadioButton darkRadioButton3;
     }
 }
