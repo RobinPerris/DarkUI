@@ -56,6 +56,9 @@ namespace Example
             foreach (var toolWindow in _toolWindows)
                 DockPanel.AddContent(toolWindow);
 
+            // Add the history panel to the layer panel group
+            DockPanel.AddContent(_dockHistory, _dockLayers.DockGroup);
+
             // Check window menu items which are contained in the dock panel
             BuildWindowMenu();
 

@@ -111,7 +111,7 @@ namespace DarkUI.Docking
         public void AddContent(DarkDockContent dockContent, DarkDockGroup dockGroup)
         {
             if (_contents.Contains(dockContent))
-                return;
+                RemoveContent(dockContent);
 
             if (dockGroup != null && dockContent.DockArea != dockGroup.DockArea)
                 throw new Exception($"Attempting to add '{dockContent.DockArea}' content to '{dockGroup.DockArea}' group.");
