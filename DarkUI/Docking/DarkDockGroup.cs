@@ -71,9 +71,14 @@ namespace DarkUI.Docking
             _tabs.Add(dockContent, new DarkDockTab(dockContent));
 
             if (VisibleContent == null)
+            {
+                dockContent.Visible = true;
                 VisibleContent = dockContent;
+            }
             else
+            {
                 dockContent.Visible = false;
+            }
 
             var menuItem = new ToolStripMenuItem(dockContent.DockText);
             menuItem.Tag = dockContent;
@@ -98,9 +103,12 @@ namespace DarkUI.Docking
             {
                 VisibleContent = null;
 
-                // todo: order?
-                foreach (var content in _contents)
-                    VisibleContent = content;
+                if (_contents.Count > 0)
+                {
+                    var newContent = _contents[0];
+                    newContent.Visible = true;
+                    VisibleContent = newContent;
+                }
             }
 
             ToolStripMenuItem itemToRemove = null;
