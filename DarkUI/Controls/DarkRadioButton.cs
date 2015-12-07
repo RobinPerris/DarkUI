@@ -237,34 +237,6 @@ namespace DarkUI.Controls
                 SetControlState(DarkControlState.Hover);
         }
 
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-
-            if (e.KeyCode == Keys.Space)
-            {
-                _spacePressed = true;
-                SetControlState(DarkControlState.Pressed);
-            }
-        }
-
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-            base.OnKeyUp(e);
-
-            if (e.KeyCode == Keys.Space)
-            {
-                _spacePressed = false;
-
-                var location = Cursor.Position;
-
-                if (!ClientRectangle.Contains(location))
-                    SetControlState(DarkControlState.Normal);
-                else
-                    SetControlState(DarkControlState.Hover);
-            }
-        }
-
         #endregion
 
         #region Paint Region
