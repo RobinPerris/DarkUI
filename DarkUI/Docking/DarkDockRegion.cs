@@ -254,10 +254,15 @@ namespace DarkUI.Docking
             _parentForm.ResizeEnd += ParentForm_ResizeEnd;
         }
 
+        protected override void OnResize(EventArgs eventargs)
+        {
+            base.OnResize(eventargs);
+
+            SizeGroups();
+        }
+
         private void ParentForm_ResizeEnd(object sender, EventArgs e)
         {
-            SizeGroups();
-
             if (_splitter != null)
                 _splitter.UpdateBounds();
         }
@@ -265,8 +270,6 @@ namespace DarkUI.Docking
         protected override void OnLayout(LayoutEventArgs e)
         {
             base.OnLayout(e);
-
-            SizeGroups();
 
             if (_splitter != null)
                 _splitter.UpdateBounds();
