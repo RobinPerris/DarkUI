@@ -40,7 +40,7 @@ namespace DarkUI.Docking
         public DarkDockContent ActiveContent
         {
             get { return _activeContent; }
-            internal set
+            set
             {
                 // Don't let content visibility changes re-trigger event
                 if (_switchingContent)
@@ -70,6 +70,16 @@ namespace DarkUI.Docking
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DarkDockGroup ActiveGroup { get; internal set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DarkDockContent ActiveDocument
+        {
+            get
+            {
+                return _regions[DarkDockArea.Document].ActiveDocument;
+            }
+        }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -152,6 +162,11 @@ namespace DarkUI.Docking
         public bool ContainsContent(DarkDockContent dockContent)
         {
             return _contents.Contains(dockContent);
+        }
+
+        public List<DarkDockContent> GetDocuments()
+        {
+            return _regions[DarkDockArea.Document].GetContents();
         }
 
         private void CreateRegions()

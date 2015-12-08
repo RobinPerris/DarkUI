@@ -15,45 +15,9 @@ namespace DarkUI.Docking
         }
     }
 
-    public class DockContentClosingEventArgs : EventArgs
-    {
-        public DarkDockContent Content { get; private set; }
-
-        public bool Cancel { get; set; }
-
-        public DockContentClosingEventArgs(DarkDockContent content)
-        {
-            Content = content;
-        }
-    }
-
-    public class DockTextChangedEventArgs : EventArgs
-    {
-        public DarkDockContent Content { get; private set; }
-
-        public string OldText { get; private set; }
-
-        public string NewText { get; private set; }
-
-        public DockTextChangedEventArgs(DarkDockContent content, string oldText, string newText)
-        {
-            Content = content;
-            OldText = oldText;
-            NewText = newText;
-        }
-    }
-
     [ToolboxItem(false)]
     public class DarkDockContent : UserControl
     {
-        #region Event Region
-
-        public event EventHandler<DockContentClosingEventArgs> Closing;
-        public event EventHandler<DockContentEventArgs> Closed;
-        public event EventHandler<DockTextChangedEventArgs> DockHeaderChanged;
-
-        #endregion
-
         #region Field Region
 
         private string _dockText;
@@ -74,8 +38,7 @@ namespace DarkUI.Docking
 
                 _dockText = value;
 
-                if (DockHeaderChanged != null)
-                    DockHeaderChanged(this, new DockTextChangedEventArgs(this, oldText, _dockText));
+                // todo: trigger tabs to re-calculate in parent group
 
                 Invalidate();
             }
@@ -123,19 +86,8 @@ namespace DarkUI.Docking
 
         public virtual void Close()
         {
-            var e = new DockContentClosingEventArgs(this);
-
-            if (Closing != null)
-                Closing(this, e);
-
-            if (e.Cancel)
-                return;
-
             if (DockPanel != null)
                 DockPanel.RemoveContent(this);
-
-            if (Closed != null)
-                Closed(this, new DockContentEventArgs(this));
         }
 
         #endregion

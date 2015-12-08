@@ -131,6 +131,11 @@ namespace DarkUI.Docking
             UpdateTabArea();
         }
 
+        public List<DarkDockContent> GetContents()
+        {
+            return _contents.ToList();
+        }
+
         private void UpdateTabArea()
         {
             if (DockArea == DarkDockArea.Document)
@@ -290,6 +295,9 @@ namespace DarkUI.Docking
         public void EnsureVisible()
         {
             if (DockArea != DarkDockArea.Document)
+                return;
+
+            if (VisibleContent == null)
                 return;
 
             var width = ClientRectangle.Width - Padding.Horizontal - _tabArea.DropdownRectangle.Width;

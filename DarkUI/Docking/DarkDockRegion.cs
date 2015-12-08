@@ -26,6 +26,17 @@ namespace DarkUI.Docking
 
         public DarkDockArea DockArea { get; private set; }
 
+        public DarkDockContent ActiveDocument
+        {
+            get
+            {
+                if (DockArea != DarkDockArea.Document || _groups.Count == 0)
+                    return null;
+
+                return _groups[0].VisibleContent;
+            }
+        }
+
         #endregion
 
         #region Constructor Region
@@ -88,6 +99,16 @@ namespace DarkUI.Docking
                 Visible = false;
 
             PositionGroups();
+        }
+
+        public List<DarkDockContent> GetContents()
+        {
+            var result = new List<DarkDockContent>();
+
+            foreach (var group in _groups)
+                result.AddRange(group.GetContents());
+
+            return result;
         }
 
         private DarkDockGroup CreateGroup()
