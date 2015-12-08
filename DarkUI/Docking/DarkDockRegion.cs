@@ -104,7 +104,7 @@ namespace DarkUI.Docking
         public List<DarkDockContent> GetContents()
         {
             var result = new List<DarkDockContent>();
-
+            
             foreach (var group in _groups)
                 result.AddRange(group.GetContents());
 

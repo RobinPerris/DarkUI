@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public abstract class DarkScrollBase : DarkControl
+    public abstract class DarkScrollBase : Control
     {
         #region Event Region
 

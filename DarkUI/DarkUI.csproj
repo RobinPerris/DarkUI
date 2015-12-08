@@ -12,6 +12,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,15 +46,16 @@
     <Compile Include="Collections\ObservableListModified.cs" />
     <Compile Include="Config\Colors.cs" />
     <Compile Include="Config\Consts.cs" />
+    <Compile Include="Controls\DarkButtonStyle.cs" />
     <Compile Include="Controls\DarkCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DarkControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\DarkContentAlignment.cs" />
+    <Compile Include="Controls\DarkControlState.cs" />
     <Compile Include="Controls\DarkRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkScrollOrientation.cs" />
     <Compile Include="Controls\DarkTitle.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -76,7 +81,9 @@
     <Compile Include="Controls\DarkMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DarkScrollBar.cs" />
+    <Compile Include="Controls\DarkScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkScrollView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -96,7 +103,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkTreeNode.cs" />
-    <Compile Include="Docking\DarkDockContent.cs" />
+    <Compile Include="Controls\ScrollValueEventArgs.cs" />
+    <Compile Include="Docking\DarkDockArea.cs" />
+    <Compile Include="Docking\DarkDockContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Docking\DarkDockGroup.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -109,12 +120,14 @@
     <Compile Include="Docking\DarkDocument.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Docking\DarkSplitterType.cs" />
     <Compile Include="Docking\DarkToolWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Docking\DarkDockSplitter.cs" />
     <Compile Include="Docking\DarkDockTab.cs" />
     <Compile Include="Docking\DarkDockTabArea.cs" />
+    <Compile Include="Docking\DockContentEvenArgs.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Forms\DarkDialog.cs">
@@ -123,6 +136,7 @@
     <Compile Include="Forms\DarkDialog.Designer.cs">
       <DependentUpon>DarkDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DarkDialogButton.cs" />
     <Compile Include="Forms\DarkForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +146,7 @@
     <Compile Include="Forms\DarkMessageBox.Designer.cs">
       <DependentUpon>DarkMessageBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DarkMessageBoxIcon.cs" />
     <Compile Include="Forms\DarkTranslucentForm.cs">
       <SubType>Form</SubType>
     </Compile>

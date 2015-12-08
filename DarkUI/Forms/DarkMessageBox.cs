@@ -6,14 +6,6 @@ using System.Windows.Forms;
 
 namespace DarkUI.Forms
 {
-    public enum DarkMessageBoxIcon
-    {
-        None,
-        Information,
-        Warning,
-        Error
-    }
-
     public partial class DarkMessageBox : DarkDialog
     {
         #region Field Region

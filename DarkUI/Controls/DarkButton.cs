@@ -6,12 +6,6 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public enum DarkButtonStyle
-    {
-        Normal,
-        Flat
-    }
-
     [ToolboxBitmap(typeof(Button))]
     [DefaultEvent("Click")]
     public class DarkButton : Button

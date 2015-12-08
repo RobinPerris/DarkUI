@@ -7,14 +7,6 @@ using System.Windows.Forms;
 
 namespace DarkUI.Docking
 {
-    public enum DarkDockArea
-    {
-        Document,
-        Left,
-        Right,
-        Bottom
-    }
-
     public class DarkDockPanel : UserControl
     {
         #region Event Region

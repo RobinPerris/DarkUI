@@ -7,23 +7,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public enum DarkScrollOrientation
-    {
-        Vertical,
-        Horizontal
-    }
-
-    public class ScrollValueEventArgs : EventArgs
-    {
-        public int Value { get; private set; }
-
-        public ScrollValueEventArgs(int value)
-        {
-            Value = value;
-        }
-    }
-
-    public class DarkScrollBar : DarkControl
+    public class DarkScrollBar : Control
     {
         #region Event Region
 

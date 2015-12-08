@@ -5,14 +5,6 @@ using System.Windows.Forms;
 
 namespace DarkUI.Docking
 {
-    public enum DarkSplitterType
-    {
-        Left,
-        Right,
-        Top,
-        Bottom
-    }
-
     public class DarkDockSplitter
     {
         #region Field Region
