@@ -119,7 +119,7 @@ namespace DarkUI.Controls
 
             if (e.OldItems != null)
             {
-                foreach (DarkListItem item in e.NewItems)
+                foreach (DarkListItem item in e.OldItems)
                     item.TextChanged -= Item_TextChanged;
 
                 // Find the starting index of the old item list and update anything past that
