@@ -12,6 +12,12 @@ namespace DarkUI.Controls
 {
     public class DarkListView : DarkScrollView
     {
+        #region Event Region
+
+        public event EventHandler SelectedIndicesChanged;
+
+        #endregion
+
         #region Field Region
 
         private int _itemHeight = 20;
@@ -238,6 +244,9 @@ namespace DarkUI.Controls
             _selectedIndices.Clear();
             _selectedIndices.Add(index);
 
+            if (SelectedIndicesChanged != null)
+                SelectedIndicesChanged(this, null);
+
             _anchoredItemStart = index;
             _anchoredItemEnd = index;
 
@@ -257,6 +266,9 @@ namespace DarkUI.Controls
 
                 _selectedIndices.Add(index);
             }
+
+            if (SelectedIndicesChanged != null)
+                SelectedIndicesChanged(this, null);
 
             _anchoredItemStart = list[list.Count - 1];
             _anchoredItemEnd = list[list.Count - 1];
@@ -314,6 +326,9 @@ namespace DarkUI.Controls
                 _anchoredItemEnd = index;
             }
 
+            if (SelectedIndicesChanged != null)
+                SelectedIndicesChanged(this, null);
+
             Invalidate();
         }
 
@@ -334,6 +349,9 @@ namespace DarkUI.Controls
                 for (var i = startRange; i >= endRange; i--)
                     _selectedIndices.Add(i);
             }
+
+            if (SelectedIndicesChanged != null)
+                SelectedIndicesChanged(this, null);
 
             Invalidate();
         }
