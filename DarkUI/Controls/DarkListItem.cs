@@ -1,13 +1,36 @@
 ﻿using DarkUI.Config;
+using System;
 using System.Drawing;
 
 namespace DarkUI.Controls
 {
     public class DarkListItem
     {
+        #region Event Region
+
+        public event EventHandler TextChanged;
+
+        #endregion
+
+        #region Field Region
+
+        private string _text;
+
+        #endregion
+
         #region Property Region
 
-        public string Text { get; set; }
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+
+                if (TextChanged != null)
+                    TextChanged(this, new EventArgs());
+            }
+        }
 
         public Rectangle Area { get; set; }
 

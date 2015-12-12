@@ -95,7 +95,10 @@ namespace DarkUI.Controls
                 {
                     // Set the area size of all new items
                     foreach (DarkListItem item in e.NewItems)
+                    {
+                        item.TextChanged += Item_TextChanged;
                         UpdateItemSize(item, g);
+                    }
                 }
 
                 // Find the starting index of the new item list and update anything past that
@@ -110,6 +113,9 @@ namespace DarkUI.Controls
 
             if (e.OldItems != null)
             {
+                foreach (DarkListItem item in e.NewItems)
+                    item.TextChanged -= Item_TextChanged;
+
                 // Find the starting index of the old item list and update anything past that
                 if (e.OldStartingIndex < (Items.Count - 1))
                 {
@@ -120,6 +126,11 @@ namespace DarkUI.Controls
                 }
             }
 
+            UpdateContentSize();
+        }
+
+        private void Item_TextChanged(object sender, EventArgs e)
+        {
             UpdateContentSize();
         }
 
