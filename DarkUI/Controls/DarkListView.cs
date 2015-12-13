@@ -125,10 +125,21 @@ namespace DarkUI.Controls
                 // Find the starting index of the old item list and update anything past that
                 if (e.OldStartingIndex < (Items.Count - 1))
                 {
-                    for (var i = e.NewStartingIndex; i <= Items.Count - 1; i++)
+                    for (var i = e.OldStartingIndex; i <= Items.Count - 1; i++)
                     {
                         UpdateItemPosition(Items[i], i);
                     }
+                }
+            }
+
+            if (Items.Count == 0)
+            {
+                if (_selectedIndices.Count > 0)
+                {
+                    _selectedIndices.Clear();
+
+                    if (SelectedIndicesChanged != null)
+                        SelectedIndicesChanged(this, null);
                 }
             }
 
@@ -225,15 +236,7 @@ namespace DarkUI.Controls
 
         public int GetItemIndex(DarkListItem item)
         {
-            var index = -1;
-            foreach (var otherItem in Items)
-            {
-                index++;
-                if (item == otherItem)
-                    break;
-            }
-
-            return index;
+            return Items.IndexOf(item);
         }
 
         public void SelectItem(int index)
