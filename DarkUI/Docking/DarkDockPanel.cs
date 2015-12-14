@@ -29,6 +29,8 @@ namespace DarkUI.Docking
 
         #region Property Region
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DarkDockContent ActiveContent
         {
             get { return _activeContent; }
