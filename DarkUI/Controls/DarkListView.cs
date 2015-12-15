@@ -148,7 +148,11 @@ namespace DarkUI.Controls
 
         private void Item_TextChanged(object sender, EventArgs e)
         {
-            UpdateContentSize();
+            var item = (DarkListItem)sender;
+
+            UpdateItemSize(item);
+            UpdateContentSize(item);
+            Invalidate();
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -411,9 +415,31 @@ namespace DarkUI.Controls
                     highestWidth = item.Area.Right + 1;
             }
 
-            ContentSize = new Size(highestWidth, Items.Count * ItemHeight);
+            var width = highestWidth;
+            var height = Items.Count * ItemHeight;
 
-            Invalidate();
+            if (ContentSize.Width != width || ContentSize.Height != height)
+            {
+                ContentSize = new Size(width, height);
+                Invalidate();
+            }
+        }
+
+        private void UpdateContentSize(DarkListItem item)
+        {
+            var itemWidth = item.Area.Right + 1;
+
+            if (itemWidth == ContentSize.Width)
+            {
+                UpdateContentSize();
+                return;
+            }
+
+            if (itemWidth > ContentSize.Width)
+            {
+                ContentSize = new Size(itemWidth, ContentSize.Height);
+                Invalidate();
+            }
         }
 
         public void EnsureVisible()
