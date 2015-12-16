@@ -329,6 +329,18 @@ namespace DarkUI.Docking
             Invalidate();
         }
 
+        public void SetVisibleContent(DarkDockContent content)
+        {
+            if (!_contents.Contains(content))
+                return;
+
+            if (VisibleContent != content)
+            {
+                VisibleContent = content;
+                Invalidate();
+            }
+        }
+
         private Point PointToTabArea(Point point)
         {
             return new Point(point.X - _tabArea.Offset, point.Y);
