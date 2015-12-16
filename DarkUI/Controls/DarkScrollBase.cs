@@ -338,6 +338,15 @@ namespace DarkUI.Controls
         {
             var pos = PointToClient(MousePosition);
 
+            var right = ClientRectangle.Right;
+            var bottom = ClientRectangle.Bottom;
+
+            if (_vScrollBar.Visible)
+                right = _vScrollBar.Left;
+
+            if (_hScrollBar.Visible)
+                bottom = _hScrollBar.Top;
+
             if (_vScrollBar.Visible)
             {
                 // Scroll up
@@ -352,9 +361,9 @@ namespace DarkUI.Controls
                 }
 
                 // Scroll down
-                if (pos.Y > ClientRectangle.Bottom)
+                if (pos.Y > bottom)
                 {
-                    var difference = pos.Y - ClientRectangle.Bottom;
+                    var difference = pos.Y - bottom;
 
                     if (MaxDragChange > 0 && difference > MaxDragChange)
                         difference = MaxDragChange;
@@ -377,9 +386,9 @@ namespace DarkUI.Controls
                 }
 
                 // Scroll right
-                if (pos.X > ClientRectangle.Right)
+                if (pos.X > right)
                 {
-                    var difference = pos.X - ClientRectangle.Right;
+                    var difference = pos.X - right;
 
                     if (MaxDragChange > 0 && difference > MaxDragChange)
                         difference = MaxDragChange;
