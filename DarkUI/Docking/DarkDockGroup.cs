@@ -337,6 +337,14 @@ namespace DarkUI.Docking
             if (VisibleContent != content)
             {
                 VisibleContent = content;
+                content.Visible = true;
+
+                foreach (var otherContent in _contents)
+                {
+                    if (otherContent != content)
+                        otherContent.Visible = false;
+                }
+
                 Invalidate();
             }
         }
