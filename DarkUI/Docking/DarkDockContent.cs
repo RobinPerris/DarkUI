@@ -8,6 +8,12 @@ namespace DarkUI.Docking
     [ToolboxItem(false)]
     public class DarkDockContent : UserControl
     {
+        #region Event Handler Region
+
+        public event EventHandler DockTextChanged;
+
+        #endregion
+
         #region Field Region
 
         private string _dockText;
@@ -28,7 +34,8 @@ namespace DarkUI.Docking
 
                 _dockText = value;
 
-                // todo: trigger tabs to re-calculate in parent group
+                if (DockTextChanged != null)
+                    DockTextChanged(this, null);
 
                 Invalidate();
             }

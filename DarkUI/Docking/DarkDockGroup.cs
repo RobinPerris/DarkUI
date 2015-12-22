@@ -68,6 +68,8 @@ namespace DarkUI.Docking
             _contents.Add(dockContent);
             Controls.Add(dockContent);
 
+            dockContent.DockTextChanged += DockContent_DockTextChanged;
+
             _tabs.Add(dockContent, new DarkDockTab(dockContent));
 
             if (VisibleContent == null)
@@ -95,6 +97,8 @@ namespace DarkUI.Docking
 
             _contents.Remove(dockContent);
             Controls.Remove(dockContent);
+
+            dockContent.DockTextChanged -= DockContent_DockTextChanged;
 
             if (_tabs.ContainsKey(dockContent))
                 _tabs.Remove(dockContent);
@@ -511,6 +515,11 @@ namespace DarkUI.Docking
             VisibleContent.Focus();
 
             EnsureVisible();
+            Invalidate();
+        }
+
+        private void DockContent_DockTextChanged(object sender, EventArgs e)
+        {
             Invalidate();
         }
 

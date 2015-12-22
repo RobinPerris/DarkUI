@@ -213,7 +213,7 @@ namespace Example
                     DockPanel.AddContent(content);
             }
         }
-
+         
         private DarkDockContent GetContentBySerializationKey(string key)
         {
             foreach (var window in _toolWindows)
