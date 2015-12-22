@@ -49,7 +49,6 @@ namespace DarkUI.Docking
             DockArea = dockArea;
 
             BuildProperties();
-            CreateSplitter();
         }
 
         #endregion
@@ -78,7 +77,10 @@ namespace DarkUI.Docking
 
             // Show the region if it was previously hidden
             if (!Visible)
+            {
                 Visible = true;
+                CreateSplitter();
+            }
 
             PositionGroups();
         }
@@ -96,7 +98,10 @@ namespace DarkUI.Docking
 
             // If we just removed the final group, and this isn't the document region, then hide
             if (_groups.Count == 0 && DockArea != DarkDockArea.Document)
+            {
                 Visible = false;
+                RemoveSplitter();
+            }
 
             PositionGroups();
         }
@@ -261,6 +266,12 @@ namespace DarkUI.Docking
             }
 
             DockPanel.Splitters.Add(_splitter);
+        }
+
+        private void RemoveSplitter()
+        {
+            if (DockPanel.Splitters.Contains(_splitter))
+                DockPanel.Splitters.Remove(_splitter);
         }
 
         #endregion
