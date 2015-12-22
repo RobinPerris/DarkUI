@@ -128,6 +128,7 @@
     <Compile Include="Docking\DarkDockTab.cs" />
     <Compile Include="Docking\DarkDockTabArea.cs" />
     <Compile Include="Docking\DockContentEvenArgs.cs" />
+    <Compile Include="Docking\DockPanelState.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Forms\DarkDialog.cs">

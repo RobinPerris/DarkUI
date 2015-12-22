@@ -51,6 +51,10 @@ namespace DarkUI.Docking
         [DefaultValue(DarkDockArea.Document)]
         public DarkDockArea DockArea { get; set; }
 
+        [Category("Behavior")]
+        [Description("Determines the key used by this content in the dock serialization.")]
+        public string SerializationKey { get; set; }
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DarkDockPanel DockPanel { get; internal set; }

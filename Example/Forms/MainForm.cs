@@ -3,6 +3,7 @@ using DarkUI.Forms;
 using DarkUI.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Example
@@ -52,12 +53,20 @@ namespace Example
             _toolWindows.Add(_dockLayers);
             _toolWindows.Add(_dockHistory);
 
-            // Add the tool window list contents to the dock panel
-            foreach (var toolWindow in _toolWindows)
-                DockPanel.AddContent(toolWindow);
+            // Deserialize if a previous state is stored
+            if (File.Exists("dockpanel.config"))
+            {
+                DeserializeDockPanel("dockpanel.config");
+            }
+            else
+            {
+                // Add the tool window list contents to the dock panel
+                foreach (var toolWindow in _toolWindows)
+                    DockPanel.AddContent(toolWindow);
 
-            // Add the history panel to the layer panel group
-            DockPanel.AddContent(_dockHistory, _dockLayers.DockGroup);
+                // Add the history panel to the layer panel group
+                DockPanel.AddContent(_dockHistory, _dockLayers.DockGroup);
+            }
 
             // Check window menu items which are contained in the dock panel
             BuildWindowMenu();
@@ -74,6 +83,8 @@ namespace Example
 
         private void HookEvents()
         {
+            FormClosing += MainForm_FormClosing;
+
             DockPanel.ContentAdded += DockPanel_ContentAdded;
             DockPanel.ContentRemoved += DockPanel_ContentRemoved;
 
@@ -113,6 +124,11 @@ namespace Example
         #endregion
 
         #region Event Handler Region
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SerializeDockPanel("dockpanel.config");
+        }
 
         private void DockPanel_ContentAdded(object sender, DockContentEventArgs e)
         {
@@ -172,6 +188,41 @@ namespace Example
         {
             var about = new DialogAbout();
             about.ShowDialog();
+        }
+
+        #endregion
+
+        #region Serialization Region
+
+        private void SerializeDockPanel(string path)
+        {
+            var state = DockPanel.GetDockPanelState();
+            SerializerHelper.Serialize(state, path);
+        }
+
+        private void DeserializeDockPanel(string path)
+        {
+            var state = SerializerHelper.Deserialize<DockPanelState>(path);
+            DockPanel.RestoreDockPanelRegions(state);
+
+            foreach (var key in state.OpenContent)
+            {
+                var content = GetContentBySerializationKey(key);
+
+                if (content != null)
+                    DockPanel.AddContent(content);
+            }
+        }
+
+        private DarkDockContent GetContentBySerializationKey(string key)
+        {
+            foreach (var window in _toolWindows)
+            {
+                if (window.SerializationKey == key)
+                    return window;
+            }
+
+            return null;
         }
 
         #endregion

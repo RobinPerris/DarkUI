@@ -31,7 +31,7 @@ namespace Example
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstLayers = new DarkListView();
+            this.lstLayers = new DarkUI.Controls.DarkListView();
             this.SuspendLayout();
             // 
             // lstLayers
@@ -48,11 +48,12 @@ namespace Example
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lstLayers);
-            this.DockArea = DarkDockArea.Right;
+            this.DockArea = DarkUI.Docking.DarkDockArea.Right;
             this.DockText = "Layers";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.Collection_16xLG;
             this.Name = "DockLayers";
+            this.SerializationKey = "DockLayers";
             this.Size = new System.Drawing.Size(280, 450);
             this.ResumeLayout(false);
 

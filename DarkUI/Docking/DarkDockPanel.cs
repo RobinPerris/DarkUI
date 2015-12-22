@@ -192,6 +192,36 @@ namespace DarkUI.Docking
         }
 
         #endregion
+
+        #region Serialization Region
+
+        public DockPanelState GetDockPanelState()
+        {
+            var state = new DockPanelState();
+
+            foreach (var content in _contents)
+                state.OpenContent.Add(content.SerializationKey);
+
+            state.LeftRegionSize = _regions[DarkDockArea.Left].Size;
+            state.RightRegionSize = _regions[DarkDockArea.Right].Size;
+            state.BottomRegionSize = _regions[DarkDockArea.Bottom].Size;
+
+            return state;
+        }
+
+        public void RestoreDockPanelRegions(DockPanelState state)
+        {
+            if (state.LeftRegionSize.Width > 0 && state.LeftRegionSize.Height > 0)
+                _regions[DarkDockArea.Left].Size = state.LeftRegionSize;
+
+            if (state.RightRegionSize.Width > 0 && state.RightRegionSize.Height > 0)
+                _regions[DarkDockArea.Right].Size = state.RightRegionSize;
+
+            if (state.BottomRegionSize.Width > 0 && state.BottomRegionSize.Height > 0)
+                _regions[DarkDockArea.Bottom].Size = state.BottomRegionSize;
+        }
+
+        #endregion
     }
 }
     

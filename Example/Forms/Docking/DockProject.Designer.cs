@@ -32,7 +32,7 @@ namespace Example
         /// </summary>
         private void InitializeComponent()
         {
-            this.treeProject = new DarkTreeView();
+            this.treeProject = new DarkUI.Controls.DarkTreeView();
             this.SuspendLayout();
             // 
             // treeProject
@@ -40,6 +40,7 @@ namespace Example
             this.treeProject.AllowMoveNodes = true;
             this.treeProject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeProject.Location = new System.Drawing.Point(0, 25);
+            this.treeProject.MaxDragChange = 20;
             this.treeProject.MultiSelect = true;
             this.treeProject.Name = "treeProject";
             this.treeProject.ShowIcons = true;
@@ -52,11 +53,12 @@ namespace Example
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.treeProject);
-            this.DockArea = DarkDockArea.Left;
+            this.DockArea = DarkUI.Docking.DarkDockArea.Left;
             this.DockText = "Project Explorer";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.application_16x;
             this.Name = "DockProject";
+            this.SerializationKey = "DockProject";
             this.Size = new System.Drawing.Size(280, 450);
             this.ResumeLayout(false);
 

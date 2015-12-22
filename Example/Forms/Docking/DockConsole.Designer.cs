@@ -31,7 +31,7 @@ namespace Example
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstConsole = new DarkListView();
+            this.lstConsole = new DarkUI.Controls.DarkListView();
             this.SuspendLayout();
             // 
             // lstConsole
@@ -49,11 +49,12 @@ namespace Example
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lstConsole);
-            this.DockArea = DarkDockArea.Bottom;
+            this.DockArea = DarkUI.Docking.DarkDockArea.Bottom;
             this.DockText = "Console";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.Console;
             this.Name = "DockConsole";
+            this.SerializationKey = "DockConsole";
             this.Size = new System.Drawing.Size(500, 200);
             this.ResumeLayout(false);
 
