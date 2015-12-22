@@ -520,7 +520,7 @@ namespace DarkUI.Docking
 
         private void DockContent_DockTextChanged(object sender, EventArgs e)
         {
-            Invalidate();
+            BuildTabs();
         }
 
         #endregion
