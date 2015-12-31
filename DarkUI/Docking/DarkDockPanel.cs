@@ -136,6 +136,8 @@ namespace DarkUI.Docking
 
             if (ContentAdded != null)
                 ContentAdded(this, new DockContentEventArgs(dockContent));
+
+            dockContent.Select();
         }
 
         public void RemoveContent(DarkDockContent dockContent)
