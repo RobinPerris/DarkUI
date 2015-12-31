@@ -136,4 +136,16 @@
   <data name="inactive_close_selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\inactive-close-selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="tw_active_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tw_active_close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tw_active_close_selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tw_active_close_selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tw_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tw_close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tw_close_selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tw_close_selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

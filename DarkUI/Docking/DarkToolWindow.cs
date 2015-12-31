@@ -2,12 +2,21 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using System;
 
 namespace DarkUI.Docking
 {
     [ToolboxItem(false)]
     public class DarkToolWindow : DarkDockContent
     {
+        #region Field Region
+
+        private Rectangle _closeButtonRect;
+        private bool _closeButtonHot = false;
+        private bool _closeButtonPressed = false;
+
+        #endregion
+
         #region Property Region
 
         [Browsable(false)]
@@ -29,6 +38,8 @@ namespace DarkUI.Docking
 
             BackColor = Colors.GreyBackground;
             base.Padding = new Padding(0, Consts.ToolWindowHeaderSize, 0, 0);
+
+            UpdateCloseButton();
         }
 
         #endregion
@@ -41,6 +52,75 @@ namespace DarkUI.Docking
                 return false;
 
             return DockPanel.ActiveContent == this;
+        }
+
+        private void UpdateCloseButton()
+        {
+            _closeButtonRect = new Rectangle
+            {
+                X = ClientRectangle.Right - DockIcons.tw_close.Width - 5 - 3,
+                Y = ClientRectangle.Top + (Consts.ToolWindowHeaderSize / 2) - (DockIcons.tw_close.Height / 2),
+                Width = DockIcons.tw_close.Width,
+                Height = DockIcons.tw_close.Height
+            };
+        }
+
+        #endregion
+
+        #region Event Handler Region
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+
+            UpdateCloseButton();
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            if (_closeButtonRect.Contains(e.Location) || _closeButtonPressed)
+            {
+                if (!_closeButtonHot)
+                {
+                    _closeButtonHot = true;
+                    Invalidate();
+                }
+            }
+            else
+            {
+                if (_closeButtonHot)
+                {
+                    _closeButtonHot = false;
+                    Invalidate();
+                }
+            }
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            if (_closeButtonRect.Contains(e.Location))
+            {
+                _closeButtonPressed = true;
+                _closeButtonHot = true;
+                Invalidate();
+            }
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+
+            if (_closeButtonRect.Contains(e.Location) && _closeButtonPressed)
+                Close();
+
+            _closeButtonPressed = false;
+            _closeButtonHot = false;
+
+            Invalidate();
         }
 
         #endregion
@@ -83,12 +163,14 @@ namespace DarkUI.Docking
 
             var xOffset = 2;
 
+            // Draw icon
             if (Icon != null)
             {
                 g.DrawImageUnscaled(Icon, ClientRectangle.Left + 5, ClientRectangle.Top + (Consts.ToolWindowHeaderSize / 2) - (Icon.Height / 2) + 1);
                 xOffset = Icon.Width + 8;
             }
 
+            // Draw text
             using (var b = new SolidBrush(Colors.LightText))
             {
                 var textRect = new Rectangle(xOffset, 0, ClientRectangle.Width - 4 - xOffset, Consts.ToolWindowHeaderSize);
@@ -103,6 +185,14 @@ namespace DarkUI.Docking
 
                 g.DrawString(DockText, Font, b, textRect, format);
             }
+
+            // Close button
+            var img = _closeButtonHot ? DockIcons.tw_close_selected : DockIcons.tw_close;
+
+            if (isActive)
+                img = _closeButtonHot ? DockIcons.tw_active_close_selected : DockIcons.tw_active_close;
+
+            g.DrawImageUnscaled(img, _closeButtonRect.Left, _closeButtonRect.Top);
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
