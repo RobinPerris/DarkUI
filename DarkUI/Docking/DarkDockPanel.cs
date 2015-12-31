@@ -201,26 +201,77 @@ namespace DarkUI.Docking
         {
             var state = new DockPanelState();
 
-            foreach (var content in _contents)
-                state.OpenContent.Add(content.SerializationKey);
+            state.Regions.Add(new DockRegionState(DarkDockArea.Document));
+            state.Regions.Add(new DockRegionState(DarkDockArea.Left, _regions[DarkDockArea.Left].Size));
+            state.Regions.Add(new DockRegionState(DarkDockArea.Right, _regions[DarkDockArea.Right].Size));
+            state.Regions.Add(new DockRegionState(DarkDockArea.Bottom, _regions[DarkDockArea.Bottom].Size));
 
-            state.LeftRegionSize = _regions[DarkDockArea.Left].Size;
-            state.RightRegionSize = _regions[DarkDockArea.Right].Size;
-            state.BottomRegionSize = _regions[DarkDockArea.Bottom].Size;
+            var _groupStates = new Dictionary<DarkDockGroup, DockGroupState>();
+
+            foreach (var content in _contents)
+            {
+                foreach (var region in state.Regions)
+                {
+                    if (region.Area == content.DockArea)
+                    {
+                        DockGroupState groupState;
+
+                        if (_groupStates.ContainsKey(content.DockGroup))
+                        {
+                            groupState = _groupStates[content.DockGroup];
+                        }
+                        else
+                        {
+                            groupState = new DockGroupState();
+                            region.Groups.Add(groupState);
+                            _groupStates.Add(content.DockGroup, groupState);
+                        }
+
+                        groupState.Contents.Add(content.SerializationKey);
+                    }
+                }
+            }
 
             return state;
         }
 
-        public void RestoreDockPanelRegions(DockPanelState state)
+        public void RestoreDockPanelState(DockPanelState state, Func<string, DarkDockContent> getContentBySerializationKey)
         {
-            if (state.LeftRegionSize.Width > 0 && state.LeftRegionSize.Height > 0)
-                _regions[DarkDockArea.Left].Size = state.LeftRegionSize;
+            foreach (var region in state.Regions)
+            {
+                switch (region.Area)
+                {
+                    case DarkDockArea.Left:
+                        _regions[DarkDockArea.Left].Size = region.Size;
+                        break;
+                    case DarkDockArea.Right:
+                        _regions[DarkDockArea.Right].Size = region.Size;
+                        break;
+                    case DarkDockArea.Bottom:
+                        _regions[DarkDockArea.Bottom].Size = region.Size;
+                        break;
+                }
 
-            if (state.RightRegionSize.Width > 0 && state.RightRegionSize.Height > 0)
-                _regions[DarkDockArea.Right].Size = state.RightRegionSize;
+                foreach (var group in region.Groups)
+                {
+                    DarkDockContent previousContent = null;
 
-            if (state.BottomRegionSize.Width > 0 && state.BottomRegionSize.Height > 0)
-                _regions[DarkDockArea.Bottom].Size = state.BottomRegionSize;
+                    foreach (var contentKey in group.Contents)
+                    {
+                        var content = getContentBySerializationKey(contentKey);
+
+                        if (content == null)
+                            continue;
+
+                        if (previousContent == null)
+                            AddContent(content);
+                        else
+                            AddContent(content, previousContent.DockGroup);
+
+                        previousContent = content;
+                    }
+                }
+            }
         }
 
         #endregion

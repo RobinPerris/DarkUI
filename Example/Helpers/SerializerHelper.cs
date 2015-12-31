@@ -11,7 +11,9 @@ namespace Example
             using (var fs = File.CreateText(file))
             {
                 var serializer = new JsonSerializer();
+                serializer.Converters.Add(new StringEnumConverter());
                 serializer.Formatting = Formatting.Indented;
+
                 serializer.Serialize(fs, obj);
             }
         }

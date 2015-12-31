@@ -203,15 +203,7 @@ namespace Example
         private void DeserializeDockPanel(string path)
         {
             var state = SerializerHelper.Deserialize<DockPanelState>(path);
-            DockPanel.RestoreDockPanelRegions(state);
-
-            foreach (var key in state.OpenContent)
-            {
-                var content = GetContentBySerializationKey(key);
-
-                if (content != null)
-                    DockPanel.AddContent(content);
-            }
+            DockPanel.RestoreDockPanelState(state, GetContentBySerializationKey);
         }
          
         private DarkDockContent GetContentBySerializationKey(string key)

@@ -2,19 +2,19 @@
 
 namespace DarkUI.Docking
 {
-    public class DockPanelState
+    public class DockGroupState
     {
         #region Property Region
 
-        public List<DockRegionState> Regions { get; set; }
+        public List<string> Contents { get; set; }
 
         #endregion
 
         #region Constructor Region
 
-        public DockPanelState()
+        public DockGroupState()
         {
-            Regions = new List<DockRegionState>();
+            Contents = new List<string>();
         }
 
         #endregion
