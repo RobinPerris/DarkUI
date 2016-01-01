@@ -19,6 +19,8 @@ namespace DarkUI.Docking
 
         private DarkDockTabArea _tabArea;
 
+        private DarkDockTab _dragTab = null;
+
         #endregion
 
         #region Property Region
@@ -414,6 +416,61 @@ namespace DarkUI.Docking
         {
             base.OnMouseMove(e);
 
+            if (_dragTab != null)
+            {
+                var offsetX = e.Location.X + _tabArea.Offset;
+                if (offsetX < _dragTab.ClientRectangle.Left)
+                {
+                    if (_dragTab.DockContent.Order > 0)
+                    {
+                        var otherTabs = _tabs.Values.Where(t => t.DockContent.Order == _dragTab.DockContent.Order - 1).ToList();
+                        if (otherTabs.Count == 0)
+                            return;
+
+                        var otherTab = otherTabs.First();
+
+                        if (otherTab == null)
+                            return;
+
+                        var oldIndex = _dragTab.DockContent.Order;
+                        _dragTab.DockContent.Order = oldIndex - 1;
+                        otherTab.DockContent.Order = oldIndex;
+
+                        BuildTabs();
+                        EnsureVisible();
+
+                        return;
+                    }
+                }
+                else if (offsetX > _dragTab.ClientRectangle.Right)
+                {
+                    var maxOrder = _contents.Count;
+
+                    if (_dragTab.DockContent.Order < maxOrder)
+                    {
+                        var otherTabs = _tabs.Values.Where(t => t.DockContent.Order == _dragTab.DockContent.Order + 1).ToList();
+                        if(otherTabs.Count == 0)
+                            return;
+
+                        var otherTab = otherTabs.First();
+
+                        if (otherTab == null)
+                            return;
+
+                        var oldIndex = _dragTab.DockContent.Order;
+                        _dragTab.DockContent.Order = oldIndex + 1;
+                        otherTab.DockContent.Order = oldIndex;
+
+                        BuildTabs();
+                        EnsureVisible();
+
+                        return;
+                    }
+                }
+
+                return;
+            }
+
             if (_tabArea.DropdownRectangle.Contains(e.Location))
             {
                 _tabArea.DropdownHot = true;
@@ -480,6 +537,7 @@ namespace DarkUI.Docking
                     {
                         DockPanel.ActiveContent = tab.DockContent;
                         EnsureVisible();
+                        _dragTab = tab;
                         return;
                     }
                 }
@@ -492,6 +550,8 @@ namespace DarkUI.Docking
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
+
+            _dragTab = null;
 
             if (_tabArea.DropdownRectangle.Contains(e.Location))
             {
