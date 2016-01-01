@@ -102,7 +102,7 @@ namespace DarkUI.Docking
             menuItem.Tag = dockContent;
             menuItem.Click += TabMenuItem_Select;
             menuItem.Image = dockContent.Icon;
-            _tabArea.TabMenu.Items.Add(menuItem);
+            _tabArea.AddMenuItem(menuItem);
 
             UpdateTabArea();
         }
@@ -139,22 +139,10 @@ namespace DarkUI.Docking
                 }
             }
 
-            ToolStripMenuItem itemToRemove = null;
-            foreach (ToolStripMenuItem item in _tabArea.TabMenu.Items)
-            {
-                var menuContent = item.Tag as DarkDockContent;
-                if (menuContent == null)
-                    continue;
+            var menuItem = _tabArea.GetMenuItem(dockContent);
 
-                if (menuContent == dockContent)
-                    itemToRemove = item;
-            }
-
-            if (itemToRemove != null)
-            {
-                itemToRemove.Click -= TabMenuItem_Select;
-                _tabArea.TabMenu.Items.Remove(itemToRemove);
-            }
+            menuItem.Click -= TabMenuItem_Select;
+            _tabArea.RemoveMenuItem(menuItem);
 
             UpdateTabArea();
         }
@@ -439,6 +427,8 @@ namespace DarkUI.Docking
                         BuildTabs();
                         EnsureVisible();
 
+                        _tabArea.RebuildMenu();
+
                         return;
                     }
                 }
@@ -463,6 +453,8 @@ namespace DarkUI.Docking
 
                         BuildTabs();
                         EnsureVisible();
+
+                        _tabArea.RebuildMenu();
 
                         return;
                     }
@@ -556,7 +548,7 @@ namespace DarkUI.Docking
             if (_tabArea.DropdownRectangle.Contains(e.Location))
             {
                 if (_tabArea.DropdownHot)
-                    _tabArea.TabMenu.Show(this, new Point(_tabArea.DropdownRectangle.Left, _tabArea.DropdownRectangle.Bottom - 2));
+                    _tabArea.ShowMenu(this, new Point(_tabArea.DropdownRectangle.Left, _tabArea.DropdownRectangle.Bottom - 2));
 
                 return;
             }
