@@ -54,9 +54,9 @@ namespace DarkUI.Docking
         }
 
         [Category("Layout")]
-        [Description("Determines which area of the dock panel this content will dock to.")]
+        [Description("Determines the default area of the dock panel this content will be added to.")]
         [DefaultValue(DarkDockArea.Document)]
-        public DarkDockArea DockArea { get; set; }
+        public DarkDockArea DefaultDockArea { get; set; }
 
         [Category("Behavior")]
         [Description("Determines the key used by this content in the dock serialization.")]
@@ -73,6 +73,10 @@ namespace DarkUI.Docking
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DarkDockGroup DockGroup { get; internal set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DarkDockArea DockArea { get; set; }
 
         #endregion
 

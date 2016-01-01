@@ -125,11 +125,11 @@ namespace DarkUI.Docking
             if (_contents.Contains(dockContent))
                 RemoveContent(dockContent);
 
-            if (dockGroup != null && dockContent.DockArea != dockGroup.DockArea)
-                throw new Exception($"Attempting to add '{dockContent.DockArea}' content to '{dockGroup.DockArea}' group.");
-
             dockContent.DockPanel = this;
             _contents.Add(dockContent);
+
+            if (dockContent.DockArea == DarkDockArea.None)
+                dockContent.DockArea = dockContent.DefaultDockArea;
 
             var region = _regions[dockContent.DockArea];
             region.AddContent(dockContent, dockGroup);

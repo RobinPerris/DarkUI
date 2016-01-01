@@ -10,9 +10,9 @@ namespace DarkUI.Docking
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new DarkDockArea DockArea
+        public new DarkDockArea DefaultDockArea
         {
-            get { return base.DockArea; }
+            get { return base.DefaultDockArea; }
         }
 
         #endregion
@@ -22,7 +22,7 @@ namespace DarkUI.Docking
         public DarkDocument()
         {
             BackColor = Colors.GreyBackground;
-            base.DockArea = DarkDockArea.Document;
+            base.DefaultDockArea = DarkDockArea.Document;
         }
 
         #endregion

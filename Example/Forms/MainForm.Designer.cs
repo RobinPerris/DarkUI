@@ -40,6 +40,11 @@ namespace Example
             this.mnuView = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDialog = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTools = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkableWithIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.checkedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkedWithIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuProject = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuProperties = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,11 +61,6 @@ namespace Example
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.DockPanel = new DarkUI.Docking.DarkDockPanel();
             this.darkSeparator1 = new DarkUI.Controls.DarkSeparator();
-            this.checkableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkableWithIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.checkedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkedWithIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.toolMain.SuspendLayout();
             this.stripMain.SuspendLayout();
@@ -79,7 +79,7 @@ namespace Example
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
             this.mnuMain.Padding = new System.Windows.Forms.Padding(3, 2, 0, 2);
-            this.mnuMain.Size = new System.Drawing.Size(784, 24);
+            this.mnuMain.Size = new System.Drawing.Size(944, 24);
             this.mnuMain.TabIndex = 0;
             this.mnuMain.Text = "darkMenuStrip1";
             // 
@@ -148,6 +148,49 @@ namespace Example
             this.mnuTools.Name = "mnuTools";
             this.mnuTools.Size = new System.Drawing.Size(48, 20);
             this.mnuTools.Text = "&Tools";
+            // 
+            // checkableToolStripMenuItem
+            // 
+            this.checkableToolStripMenuItem.CheckOnClick = true;
+            this.checkableToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.checkableToolStripMenuItem.Name = "checkableToolStripMenuItem";
+            this.checkableToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.checkableToolStripMenuItem.Text = "Checkable";
+            // 
+            // checkableWithIconToolStripMenuItem
+            // 
+            this.checkableWithIconToolStripMenuItem.CheckOnClick = true;
+            this.checkableWithIconToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.checkableWithIconToolStripMenuItem.Image = global::Example.Icons.properties_16xLG;
+            this.checkableWithIconToolStripMenuItem.Name = "checkableWithIconToolStripMenuItem";
+            this.checkableWithIconToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.checkableWithIconToolStripMenuItem.Text = "Checkable with icon";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.toolStripSeparator2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
+            // 
+            // checkedToolStripMenuItem
+            // 
+            this.checkedToolStripMenuItem.Checked = true;
+            this.checkedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkedToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.checkedToolStripMenuItem.Name = "checkedToolStripMenuItem";
+            this.checkedToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.checkedToolStripMenuItem.Text = "Checked";
+            // 
+            // checkedWithIconToolStripMenuItem
+            // 
+            this.checkedWithIconToolStripMenuItem.Checked = true;
+            this.checkedWithIconToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkedWithIconToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.checkedWithIconToolStripMenuItem.Image = global::Example.Icons.properties_16xLG;
+            this.checkedWithIconToolStripMenuItem.Name = "checkedWithIconToolStripMenuItem";
+            this.checkedWithIconToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.checkedWithIconToolStripMenuItem.Text = "Checked with icon";
             // 
             // mnuWindow
             // 
@@ -230,7 +273,7 @@ namespace Example
             this.toolMain.Location = new System.Drawing.Point(0, 26);
             this.toolMain.Name = "toolMain";
             this.toolMain.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolMain.Size = new System.Drawing.Size(784, 28);
+            this.toolMain.Size = new System.Drawing.Size(944, 28);
             this.toolMain.TabIndex = 1;
             this.toolMain.Text = "darkToolStrip1";
             // 
@@ -254,10 +297,10 @@ namespace Example
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel6,
             this.toolStripStatusLabel5});
-            this.stripMain.Location = new System.Drawing.Point(0, 538);
+            this.stripMain.Location = new System.Drawing.Point(0, 618);
             this.stripMain.Name = "stripMain";
             this.stripMain.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
-            this.stripMain.Size = new System.Drawing.Size(784, 24);
+            this.stripMain.Size = new System.Drawing.Size(944, 24);
             this.stripMain.SizingGrip = false;
             this.stripMain.TabIndex = 2;
             this.stripMain.Text = "darkStatusStrip1";
@@ -275,7 +318,7 @@ namespace Example
             // 
             this.toolStripStatusLabel6.Margin = new System.Windows.Forms.Padding(0, 0, 50, 2);
             this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(597, 14);
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(757, 14);
             this.toolStripStatusLabel6.Spring = true;
             this.toolStripStatusLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -293,7 +336,7 @@ namespace Example
             this.DockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DockPanel.Location = new System.Drawing.Point(0, 54);
             this.DockPanel.Name = "DockPanel";
-            this.DockPanel.Size = new System.Drawing.Size(784, 484);
+            this.DockPanel.Size = new System.Drawing.Size(944, 564);
             this.DockPanel.TabIndex = 3;
             // 
             // darkSeparator1
@@ -301,58 +344,15 @@ namespace Example
             this.darkSeparator1.Dock = System.Windows.Forms.DockStyle.Top;
             this.darkSeparator1.Location = new System.Drawing.Point(0, 24);
             this.darkSeparator1.Name = "darkSeparator1";
-            this.darkSeparator1.Size = new System.Drawing.Size(784, 2);
+            this.darkSeparator1.Size = new System.Drawing.Size(944, 2);
             this.darkSeparator1.TabIndex = 4;
             this.darkSeparator1.Text = "darkSeparator1";
-            // 
-            // checkableToolStripMenuItem
-            // 
-            this.checkableToolStripMenuItem.CheckOnClick = true;
-            this.checkableToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.checkableToolStripMenuItem.Name = "checkableToolStripMenuItem";
-            this.checkableToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.checkableToolStripMenuItem.Text = "Checkable";
-            // 
-            // checkableWithIconToolStripMenuItem
-            // 
-            this.checkableWithIconToolStripMenuItem.CheckOnClick = true;
-            this.checkableWithIconToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.checkableWithIconToolStripMenuItem.Image = global::Example.Icons.properties_16xLG;
-            this.checkableWithIconToolStripMenuItem.Name = "checkableWithIconToolStripMenuItem";
-            this.checkableWithIconToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.checkableWithIconToolStripMenuItem.Text = "Checkable with icon";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.toolStripSeparator2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
-            // 
-            // checkedToolStripMenuItem
-            // 
-            this.checkedToolStripMenuItem.Checked = true;
-            this.checkedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkedToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.checkedToolStripMenuItem.Name = "checkedToolStripMenuItem";
-            this.checkedToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.checkedToolStripMenuItem.Text = "Checked";
-            // 
-            // checkedWithIconToolStripMenuItem
-            // 
-            this.checkedWithIconToolStripMenuItem.Checked = true;
-            this.checkedWithIconToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkedWithIconToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.checkedWithIconToolStripMenuItem.Image = global::Example.Icons.properties_16xLG;
-            this.checkedWithIconToolStripMenuItem.Name = "checkedWithIconToolStripMenuItem";
-            this.checkedWithIconToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.checkedWithIconToolStripMenuItem.Text = "Checked with icon";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ClientSize = new System.Drawing.Size(944, 642);
             this.Controls.Add(this.DockPanel);
             this.Controls.Add(this.stripMain);
             this.Controls.Add(this.toolMain);
