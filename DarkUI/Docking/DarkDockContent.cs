@@ -78,6 +78,10 @@ namespace DarkUI.Docking
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DarkDockArea DockArea { get; set; }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int Order { get; set; }
+
         #endregion
 
         #region Constructor Region

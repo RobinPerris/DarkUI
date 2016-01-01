@@ -65,6 +65,20 @@ namespace DarkUI.Docking
             dockContent.DockGroup = this;
             dockContent.Dock = DockStyle.Fill;
 
+            dockContent.Order = 0;
+
+            if (_contents.Count > 0)
+            {
+                var order = -1;
+                foreach (var otherContent in _contents)
+                {
+                    if (otherContent.Order >= order)
+                        order = otherContent.Order + 1;
+                }
+
+                dockContent.Order = order;
+            }
+
             _contents.Add(dockContent);
             Controls.Add(dockContent);
 
@@ -95,8 +109,16 @@ namespace DarkUI.Docking
         {
             dockContent.DockGroup = null;
 
+            var order = dockContent.Order;
+
             _contents.Remove(dockContent);
             Controls.Remove(dockContent);
+
+            foreach (var otherContent in _contents)
+            {
+                if (otherContent.Order > order)
+                    otherContent.Order--;
+            }
 
             dockContent.DockTextChanged -= DockContent_DockTextChanged;
 
@@ -137,7 +159,7 @@ namespace DarkUI.Docking
 
         public List<DarkDockContent> GetContents()
         {
-            return _contents.ToList();
+            return _contents.OrderBy(c => c.Order).ToList();
         }
 
         private void UpdateTabArea()
@@ -192,9 +214,13 @@ namespace DarkUI.Docking
             // Calculate areas of all tabs
             var totalSize = 0;
 
-            foreach (var tab in _tabs.Values)
+            var orderedContent = _contents.OrderBy(c => c.Order);
+
+            foreach (var content in orderedContent)
             {
                 int width;
+
+                var tab = _tabs[content];
 
                 using (var g = CreateGraphics())
                 {
@@ -232,7 +258,7 @@ namespace DarkUI.Docking
                     var difference = totalSize - _tabArea.ClientRectangle.Width;
 
                     // No matter what, we want to slice off the 1 pixel separator from the final tab.
-                    var lastTab = _tabs.Values.Last();
+                    var lastTab = _tabs[orderedContent.Last()];
                     var tabRect = lastTab.ClientRectangle;
                     lastTab.ClientRectangle = new Rectangle(tabRect.Left, tabRect.Top, tabRect.Width - 1, tabRect.Height);
                     lastTab.ShowSeparator = false;
@@ -246,8 +272,10 @@ namespace DarkUI.Docking
                                                                      .First()
                                                                      .ClientRectangle.Width;
 
-                        foreach (var tab in _tabs.Values)
+                        foreach (var content in orderedContent)
                         {
+                            var tab = _tabs[content];
+
                             // Check if previous iteration of loop met the difference
                             if (differenceMadeUp >= difference)
                                 break;
@@ -263,8 +291,10 @@ namespace DarkUI.Docking
 
                     // After resizing the tabs reposition them accordingly.
                     var xOffset = 0;
-                    foreach (var tab in _tabs.Values)
+                    foreach (var content in orderedContent)
                     {
+                        var tab = _tabs[content];
+
                         var rect = tab.ClientRectangle;
                         tab.ClientRectangle = new Rectangle(_tabArea.ClientRectangle.Left + xOffset, rect.Top, rect.Width, rect.Height);
 
@@ -276,8 +306,9 @@ namespace DarkUI.Docking
             // Build close button rectangles
             if (DockArea == DarkDockArea.Document)
             {
-                foreach (var tab in _tabs.Values)
+                foreach (var content in orderedContent)
                 {
+                    var tab = _tabs[content];
                     var closeRect = new Rectangle(tab.ClientRectangle.Right - 7 - closeButtonSize - 1,
                                                   tab.ClientRectangle.Top + (tab.ClientRectangle.Height / 2) - (closeButtonSize / 2) - 1,
                                                   closeButtonSize, closeButtonSize);
@@ -287,8 +318,12 @@ namespace DarkUI.Docking
 
             // Update the tab area with the new total tab width
             totalSize = 0;
-            foreach (var tab in _tabs.Values)
+            foreach (var content in orderedContent)
+            {
+                var tab = _tabs[content];
                 totalSize += tab.ClientRectangle.Width;
+            }
+
             _tabArea.TotalTabSize = totalSize;
 
             ResumeLayout();
@@ -322,7 +357,8 @@ namespace DarkUI.Docking
 
             if (_tabArea.TotalTabSize > offsetArea.Width)
             {
-                var lastTab = _tabs.Values.Last();
+                var orderedContent = _contents.OrderBy(x => x.Order);
+                var lastTab = _tabs[orderedContent.Last()];
                 if (lastTab != null)
                 {
                     if (RectangleToTabArea(lastTab.ClientRectangle).Right < offsetArea.Right)
