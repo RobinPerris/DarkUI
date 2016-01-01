@@ -3,6 +3,7 @@ using DarkUI.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DarkUI.Docking
@@ -208,7 +209,8 @@ namespace DarkUI.Docking
 
             var _groupStates = new Dictionary<DarkDockGroup, DockGroupState>();
 
-            foreach (var content in _contents)
+            var orderedContent = _contents.OrderBy(c => c.Order);
+            foreach (var content in orderedContent)
             {
                 foreach (var region in state.Regions)
                 {
