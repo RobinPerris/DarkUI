@@ -83,7 +83,22 @@ namespace DarkUI.Docking
             dockContent.DockRegion = this;
             dockGroup.AddContent(dockContent);
 
-            // Show the region if it was previously hidden
+            if (!Visible)
+            {
+                Visible = true;
+                CreateSplitter();
+            }
+
+            PositionGroups();
+        }
+
+        internal void InsertContent(DarkDockContent dockContent, DarkDockGroup dockGroup)
+        {
+            var newGroup = InsertGroup(dockGroup.Order);
+
+            dockContent.DockRegion = this;
+            newGroup.AddContent(dockContent);
+
             if (!Visible)
             {
                 Visible = true;
@@ -138,6 +153,21 @@ namespace DarkUI.Docking
                     if (group.Order >= order)
                         order = group.Order + 1;
                 }
+            }
+
+            var newGroup = new DarkDockGroup(DockPanel, this, order);
+            _groups.Add(newGroup);
+            Controls.Add(newGroup);
+
+            return newGroup;
+        }
+
+        private DarkDockGroup InsertGroup(int order)
+        {
+            foreach (var group in _groups)
+            {
+                if (group.Order <= order)
+                    group.Order++;
             }
 
             var newGroup = new DarkDockGroup(DockPanel, this, order);

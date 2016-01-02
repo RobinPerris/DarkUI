@@ -101,11 +101,11 @@ namespace DarkUI.Docking
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public List<DarkDockRegion> Regions
+        public Dictionary<DarkDockArea, DarkDockRegion> Regions
         {
             get
             {
-                return _regions.Values.ToList();
+                return _regions;
             }
         }
 
@@ -152,6 +152,25 @@ namespace DarkUI.Docking
 
             var region = _regions[dockContent.DockArea];
             region.AddContent(dockContent, dockGroup);
+
+            if (ContentAdded != null)
+                ContentAdded(this, new DockContentEventArgs(dockContent));
+
+            dockContent.Select();
+        }
+
+        public void InsertContent(DarkDockContent dockContent, DarkDockGroup dockGroup)
+        {
+            if (_contents.Contains(dockContent))
+                RemoveContent(dockContent);
+
+            dockContent.DockPanel = this;
+            _contents.Add(dockContent);
+
+            dockContent.DockArea = dockGroup.DockArea;
+
+            var region = _regions[dockGroup.DockArea];
+            region.InsertContent(dockContent, dockGroup);
 
             if (ContentAdded != null)
                 ContentAdded(this, new DockContentEventArgs(dockContent));

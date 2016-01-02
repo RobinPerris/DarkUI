@@ -1,4 +1,5 @@
 DarkUI
+-- moving nodes within a treeview doesn't re-build the next/prev references
 -- Add textbox control
 -- Add dropdown control
 -- Allow dropdown to show arbitrary control types
@@ -24,4 +25,5 @@ Dock panel
 -- right click tab menu. close all, close all but this etc. etc.
 -- stop dragging tabs instantly going to the end of the row
 -- stop differently sized toolwindow tabs from vibrating when dragging
--- fix regions being visible with no groups on load
+-- remove 1 pixel left padding from bottom region
+-- add 1 pixel border between groups in bottom region
