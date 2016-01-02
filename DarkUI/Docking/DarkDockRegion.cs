@@ -37,6 +37,14 @@ namespace DarkUI.Docking
             }
         }
 
+        public List<DarkDockGroup> Groups
+        {
+            get
+            {
+                return _groups.ToList();
+            }
+        }
+
         #endregion
 
         #region Constructor Region
@@ -91,6 +99,8 @@ namespace DarkUI.Docking
 
             var group = dockContent.DockGroup;
             group.RemoveContent(dockContent);
+
+            dockContent.DockArea = DarkDockArea.None;
 
             // If that was the final content in the group then remove the group
             if (group.ContentCount == 0)
@@ -250,6 +260,9 @@ namespace DarkUI.Docking
 
         private void CreateSplitter()
         {
+            if (_splitter != null && DockPanel.Splitters.Contains(_splitter))
+                DockPanel.Splitters.Remove(_splitter);
+
             switch (DockArea)
             {
                 case DarkDockArea.Left:

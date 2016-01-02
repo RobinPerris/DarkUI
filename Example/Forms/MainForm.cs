@@ -30,11 +30,14 @@ namespace Example
 
             // Add the control scroll message filter to re-route all mousewheel events
             // to the control the user is currently hovering over with their cursor.
-            Application.AddMessageFilter(new DarkControlScrollFilter());
+            Application.AddMessageFilter(new ControlScrollFilter());
+
+            // Add the dock content drag message filter to handle moving dock content around.
+            Application.AddMessageFilter(DockPanel.DockContentDragFilter);
 
             // Add the dock panel message filter to filter through for dock panel splitter
             // input before letting events pass through to the rest of the application.
-            Application.AddMessageFilter(DockPanel.MessageFilter);
+            Application.AddMessageFilter(DockPanel.DockResizeFilter);
 
             // Hook in all the UI events manually for clarity.
             HookEvents();

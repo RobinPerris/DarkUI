@@ -178,11 +178,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TreeViewIcons.resx</DependentUpon>
     </Compile>
-    <Compile Include="Win32\DarkControlScrollFilter.cs" />
+    <Compile Include="Win32\ControlScrollFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\DarkMenuRenderer.cs" />
     <Compile Include="Renderers\DarkToolStripRenderer.cs" />
-    <Compile Include="Win32\DarkDockResizeFilter.cs" />
+    <Compile Include="Win32\DockResizeFilter.cs" />
+    <Compile Include="Win32\DockContentDragFilter.cs" />
     <Compile Include="Win32\Native.cs" />
     <Compile Include="Win32\WindowsMessages.cs" />
   </ItemGroup>

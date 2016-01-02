@@ -14,9 +14,14 @@ DarkUI
 -- standardise the amount you scroll through with the mousewheel. Basing it on the pixels makes it weird.
 -- ScrollView not taking in to account size WITHOUT scrollbars causing you to have to overshoot when re-sizing to get rid of them
 -- if the final node in a treeview has been previous expanded, pressing 'down' will cause it to re-open
+-- create click-through panel
 
 Dock panel
--- drag tabs and toolwindows to re-order or change region
+-- make it so highlight form doesn't steal focus
 -- add splitters between region groups
 -- fix max position of splitters
 -- serialise the visible content for groups and the active content
+-- right click tab menu. close all, close all but this etc. etc.
+-- stop dragging tabs instantly going to the end of the row
+-- stop differently sized toolwindow tabs from vibrating when dragging
+-- fix regions being visible with no groups on load

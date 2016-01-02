@@ -529,7 +529,9 @@ namespace DarkUI.Docking
                     {
                         DockPanel.ActiveContent = tab.DockContent;
                         EnsureVisible();
+
                         _dragTab = tab;
+   
                         return;
                     }
                 }

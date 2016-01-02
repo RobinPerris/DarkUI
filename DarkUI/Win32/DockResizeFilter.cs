@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Win32
 {
-    public class DarkDockResizeFilter : IMessageFilter
+    public class DockResizeFilter : IMessageFilter
     {
         #region Field Region
 
@@ -20,7 +20,7 @@ namespace DarkUI.Win32
 
         #region Constructor Region
 
-        public DarkDockResizeFilter(DarkDockPanel dockPanel)
+        public DockResizeFilter(DarkDockPanel dockPanel)
         {
             _dockPanel = dockPanel;
 

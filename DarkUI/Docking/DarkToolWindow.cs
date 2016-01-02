@@ -15,6 +15,9 @@ namespace DarkUI.Docking
         private bool _closeButtonHot = false;
         private bool _closeButtonPressed = false;
 
+        private Rectangle _headerRect;
+        private bool _shouldDrag;
+
         #endregion
 
         #region Property Region
@@ -56,6 +59,14 @@ namespace DarkUI.Docking
 
         private void UpdateCloseButton()
         {
+            _headerRect = new Rectangle
+            {
+                X = ClientRectangle.Left,
+                Y = ClientRectangle.Top,
+                Width = ClientRectangle.Width,
+                Height = Consts.ToolWindowHeaderSize
+            };
+
             _closeButtonRect = new Rectangle
             {
                 X = ClientRectangle.Right - DockIcons.tw_close.Width - 5 - 3,
@@ -95,6 +106,12 @@ namespace DarkUI.Docking
                     _closeButtonHot = false;
                     Invalidate();
                 }
+
+                if (_shouldDrag)
+                {
+                    DockPanel.DragContent(this);
+                    return;
+                }
             }
         }
 
@@ -107,6 +124,13 @@ namespace DarkUI.Docking
                 _closeButtonPressed = true;
                 _closeButtonHot = true;
                 Invalidate();
+                return;
+            }
+
+            if (_headerRect.Contains(e.Location))
+            {
+                _shouldDrag = true;
+                return;
             }
         }
 
@@ -119,6 +143,8 @@ namespace DarkUI.Docking
 
             _closeButtonPressed = false;
             _closeButtonHot = false;
+
+            _shouldDrag = false;
 
             Invalidate();
         }

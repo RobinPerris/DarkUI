@@ -78,7 +78,11 @@ namespace DarkUI.Docking
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IMessageFilter MessageFilter { get; private set; }
+        public DockContentDragFilter DockContentDragFilter { get; private set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DockResizeFilter DockResizeFilter { get; private set; }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -95,6 +99,16 @@ namespace DarkUI.Docking
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public List<DarkDockRegion> Regions
+        {
+            get
+            {
+                return _regions.Values.ToList();
+            }
+        }
+
         #endregion
 
         #region Constructor Region
@@ -102,7 +116,8 @@ namespace DarkUI.Docking
         public DarkDockPanel()
         {
             Splitters = new List<DarkDockSplitter>();
-            MessageFilter = new DarkDockResizeFilter(this);
+            DockContentDragFilter = new DockContentDragFilter(this);
+            DockResizeFilter = new DockResizeFilter(this);
 
             _regions = new Dictionary<DarkDockArea, DarkDockRegion>();
             _contents = new List<DarkDockContent>();
@@ -128,6 +143,9 @@ namespace DarkUI.Docking
 
             dockContent.DockPanel = this;
             _contents.Add(dockContent);
+
+            if (dockGroup != null)
+                dockContent.DockArea = dockGroup.DockArea;
 
             if (dockContent.DockArea == DarkDockArea.None)
                 dockContent.DockArea = dockContent.DefaultDockArea;
@@ -192,6 +210,11 @@ namespace DarkUI.Docking
             rightRegion.TabIndex = 1;
             bottomRegion.TabIndex = 2;
             leftRegion.TabIndex = 3;
+        }
+
+        public void DragContent(DarkDockContent content)
+        {
+            DockContentDragFilter.StartDrag(content);
         }
 
         #endregion
