@@ -18,13 +18,12 @@ namespace DarkUI.Win32
         private DarkTranslucentForm _highlightForm;
 
         private bool _isDragging = false;
-        private bool _insert = false;
         private DarkDockRegion _targetRegion;
         private DarkDockGroup _targetGroup;
+        private DockInsertType _insertType = DockInsertType.None;
 
-        private Dictionary<DarkDockRegion, Rectangle> _regionDropAreas = new Dictionary<DarkDockRegion, Rectangle>();
-        private Dictionary<DarkDockGroup, Rectangle> _groupInsertDropAreas = new Dictionary<DarkDockGroup, Rectangle>();
-        private Dictionary<DarkDockGroup, Rectangle> _groupDropAreas = new Dictionary<DarkDockGroup, Rectangle>();
+        private Dictionary<DarkDockRegion, DockDropCollection> _regionDropAreas = new Dictionary<DarkDockRegion, DockDropCollection>();
+        private Dictionary<DarkDockGroup, DockDropCollection> _groupDropAreas = new Dictionary<DarkDockGroup, DockDropCollection>();
 
         #endregion
 
@@ -73,10 +72,17 @@ namespace DarkUI.Win32
                 {
                     _dockPanel.RemoveContent(_dragContent);
 
-                    if (_insert)
-                        _dockPanel.InsertContent(_dragContent, _targetGroup);
-                    else
-                        _dockPanel.AddContent(_dragContent, _targetGroup);
+                    switch (_insertType)
+                    {
+                        case DockInsertType.None:
+                            _dockPanel.AddContent(_dragContent, _targetGroup);
+                            break;
+
+                        case DockInsertType.Before:
+                        case DockInsertType.After:
+                            _dockPanel.InsertContent(_dragContent, _targetGroup, _insertType);
+                            break;
+                    }                        
                 }
 
                 StopDrag();
@@ -92,71 +98,28 @@ namespace DarkUI.Win32
 
         public void StartDrag(DarkDockContent content)
         {
-            _regionDropAreas = new Dictionary<DarkDockRegion, Rectangle>();
-            _groupInsertDropAreas = new Dictionary<DarkDockGroup, Rectangle>();
-            _groupDropAreas = new Dictionary<DarkDockGroup, Rectangle>();
+            _regionDropAreas = new Dictionary<DarkDockRegion, DockDropCollection>();
+            _groupDropAreas = new Dictionary<DarkDockGroup, DockDropCollection>();
 
+            // Add all regions and groups to the drop collections
             foreach (var region in _dockPanel.Regions.Values)
             {
+                if (region.DockArea == DarkDockArea.Document)
+                    continue;
+
+                // If the region is visible then build drop areas for the groups.
                 if (region.Visible)
                 {
                     foreach (var group in region.Groups)
                     {
-                        var rect = new Rectangle
-                        {
-                            X = group.PointToScreen(Point.Empty).X,
-                            Y = group.PointToScreen(Point.Empty).Y,
-                            Width = group.Width,
-                            Height = group.Height
-                        };
-
-                        var insertRect = new Rectangle();
-
-                        switch (group.DockArea)
-                        {
-                            case DarkDockArea.Left:
-                            case DarkDockArea.Right:
-
-                                var top = rect.Top;
-
-                                if (group.Order > 0)
-                                    top -= 7;
-
-                                insertRect = new Rectangle
-                                {
-                                    X = rect.Left,
-                                    Y = top,
-                                    Width = rect.Width,
-                                    Height = 15
-                                };
-
-                                break;
-
-                            case DarkDockArea.Bottom:
-
-                                var left = rect.Left;
-
-                                if (group.Order > 0)
-                                    left -= 7;
-
-                                insertRect = new Rectangle
-                                {
-                                    X = left,
-                                    Y = rect.Top,
-                                    Width = 15,
-                                    Height = rect.Height
-                                };
-
-                                break;
-                        }
-
-                        _groupDropAreas.Add(group, rect);
-                        _groupInsertDropAreas.Add(group, insertRect);
+                        var collection = new DockDropCollection(_dockPanel, group);
+                        _groupDropAreas.Add(group, collection);
                     }
                 }
+                // If the region is NOT visible then build a drop area for the region itself.
                 else
                 {
-                    var rect = new Rectangle();
+                    /*var rect = new Rectangle();
 
                     switch (region.DockArea)
                     {
@@ -211,7 +174,7 @@ namespace DarkUI.Win32
                             break;
                     }
 
-                    _regionDropAreas.Add(region, rect);
+                    _regionDropAreas.Add(region, rect);*/
                 }
             }
 
@@ -221,97 +184,143 @@ namespace DarkUI.Win32
 
         private void StopDrag()
         {
+            Cursor.Current = Cursors.Default;
+
             _highlightForm.Hide();
             _dragContent = null;
             _isDragging = false;
+        }
+
+        private void UpdateHighlightForm(Rectangle rect)
+        {
+            Cursor.Current = Cursors.SizeAll;
+
+            _highlightForm.SuspendLayout();
+
+            _highlightForm.Size = new Size(rect.Width, rect.Height);
+            _highlightForm.Location = new Point(rect.X, rect.Y);
+
+            _highlightForm.ResumeLayout();
+
+            if (!_highlightForm.Visible)
+            {
+                _highlightForm.Show();
+                _highlightForm.BringToFront();
+            }
         }
 
         private void HandleDrag()
         {
             var location = Cursor.Position;
 
+            _insertType = DockInsertType.None;
+
             _targetRegion = null;
             _targetGroup = null;
 
-            foreach (var keyValuePair in _regionDropAreas)
+            // Check all region drop areas
+            foreach (var collection in _regionDropAreas.Values)
             {
-                var region = keyValuePair.Key;
-                var rect = keyValuePair.Value;
-
-                if (rect.Contains(location))
+                if (collection.InsertBeforeArea.DropArea.Contains(location))
                 {
-                    _targetRegion = region;
+                    _insertType = DockInsertType.Before;
+                    _targetRegion = collection.InsertBeforeArea.DockRegion;
+                    UpdateHighlightForm(collection.InsertBeforeArea.HighlightArea);
+                    return;
+                }
 
-                    _highlightForm.Location = new Point(rect.X, rect.Y);
-                    _highlightForm.Size = new Size(rect.Width, rect.Height);
+                if (collection.InsertAfterArea.DropArea.Contains(location))
+                {
+                    _insertType = DockInsertType.After;
+                    _targetRegion = collection.InsertAfterArea.DockRegion;
+                    UpdateHighlightForm(collection.InsertAfterArea.HighlightArea);
+                    return;
+                }
+
+                if (collection.DropArea.DropArea.Contains(location))
+                {
+                    _insertType = DockInsertType.None;
+                    _targetRegion = collection.DropArea.DockRegion;
+                    UpdateHighlightForm(collection.DropArea.HighlightArea);
+                    return;
                 }
             }
 
-            var inserting = false;
-
-            foreach (var keyValuePair in _groupInsertDropAreas)
+            // Check all group drop areas
+            foreach (var collection in _groupDropAreas.Values)
             {
-                var group = keyValuePair.Key;
-                var rect = keyValuePair.Value;
+                var sameRegion = false;
+                var sameGroup = false;
+                var groupHasOtherContent = false;
 
-                if (group.DockRegion == _dragContent.DockGroup.DockRegion)
+                if (collection.DropArea.DockGroup == _dragContent.DockGroup)
                 {
-                    if (group == _dragContent.DockGroup)
-                        continue;
+                    sameGroup = true;
 
-                    if (_dragContent.DockGroup.Order == group.Order - 1)
-                        continue;
+                    if (collection.DropArea.DockGroup.ContentCount > 1)
+                        groupHasOtherContent = true;
                 }
 
-                if (rect.Contains(location))
+                if (collection.DropArea.DockGroup.DockRegion == _dragContent.DockRegion)
                 {
-                    inserting = true;
-
-                    _insert = true;
-                    _targetGroup = group;
-
-                    _highlightForm.Location = new Point(rect.X, rect.Y);
-                    _highlightForm.Size = new Size(rect.Width, rect.Height);
+                    sameRegion = true;
                 }
-            }
 
-            if (!inserting)
-            {
-                foreach (var keyValuePair in _groupDropAreas)
+                if (!sameGroup || groupHasOtherContent)
                 {
-                    var group = keyValuePair.Key;
-                    var rect = keyValuePair.Value;
+                    var skipBefore = false;
+                    var skipAfter = false;
 
-                    if (group == _dragContent.DockGroup)
-                        continue;
-
-                    if (group.DockArea == DarkDockArea.Document)
-                        continue;
-
-                    if (rect.Contains(location))
+                    if (sameRegion && !groupHasOtherContent)
                     {
-                        _insert = false;
-                        _targetGroup = group;
+                        if (collection.InsertBeforeArea.DockGroup.Order == _dragContent.DockGroup.Order + 1)
+                            skipBefore = true;
 
-                        _highlightForm.Location = new Point(rect.X, rect.Y);
-                        _highlightForm.Size = new Size(rect.Width, rect.Height);
+                        if (collection.InsertAfterArea.DockGroup.Order == _dragContent.DockGroup.Order - 1)
+                            skipAfter = true;
+                    }
+
+                    if (!skipBefore)
+                    {
+                        if (collection.InsertBeforeArea.DropArea.Contains(location))
+                        {
+                            _insertType = DockInsertType.Before;
+                            _targetGroup = collection.InsertBeforeArea.DockGroup;
+                            UpdateHighlightForm(collection.InsertBeforeArea.HighlightArea);
+                            return;
+                        }
+                    }
+
+                    if (!skipAfter)
+                    {
+                        if (collection.InsertAfterArea.DropArea.Contains(location))
+                        {
+                            _insertType = DockInsertType.After;
+                            _targetGroup = collection.InsertAfterArea.DockGroup;
+                            UpdateHighlightForm(collection.InsertAfterArea.HighlightArea);
+                            return;
+                        }
+                    }
+                }
+
+                if (!sameGroup)
+                {
+                    if (collection.DropArea.DropArea.Contains(location))
+                    {
+                        _insertType = DockInsertType.None;
+                        _targetGroup = collection.DropArea.DockGroup;
+                        UpdateHighlightForm(collection.DropArea.HighlightArea);
+                        return;
                     }
                 }
             }
 
-            if (_targetRegion == null && _targetGroup == null)
-            {
-                if (_highlightForm.Visible)
-                    _highlightForm.Hide();
-            }
-            else
-            {
-                if (!_highlightForm.Visible)
-                {
-                    _highlightForm.Show();
-                    _highlightForm.BringToFront();
-                }
-            }
+            // Not hovering over anything - hide the highlight
+            if (_highlightForm.Visible)
+                _highlightForm.Hide();
+
+            // Show we can't drag here
+            Cursor.Current = Cursors.No;
         }
 
         #endregion

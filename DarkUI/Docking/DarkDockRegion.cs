@@ -92,9 +92,14 @@ namespace DarkUI.Docking
             PositionGroups();
         }
 
-        internal void InsertContent(DarkDockContent dockContent, DarkDockGroup dockGroup)
+        internal void InsertContent(DarkDockContent dockContent, DarkDockGroup dockGroup, DockInsertType insertType)
         {
-            var newGroup = InsertGroup(dockGroup.Order);
+            var order = dockGroup.Order;
+
+            if (insertType == DockInsertType.After)
+                order++;
+
+            var newGroup = InsertGroup(order);
 
             dockContent.DockRegion = this;
             newGroup.AddContent(dockContent);
@@ -166,7 +171,7 @@ namespace DarkUI.Docking
         {
             foreach (var group in _groups)
             {
-                if (group.Order <= order)
+                if (group.Order >= order)
                     group.Order++;
             }
 

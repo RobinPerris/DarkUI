@@ -159,7 +159,7 @@ namespace DarkUI.Docking
             dockContent.Select();
         }
 
-        public void InsertContent(DarkDockContent dockContent, DarkDockGroup dockGroup)
+        public void InsertContent(DarkDockContent dockContent, DarkDockGroup dockGroup, DockInsertType insertType)
         {
             if (_contents.Contains(dockContent))
                 RemoveContent(dockContent);
@@ -170,7 +170,7 @@ namespace DarkUI.Docking
             dockContent.DockArea = dockGroup.DockArea;
 
             var region = _regions[dockGroup.DockArea];
-            region.InsertContent(dockContent, dockGroup);
+            region.InsertContent(dockContent, dockGroup, insertType);
 
             if (ContentAdded != null)
                 ContentAdded(this, new DockContentEventArgs(dockContent));
