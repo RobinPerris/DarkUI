@@ -22,7 +22,7 @@ namespace DarkUI.Win32
         private DarkDockGroup _targetGroup;
         private DockInsertType _insertType = DockInsertType.None;
 
-        private Dictionary<DarkDockRegion, DockDropCollection> _regionDropAreas = new Dictionary<DarkDockRegion, DockDropCollection>();
+        private Dictionary<DarkDockRegion, DockDropArea> _regionDropAreas = new Dictionary<DarkDockRegion, DockDropArea>();
         private Dictionary<DarkDockGroup, DockDropCollection> _groupDropAreas = new Dictionary<DarkDockGroup, DockDropCollection>();
 
         #endregion
@@ -98,7 +98,7 @@ namespace DarkUI.Win32
 
         public void StartDrag(DarkDockContent content)
         {
-            _regionDropAreas = new Dictionary<DarkDockRegion, DockDropCollection>();
+            _regionDropAreas = new Dictionary<DarkDockRegion, DockDropArea>();
             _groupDropAreas = new Dictionary<DarkDockGroup, DockDropCollection>();
 
             // Add all regions and groups to the drop collections
@@ -116,65 +116,11 @@ namespace DarkUI.Win32
                         _groupDropAreas.Add(group, collection);
                     }
                 }
-                // If the region is NOT visible then build a drop area for the region itself.
+                // If the region is NOT visible then build drop areas for the region itself.
                 else
                 {
-                    /*var rect = new Rectangle();
-
-                    switch (region.DockArea)
-                    {
-                        case DarkDockArea.Left:
-
-                            rect = new Rectangle
-                            {
-                                X = _dockPanel.PointToScreen(Point.Empty).X,
-                                Y = _dockPanel.PointToScreen(Point.Empty).Y,
-                                Width = 15,
-                                Height = _dockPanel.Height
-                            };
-
-                            break;
-
-                        case DarkDockArea.Right:
-
-                            rect = new Rectangle
-                            {
-                                X = _dockPanel.PointToScreen(Point.Empty).X + _dockPanel.Width - 15,
-                                Y = _dockPanel.PointToScreen(Point.Empty).Y,
-                                Width = 15,
-                                Height = _dockPanel.Height
-                            };
-
-                            break;
-
-                        case DarkDockArea.Bottom:
-
-                            var x = _dockPanel.PointToScreen(Point.Empty).X;
-                            var width = _dockPanel.Width;
-
-                            if (_dockPanel.Regions[DarkDockArea.Left].Visible)
-                            {
-                                x += _dockPanel.Regions[DarkDockArea.Left].Width;
-                                width -= _dockPanel.Regions[DarkDockArea.Left].Width;
-                            }
-
-                            if (_dockPanel.Regions[DarkDockArea.Right].Visible)
-                            {
-                                width -= _dockPanel.Regions[DarkDockArea.Right].Width;
-                            }
-
-                            rect = new Rectangle
-                            {
-                                X = x,
-                                Y = _dockPanel.PointToScreen(Point.Empty).Y + _dockPanel.Height - 15,
-                                Width = width,
-                                Height = 15
-                            };
-
-                            break;
-                    }
-
-                    _regionDropAreas.Add(region, rect);*/
+                    var area = new DockDropArea(_dockPanel, region);
+                    _regionDropAreas.Add(region, area);
                 }
             }
 
@@ -219,29 +165,13 @@ namespace DarkUI.Win32
             _targetGroup = null;
 
             // Check all region drop areas
-            foreach (var collection in _regionDropAreas.Values)
+            foreach (var area in _regionDropAreas.Values)
             {
-                if (collection.InsertBeforeArea.DropArea.Contains(location))
-                {
-                    _insertType = DockInsertType.Before;
-                    _targetRegion = collection.InsertBeforeArea.DockRegion;
-                    UpdateHighlightForm(collection.InsertBeforeArea.HighlightArea);
-                    return;
-                }
-
-                if (collection.InsertAfterArea.DropArea.Contains(location))
-                {
-                    _insertType = DockInsertType.After;
-                    _targetRegion = collection.InsertAfterArea.DockRegion;
-                    UpdateHighlightForm(collection.InsertAfterArea.HighlightArea);
-                    return;
-                }
-
-                if (collection.DropArea.DropArea.Contains(location))
+                if (area.DropArea.Contains(location))
                 {
                     _insertType = DockInsertType.None;
-                    _targetRegion = collection.DropArea.DockRegion;
-                    UpdateHighlightForm(collection.DropArea.HighlightArea);
+                    _targetRegion = area.DockRegion;
+                    UpdateHighlightForm(area.HighlightArea);
                     return;
                 }
             }

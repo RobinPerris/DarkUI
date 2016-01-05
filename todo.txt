@@ -16,11 +16,12 @@ DarkUI
 -- ScrollView not taking in to account size WITHOUT scrollbars causing you to have to overshoot when re-sizing to get rid of them
 -- if the final node in a treeview has been previous expanded, pressing 'down' will cause it to re-open
 -- create click-through panel
+-- dragging treeview nodes doesn't rebuild prev/next references
 
 Dock panel
 -- make it so highlight form doesn't steal focus
 -- add splitters between region groups
--- fix max position of splitters
+-- fix max position of splitters - can currently resize a tool window offscreen
 -- serialise the visible content for groups and the active content
 -- right click tab menu. close all, close all but this etc. etc.
 -- stop dragging tabs instantly going to the end of the row

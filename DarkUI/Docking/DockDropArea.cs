@@ -22,16 +22,22 @@ namespace DarkUI.Docking
 
         #region Constructor Region
 
-        internal DockDropArea(DarkDockRegion region, DockInsertType insertType)
+        internal DockDropArea(DarkDockPanel dockPanel, DarkDockRegion region)
         {
+            DockPanel = dockPanel;
             DockRegion = region;
-            InsertType = insertType;
+            InsertType = DockInsertType.None;
+
+            BuildAreas();
         }
 
-        internal DockDropArea(DarkDockGroup group, DockInsertType insertType)
+        internal DockDropArea(DarkDockPanel dockPanel, DarkDockGroup group, DockInsertType insertType)
         {
+            DockPanel = dockPanel;
             DockGroup = group;
             InsertType = insertType;
+
+            BuildAreas();
         }
 
         #endregion
@@ -48,7 +54,67 @@ namespace DarkUI.Docking
 
         private void BuildRegionAreas()
         {
+            switch (DockRegion.DockArea)
+            {
+                case DarkDockArea.Left:
 
+                    var leftRect = new Rectangle
+                    {
+                        X = DockPanel.PointToScreen(Point.Empty).X,
+                        Y = DockPanel.PointToScreen(Point.Empty).Y,
+                        Width = 50,
+                        Height = DockPanel.Height
+                    };
+
+                    DropArea = leftRect;
+                    HighlightArea = leftRect;
+
+                    break;
+
+                case DarkDockArea.Right:
+
+                    var rightRect = new Rectangle
+                    {
+                        X = DockPanel.PointToScreen(Point.Empty).X + DockPanel.Width - 50,
+                        Y = DockPanel.PointToScreen(Point.Empty).Y,
+                        Width = 50,
+                        Height = DockPanel.Height
+                    };
+
+                    DropArea = rightRect;
+                    HighlightArea = rightRect;
+
+                    break;
+
+                case DarkDockArea.Bottom:
+
+                    var x = DockPanel.PointToScreen(Point.Empty).X;
+                    var width = DockPanel.Width;
+
+                    if (DockPanel.Regions[DarkDockArea.Left].Visible)
+                    {
+                        x += DockPanel.Regions[DarkDockArea.Left].Width;
+                        width -= DockPanel.Regions[DarkDockArea.Left].Width;
+                    }
+
+                    if (DockPanel.Regions[DarkDockArea.Right].Visible)
+                    {
+                        width -= DockPanel.Regions[DarkDockArea.Right].Width;
+                    }
+
+                    var bottomRect = new Rectangle
+                    {
+                        X = x,
+                        Y = DockPanel.PointToScreen(Point.Empty).Y + DockPanel.Height - 50,
+                        Width = width,
+                        Height = 50
+                    };
+
+                    DropArea = bottomRect;
+                    HighlightArea = bottomRect;
+
+                    break;
+            }
         }
 
         private void BuildGroupAreas()
