@@ -13,13 +13,13 @@ For more detailed information and tutorials check out the [GitHub project wiki](
 
 ### Screenshots
 Game map editor
-[[http://www.darkui.com/images/editor.png]]
+![Game map editor](http://www.darkui.com/images/editor.png)
 
 Lua script editor
-[[http://www.darkui.com/images/lua.png]]
+![Lua script editor](http://www.darkui.com/images/lua.png)
 
 Example docking application
-[[http://www.darkui.com/images/docking.png]]
+![Example docking application](http://www.darkui.com/images/docking.png)
 
 Controls preview
-[[http://www.darkui.com/images/controls.png]]
+![Controls preview](http://www.darkui.com/images/controls.png)
