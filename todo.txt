@@ -28,4 +28,4 @@ Dock panel
 -- stop differently sized toolwindow tabs from vibrating when dragging
 -- remove 1 pixel left padding from bottom region
 -- add 1 pixel border between groups in bottom region
--- allow dragging above/below adjacent groups if multiple content exists within group
+-- if bottom & left regions are invisible on load, then content is added, the bottom region will expand too far to the left
