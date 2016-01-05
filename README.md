@@ -1,4 +1,4 @@
-<img src="http://www.darkui.com/images/logo-850.png">
+<img src="http://www.darkui.com/images/logo-888.png">
 
 ## DarkUI
 Dark themed control and docking library for .NET WinForms.
