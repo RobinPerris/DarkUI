@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA334815-6D78-4E9A-9F4D-6C8A58222A57}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Example</RootNamespace>
+    <AssemblyName>Example</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\Dialogs\DialogAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\DialogAbout.Designer.cs">
+      <DependentUpon>DialogAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dialogs\DialogControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\DialogControls.Designer.cs">
+      <DependentUpon>DialogControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Docking\DockDocument.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Docking\DockDocument.Designer.cs">
+      <DependentUpon>DockDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Docking\DockConsole.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Docking\DockConsole.Designer.cs">
+      <DependentUpon>DockConsole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Docking\DockHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Docking\DockHistory.Designer.cs">
+      <DependentUpon>DockHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Docking\DockLayers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Docking\DockLayers.Designer.cs">
+      <DependentUpon>DockLayers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Docking\DockProperties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Docking\DockProperties.Designer.cs">
+      <DependentUpon>DockProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Docking\DockProject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Docking\DockProject.Designer.cs">
+      <DependentUpon>DockProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\SerializerHelper.cs" />
+    <Compile Include="Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Dialogs\DialogAbout.resx">
+      <DependentUpon>DialogAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dialogs\DialogControls.resx">
+      <DependentUpon>DialogControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Docking\DockDocument.resx">
+      <DependentUpon>DockDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Docking\DockConsole.resx">
+      <DependentUpon>DockConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Docking\DockHistory.resx">
+      <DependentUpon>DockHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Docking\DockLayers.resx">
+      <DependentUpon>DockLayers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Docking\DockProperties.resx">
+      <DependentUpon>DockProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Docking\DockProject.resx">
+      <DependentUpon>DockProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DarkUI\DarkUI.csproj">
+      <Project>{f19472f5-8c44-4c51-a8a0-b9de5f555255}</Project>
+      <Name>DarkUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_Closed_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Files_7954.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewFile_6276.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StatusAnnotations_Information_16xMD_color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StatusAnnotations_Information_16xLG_color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\properties_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Console.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Collection_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RefactoringLog_12810.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document_16xLG.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

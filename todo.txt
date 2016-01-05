@@ -1,0 +1,31 @@
+DarkUI
+-- moving nodes within a treeview doesn't re-build the next/prev references
+-- Add textbox control
+-- Add dropdown control
+-- Allow dropdown to show arbitrary control types
+-- Add dropdown treeview control
+-- Add tooltip control
+-- Add split panel control (and serialised version)
+-- Add filter/search control
+-- Add tabbed panel control
+-- Fix DarkButton image align bullshit
+-- Fix checkbox and radiobutton CheckAlign support
+-- If you collapse a node when a child has focus, focus the parent node
+-- arrow keys to scroll around the scrollbase control -- space to pan?
+-- standardise the amount you scroll through with the mousewheel. Basing it on the pixels makes it weird.
+-- ScrollView not taking in to account size WITHOUT scrollbars causing you to have to overshoot when re-sizing to get rid of them
+-- if the final node in a treeview has been previous expanded, pressing 'down' will cause it to re-open
+-- create click-through panel
+-- dragging treeview nodes doesn't rebuild prev/next references
+
+Dock panel
+-- make it so highlight form doesn't steal focus
+-- add splitters between region groups
+-- fix max position of splitters - can currently resize a tool window offscreen
+-- serialise the visible content for groups and the active content
+-- right click tab menu. close all, close all but this etc. etc.
+-- stop dragging tabs instantly going to the end of the row
+-- stop differently sized toolwindow tabs from vibrating when dragging
+-- remove 1 pixel left padding from bottom region
+-- add 1 pixel border between groups in bottom region
+-- if bottom & left regions are invisible on load, then content is added, the bottom region will expand too far to the left
