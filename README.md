@@ -7,11 +7,9 @@ DarkUI is an attempt to create a simple, extensible control library which emulat
 Check out our [GitHub Pages site](http://www.darkui.com).
 
 ### How to use
-DarkUI is easy to use. It uses a mix of inherited control types (text box, button, label etc.) and a few completely custom additions (dock panel, list view, scrollbar etc.) If you've ever built a WinForms application before, you should be able to easily use DarkUI in exactly the same way.
+The best way to learn how to use DarkUI is to check out the Example project included with the source code. It'll show you how to use the majority of the forms, controls, and docking components.
 
-Simply download the latest version from GitHub and build it - the example application included shows how you can build a Visual Studio style tabbed interface within minutes.
-
-For more detailed information and tutorials check out the [GitHub project wiki](https://github.com/RobinPerris/DarkUI/wiki).
+You can also read the [GitHub project wiki](https://github.com/RobinPerris/DarkUI/wiki). This contains all the information you need to get started as well as more detailed information and guides.
 
 ### Screenshots
 Game map editor
