@@ -116,7 +116,7 @@ namespace DarkUI.Win32
                         _groupDropAreas.Add(group, collection);
                     }
                 }
-                // If the region is NOT visible then build drop areas for the region itself.
+                // If the region is NOT visible then build the drop area for the region itself.
                 else
                 {
                     var area = new DockDropArea(_dockPanel, region);
@@ -184,23 +184,22 @@ namespace DarkUI.Win32
                 var groupHasOtherContent = false;
 
                 if (collection.DropArea.DockGroup == _dragContent.DockGroup)
-                {
                     sameGroup = true;
 
-                    if (collection.DropArea.DockGroup.ContentCount > 1)
-                        groupHasOtherContent = true;
-                }
-
                 if (collection.DropArea.DockGroup.DockRegion == _dragContent.DockRegion)
-                {
                     sameRegion = true;
-                }
 
+                if (_dragContent.DockGroup.ContentCount > 1)
+                    groupHasOtherContent = true;
+
+                // If we're hovering over the group itself, only allow inserting before/after if multiple content is tabbed.
                 if (!sameGroup || groupHasOtherContent)
                 {
                     var skipBefore = false;
                     var skipAfter = false;
 
+                    // Inserting before/after other content might cause the content to be dropped on to its own location.
+                    // Check if the group above/below the hovered group contains our drag content.
                     if (sameRegion && !groupHasOtherContent)
                     {
                         if (collection.InsertBeforeArea.DockGroup.Order == _dragContent.DockGroup.Order + 1)
@@ -233,6 +232,7 @@ namespace DarkUI.Win32
                     }
                 }
 
+                // Don't allow content to be dragged on to itself
                 if (!sameGroup)
                 {
                     if (collection.DropArea.DropArea.Contains(location))
