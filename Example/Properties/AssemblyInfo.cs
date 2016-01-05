@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Dark UI Example")]
-[assembly: AssemblyDescription("Examlpe application for Dark UI")]
+[assembly: AssemblyDescription("Example application for Dark UI")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Robin Perris")]
 [assembly: AssemblyProduct("Dark UI")]
