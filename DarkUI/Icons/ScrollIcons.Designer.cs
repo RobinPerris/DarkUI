@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DarkUI.Icons {
+namespace DarkUI {
     using System;
     
     
@@ -76,6 +76,16 @@ namespace DarkUI.Icons {
         internal static System.Drawing.Bitmap scrollbar_arrow_clicked {
             get {
                 object obj = ResourceManager.GetObject("scrollbar_arrow_clicked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap scrollbar_arrow_disabled {
+            get {
+                object obj = ResourceManager.GetObject("scrollbar_arrow_disabled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

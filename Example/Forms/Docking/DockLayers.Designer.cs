@@ -38,6 +38,7 @@ namespace Example
             // lstLayers
             // 
             this.lstLayers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstLayers.HideScrollBars = false;
             this.lstLayers.Location = new System.Drawing.Point(0, 51);
             this.lstLayers.Name = "lstLayers";
             this.lstLayers.ShowIcons = true;
