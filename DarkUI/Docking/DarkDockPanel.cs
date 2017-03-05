@@ -307,6 +307,8 @@ namespace DarkUI.Docking
                         if (content == null)
                             continue;
 
+                        content.DockArea = region.Area;
+
                         if (previousContent == null)
                             AddContent(content);
                         else
