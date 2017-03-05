@@ -272,6 +272,8 @@ namespace DarkUI.Docking
                         }
 
                         groupState.Contents.Add(content.SerializationKey);
+
+                        groupState.VisibleContent = content.DockGroup.VisibleContent.SerializationKey;
                     }
                 }
             }
@@ -299,6 +301,7 @@ namespace DarkUI.Docking
                 foreach (var group in region.Groups)
                 {
                     DarkDockContent previousContent = null;
+                    DarkDockContent visibleContent = null;
 
                     foreach (var contentKey in group.Contents)
                     {
@@ -315,7 +318,13 @@ namespace DarkUI.Docking
                             AddContent(content, previousContent.DockGroup);
 
                         previousContent = content;
+
+                        if (group.VisibleContent == contentKey)
+                            visibleContent = content;
                     }
+
+                    if (visibleContent != null)
+                        visibleContent.Select();
                 }
             }
         }
