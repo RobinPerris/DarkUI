@@ -15,6 +15,7 @@ namespace Example
             for (var i = 0; i < 100; i++)
             {
                 var item = new DarkListItem($"List item #{i}");
+                item.Icon = Icons.application_16x;
                 lstLayers.Items.Add(item);
             }
         }

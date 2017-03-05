@@ -39,6 +39,7 @@ namespace Example
             this.lstLayers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstLayers.Location = new System.Drawing.Point(0, 25);
             this.lstLayers.Name = "lstLayers";
+            this.lstLayers.ShowIcons = true;
             this.lstLayers.Size = new System.Drawing.Size(280, 425);
             this.lstLayers.TabIndex = 0;
             this.lstLayers.Text = "darkListView1";

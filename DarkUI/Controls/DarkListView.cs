@@ -23,6 +23,8 @@ namespace DarkUI.Controls
         private int _itemHeight = 20;
         private bool _multiSelect;
 
+        private readonly int _iconSize = 16;
+
         private ObservableCollection<DarkListItem> _items;
         private List<int> _selectedIndices;
         private int _anchoredItemStart = -1;
@@ -78,6 +80,11 @@ namespace DarkUI.Controls
             get { return _multiSelect; }
             set { _multiSelect = value; }
         }
+
+        [Category("Appearance")]
+        [Description("Determines whether icons are rendered with the list items.")]
+        [DefaultValue(false)]
+        public bool ShowIcons { get; set; }
 
         #endregion
 
@@ -397,6 +404,9 @@ namespace DarkUI.Controls
             var size = g.MeasureString(item.Text, Font);
             size.Width++;
 
+            if (ShowIcons)
+                size.Width += _iconSize + 8;
+
             item.Area = new Rectangle(item.Area.Left, item.Area.Top, (int)size.Width, item.Area.Height);
         }
 
@@ -523,6 +533,12 @@ namespace DarkUI.Controls
                     g.DrawLine(p, new Point(rect.Left, rect.Bottom - 1), new Point(rect.Right, rect.Bottom - 1));
                 }*/
 
+                // Icon
+                if (ShowIcons && Items[i].Icon != null)
+                {
+                    g.DrawImageUnscaled(Items[i].Icon, new Point(rect.Left + 5, rect.Top + (rect.Height / 2) - (_iconSize / 2)));
+                }
+
                 // Text
                 using (var b = new SolidBrush(Items[i].TextColor))
                 {
@@ -535,6 +551,10 @@ namespace DarkUI.Controls
                     var modFont = new Font(Font, Items[i].FontStyle);
 
                     var modRect = new Rectangle(rect.Left + 2, rect.Top, rect.Width, rect.Height);
+
+                    if (ShowIcons)
+                        modRect.X += _iconSize + 8;
+
                     g.DrawString(Items[i].Text, modFont, b, modRect, stringFormat);
                 }
             }
