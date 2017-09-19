@@ -81,6 +81,7 @@ namespace DarkUI.Docking
                 dockContent.Order = order;
             }
 
+
             _contents.Add(dockContent);
             Controls.Add(dockContent);
 
@@ -105,6 +106,7 @@ namespace DarkUI.Docking
             _tabArea.AddMenuItem(menuItem);
 
             UpdateTabArea();
+            UpdateMaximumSize();
         }
 
         public void RemoveContent(DarkDockContent dockContent)
@@ -145,6 +147,7 @@ namespace DarkUI.Docking
             _tabArea.RemoveMenuItem(menuItem);
 
             UpdateTabArea();
+            UpdateMaximumSize();
         }
 
         public List<DarkDockContent> GetContents()
@@ -190,6 +193,22 @@ namespace DarkUI.Docking
             BuildTabs();
 
             EnsureVisible();
+        }
+
+        private void UpdateMaximumSize()
+        {
+            // Calculate maximum height among all elements of group.
+
+            if (_contents.Count > 0)
+            {
+                var maxSize = new Size(0, 0);
+                foreach (var currContent in _contents)
+                {
+                    if (currContent.MaximumSize.Height > maxSize.Height)
+                        maxSize = currContent.MaximumSize;
+                }
+                MaximumSize = maxSize;
+            }
         }
 
         private void BuildTabs()

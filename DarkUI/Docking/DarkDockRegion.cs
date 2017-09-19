@@ -261,7 +261,19 @@ namespace DarkUI.Docking
             }
 
             foreach (var group in _groups)
-                group.Size = size;
+            {
+                // Override height, if control has specific maximum height.
+                if (group.MaximumSize.Height > 0)
+                {
+                    var currsize = new Size(size.Width, group.MaximumSize.Height);
+                    group.Size = currsize;
+                }
+                else
+                {
+                    group.Size = size;
+                }
+            }
+
         }
 
         private void BuildProperties()
