@@ -43,6 +43,7 @@
             this.txtDocument.Size = new System.Drawing.Size(175, 173);
             this.txtDocument.TabIndex = 1;
             this.txtDocument.Text = "This is some example text";
+            this.txtDocument.TextChanged += new System.EventHandler(this.txtDocument_TextChanged);
             // 
             // DockDocument
             // 

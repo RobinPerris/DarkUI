@@ -388,7 +388,7 @@ namespace DarkUI.Controls
                         y = y + ((int)(stringSize.Height / 2) + (ImagePadding / 2));
                         break;
                     case TextImageRelation.ImageBeforeText:
-                        textOffsetX = Image.Size.Width + (ImagePadding * 2);
+                        textOffsetX = Image.Size.Width + (ImagePadding / 2);
                         x = ImagePadding;
                         break;
                     case TextImageRelation.TextBeforeImage:
@@ -396,7 +396,8 @@ namespace DarkUI.Controls
                         break;
                 }
 
-                g.DrawImageUnscaled(Image, x, y);
+                //g.DrawImageUnscaled(Image, x, y);
+                g.DrawImage(Image, new Rectangle(x, y, Image.Width, Image.Height));
             }
 
             using (var b = new SolidBrush(textColor))
@@ -405,14 +406,28 @@ namespace DarkUI.Controls
                                             rect.Top + textOffsetY + Padding.Top, rect.Width - Padding.Horizontal,
                                             rect.Height - Padding.Vertical);
 
-                var stringFormat = new StringFormat
+                if (Image != null)
                 {
-                    LineAlignment = StringAlignment.Center,
-                    Alignment = StringAlignment.Center,
-                    Trimming = StringTrimming.EllipsisCharacter
-                };
+                    var stringFormat = new StringFormat
+                    {
+                        LineAlignment = StringAlignment.Center,
+                        Alignment = StringAlignment.Near,
+                        Trimming = StringTrimming.EllipsisCharacter
+                    };
 
-                g.DrawString(Text, Font, b, modRect, stringFormat);
+                    g.DrawString(Text, Font, b, modRect, stringFormat);
+                }
+                else
+                {
+                    var stringFormat = new StringFormat
+                    {
+                        LineAlignment = StringAlignment.Center,
+                        Alignment = StringAlignment.Center,
+                        Trimming = StringTrimming.EllipsisCharacter
+                    };
+
+                    g.DrawString(Text, Font, b, modRect, stringFormat);
+                }
             }
         }
 

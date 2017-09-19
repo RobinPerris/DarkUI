@@ -100,7 +100,7 @@ namespace Example
             this.mnuNewFile.Image = global::Example.Icons.NewFile_6276;
             this.mnuNewFile.Name = "mnuNewFile";
             this.mnuNewFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.mnuNewFile.Size = new System.Drawing.Size(160, 22);
+            this.mnuNewFile.Size = new System.Drawing.Size(169, 22);
             this.mnuNewFile.Text = "&New file";
             // 
             // toolStripSeparator1
@@ -108,7 +108,7 @@ namespace Example
             this.toolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
             // 
             // mnuClose
             // 
@@ -116,7 +116,7 @@ namespace Example
             this.mnuClose.Image = global::Example.Icons.Close_16xLG;
             this.mnuClose.Name = "mnuClose";
             this.mnuClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.mnuClose.Size = new System.Drawing.Size(160, 22);
+            this.mnuClose.Size = new System.Drawing.Size(169, 22);
             this.mnuClose.Text = "&Close";
             // 
             // mnuView
@@ -146,7 +146,7 @@ namespace Example
             this.checkedWithIconToolStripMenuItem});
             this.mnuTools.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.mnuTools.Name = "mnuTools";
-            this.mnuTools.Size = new System.Drawing.Size(48, 20);
+            this.mnuTools.Size = new System.Drawing.Size(47, 20);
             this.mnuTools.Text = "&Tools";
             // 
             // checkableToolStripMenuItem
@@ -365,6 +365,7 @@ namespace Example
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dark UI - Example";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();
             this.toolMain.ResumeLayout(false);

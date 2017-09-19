@@ -74,7 +74,7 @@ namespace DarkUI.Renderers
 
                 if (castItem.Checked)
                 {
-                    using (var b = new SolidBrush(Colors.GreySelection))
+                    using (var b = new SolidBrush(Color.Orange))
                     {
                         g.FillRectangle(b, rect);
                     }

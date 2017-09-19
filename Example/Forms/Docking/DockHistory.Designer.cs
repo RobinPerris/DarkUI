@@ -40,7 +40,7 @@ namespace Example
             this.lstHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstHistory.Location = new System.Drawing.Point(0, 25);
             this.lstHistory.Name = "lstHistory";
-            this.lstHistory.Size = new System.Drawing.Size(280, 425);
+            this.lstHistory.Size = new System.Drawing.Size(280, 152);
             this.lstHistory.TabIndex = 0;
             this.lstHistory.Text = "darkListView1";
             // 
@@ -53,9 +53,10 @@ namespace Example
             this.DockText = "History";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.RefactoringLog_12810;
+            this.MaximumSize = new System.Drawing.Size(280, 177);
             this.Name = "DockHistory";
             this.SerializationKey = "DockHistory";
-            this.Size = new System.Drawing.Size(280, 450);
+            this.Size = new System.Drawing.Size(280, 177);
             this.ResumeLayout(false);
 
         }

@@ -12,5 +12,10 @@ namespace Example
         }
 
         #endregion
+
+        private void pnlMain_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+
+        }
     }
 }

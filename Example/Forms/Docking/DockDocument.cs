@@ -39,5 +39,10 @@ namespace Example
         }
 
         #endregion
+
+        private void txtDocument_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

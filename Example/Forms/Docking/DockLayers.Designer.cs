@@ -39,7 +39,7 @@ namespace Example
             this.lstLayers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstLayers.Location = new System.Drawing.Point(0, 25);
             this.lstLayers.Name = "lstLayers";
-            this.lstLayers.Size = new System.Drawing.Size(280, 425);
+            this.lstLayers.Size = new System.Drawing.Size(280, 192);
             this.lstLayers.TabIndex = 0;
             this.lstLayers.Text = "darkListView1";
             // 
@@ -52,9 +52,10 @@ namespace Example
             this.DockText = "Layers";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.Collection_16xLG;
+            this.MaximumSize = new System.Drawing.Size(280, 217);
             this.Name = "DockLayers";
             this.SerializationKey = "DockLayers";
-            this.Size = new System.Drawing.Size(280, 450);
+            this.Size = new System.Drawing.Size(280, 217);
             this.ResumeLayout(false);
 
         }

@@ -57,6 +57,7 @@ namespace Example
             this.pnlMain.Padding = new System.Windows.Forms.Padding(10);
             this.pnlMain.Size = new System.Drawing.Size(280, 425);
             this.pnlMain.TabIndex = 0;
+            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             // 
             // panel1
             // 
