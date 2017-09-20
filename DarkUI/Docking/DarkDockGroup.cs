@@ -106,7 +106,7 @@ namespace DarkUI.Docking
             _tabArea.AddMenuItem(menuItem);
 
             UpdateTabArea();
-            UpdateMaximumSize();
+            UpdateMinimumSize();
         }
 
         public void RemoveContent(DarkDockContent dockContent)
@@ -147,7 +147,7 @@ namespace DarkUI.Docking
             _tabArea.RemoveMenuItem(menuItem);
 
             UpdateTabArea();
-            UpdateMaximumSize();
+            UpdateMinimumSize();
         }
 
         public List<DarkDockContent> GetContents()
@@ -195,19 +195,39 @@ namespace DarkUI.Docking
             EnsureVisible();
         }
 
-        private void UpdateMaximumSize()
+        private void UpdateMinimumSize()
         {
-            // Calculate maximum height among all elements of group.
+            // Calculate maximum size among all elements of group.
 
             if (_contents.Count > 0)
             {
-                var maxSize = new Size(0, 0);
-                foreach (var currContent in _contents)
+                int maxSize = 0;
+                switch (DockArea)
                 {
-                    if (currContent.MaximumSize.Height > maxSize.Height)
-                        maxSize = currContent.MaximumSize;
+                    default:
+                    case DarkDockArea.Document:
+                        return;
+
+                    case DarkDockArea.Left:
+                    case DarkDockArea.Right:
+                        foreach (var currContent in _contents)
+                        {
+                            if (currContent.MinimumSize.Height > maxSize)
+                                maxSize = currContent.MinimumSize.Height;
+                        }
+                        MinimumSize = new Size(0, maxSize);
+                        break;
+
+                    case DarkDockArea.Bottom:
+                        foreach (var currContent in _contents)
+                        {
+                            if (currContent.MinimumSize.Width > maxSize)
+                                maxSize = currContent.MinimumSize.Width;
+                        }
+                        MinimumSize = new Size(maxSize, 0);
+                        break;
+
                 }
-                MaximumSize = maxSize;
             }
         }
 

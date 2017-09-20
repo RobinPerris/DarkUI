@@ -244,7 +244,8 @@ namespace DarkUI.Docking
             if (_groups.Count <= 1)
                 return;
 
-            var size = new Size(0, 0);
+            int freeSpace = 0;
+            int varSizedGroups = 0;
 
             switch (DockArea)
             {
@@ -253,25 +254,39 @@ namespace DarkUI.Docking
                     return;
                 case DarkDockArea.Left:
                 case DarkDockArea.Right:
-                    size = new Size(ClientRectangle.Width, ClientRectangle.Height / _groups.Count);
+                    freeSpace = ClientRectangle.Height;
+                    foreach (var group in _groups)
+                    {
+                        if (group.MinimumSize.Height > 0)
+                            freeSpace = freeSpace - group.MinimumSize.Height;
+                        else
+                            varSizedGroups++;
+                    }
+                    foreach (var group in _groups)
+                    {
+                        if (group.MinimumSize.Height > 0)
+                            group.Size = new Size(ClientRectangle.Width, group.MinimumSize.Height);
+                        else
+                            group.Size = new Size(ClientRectangle.Width, freeSpace / varSizedGroups);
+                    }
                     break;
                 case DarkDockArea.Bottom:
-                    size = new Size(ClientRectangle.Width / _groups.Count, ClientRectangle.Height);
+                    freeSpace = ClientRectangle.Width;
+                    foreach (var group in _groups)
+                    {
+                        if (group.MinimumSize.Width > 0)
+                            freeSpace = freeSpace - group.MinimumSize.Width;
+                        else
+                            varSizedGroups++;
+                    }
+                    foreach (var group in _groups)
+                    {
+                        if (group.MinimumSize.Width > 0)
+                            group.Size = new Size(group.MinimumSize.Width, ClientRectangle.Height);
+                        else
+                            group.Size = new Size(freeSpace / varSizedGroups, ClientRectangle.Height);
+                    }
                     break;
-            }
-
-            foreach (var group in _groups)
-            {
-                // Override height, if control has specific maximum height.
-                if (group.MaximumSize.Height > 0)
-                {
-                    var currsize = new Size(size.Width, group.MaximumSize.Height);
-                    group.Size = currsize;
-                }
-                else
-                {
-                    group.Size = size;
-                }
             }
 
         }
