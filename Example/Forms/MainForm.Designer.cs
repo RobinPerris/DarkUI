@@ -365,7 +365,6 @@ namespace Example
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dark UI - Example";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();
             this.toolMain.ResumeLayout(false);

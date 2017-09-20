@@ -32,6 +32,7 @@ namespace Example
         private void InitializeComponent()
         {
             this.lstConsole = new DarkUI.Controls.DarkListView();
+            this.darkTreeView1 = new DarkUI.Controls.DarkTreeView();
             this.SuspendLayout();
             // 
             // lstConsole
@@ -44,10 +45,20 @@ namespace Example
             this.lstConsole.TabIndex = 0;
             this.lstConsole.Text = "darkListView1";
             // 
+            // darkTreeView1
+            // 
+            this.darkTreeView1.Location = new System.Drawing.Point(415, 117);
+            this.darkTreeView1.MaxDragChange = 20;
+            this.darkTreeView1.Name = "darkTreeView1";
+            this.darkTreeView1.Size = new System.Drawing.Size(75, 23);
+            this.darkTreeView1.TabIndex = 1;
+            this.darkTreeView1.Text = "darkTreeView1";
+            // 
             // DockConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.darkTreeView1);
             this.Controls.Add(this.lstConsole);
             this.DefaultDockArea = DarkUI.Docking.DarkDockArea.Bottom;
             this.DockText = "Console";
@@ -63,5 +74,6 @@ namespace Example
         #endregion
 
         private DarkListView lstConsole;
+        private DarkTreeView darkTreeView1;
     }
 }

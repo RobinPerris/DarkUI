@@ -20,10 +20,5 @@ namespace Example
         }
 
         #endregion
-
-        void ciao()
-        {
-            
-        }
     }
 }

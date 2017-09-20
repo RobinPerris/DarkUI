@@ -157,9 +157,9 @@ namespace DarkUI.Docking
 
         private void UpdateTabArea()
         {
-            if (DockArea == DarkDockArea.Document)
-                _tabArea.Visible = (_contents.Count > 0);
-            else
+            //if (DockArea == DarkDockArea.Document)
+            //    _tabArea.Visible = (_contents.Count > 0);
+            //else
                 _tabArea.Visible = (_contents.Count > 1);
 
             var size = 0;
