@@ -38,6 +38,8 @@ namespace DarkUI.Controls
 
         public FontStyle FontStyle { get; set; }
 
+        public Bitmap Icon { get; set; }
+
         public object Tag { get; set; }
 
         #endregion

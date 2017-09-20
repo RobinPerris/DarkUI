@@ -22,14 +22,14 @@ namespace DarkUI {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ScrollIcons {
+    internal class DropdownIcons {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ScrollIcons() {
+        internal DropdownIcons() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DarkUI {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DarkUI.Icons.ScrollIcons", typeof(ScrollIcons).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DarkUI.Icons.DropdownIcons", typeof(DropdownIcons).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,49 +63,9 @@ namespace DarkUI {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap scrollbar_arrow {
+        internal static System.Drawing.Bitmap small_arrow {
             get {
-                object obj = ResourceManager.GetObject("scrollbar_arrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap scrollbar_arrow_clicked {
-            get {
-                object obj = ResourceManager.GetObject("scrollbar_arrow_clicked", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap scrollbar_arrow_disabled {
-            get {
-                object obj = ResourceManager.GetObject("scrollbar_arrow_disabled", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap scrollbar_arrow_hot {
-            get {
-                object obj = ResourceManager.GetObject("scrollbar_arrow_hot", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap scrollbar_arrow_standard {
-            get {
-                object obj = ResourceManager.GetObject("scrollbar_arrow_standard", resourceCulture);
+                object obj = ResourceManager.GetObject("small_arrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

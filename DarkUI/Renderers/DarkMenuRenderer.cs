@@ -1,4 +1,5 @@
 ﻿using DarkUI.Config;
+using DarkUI.Controls;
 using DarkUI.Icons;
 using System;
 using System.Drawing;
@@ -22,6 +23,7 @@ namespace DarkUI.Renderers
         {
             base.InitializeItem(item);
 
+            item.BackColor = Colors.GreyBackground;
             item.ForeColor = Colors.LightText;
 
             if (item.GetType() == typeof(ToolStripSeparator))
@@ -107,15 +109,15 @@ namespace DarkUI.Renderers
 
             if (e.Item.Enabled)
             {
-                // Normal item
-                if (e.Item.Selected)
-                {
-                    var rect = new Rectangle(2, 0, e.Item.Width - 3, e.Item.Height);
+                
+                var bgColor = e.Item.Selected ? Colors.GreyHighlight : e.Item.BackColor;
 
-                    using (var b = new SolidBrush(Colors.GreySelection))
-                    {
-                        g.FillRectangle(b, rect);
-                    }
+                // Normal item
+                var rect = new Rectangle(2, 0, e.Item.Width - 3, e.Item.Height);
+
+                using (var b = new SolidBrush(bgColor))
+                {
+                    g.FillRectangle(b, rect);
                 }
 
                 // Header item on open menu
@@ -123,8 +125,6 @@ namespace DarkUI.Renderers
                 {
                     if (((ToolStripMenuItem)e.Item).DropDown.Visible && e.Item.IsOnDropDown == false)
                     {
-                        var rect = new Rectangle(2, 0, e.Item.Width - 3, e.Item.Height);
-
                         using (var b = new SolidBrush(Colors.GreySelection))
                         {
                             g.FillRectangle(b, rect);
