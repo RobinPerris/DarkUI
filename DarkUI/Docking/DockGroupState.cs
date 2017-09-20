@@ -10,6 +10,8 @@ namespace DarkUI.Docking
 
         public string VisibleContent { get; set; }
 
+        public int    Order { get; set; }
+
         #endregion
 
         #region Constructor Region

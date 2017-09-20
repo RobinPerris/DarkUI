@@ -274,6 +274,7 @@ namespace DarkUI.Docking
                         groupState.Contents.Add(content.SerializationKey);
 
                         groupState.VisibleContent = content.DockGroup.VisibleContent.SerializationKey;
+                        groupState.Order = content.DockGroup.Order;
                     }
                 }
             }
@@ -297,6 +298,8 @@ namespace DarkUI.Docking
                         _regions[DarkDockArea.Bottom].Size = region.Size;
                         break;
                 }
+
+                region.Groups.Sort(delegate (DockGroupState a, DockGroupState b) { return a.Order.CompareTo(b.Order); });
 
                 foreach (var group in region.Groups)
                 {
