@@ -178,6 +178,15 @@ namespace DarkUI.Docking
             dockContent.Select();
         }
 
+        public void RemoveContent()
+        {
+            if (_contents.Count == 0)
+                return;
+
+            while(_contents.Count > 0)
+                RemoveContent(_contents.First());
+        }
+
         public void RemoveContent(DarkDockContent dockContent)
         {
             if (!_contents.Contains(dockContent))
