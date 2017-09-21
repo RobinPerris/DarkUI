@@ -74,9 +74,15 @@ namespace DarkUI.Renderers
 
                 if (castItem.Checked)
                 {
-                    using (var b = new SolidBrush(Color.Orange))
+                    using (var b = new SolidBrush(Color.FromArgb(80, 72, 69)))
                     {
                         g.FillRectangle(b, rect);
+                    }
+
+                    using (var p = new Pen(Color.FromArgb(225, 128, 68)))
+                    {
+                        var modRect = new Rectangle(rect.Left, rect.Top, rect.Width - 1, rect.Height - 1);
+                        g.DrawRectangle(p, modRect);
                     }
                 }
 

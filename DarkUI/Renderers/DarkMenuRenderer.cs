@@ -64,12 +64,12 @@ namespace DarkUI.Renderers
             var rect = new Rectangle(e.ImageRectangle.Left - 2, e.ImageRectangle.Top - 2,
                                          e.ImageRectangle.Width + 4, e.ImageRectangle.Height + 4);
 
-            using (var b = new SolidBrush(Colors.LightBorder))
+            using (var b = new SolidBrush(Color.FromArgb(80, 72, 69)))
             {
                 g.FillRectangle(b, rect);
             }
 
-            using (var p = new Pen(Colors.BlueHighlight))
+            using (var p = new Pen(Color.FromArgb(225, 128, 68)))
             {
                 var modRect = new Rectangle(rect.Left, rect.Top, rect.Width - 1, rect.Height - 1);
                 g.DrawRectangle(p, modRect);
