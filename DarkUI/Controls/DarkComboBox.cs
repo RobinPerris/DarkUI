@@ -71,7 +71,7 @@ namespace DarkUI.Controls
             this.mBorderColor = Colors.LightBorder;
             this.mBorderStyle = ButtonBorderStyle.Solid;
 
-            this.mButtonColor = Colors.MediumBackground;
+            this.mButtonColor = Colors.DarkBackground;
             this.mButtonIcon = DefaultButtonIcon;
             
             this.mTextPadding = new Padding(2);
@@ -277,6 +277,18 @@ namespace DarkUI.Controls
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             e.Graphics.Clear(BackColor);
+        }
+
+        protected override void OnDropDown(EventArgs e)
+        {
+            base.OnDropDown(e);
+            ButtonIcon = ScrollIcons.scrollbar_arrow_clicked;
+        }
+
+        protected override void OnDropDownClosed(EventArgs e)
+        {
+            base.OnDropDownClosed(e);
+            ButtonIcon = ScrollIcons.scrollbar_arrow_standard;
         }
         #endregion Drawing
 
