@@ -53,8 +53,8 @@
     <Compile Include="Controls\DarkComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DarkComboBox.Designer.cs">
-      <DependentUpon>DarkComboBox.cs</DependentUpon>
+    <Compile Include="Controls\DarkGroupBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkDropdownItem.cs" />
     <Compile Include="Controls\DarkDropdownList.cs">
@@ -70,9 +70,6 @@
     </Compile>
     <Compile Include="Controls\DarkNumericUpDown.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\DarkNumericUpDown.Designer.cs">
-      <DependentUpon>DarkNumericUpDown.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DarkRadioButton.cs">
       <SubType>Component</SubType>
