@@ -65,9 +65,6 @@
     <Compile Include="Controls\DarkListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DarkListBox.Designer.cs">
-      <DependentUpon>DarkListBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DarkNumericUpDown.cs">
       <SubType>Component</SubType>
     </Compile>
