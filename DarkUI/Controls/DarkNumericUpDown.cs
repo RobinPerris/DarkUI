@@ -15,7 +15,7 @@ namespace DarkUI.Controls
     public class DarkNumericUpDown : NumericUpDown
     {
         [Category("Data")]
-        [Description("Determines increment value used with mousewheel scroll with shift modifier.")]
+        [Description("Determines increment value used with shift modifier.")]
         public decimal IncrementAlternate { get; set; } = 1.0M;
 
         [Category("Behavior")]
@@ -129,6 +129,26 @@ namespace DarkUI.Controls
             }
             else
                 base.OnMouseWheel(e);
+        }
+
+        public override void UpButton()
+        {
+            if (ModifierKeys.HasFlag(Keys.Shift))
+            {
+                Value += IncrementAlternate;
+            }
+            else
+                base.UpButton();
+        }
+
+        public override void DownButton()
+        {
+            if (ModifierKeys.HasFlag(Keys.Shift))
+            {
+                Value -= IncrementAlternate;
+            }
+            else
+                base.DownButton();
         }
     }
 }
