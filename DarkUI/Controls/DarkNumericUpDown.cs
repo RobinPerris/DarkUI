@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -13,9 +14,18 @@ namespace DarkUI.Controls
 {
     public class DarkNumericUpDown : NumericUpDown
     {
+        [Category("Data")]
+        [Description("Determines increment value used with mousewheel scroll with shift modifier.")]
+        public decimal IncrementAlternate { get; set; } = 1.0M;
+
+        [Category("Behavior")]
+        [Description("Forces mousewheel to scroll by one increment.")]
+        public bool MousewheelSingleIncrement { get; set; } = true;
+
         private bool mouseDown = false;
         private Point mousePos = new Point();
         private Rectangle scrollButtons;
+
         public DarkNumericUpDown()
         {
             this.ForeColor = Color.Gainsboro;
@@ -94,6 +104,28 @@ namespace DarkUI.Controls
         {
             base.OnPaint(e);
             ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.FromArgb(100,100,100), ButtonBorderStyle.Solid);
+        }
+
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            if(MousewheelSingleIncrement)
+            {
+                decimal newValue = Value;
+
+                if (e.Delta > 0)
+                    newValue += (ModifierKeys == Keys.Shift) ? IncrementAlternate: Increment;
+                else
+                    newValue -= (ModifierKeys == Keys.Shift) ? IncrementAlternate : Increment;
+                if (newValue > Maximum)
+                    newValue = Maximum;
+                else
+                    if (newValue < Minimum)
+                    newValue = Minimum;
+
+                Value = newValue;
+            }
+            else
+                base.OnMouseWheel(e);
         }
     }
 }
