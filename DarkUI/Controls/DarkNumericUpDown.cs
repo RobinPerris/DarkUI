@@ -74,10 +74,13 @@ namespace DarkUI.Controls
 
         private void DarkNumericUpDown_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(new SolidBrush(Colors.DarkBackground), new Rectangle(0, 0, e.ClipRectangle.Width,e.ClipRectangle.Height));
+            // Up-down background
+            var upDownRect = new Rectangle(0, 0, Controls[0].Width, Controls[0].Height);
+            e.Graphics.FillRectangle(new SolidBrush(Colors.DarkBackground), upDownRect);
 
+            // Up arrow
             var upIcon = ScrollIcons.scrollbar_arrow_standard;
-            var upRect = new Rectangle(e.ClipRectangle.Width/2 - upIcon.Width/2,e.ClipRectangle.Height/4 - upIcon.Height/2,upIcon.Width,upIcon.Height);
+            var upRect = new Rectangle(Controls[0].Size.Width / 2 - upIcon.Width / 2, Controls[0].Size.Height / 4 - upIcon.Height / 2,upIcon.Width, upIcon.Height);
             upIcon = upRect.Contains(mousePos) ? ScrollIcons.scrollbar_arrow_hot : ScrollIcons.scrollbar_arrow_standard;
 
             if (mouseDown && upRect.Contains(mousePos))
@@ -85,19 +88,19 @@ namespace DarkUI.Controls
 
             upIcon.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
-
             e.Graphics.DrawImageUnscaled(upIcon,upRect);
 
             // Down arrow
             var downIcon = ScrollIcons.scrollbar_arrow_standard;
-            var downRect = new Rectangle(e.ClipRectangle.Width / 2 - upIcon.Width / 2, e.ClipRectangle.Height / 2 + e.ClipRectangle.Height/4 - upIcon.Height / 2, upIcon.Width, upIcon.Height);
+            var downRect = new Rectangle(Controls[0].Size.Width / 2 - upIcon.Width / 2, Controls[0].Size.Height / 2 + Controls[0].Size.Height / 4 - upIcon.Height / 2, upIcon.Width, upIcon.Height);
             downIcon = downRect.Contains(mousePos) ? ScrollIcons.scrollbar_arrow_hot : ScrollIcons.scrollbar_arrow_standard;
 
             if (mouseDown && downRect.Contains(mousePos))
                 downIcon = ScrollIcons.scrollbar_arrow_clicked;
 
             e.Graphics.DrawImageUnscaled(downIcon, downRect);
-            scrollButtons = e.ClipRectangle;
+
+            scrollButtons = upDownRect;
         }
 
         protected override void OnPaint(PaintEventArgs e)

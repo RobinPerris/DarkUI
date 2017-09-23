@@ -13,8 +13,6 @@ namespace DarkUI.Controls
     {
         public DarkListBox()
         {
-            InitializeComponent();
-
             BackColor = Colors.LightBackground;
             ForeColor = Colors.LightText;
             Padding = new Padding(2, 2, 2, 2);
