@@ -88,7 +88,7 @@ namespace DarkUI.Docking
                 Visible = true;
                 CreateSplitter();
             }
-
+            
             PositionGroups();
         }
 
@@ -109,7 +109,7 @@ namespace DarkUI.Docking
                 Visible = true;
                 CreateSplitter();
             }
-
+            
             PositionGroups();
         }
 
@@ -288,7 +288,15 @@ namespace DarkUI.Docking
                     }
                     break;
             }
+        }
 
+        private void SizeGroupSplitters()
+        {
+            if (DockArea != DarkDockArea.Document)
+            {
+                foreach (var regionGroup in Groups)
+                    regionGroup.UpdateSplitterBounds();
+            }
         }
 
         private void BuildProperties()
@@ -372,6 +380,8 @@ namespace DarkUI.Docking
         {
             if (_splitter != null)
                 _splitter.UpdateBounds();
+
+            SizeGroupSplitters();
         }
 
         protected override void OnLayout(LayoutEventArgs e)
@@ -380,6 +390,8 @@ namespace DarkUI.Docking
 
             if (_splitter != null)
                 _splitter.UpdateBounds();
+
+            SizeGroupSplitters();
         }
 
         #endregion

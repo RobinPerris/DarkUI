@@ -21,6 +21,8 @@ namespace DarkUI.Docking
 
         private DarkDockTab _dragTab = null;
 
+        private DarkDockSplitter _splitter;
+
         #endregion
 
         #region Property Region
@@ -81,7 +83,6 @@ namespace DarkUI.Docking
                 dockContent.Order = order;
             }
 
-
             _contents.Add(dockContent);
             Controls.Add(dockContent);
 
@@ -107,6 +108,7 @@ namespace DarkUI.Docking
 
             UpdateTabArea();
             UpdateMinimumSize();
+            RebuildGroupSplitters();
         }
 
         public void RemoveContent(DarkDockContent dockContent)
@@ -148,6 +150,7 @@ namespace DarkUI.Docking
 
             UpdateTabArea();
             UpdateMinimumSize();
+            RebuildGroupSplitters();
         }
 
         public List<DarkDockContent> GetContents()
@@ -193,6 +196,46 @@ namespace DarkUI.Docking
             BuildTabs();
 
             EnsureVisible();
+        }
+
+        private void CreateSplitter()
+        {
+            RemoveSplitter();
+
+            switch (DockArea)
+            {
+                case DarkDockArea.Left:
+                case DarkDockArea.Right:
+                    _splitter = new DarkDockSplitter(DockRegion, this, DarkSplitterType.Bottom);
+                    break;
+                case DarkDockArea.Bottom:
+                    _splitter = new DarkDockSplitter(DockRegion, this, DarkSplitterType.Right);
+                    break;
+                default:
+                    return;
+            }
+
+            DockPanel.Splitters.Add(_splitter);
+        }
+
+        private void RemoveSplitter()
+        {
+            if (_splitter != null && DockPanel.Splitters.Contains(_splitter))
+                DockPanel.Splitters.Remove(_splitter);
+        }
+
+        private void RebuildGroupSplitters()
+        {
+            if (DockArea != DarkDockArea.Document)
+            {
+                foreach (var regionGroup in DockRegion.Groups)
+                {
+                    regionGroup.CreateSplitter();
+
+                    if (regionGroup.Order == DockRegion.Groups.Count - 1)
+                        regionGroup.RemoveSplitter();
+                }
+            }
         }
 
         private void UpdateMinimumSize()
@@ -416,6 +459,12 @@ namespace DarkUI.Docking
 
                 Invalidate();
             }
+        }
+
+        public void UpdateSplitterBounds()
+        {
+            if (_splitter != null)
+                _splitter.UpdateBounds();
         }
 
         private Point PointToTabArea(Point point)
