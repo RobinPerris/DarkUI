@@ -132,6 +132,9 @@ namespace DarkUI.Docking
 
         public void UpdateBounds()
         {
+            _control.Width += 1;   // <<<<<< WHY THESE TWO LINES FIXED MISPLACED SPLITTER ISSUE?
+            _control.Width -= 1;
+
             var bounds = _parentControl.RectangleToScreen(_control.Bounds);
 
             switch (_splitterType)
