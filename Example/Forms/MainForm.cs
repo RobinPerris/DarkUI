@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Example
 {
@@ -57,9 +58,9 @@ namespace Example
             _toolWindows.Add(_dockHistory);
 
             // Deserialize if a previous state is stored
-            if (File.Exists("dockpanel.config"))
+            if (File.Exists("dockpanel.xml"))
             {
-                DeserializeDockPanel("dockpanel.config");
+                DeserializeDockPanel("dockpanel.xml");
             }
             else
             {
@@ -130,7 +131,7 @@ namespace Example
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SerializeDockPanel("dockpanel.config");
+            SerializeDockPanel("dockpanel.xml");
         }
 
         private void DockPanel_ContentAdded(object sender, DockContentEventArgs e)
@@ -199,16 +200,24 @@ namespace Example
 
         private void SerializeDockPanel(string path)
         {
-            var state = DockPanel.GetDockPanelState();
-            SerializerHelper.Serialize(state, path);
+            DockPanelState state = DockPanel.GetDockPanelState();
+
+            var serializer = new XmlSerializer(typeof(DockPanelState));
+            using (var stream = new FileStream(path, FileMode.Create, FileAccess.Write))
+                serializer.Serialize(stream, state);
         }
 
         private void DeserializeDockPanel(string path)
         {
-            var state = SerializerHelper.Deserialize<DockPanelState>(path);
+            DockPanelState state;
+
+            var serializer = new XmlSerializer(typeof(DockPanelState));
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                state = (DockPanelState)serializer.Deserialize(stream);
+
             DockPanel.RestoreDockPanelState(state, GetContentBySerializationKey);
         }
-         
+
         private DarkDockContent GetContentBySerializationKey(string key)
         {
             foreach (var window in _toolWindows)
