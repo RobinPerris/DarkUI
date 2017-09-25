@@ -134,7 +134,6 @@ namespace DarkUI.Docking
 
         public void UpdateBounds()
         {
-            _control.SetBounds(_control.Bounds.X, _control.Bounds.Y, _control.Bounds.Width, _control.Bounds.Height);
             var bounds = _parentControl.RectangleToScreen(_control.Bounds);
 
             switch (_splitterType)
