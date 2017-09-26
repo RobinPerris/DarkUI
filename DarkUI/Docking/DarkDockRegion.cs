@@ -328,7 +328,7 @@ namespace DarkUI.Docking
                             maxSize = group.Width;
                             largestGroup = group;
                         }
-                    if ((largestGroup != null) && (largestGroup.Size.Width > SpaceToCut))
+                    if ((largestGroup != null) && (largestGroup.Size.Width > SpaceToCut) && (largestGroup.Size.Width > largestGroup.MinimumSize.Width))
                     {
                         largestGroup.Size = new Size(largestGroup.Size.Width - SpaceToCut, largestGroup.Size.Height);
                         return true;
