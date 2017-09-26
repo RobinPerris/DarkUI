@@ -88,7 +88,7 @@ namespace DarkUI.Docking
                 Visible = true;
                 CreateSplitter();
             }
-            
+
             PositionGroups();
         }
 
@@ -109,7 +109,7 @@ namespace DarkUI.Docking
                 Visible = true;
                 CreateSplitter();
             }
-            
+
             PositionGroups();
         }
 
@@ -139,7 +139,7 @@ namespace DarkUI.Docking
         public List<DarkDockContent> GetContents()
         {
             var result = new List<DarkDockContent>();
-            
+
             foreach (var group in _groups)
                 result.AddRange(group.GetContents());
 
@@ -263,12 +263,12 @@ namespace DarkUI.Docking
                         restart = false;
                         foreach (var group in _groups)
                         {
-                            if (group.Order == _groups.Count-1)
+                            if (group.Order == _groups.Count - 1)
                                 group.Size = new Size(ClientRectangle.Width, group.Location.Y - ClientRectangle.Height);
                             else
                                 group.Size = new Size(ClientRectangle.Width, group.Height);
                             if (group.Location.Y >= ClientRectangle.Height)
-                                restart = CropLargestGroup(group.MinimumSize.Height);
+                                restart = CropLargestGroup((group.MinimumSize.Height > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
                         }
                     } while (restart);
                     break;
@@ -284,7 +284,7 @@ namespace DarkUI.Docking
                             else
                                 group.Size = new Size(group.Width, ClientRectangle.Height);
                             if (group.Location.X >= ClientRectangle.Width)
-                                restart = CropLargestGroup(group.MinimumSize.Width);
+                                restart = CropLargestGroup((group.MinimumSize.Width > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
                         }
                     } while (restart);
                     break;
@@ -296,7 +296,7 @@ namespace DarkUI.Docking
         {
             DarkDockGroup largestGroup = null;
 
-            if ((_groups.Count <= 1) || (DockArea == DarkDockArea.Document))
+            if ((_groups.Count <= 1) || (SpaceToCut == 0) || (DockArea == DarkDockArea.Document))
                 return false;
 
             int maxSize = 0;
