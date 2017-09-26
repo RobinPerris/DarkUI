@@ -247,6 +247,7 @@ namespace DarkUI.Docking
                 return;
 
             bool restart;
+            var lastGroup = _groups.OrderByDescending(g => g.Order).First();
 
             switch (DockArea)
             {
@@ -268,7 +269,7 @@ namespace DarkUI.Docking
                             if (group.Height <= 0)
                                 group.Size = new Size(ClientRectangle.Width, ((group.MinimumSize.Height > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize));
 
-                            if (group.Order == _groups.Count - 1)
+                            if (group.Order == lastGroup.Order)
                                 group.Size = new Size(ClientRectangle.Width, group.Location.Y - ClientRectangle.Height);
                             else
                                 group.Size = new Size(ClientRectangle.Width, group.Height);
@@ -288,7 +289,7 @@ namespace DarkUI.Docking
                             if (group.Width <= 0)
                                 group.Size = new Size(((group.MinimumSize.Width > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize), ClientRectangle.Height);
 
-                            if (group.Order == _groups.Count - 1)
+                            if (group.Order == lastGroup.Order)
                                 group.Size = new Size(group.Location.X - ClientRectangle.Width, ClientRectangle.Height);
                             else
                                 group.Size = new Size(group.Width, ClientRectangle.Height);
@@ -425,7 +426,7 @@ namespace DarkUI.Docking
             {
                 foreach (var regionGroup in Groups)
                 {
-                    if ((Groups.Count <= 1) || (regionGroup.Order == Groups.Count - 1))
+                    if ((Groups.Count <= 1) || (regionGroup.Order == _groups.OrderByDescending(g => g.Order).First().Order))
                         regionGroup.RemoveSplitter();
                     else
                         regionGroup.CreateSplitter();
