@@ -234,7 +234,7 @@ namespace DarkUI.Docking
             if (_contents.Count > 0)
             {
                 int maxSize = 0;
-                int maxMinSize = 0;
+                int maxMinSize = Consts.ToolWindowHeaderSize;
 
                 switch (DockArea)
                 {
@@ -243,6 +243,9 @@ namespace DarkUI.Docking
 
                     case DarkDockArea.Left:
                     case DarkDockArea.Right:
+                        if (_contents.Count > 1)
+                            maxMinSize += Consts.ToolWindowTabAreaSize;
+
                         foreach (var currContent in _contents)
                         {
                             if (currContent.Size.Height > maxSize)
