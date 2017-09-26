@@ -111,8 +111,13 @@ namespace DarkUI.Win32
                 return;
             }
 
-            var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
-            _activeSplitter.UpdateOverlay(difference);
+            if (_dockPanel.FindForm().RectangleToScreen(_dockPanel.Bounds).Contains(Cursor.Position))
+            {
+                var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
+                _activeSplitter.UpdateOverlay(difference);
+            }
+
+            
         }
 
         #endregion
@@ -136,8 +141,12 @@ namespace DarkUI.Win32
             _dragTimer.Stop();
             _activeSplitter.HideOverlay();
 
-            var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
-            _activeSplitter.Move(difference);
+
+            if (_dockPanel.FindForm().RectangleToScreen(_dockPanel.Bounds).Contains(Cursor.Position))
+            {
+                var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
+                _activeSplitter.Move(difference);
+            }
 
             _isDragging = false;
         }
