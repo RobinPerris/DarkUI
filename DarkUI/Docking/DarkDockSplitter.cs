@@ -111,8 +111,6 @@ namespace DarkUI.Docking
 
         public void Move(Point difference)
         {
-            int newSize = 0;
-
             switch (_splitterType)
             {
                 case DarkSplitterType.Left:
