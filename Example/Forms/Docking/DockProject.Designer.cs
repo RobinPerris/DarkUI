@@ -44,7 +44,7 @@ namespace Example
             this.treeProject.MultiSelect = true;
             this.treeProject.Name = "treeProject";
             this.treeProject.ShowIcons = true;
-            this.treeProject.Size = new System.Drawing.Size(280, 425);
+            this.treeProject.Size = new System.Drawing.Size(200, 175);
             this.treeProject.TabIndex = 0;
             this.treeProject.Text = "darkTreeView1";
             // 
@@ -53,13 +53,12 @@ namespace Example
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.treeProject);
-            this.DefaultDockArea = DarkUI.Docking.DarkDockArea.Left;
             this.DockText = "Project Explorer";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.application_16x;
             this.Name = "DockProject";
             this.SerializationKey = "DockProject";
-            this.Size = new System.Drawing.Size(280, 450);
+            this.Size = new System.Drawing.Size(200, 200);
             this.ResumeLayout(false);
 
         }

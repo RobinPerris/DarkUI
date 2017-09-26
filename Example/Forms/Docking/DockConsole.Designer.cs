@@ -41,7 +41,7 @@ namespace Example
             this.lstConsole.Location = new System.Drawing.Point(0, 25);
             this.lstConsole.MultiSelect = true;
             this.lstConsole.Name = "lstConsole";
-            this.lstConsole.Size = new System.Drawing.Size(500, 175);
+            this.lstConsole.Size = new System.Drawing.Size(200, 175);
             this.lstConsole.TabIndex = 0;
             this.lstConsole.Text = "darkListView1";
             // 
@@ -66,7 +66,7 @@ namespace Example
             this.Icon = global::Example.Icons.Console;
             this.Name = "DockConsole";
             this.SerializationKey = "DockConsole";
-            this.Size = new System.Drawing.Size(500, 200);
+            this.Size = new System.Drawing.Size(200, 200);
             this.ResumeLayout(false);
 
         }

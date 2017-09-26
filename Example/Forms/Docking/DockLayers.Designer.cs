@@ -42,7 +42,7 @@ namespace Example
             this.lstLayers.Location = new System.Drawing.Point(0, 51);
             this.lstLayers.Name = "lstLayers";
             this.lstLayers.ShowIcons = true;
-            this.lstLayers.Size = new System.Drawing.Size(280, 399);
+            this.lstLayers.Size = new System.Drawing.Size(200, 149);
             this.lstLayers.TabIndex = 0;
             this.lstLayers.Text = "darkListView1";
             // 
@@ -52,7 +52,7 @@ namespace Example
             this.cmbList.Location = new System.Drawing.Point(0, 25);
             this.cmbList.Name = "cmbList";
             this.cmbList.ShowBorder = false;
-            this.cmbList.Size = new System.Drawing.Size(280, 26);
+            this.cmbList.Size = new System.Drawing.Size(200, 26);
             this.cmbList.TabIndex = 1;
             this.cmbList.Text = "darkDropdownList1";
             // 
@@ -66,10 +66,9 @@ namespace Example
             this.DockText = "Layers";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.Collection_16xLG;
-            this.MaximumSize = new System.Drawing.Size(0, 217);
             this.Name = "DockLayers";
             this.SerializationKey = "DockLayers";
-            this.Size = new System.Drawing.Size(280, 217);
+            this.Size = new System.Drawing.Size(200, 200);
             this.ResumeLayout(false);
 
         }
