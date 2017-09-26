@@ -294,6 +294,8 @@ namespace DarkUI.Docking
 
         public void RestoreDockPanelState(DockPanelState state, Func<string, DarkDockContent> getContentBySerializationKey)
         {
+            SuspendLayout();
+
             foreach (var region in state.Regions)
             {
                 switch (region.Area)
@@ -346,6 +348,8 @@ namespace DarkUI.Docking
 
                 }
             }
+
+            ResumeLayout();
         }
 
         #endregion
