@@ -88,7 +88,7 @@ namespace DarkUI.Docking
                 Visible = true;
                 CreateSplitter();
             }
-
+            RebuildGroupSplitters();
             PositionGroups();
         }
 
@@ -109,7 +109,7 @@ namespace DarkUI.Docking
                 Visible = true;
                 CreateSplitter();
             }
-
+            RebuildGroupSplitters();
             PositionGroups();
         }
 
@@ -132,7 +132,7 @@ namespace DarkUI.Docking
                 Visible = false;
                 RemoveSplitter();
             }
-
+            RebuildGroupSplitters();
             PositionGroups();
         }
 
@@ -407,6 +407,20 @@ namespace DarkUI.Docking
         {
             if (DockPanel.Splitters.Contains(_splitter))
                 DockPanel.Splitters.Remove(_splitter);
+        }
+
+        private void RebuildGroupSplitters()
+        {
+            if (DockArea != DarkDockArea.Document)
+            {
+                foreach (var regionGroup in Groups)
+                {
+                    if ((Groups.Count <= 1) || (regionGroup.Order == Groups.Count - 1))
+                        regionGroup.RemoveSplitter();
+                    else
+                        regionGroup.CreateSplitter();
+                }
+            }
         }
 
         #endregion

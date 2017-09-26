@@ -110,7 +110,6 @@ namespace DarkUI.Docking
             _tabArea.AddMenuItem(menuItem);
 
             Size = _size;
-            RebuildGroupSplitters();
         }
 
         public void RemoveContent(DarkDockContent dockContent)
@@ -151,7 +150,6 @@ namespace DarkUI.Docking
             _tabArea.RemoveMenuItem(menuItem);
 
             Size = CalculateGroupSize();
-            RebuildGroupSplitters();
         }
 
         public List<DarkDockContent> GetContents()
@@ -199,7 +197,7 @@ namespace DarkUI.Docking
             EnsureVisible();
         }
 
-        private void CreateSplitter()
+        public void CreateSplitter()
         {
             RemoveSplitter();
 
@@ -219,25 +217,12 @@ namespace DarkUI.Docking
             DockPanel.Splitters.Add(_splitter);
         }
 
-        private void RemoveSplitter()
+        public void RemoveSplitter()
         {
             if (_splitter != null && DockPanel.Splitters.Contains(_splitter))
                 DockPanel.Splitters.Remove(_splitter);
         }
 
-        private void RebuildGroupSplitters()
-        {
-            if (DockArea != DarkDockArea.Document)
-            {
-                foreach (var regionGroup in DockRegion.Groups)
-                {
-                    regionGroup.CreateSplitter();
-
-                    if (regionGroup.Order == DockRegion.Groups.Count - 1)
-                        regionGroup.RemoveSplitter();
-                }
-            }
-        }
 
         private Size CalculateGroupSize()
         {
