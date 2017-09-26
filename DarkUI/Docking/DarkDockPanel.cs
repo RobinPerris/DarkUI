@@ -324,26 +324,26 @@ namespace DarkUI.Docking
                             continue;
 
                         content.DockArea = region.Area;
-                        content.Size = group.Size;
 
                         if (previousContent == null)
                             AddContent(content);
                         else
                             AddContent(content, previousContent.DockGroup);
-                        
+
                         previousContent = content;
 
                         if (group.VisibleContent == contentKey)
                         {
                             visibleContent = content;
                         }
-                            
-
-
                     }
 
                     if (visibleContent != null)
+                    {
                         visibleContent.Select();
+                        visibleContent.DockGroup.Size = group.Size;
+                    }
+
                 }
             }
         }
