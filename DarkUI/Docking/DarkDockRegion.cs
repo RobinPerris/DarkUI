@@ -244,54 +244,106 @@ namespace DarkUI.Docking
             if (_groups.Count <= 1)
                 return;
 
-            int freeSpace = 0;
-            int varSizedGroups = 0;
+            bool restart;
 
             switch (DockArea)
             {
                 default:
                 case DarkDockArea.Document:
                     return;
+
+                // At first we try to resize group according to their native size.
+                // If any group is pushed out of screen space by other groups, we try to cut largest group by the minimum size of current one.
+                // If all groups already cut by minimum size, we stop trying.
+
                 case DarkDockArea.Left:
                 case DarkDockArea.Right:
-                    freeSpace = ClientRectangle.Height;
-                    foreach (var group in _groups)
+                    do
                     {
-                        if (group.MinimumSize.Height > 0)
-                            freeSpace = freeSpace - group.MinimumSize.Height;
-                        else
-                            varSizedGroups++;
-                    }
-                    foreach (var group in _groups)
+                        restart = false;
+                        foreach (var group in _groups)
+                        {
+                            if (group.Order == _groups.Count-1)
+                                group.Size = new Size(ClientRectangle.Width, group.Location.Y - ClientRectangle.Height);
+                            else
+                                group.Size = new Size(ClientRectangle.Width, group.Height);
+                            if (group.Location.Y >= ClientRectangle.Height)
+                                restart = CropLargestGroup(group.MinimumSize.Height);
+                        }
+                    } while (restart);
+                    break;
+
+                case DarkDockArea.Bottom:
+                    do
                     {
-                        if (group.MinimumSize.Height > 0)
-                            group.Size = new Size(ClientRectangle.Width, group.MinimumSize.Height);
-                        else
-                            group.Size = new Size(ClientRectangle.Width, freeSpace / varSizedGroups);
+                        restart = false;
+                        foreach (var group in _groups)
+                        {
+                            if (group.Order == _groups.Count - 1)
+                                group.Size = new Size(group.Location.X - ClientRectangle.Width, ClientRectangle.Height);
+                            else
+                                group.Size = new Size(group.Width, ClientRectangle.Height);
+                            if (group.Location.X >= ClientRectangle.Width)
+                                restart = CropLargestGroup(group.MinimumSize.Width);
+                        }
+                    } while (restart);
+                    break;
+            }
+
+        }
+
+        private bool CropLargestGroup(int SpaceToCut)
+        {
+            DarkDockGroup largestGroup = null;
+
+            if ((_groups.Count <= 1) || (DockArea == DarkDockArea.Document))
+                return false;
+
+            int maxSize = 0;
+
+            switch (DockArea)
+            {
+                default:
+                    return false;
+
+                case DarkDockArea.Left:
+                case DarkDockArea.Right:
+                    foreach (var group in _groups)
+                        if (group.Height > maxSize && group.Height > group.MaximumSize.Height)
+                        {
+                            maxSize = group.Height;
+                            largestGroup = group;
+                        }
+                    if((largestGroup != null) && (largestGroup.Size.Height > SpaceToCut) && (largestGroup.Size.Height > largestGroup.MinimumSize.Height))
+                    {
+                        largestGroup.Size = new Size(largestGroup.Size.Width, largestGroup.Size.Height - SpaceToCut);
+                        return true;
                     }
                     break;
+
                 case DarkDockArea.Bottom:
-                    freeSpace = ClientRectangle.Width;
                     foreach (var group in _groups)
+                        if (group.Width > maxSize && group.Width > group.MaximumSize.Width)
+                        {
+                            maxSize = group.Width;
+                            largestGroup = group;
+                        }
+                    if ((largestGroup != null) && (largestGroup.Size.Width > SpaceToCut))
                     {
-                        if (group.MinimumSize.Width > 0)
-                            freeSpace = freeSpace - group.MinimumSize.Width;
-                        else
-                            varSizedGroups++;
-                    }
-                    foreach (var group in _groups)
-                    {
-                        if (group.MinimumSize.Width > 0)
-                            group.Size = new Size(group.MinimumSize.Width, ClientRectangle.Height);
-                        else
-                            group.Size = new Size(freeSpace / varSizedGroups, ClientRectangle.Height);
+                        largestGroup.Size = new Size(largestGroup.Size.Width - SpaceToCut, largestGroup.Size.Height);
+                        return true;
                     }
                     break;
             }
+
+            return false;
         }
 
-        private void SizeGroupSplitters()
+        private void UpdateSplitterBounds()
         {
+            if (_splitter != null)
+                _splitter.UpdateBounds();
+
             if (DockArea != DarkDockArea.Document)
             {
                 foreach (var regionGroup in Groups)
@@ -369,29 +421,15 @@ namespace DarkUI.Docking
             _parentForm.ResizeEnd += ParentForm_ResizeEnd;
         }
 
-        protected override void OnResize(EventArgs eventargs)
-        {
-            base.OnResize(eventargs);
-
-            SizeGroups();
-        }
-
         private void ParentForm_ResizeEnd(object sender, EventArgs e)
         {
-            if (_splitter != null)
-                _splitter.UpdateBounds();
-
-            SizeGroupSplitters();
+            UpdateSplitterBounds();
         }
 
         protected override void OnLayout(LayoutEventArgs e)
         {
             base.OnLayout(e);
-
-            if (_splitter != null)
-                _splitter.UpdateBounds();
-
-            SizeGroupSplitters();
+            UpdateSplitterBounds();
         }
 
         #endregion

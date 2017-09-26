@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace DarkUI.Docking
 {
@@ -10,7 +11,9 @@ namespace DarkUI.Docking
 
         public string VisibleContent { get; set; }
 
-        public int    Order { get; set; }
+        public int Order { get; set; }
+
+        public Size Size { get; set; }
 
         #endregion
 

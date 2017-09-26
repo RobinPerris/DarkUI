@@ -84,6 +84,9 @@ namespace DarkUI.Docking
             }
 
             _contents.Add(dockContent);
+
+            var _size = CalculateGroupSize();
+
             Controls.Add(dockContent);
 
             dockContent.DockTextChanged += DockContent_DockTextChanged;
@@ -106,8 +109,7 @@ namespace DarkUI.Docking
             menuItem.Image = dockContent.Icon;
             _tabArea.AddMenuItem(menuItem);
 
-            UpdateTabArea();
-            UpdateMinimumSize();
+            Size = _size;
             RebuildGroupSplitters();
         }
 
@@ -148,8 +150,7 @@ namespace DarkUI.Docking
             menuItem.Click -= TabMenuItem_Select;
             _tabArea.RemoveMenuItem(menuItem);
 
-            UpdateTabArea();
-            UpdateMinimumSize();
+            Size = CalculateGroupSize();
             RebuildGroupSplitters();
         }
 
@@ -160,9 +161,9 @@ namespace DarkUI.Docking
 
         private void UpdateTabArea()
         {
-            //if (DockArea == DarkDockArea.Document)
-            //    _tabArea.Visible = (_contents.Count > 0);
-            //else
+            if ((DockArea == DarkDockArea.Document) && (Consts.DisableSingleDocumentTab == false))
+                _tabArea.Visible = (_contents.Count > 0);
+            else
                 _tabArea.Visible = (_contents.Count > 1);
 
             var size = 0;
@@ -238,40 +239,53 @@ namespace DarkUI.Docking
             }
         }
 
-        private void UpdateMinimumSize()
+        private Size CalculateGroupSize()
         {
-            // Calculate maximum size among all elements of group.
+            if (DockArea == DarkDockArea.Document)
+                return DockRegion.Size;
+
+                // Calculate maximum size among all elements of group.
 
             if (_contents.Count > 0)
             {
                 int maxSize = 0;
+                int maxMinSize = 0;
+
                 switch (DockArea)
                 {
                     default:
-                    case DarkDockArea.Document:
-                        return;
+                        break;
 
                     case DarkDockArea.Left:
                     case DarkDockArea.Right:
                         foreach (var currContent in _contents)
                         {
-                            if (currContent.MinimumSize.Height > maxSize)
-                                maxSize = currContent.MinimumSize.Height;
+                            if (currContent.Size.Height > maxSize)
+                                maxSize = currContent.Size.Height;
+
+                            if (currContent.MinimumSize.Height > maxMinSize)
+                                maxMinSize = currContent.MinimumSize.Height;
                         }
-                        MinimumSize = new Size(0, maxSize);
-                        break;
+
+                        MinimumSize = new Size(0, maxMinSize);
+                        return new Size(0, maxSize);
 
                     case DarkDockArea.Bottom:
                         foreach (var currContent in _contents)
                         {
-                            if (currContent.MinimumSize.Width > maxSize)
-                                maxSize = currContent.MinimumSize.Width;
-                        }
-                        MinimumSize = new Size(maxSize, 0);
-                        break;
+                            if (currContent.Size.Width > maxSize)
+                                maxSize = currContent.Size.Width;
 
+                            if (currContent.MinimumSize.Width > maxMinSize)
+                                maxMinSize = currContent.MinimumSize.Width;
+                        }
+
+                        MinimumSize = new Size(maxMinSize, 0);
+                        return new Size(maxSize, 0);
                 }
             }
+
+            return new Size(0, 0);
         }
 
         private void BuildTabs()
@@ -484,7 +498,6 @@ namespace DarkUI.Docking
         protected override void OnResize(EventArgs eventargs)
         {
             base.OnResize(eventargs);
-
             UpdateTabArea();
         }
 
