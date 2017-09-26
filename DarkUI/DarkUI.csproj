@@ -53,6 +53,9 @@
     <Compile Include="Controls\DarkComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\DarkGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -212,6 +215,9 @@
     <Compile Include="Win32\WindowsMessages.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\DarkDataGridView.resx">
+      <DependentUpon>DarkDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DarkDialog.resx">
       <DependentUpon>DarkDialog.cs</DependentUpon>
     </EmbeddedResource>
