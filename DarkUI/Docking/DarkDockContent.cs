@@ -56,7 +56,7 @@ namespace DarkUI.Docking
         [Category("Layout")]
         [Description("Determines the default area of the dock panel this content will be added to.")]
         [DefaultValue(DarkDockArea.Document)]
-        public DarkDockArea DefaultDockArea { get; set; }
+        public DarkDockArea DefaultDockArea { get; set; } = DarkDockArea.Left;
 
         [Category("Behavior")]
         [Description("Determines the key used by this content in the dock serialization.")]
