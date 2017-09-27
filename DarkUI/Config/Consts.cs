@@ -14,6 +14,7 @@
         public const int ToolWindowHeaderSize = 25;
         public const int DocumentTabAreaSize = 24;
         public const int ToolWindowTabAreaSize = 21;
+        public const int MinimumRegionSize = 50;
 
         public static bool DisableSingleDocumentTab = true;
     }

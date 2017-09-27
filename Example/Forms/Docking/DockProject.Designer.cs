@@ -56,6 +56,7 @@ namespace Example
             this.DockText = "Project Explorer";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.application_16x;
+            this.MinimumSize = new System.Drawing.Size(150, 150);
             this.Name = "DockProject";
             this.SerializationKey = "DockProject";
             this.Size = new System.Drawing.Size(200, 200);

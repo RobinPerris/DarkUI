@@ -66,6 +66,7 @@ namespace Example
             this.DockText = "Layers";
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Example.Icons.Collection_16xLG;
+            this.MinimumSize = new System.Drawing.Size(200, 200);
             this.Name = "DockLayers";
             this.SerializationKey = "DockLayers";
             this.Size = new System.Drawing.Size(200, 200);
