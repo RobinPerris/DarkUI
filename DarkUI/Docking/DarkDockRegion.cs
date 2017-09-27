@@ -273,11 +273,11 @@ namespace DarkUI.Docking
                         foreach (var group in _groups)
                         {
                             if (group.Location.Y >= ClientRectangle.Height - group.MinimumSize.Height)
-                                restart = CropLargestGroup((group.MinimumSize.Height > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
+                                restart = CropLargestGroup((group.MinimumSize.Height > 0) ? group.MinimumSize.Height : Consts.ToolWindowHeaderSize);
 
                             if (group.Height <= 0)
                                 group.Size = new Size(ClientRectangle.Width, ((group.MinimumSize.Height > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize));
-                            else if (group.Order == lastGroup.Order)
+                            else if ((group.Order == lastGroup.Order) && (group.Location.Y > ClientRectangle.Height))
                                 group.Size = new Size(ClientRectangle.Width, group.Location.Y - ClientRectangle.Height);
                             else
                                 group.Size = new Size(ClientRectangle.Width, group.Height);
@@ -296,7 +296,7 @@ namespace DarkUI.Docking
 
                             if (group.Width <= 0)
                                 group.Size = new Size(((group.MinimumSize.Width > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize), ClientRectangle.Height);
-                            else if (group.Order == lastGroup.Order)
+                            else if ((group.Order == lastGroup.Order) && (group.Location.X > ClientRectangle.Width))
                                 group.Size = new Size(group.Location.X - ClientRectangle.Width, ClientRectangle.Height);
                             else
                                 group.Size = new Size(group.Width, ClientRectangle.Height);
@@ -324,7 +324,7 @@ namespace DarkUI.Docking
                 case DarkDockArea.Left:
                 case DarkDockArea.Right:
                     foreach (var group in _groups)
-                        if (group.Height > maxSize && group.Height > group.MaximumSize.Height)
+                        if (group.Height > maxSize && group.Height > group.MinimumSize.Height)
                         {
                             maxSize = group.Height;
                             largestGroup = group;
@@ -338,7 +338,7 @@ namespace DarkUI.Docking
 
                 case DarkDockArea.Bottom:
                     foreach (var group in _groups)
-                        if (group.Width > maxSize && group.Width > group.MaximumSize.Width)
+                        if (group.Width > maxSize && group.Width > group.MinimumSize.Width)
                         {
                             maxSize = group.Width;
                             largestGroup = group;
