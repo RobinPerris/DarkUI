@@ -197,6 +197,9 @@ namespace DarkUI.Docking
 
                     break;
             }
+
+            DropArea = Rectangle.Intersect(DropArea, DockPanel.ParentForm.Bounds);
+            HighlightArea = Rectangle.Intersect(HighlightArea, DockPanel.ParentForm.Bounds);
         }
 
         #endregion

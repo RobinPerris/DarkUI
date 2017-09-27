@@ -84,14 +84,13 @@ namespace DarkUI.Docking
             }
 
             _contents.Add(dockContent);
+            _tabs.Add(dockContent, new DarkDockTab(dockContent));
 
             var _size = CalculateGroupSize();
 
             Controls.Add(dockContent);
 
             dockContent.DockTextChanged += DockContent_DockTextChanged;
-
-            _tabs.Add(dockContent, new DarkDockTab(dockContent));
 
             if (VisibleContent == null)
             {

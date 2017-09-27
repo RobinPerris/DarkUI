@@ -157,6 +157,9 @@ namespace DarkUI.Win32
 
         private void HandleDrag()
         {
+            if (!_dockPanel.FindForm().RectangleToScreen(_dockPanel.Bounds).Contains(Cursor.Position))
+                return;
+
             var location = Cursor.Position;
 
             _insertType = DockInsertType.None;
