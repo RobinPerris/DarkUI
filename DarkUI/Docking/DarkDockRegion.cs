@@ -272,15 +272,15 @@ namespace DarkUI.Docking
                         restart = false;
                         foreach (var group in _groups)
                         {
+                            if (group.Location.Y >= ClientRectangle.Height - group.MinimumSize.Height)
+                                restart = CropLargestGroup((group.MinimumSize.Height > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
+
                             if (group.Height <= 0)
                                 group.Size = new Size(ClientRectangle.Width, ((group.MinimumSize.Height > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize));
                             else if (group.Order == lastGroup.Order)
                                 group.Size = new Size(ClientRectangle.Width, group.Location.Y - ClientRectangle.Height);
                             else
                                 group.Size = new Size(ClientRectangle.Width, group.Height);
-
-                            if (group.Location.Y >= ClientRectangle.Height)
-                                restart = CropLargestGroup((group.MinimumSize.Height > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
                         }
                     } while (restart);
                     break;
@@ -291,15 +291,15 @@ namespace DarkUI.Docking
                         restart = false;
                         foreach (var group in _groups)
                         {
+                            if (group.Location.X >= ClientRectangle.Width - group.MinimumSize.Width)
+                                restart = CropLargestGroup((group.MinimumSize.Width > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
+
                             if (group.Width <= 0)
                                 group.Size = new Size(((group.MinimumSize.Width > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize), ClientRectangle.Height);
                             else if (group.Order == lastGroup.Order)
                                 group.Size = new Size(group.Location.X - ClientRectangle.Width, ClientRectangle.Height);
                             else
                                 group.Size = new Size(group.Width, ClientRectangle.Height);
-
-                            if (group.Location.X >= ClientRectangle.Width)
-                                restart = CropLargestGroup((group.MinimumSize.Width > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
                         }
                     } while (restart);
                     break;
