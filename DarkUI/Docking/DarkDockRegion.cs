@@ -370,14 +370,14 @@ namespace DarkUI.Docking
                 case DarkDockArea.Right:
                     foreach (var group in _groups)
                         if (minRegionSize < group.MinimumSize.Width)
-                            minRegionSize = group.MinimumSize.Width;
+                            minRegionSize = group.MinimumSize.Width + 2;
                     MinimumSize = new Size(minRegionSize, 0);
                     break;
 
                 case DarkDockArea.Bottom:
                     foreach (var group in _groups)
                         if (minRegionSize < group.MinimumSize.Height)
-                            minRegionSize = group.MinimumSize.Height;
+                            minRegionSize = group.MinimumSize.Height + 2;
                     if (_groups.Count > 1)
                         minRegionSize += Consts.ToolWindowTabAreaSize;
                     MinimumSize = new Size(0, minRegionSize);
