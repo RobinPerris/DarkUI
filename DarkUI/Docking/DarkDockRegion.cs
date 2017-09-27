@@ -378,6 +378,8 @@ namespace DarkUI.Docking
                     foreach (var group in _groups)
                         if (minRegionSize < group.MinimumSize.Height)
                             minRegionSize = group.MinimumSize.Height;
+                    if (_groups.Count > 1)
+                        minRegionSize += Consts.ToolWindowTabAreaSize;
                     MinimumSize = new Size(0, minRegionSize);
                     break;
             }
