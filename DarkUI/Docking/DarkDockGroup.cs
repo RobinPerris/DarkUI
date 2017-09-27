@@ -109,6 +109,8 @@ namespace DarkUI.Docking
             _tabArea.AddMenuItem(menuItem);
 
             Size = _size;
+
+            UpdateTabArea();
         }
 
         public void RemoveContent(DarkDockContent dockContent)
@@ -149,6 +151,8 @@ namespace DarkUI.Docking
             _tabArea.RemoveMenuItem(menuItem);
 
             Size = CalculateGroupSize();
+
+            UpdateTabArea();
         }
 
         public List<DarkDockContent> GetContents()
