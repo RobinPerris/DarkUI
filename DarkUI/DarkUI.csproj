@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Collections\ObservableList.cs" />
     <Compile Include="Collections\ObservableListModified.cs" />
+    <Compile Include="Collections\SortableBindingList.cs" />
     <Compile Include="Config\Colors.cs" />
     <Compile Include="Config\Consts.cs" />
     <Compile Include="Controls\DarkButtonStyle.cs" />
