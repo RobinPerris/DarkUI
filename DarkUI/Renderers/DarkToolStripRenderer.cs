@@ -164,39 +164,26 @@ namespace DarkUI.Renderers
 
         protected override void OnRenderOverflowButtonBackground(ToolStripItemRenderEventArgs e)
         {
-            /*var g = e.Graphics;
+            var g = e.Graphics;
 
-            var rect = new Rectangle(1, 0, e.Item.Width - 5, e.Item.Height);
+            var rect = new Rectangle(0, 2, e.Item.Width - 3, e.Item.Height - 5);
 
             var castItem = (ToolStripOverflowButton)e.Item;
 
-            var bgColor = BasicColors.White;
+            Color bgColor = Colors.GreyBackground;
             if (castItem.Selected)
-                bgColor = StyleColors.Weak(style);
+                bgColor = Colors.LighterBackground;
             if (castItem.Pressed)
-                bgColor = StyleColors.Medium(style);
+                bgColor = Colors.GreyBackground;
 
             using (var b = new SolidBrush(bgColor))
             {
                 g.FillRectangle(b, rect);
             }
 
-            var fgColor = BasicColors.Grey;
-            if (castItem.Selected)
-                fgColor = StyleColors.Medium(style);
-            if (castItem.Pressed)
-                fgColor = StyleColors.Strong(style);
-
-            using (var p = new Pen(fgColor))
-            {
-                var modRect = new Rectangle(1, 0, e.Item.Width - 6, e.Item.Height - 1);
-                g.DrawRectangle(p, modRect);
-            }
-
-            using (var img = MenuIcons.overflow.SetColor(BasicColors.MediumGrey))
-            {
-                g.DrawImageUnscaled(img, e.Item.Width - 13, e.Item.Height - 9);
-            }*/
+            g.DrawImageUnscaled(ScrollIcons.scrollbar_arrow_hot,
+                e.Item.Width / 2 - ScrollIcons.scrollbar_arrow_hot.Width  / 2 - 2,
+                e.Item.Height/ 2 - ScrollIcons.scrollbar_arrow_hot.Height / 2 - 1);
         }
 
         #endregion
