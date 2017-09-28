@@ -296,7 +296,7 @@ namespace DarkUI.Docking
         {
             SuspendLayout();
 
-            foreach (var region in state.Regions)
+            foreach (var region in state.Regions.OrderByDescending(r => r.Area))
             {
                 switch (region.Area)
                 {
