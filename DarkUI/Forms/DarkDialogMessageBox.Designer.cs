@@ -2,7 +2,7 @@
 
 namespace DarkUI.Forms
 {
-    partial class DarkMessageBox
+    partial class DarkDialogMessageBox
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace DarkUI.Forms
         private void InitializeComponent()
         {
             this.picIcon = new System.Windows.Forms.PictureBox();
-            this.lblText = new DarkLabel();
+            this.lblText = new DarkUI.Controls.DarkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,17 +56,17 @@ namespace DarkUI.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 86);
+            this.ClientSize = new System.Drawing.Size(452, 130);
             this.Controls.Add(this.lblText);
             this.Controls.Add(this.picIcon);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DarkMessageBox";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Message box";
             this.Controls.SetChildIndex(this.picIcon, 0);
             this.Controls.SetChildIndex(this.lblText, 0);

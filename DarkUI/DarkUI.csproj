@@ -162,17 +162,16 @@
     <Compile Include="Forms\DarkDialog.Designer.cs">
       <DependentUpon>DarkDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DarkDialogButton.cs" />
     <Compile Include="Forms\DarkForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DarkMessageBox.cs">
+    <Compile Include="Forms\DarkDialogMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DarkMessageBox.Designer.cs">
-      <DependentUpon>DarkMessageBox.cs</DependentUpon>
+    <Compile Include="Forms\DarkDialogMessageBox.Designer.cs">
+      <DependentUpon>DarkDialogMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DarkMessageBoxIcon.cs" />
+    <Compile Include="Forms\DarkMessageBox.cs" />
     <Compile Include="Forms\DarkTranslucentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,8 +221,8 @@
     <EmbeddedResource Include="Forms\DarkDialog.resx">
       <DependentUpon>DarkDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DarkMessageBox.resx">
-      <DependentUpon>DarkMessageBox.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DarkDialogMessageBox.resx">
+      <DependentUpon>DarkDialogMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\DockIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -330,6 +329,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\scrollbar_disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
