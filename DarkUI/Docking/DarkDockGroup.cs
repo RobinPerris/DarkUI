@@ -673,21 +673,13 @@ namespace DarkUI.Docking
 
         private void DockPanel_ActiveContentChanged(object sender, DockContentEventArgs e)
         {
-            if (!_contents.Contains(e.Content))
+            if (e.Content == VisibleContent || !_contents.Contains(e.Content))
                 return;
-
-            if (e.Content == VisibleContent)
-            {
-                VisibleContent.Focus();
-                return;
-            }
 
             VisibleContent = e.Content;
 
             foreach (var content in _contents)
                 content.Visible = content == VisibleContent;
-
-            VisibleContent.Focus();
 
             EnsureVisible();
             Invalidate();
