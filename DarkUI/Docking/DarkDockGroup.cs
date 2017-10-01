@@ -208,10 +208,10 @@ namespace DarkUI.Docking
             {
                 case DarkDockArea.Left:
                 case DarkDockArea.Right:
-                    _splitter = new DarkDockSplitter(DockRegion, this, DarkSplitterType.Bottom);
+                    _splitter = new DarkDockSplitter(DockRegion, this, DarkSplitterType.Bottom, DarkSplitterMode.Group);
                     break;
                 case DarkDockArea.Bottom:
-                    _splitter = new DarkDockSplitter(DockRegion, this, DarkSplitterType.Right);
+                    _splitter = new DarkDockSplitter(DockRegion, this, DarkSplitterType.Right, DarkSplitterMode.Group);
                     break;
                 default:
                     return;

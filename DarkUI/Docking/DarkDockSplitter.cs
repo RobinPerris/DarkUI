@@ -12,8 +12,6 @@ namespace DarkUI.Docking
         private Control _parentControl;
         private Control _control;
 
-        private DarkSplitterType _splitterType;
-
         private int _minimum;
         private int _maximum;
         private DarkTranslucentForm _overlayForm;
@@ -21,6 +19,9 @@ namespace DarkUI.Docking
         #endregion
 
         #region Property Region
+
+        public DarkSplitterMode SplitterMode { get; private set; }
+        public DarkSplitterType SplitterType { get; private set; }
 
         public Rectangle Bounds { get; set; }
 
@@ -30,13 +31,14 @@ namespace DarkUI.Docking
 
         #region Constructor Region
 
-        public DarkDockSplitter(Control parentControl, Control control, DarkSplitterType splitterType)
+        public DarkDockSplitter(Control parentControl, Control control, DarkSplitterType splitterType, DarkSplitterMode splitterMode)
         {
             _parentControl = parentControl;
             _control = control;
-            _splitterType = splitterType;
+            SplitterType = splitterType;
+            SplitterMode = splitterMode;
 
-            switch (_splitterType)
+            switch (SplitterType)
             {
                 case DarkSplitterType.Left:
                 case DarkSplitterType.Right:
@@ -70,7 +72,7 @@ namespace DarkUI.Docking
         {
             var bounds = new Rectangle(Bounds.Location, Bounds.Size);
 
-            switch (_splitterType)
+            switch (SplitterType)
             {
                 case DarkSplitterType.Left:
                     var leftX = Math.Max(bounds.Location.X - difference.X, _minimum);
@@ -111,7 +113,7 @@ namespace DarkUI.Docking
 
         public void Move(Point difference)
         {
-            switch (_splitterType)
+            switch (SplitterType)
             {
                 case DarkSplitterType.Left:
                     _control.SetBounds(_control.Bounds.X - difference.X, _control.Bounds.Y, _control.Bounds.Width + difference.X, _control.Bounds.Height);
@@ -134,7 +136,7 @@ namespace DarkUI.Docking
         {
             var bounds = _parentControl.RectangleToScreen(_control.Bounds);
 
-            switch (_splitterType)
+            switch (SplitterType)
             {
                 case DarkSplitterType.Left:
                     Bounds = new Rectangle(bounds.Left - 2, bounds.Top, 5, bounds.Height);

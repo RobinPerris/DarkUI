@@ -1,4 +1,5 @@
-﻿using DarkUI.Docking;
+﻿using DarkUI.Config;
+using DarkUI.Docking;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -111,13 +112,8 @@ namespace DarkUI.Win32
                 return;
             }
 
-            if (_dockPanel.ParentForm.RectangleToScreen(_dockPanel.Bounds).Contains(Cursor.Position))
-            {
-                var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
-                _activeSplitter.UpdateOverlay(difference);
-            }
-
-            
+            if (CursorInDockPanel())
+                _activeSplitter.UpdateOverlay(SplitterDifference());
         }
 
         #endregion
@@ -141,12 +137,8 @@ namespace DarkUI.Win32
             _dragTimer.Stop();
             _activeSplitter.HideOverlay();
 
-
-            if (_dockPanel.FindForm().RectangleToScreen(_dockPanel.Bounds).Contains(Cursor.Position))
-            {
-                var difference = new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
-                _activeSplitter.Move(difference);
-            }
+            if(CursorInDockPanel())
+                _activeSplitter.Move(SplitterDifference());
 
             _isDragging = false;
         }
@@ -176,6 +168,60 @@ namespace DarkUI.Win32
         {
             Cursor.Current = Cursors.Default;
             CheckCursor();
+        }
+
+        private bool CursorInDockPanel()
+        {
+            return _dockPanel.RectangleToScreen(_dockPanel.Bounds).Contains(Cursor.Position);
+        }
+
+        private Point SplitterDifference()
+        {
+            if(_activeSplitter.SplitterMode == DarkSplitterMode.Region)
+            {
+                Rectangle OppositeRegion;
+                Point MaxPoint;
+
+                switch (_activeSplitter.SplitterType)
+                {
+                    default:
+                    case DarkSplitterType.Right:
+                        OppositeRegion = _dockPanel.Regions[DarkDockArea.Right].Bounds;
+                        OppositeRegion.X -= Consts.MinimumRegionSize;
+                        OppositeRegion.Width += Consts.MinimumRegionSize + _dockPanel.Regions[DarkDockArea.Right].Margin.Right;
+                        MaxPoint = new Point(OppositeRegion.X, 0);
+                        break;
+
+                    case DarkSplitterType.Left:
+                        OppositeRegion = _dockPanel.Regions[DarkDockArea.Left].Bounds;
+                        OppositeRegion.X -= _dockPanel.Regions[DarkDockArea.Left].Margin.Left;
+                        OppositeRegion.Width += Consts.MinimumRegionSize;
+                        MaxPoint = new Point(OppositeRegion.X + OppositeRegion.Width, 0);
+                        break;
+
+                    case DarkSplitterType.Top:
+                        OppositeRegion = _dockPanel.Regions[DarkDockArea.Document].Bounds;
+                        OppositeRegion.Y -= _dockPanel.Regions[DarkDockArea.Document].Margin.Top;
+                        OppositeRegion.Height = Consts.MinimumRegionSize;
+                        MaxPoint = new Point(0, OppositeRegion.Y + OppositeRegion.Height);
+                        break;
+
+                    case DarkSplitterType.Bottom:
+                        OppositeRegion = _dockPanel.Regions[DarkDockArea.Bottom].Bounds;
+                        OppositeRegion.Y += OppositeRegion.Height - Consts.MinimumRegionSize;
+                        OppositeRegion.Height += Consts.MinimumRegionSize + _dockPanel.Regions[DarkDockArea.Bottom].Margin.Bottom;
+                        MaxPoint = new Point(0, OppositeRegion.Y);
+                        break;
+                }
+
+                if(_dockPanel.ParentForm.RectangleToScreen(OppositeRegion).Contains(Cursor.Position))
+                {
+                    MaxPoint = _dockPanel.ParentForm.PointToScreen(MaxPoint);
+                    return new Point(_initialContact.X - MaxPoint.X, _initialContact.Y - MaxPoint.Y);
+                }
+            }
+
+            return new Point(_initialContact.X - Cursor.Position.X, _initialContact.Y - Cursor.Position.Y);
         }
 
         #endregion

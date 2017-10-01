@@ -442,13 +442,13 @@ namespace DarkUI.Docking
             switch (DockArea)
             {
                 case DarkDockArea.Left:
-                    _splitter = new DarkDockSplitter(DockPanel, this, DarkSplitterType.Right);
+                    _splitter = new DarkDockSplitter(DockPanel, this, DarkSplitterType.Right, DarkSplitterMode.Region);
                     break;
                 case DarkDockArea.Right:
-                    _splitter = new DarkDockSplitter(DockPanel, this, DarkSplitterType.Left);
+                    _splitter = new DarkDockSplitter(DockPanel, this, DarkSplitterType.Left, DarkSplitterMode.Region);
                     break;
                 case DarkDockArea.Bottom:
-                    _splitter = new DarkDockSplitter(DockPanel, this, DarkSplitterType.Top);
+                    _splitter = new DarkDockSplitter(DockPanel, this, DarkSplitterType.Top, DarkSplitterMode.Region);
                     break;
                 default:
                     return;

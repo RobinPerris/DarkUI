@@ -7,4 +7,10 @@
         Top,
         Bottom
     }
+
+    public enum DarkSplitterMode
+    {
+        Region,
+        Group
+    }
 }
