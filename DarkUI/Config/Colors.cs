@@ -108,5 +108,15 @@ namespace DarkUI.Config
         {
             get { return Color.FromArgb(159, 178, 196); }
         }
+
+        public static Color MenuItemToggledOnFill
+        {
+            get { return Color.FromArgb(105, 84, 69); }
+        }
+
+        public static Color MenuItemToggledOnBorder
+        {
+            get { return Color.FromArgb(225, 128, 68); }
+        }
     }
 }

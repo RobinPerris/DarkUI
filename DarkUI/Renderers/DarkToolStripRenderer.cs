@@ -68,18 +68,18 @@ namespace DarkUI.Renderers
                 }
             }
 
-            if (e.Item.GetType() == typeof(ToolStripButton))
+            if (e.Item is ToolStripButton)
             {
                 var castItem = (ToolStripButton)e.Item;
 
                 if (castItem.Checked)
                 {
-                    using (var b = new SolidBrush(Color.FromArgb(80, 72, 69)))
+                    using (var b = new SolidBrush(Colors.MenuItemToggledOnFill))
                     {
                         g.FillRectangle(b, rect);
                     }
 
-                    using (var p = new Pen(Color.FromArgb(225, 128, 68)))
+                    using (var p = new Pen(Colors.MenuItemToggledOnBorder))
                     {
                         var modRect = new Rectangle(rect.Left, rect.Top, rect.Width - 1, rect.Height - 1);
                         g.DrawRectangle(p, modRect);
@@ -121,7 +121,7 @@ namespace DarkUI.Renderers
 
             using (var img = MenuIcons.grip.SetColor(Colors.LightBorder))
             {
-                g.DrawImageUnscaled(img, new Point(e.AffectedBounds.Left, e.AffectedBounds.Top));
+                g.DrawImage(img, new Point(e.AffectedBounds.Left, e.AffectedBounds.Top));
             }
         }
 
@@ -156,10 +156,13 @@ namespace DarkUI.Renderers
             if (e.Image == null)
                 return;
 
-            if (e.Item.Enabled)
-                g.DrawImageUnscaled(e.Image, new Point(e.ImageRectangle.Left, e.ImageRectangle.Top));
-            else
-                ControlPaint.DrawImageDisabled(g, e.Image, e.ImageRectangle.Left, e.ImageRectangle.Top, Color.Transparent);
+            g.DrawImage(e.Image, new Point(e.ImageRectangle.Left, e.ImageRectangle.Top));
+            if (!e.Item.Enabled)
+                using (var b = new SolidBrush(Color.FromArgb(180, e.Item.BackColor.R, e.Item.BackColor.G, e.Item.BackColor.B)))
+                    g.FillRectangle(b, e.ImageRectangle);
+
+            // Doesn't work well
+            // ControlPaint.DrawImageDisabled(g, e.Image, e.ImageRectangle.Left, e.ImageRectangle.Top, Color.Transparent);
         }
 
         protected override void OnRenderOverflowButtonBackground(ToolStripItemRenderEventArgs e)
@@ -181,7 +184,7 @@ namespace DarkUI.Renderers
                 g.FillRectangle(b, rect);
             }
 
-            g.DrawImageUnscaled(ScrollIcons.scrollbar_arrow_hot,
+            g.DrawImage(ScrollIcons.scrollbar_arrow_hot,
                 e.Item.Width / 2 - ScrollIcons.scrollbar_arrow_hot.Width  / 2 - 2,
                 e.Item.Height/ 2 - ScrollIcons.scrollbar_arrow_hot.Height / 2 - 1);
         }
