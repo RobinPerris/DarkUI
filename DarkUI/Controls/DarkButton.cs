@@ -396,7 +396,7 @@ namespace DarkUI.Controls
                         break;
                 }
 
-                //g.DrawImageUnscaled(Image, x, y);
+                //g.DrawImage(Image, x, y);
                 g.DrawImage(Image, new Rectangle(x, y, Image.Width, Image.Height));
             }
 

@@ -202,7 +202,7 @@ namespace DarkUI.Controls
             {
                 bufferGraphics.Clear(BackColor);
                 bufferGraphics.FillRectangle(mButtonBrush, mButtonRect);
-                bufferGraphics.DrawImageUnscaled(mButtonIcon, mButtonIconRect);
+                bufferGraphics.DrawImage(mButtonIcon, mButtonIconRect);
                 ControlPaint.DrawBorder(bufferGraphics, ClientRectangle, mBorderColor, ButtonBorderStyle.Solid);
             }
 
@@ -269,8 +269,8 @@ namespace DarkUI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.DrawImageUnscaled(mDrawBuffer, Point.Empty);
-            e.Graphics.DrawImageUnscaled(mDrawTextBuffer, Point.Empty);
+            e.Graphics.DrawImage(mDrawBuffer, Point.Empty);
+            e.Graphics.DrawImage(mDrawTextBuffer, Point.Empty);
             if (DesignMode && Items.Count > 0 && Text != Items[0].ToString()) Text = Items[0].ToString();
         }
 

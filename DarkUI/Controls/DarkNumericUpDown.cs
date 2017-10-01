@@ -88,7 +88,7 @@ namespace DarkUI.Controls
 
             upIcon.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
-            e.Graphics.DrawImageUnscaled(upIcon,upRect);
+            e.Graphics.DrawImage(upIcon,upRect);
 
             // Down arrow
             var downIcon = ScrollIcons.scrollbar_arrow_standard;
@@ -98,7 +98,7 @@ namespace DarkUI.Controls
             if (mouseDown && downRect.Contains(mousePos))
                 downIcon = ScrollIcons.scrollbar_arrow_clicked;
 
-            e.Graphics.DrawImageUnscaled(downIcon, downRect);
+            e.Graphics.DrawImage(downIcon, downRect);
 
             scrollButtons = upDownRect;
         }

@@ -499,7 +499,7 @@ namespace DarkUI.Controls
             else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
                 upIcon.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
-            g.DrawImageUnscaled(upIcon,
+            g.DrawImage(upIcon,
                                 _upArrowArea.Left + (_upArrowArea.Width / 2) - (upIcon.Width / 2),
                                 _upArrowArea.Top + (_upArrowArea.Height / 2) - (upIcon.Height / 2));
 
@@ -515,7 +515,7 @@ namespace DarkUI.Controls
             if (_scrollOrientation == DarkScrollOrientation.Horizontal)
                 downIcon.RotateFlip(RotateFlipType.Rotate270FlipNone);
 
-            g.DrawImageUnscaled(downIcon,
+            g.DrawImage(downIcon,
                                 _downArrowArea.Left + (_downArrowArea.Width / 2) - (downIcon.Width / 2),
                                 _downArrowArea.Top + (_downArrowArea.Height / 2) - (downIcon.Height / 2));
 

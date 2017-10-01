@@ -448,7 +448,7 @@ namespace DarkUI.Controls
             // Draw dropdown arrow
             using (var img = DropdownIcons.small_arrow)
             {
-                g.DrawImageUnscaled(img, ClientRectangle.Right - img.Width - 4, ClientRectangle.Top + (ClientRectangle.Height / 2) - (img.Height / 2));
+                g.DrawImage(img, ClientRectangle.Right - img.Width - 4, ClientRectangle.Top + (ClientRectangle.Height / 2) - (img.Height / 2));
             }
 
             // Draw selected item
@@ -459,7 +459,7 @@ namespace DarkUI.Controls
 
                 if (hasIcon)
                 {
-                    g.DrawImageUnscaled(SelectedItem.Icon, new Point(ClientRectangle.Left + 5, ClientRectangle.Top + (ClientRectangle.Height / 2) - (_iconSize / 2)));
+                    g.DrawImage(SelectedItem.Icon, new Point(ClientRectangle.Left + 5, ClientRectangle.Top + (ClientRectangle.Height / 2) - (_iconSize / 2)));
                 }
 
                 // Draw Text

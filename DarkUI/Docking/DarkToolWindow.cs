@@ -192,7 +192,7 @@ namespace DarkUI.Docking
             // Draw icon
             if (Icon != null)
             {
-                g.DrawImageUnscaled(Icon, ClientRectangle.Left + 5, ClientRectangle.Top + (Consts.ToolWindowHeaderSize / 2) - (Icon.Height / 2) + 1);
+                g.DrawImage(Icon, ClientRectangle.Left + 5, ClientRectangle.Top + (Consts.ToolWindowHeaderSize / 2) - (Icon.Height / 2) + 1);
                 xOffset = Icon.Width + 8;
             }
 
@@ -218,7 +218,7 @@ namespace DarkUI.Docking
             if (isActive)
                 img = _closeButtonHot ? DockIcons.tw_active_close_selected : DockIcons.tw_active_close;
 
-            g.DrawImageUnscaled(img, _closeButtonRect.Left, _closeButtonRect.Top);
+            g.DrawImage(img, _closeButtonRect.Left, _closeButtonRect.Top);
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)

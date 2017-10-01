@@ -1237,16 +1237,16 @@ namespace DarkUI.Controls
                 else if (!node.Expanded && node.ExpandAreaHot && SelectedNodes.Contains(node))
                     icon = _nodeClosedHoverSelected;
 
-                g.DrawImageUnscaled(icon, pos);
+                g.DrawImage(icon, pos);
             }
 
             // 3. Draw icon
             if (ShowIcons && node.Icon != null)
             {
                 if (node.Expanded && node.ExpandedIcon != null)
-                    g.DrawImageUnscaled(node.ExpandedIcon, node.IconArea.Location);
+                    g.DrawImage(node.ExpandedIcon, node.IconArea.Location);
                 else
-                    g.DrawImageUnscaled(node.Icon, node.IconArea.Location);
+                    g.DrawImage(node.Icon, node.IconArea.Location);
             }
 
             // 4. Draw text

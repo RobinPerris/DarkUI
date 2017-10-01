@@ -536,7 +536,7 @@ namespace DarkUI.Controls
                 // Icon
                 if (ShowIcons && Items[i].Icon != null)
                 {
-                    g.DrawImageUnscaled(Items[i].Icon, new Point(rect.Left + 5, rect.Top + (rect.Height / 2) - (_iconSize / 2)));
+                    g.DrawImage(Items[i].Icon, new Point(rect.Left + 5, rect.Top + (rect.Height / 2) - (_iconSize / 2)));
                 }
 
                 // Text

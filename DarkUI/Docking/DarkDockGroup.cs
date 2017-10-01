@@ -748,7 +748,7 @@ namespace DarkUI.Docking
 
                 using (var img = DockIcons.arrow)
                 {
-                    g.DrawImageUnscaled(img, dropdownRect.Left + (dropdownRect.Width / 2) - (img.Width / 2), dropdownRect.Top + (dropdownRect.Height / 2) - (img.Height / 2) + 1);
+                    g.DrawImage(img, dropdownRect.Left + (dropdownRect.Width / 2) - (img.Width / 2), dropdownRect.Top + (dropdownRect.Height / 2) - (img.Height / 2) + 1);
                 }
             }
         }
@@ -787,7 +787,7 @@ namespace DarkUI.Docking
             // Draw icon
             if (tab.DockContent.Icon != null)
             {
-                g.DrawImageUnscaled(tab.DockContent.Icon, tabRect.Left + 5, tabRect.Top + 4);
+                g.DrawImage(tab.DockContent.Icon, tabRect.Left + 5, tabRect.Top + 4);
                 xOffset += tab.DockContent.Icon.Width + 2;
             }
 
@@ -819,7 +819,7 @@ namespace DarkUI.Docking
             }
 
             var closeRect = RectangleToTabArea(tab.CloseButtonRectangle);
-            g.DrawImageUnscaled(img, closeRect.Left, closeRect.Top);
+            g.DrawImage(img, closeRect.Left, closeRect.Top);
         }
 
         private void PaintToolWindowTab(Graphics g, DarkDockTab tab)
