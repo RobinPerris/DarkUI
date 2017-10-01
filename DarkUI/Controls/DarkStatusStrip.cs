@@ -1,5 +1,7 @@
 ﻿using DarkUI.Config;
+using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DarkUI.Controls
@@ -43,5 +45,23 @@ namespace DarkUI.Controls
         }
 
         #endregion
+
+        [Browsable(true)]
+        [DefaultValue(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        public override bool AutoSize
+        {
+            get { return base.AutoSize; }
+            set { base.AutoSize = value; }
+        }
+
+        [DefaultValue(false)]
+        [IODescription("StatusStripSizingGripDescr")]
+        public new bool SizingGrip
+        {
+            get { return base.SizingGrip; }
+            set { base.SizingGrip = value; }
+        }
     }
 }
