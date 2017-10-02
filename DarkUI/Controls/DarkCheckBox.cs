@@ -286,6 +286,27 @@ namespace DarkUI.Controls
             var borderColor = Colors.LightText;
             var fillColor = Colors.LightestBackground;
 
+            Rectangle boxRect, checkBoxRect, labelRect;
+            StringAlignment labelAlignment;
+
+            switch(CheckAlign)
+            {
+                case ContentAlignment.MiddleRight:
+                    boxRect = new Rectangle(rect.Width - size - 2, (rect.Height / 2) - (size / 2), size, size);
+                    checkBoxRect = new Rectangle(rect.Width - size, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
+                    labelRect = new Rectangle(0, 0, rect.Width - size - 5, rect.Height);
+                    labelAlignment = StringAlignment.Far;
+                    break;
+
+                case ContentAlignment.MiddleLeft:
+                default:
+                    boxRect = new Rectangle(0, (rect.Height / 2) - (size / 2), size, size);
+                    checkBoxRect = new Rectangle(2, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
+                    labelRect = new Rectangle(size + 4, 0, rect.Width - size, rect.Height);
+                    labelAlignment = StringAlignment.Near;
+                    break;
+            }
+
             if (Enabled)
             {
                 if (Focused)
@@ -320,13 +341,6 @@ namespace DarkUI.Controls
 
             using (var p = new Pen(borderColor))
             {
-                Rectangle boxRect;
-
-                if(CheckAlign == ContentAlignment.MiddleRight)
-                    boxRect = new Rectangle(rect.Width - size - 2, (rect.Height / 2) - (size / 2), size, size);
-                else
-                    boxRect = new Rectangle(0, (rect.Height / 2) - (size / 2), size, size);
-
                 g.DrawRectangle(p, boxRect);
             }
 
@@ -334,14 +348,7 @@ namespace DarkUI.Controls
             {
                 using (var b = new SolidBrush(fillColor))
                 {
-                    Rectangle boxRect;
-
-                    if (CheckAlign == ContentAlignment.MiddleRight)
-                        boxRect = new Rectangle(rect.Width - size, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
-                    else
-                        boxRect = new Rectangle(2, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
-
-                    g.FillRectangle(b, boxRect);
+                    g.FillRectangle(b, checkBoxRect);
                 }
             }
 
@@ -350,17 +357,10 @@ namespace DarkUI.Controls
                 var stringFormat = new StringFormat
                 {
                     LineAlignment = StringAlignment.Center,
-                    Alignment = (CheckAlign == ContentAlignment.MiddleRight) ? StringAlignment.Far : StringAlignment.Near
+                    Alignment = labelAlignment
                 };
 
-                Rectangle modRect;
-
-                if (CheckAlign == ContentAlignment.MiddleRight)
-                    modRect = new Rectangle(0, 0, rect.Width - size - 5, rect.Height);
-                else
-                    modRect = new Rectangle(size + 4, 0, rect.Width - size, rect.Height);
-
-                g.DrawString(Text, Font, b, modRect, stringFormat);
+                g.DrawString(Text, Font, b, labelRect, stringFormat);
             }
         }
 
