@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Forms
 {
-    internal class DarkTranslucentForm : Form
+    internal sealed class DarkTranslucentForm : Form
     {
         #region Property Region
 

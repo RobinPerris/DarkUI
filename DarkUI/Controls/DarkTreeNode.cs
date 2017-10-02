@@ -20,9 +20,7 @@ namespace DarkUI.Controls
         #region Field Region
 
         private string _text;
-        private bool _isRoot;
         private DarkTreeView _parentTree;
-        private DarkTreeNode _parentNode;
 
         private ObservableList<DarkTreeNode> _nodes;
 
@@ -68,20 +66,18 @@ namespace DarkUI.Controls
                 if (_expanded == value)
                     return;
 
-                if (value == true && Nodes.Count == 0)
+                if (value && Nodes.Count == 0)
                     return;
 
                 _expanded = value;
 
                 if (_expanded)
                 {
-                    if (NodeExpanded != null)
-                        NodeExpanded(this, null);
+                    NodeExpanded?.Invoke(this, null);
                 }
                 else
                 {
-                    if (NodeCollapsed != null)
-                        NodeCollapsed(this, null);
+                    NodeCollapsed?.Invoke(this, null);
                 }
             }
         }
@@ -104,11 +100,7 @@ namespace DarkUI.Controls
             }
         }
 
-        public bool IsRoot
-        {
-            get { return _isRoot; }
-            set { _isRoot = value; }
-        }
+        public bool IsRoot { get; set; }
 
         public DarkTreeView ParentTree
         {
@@ -125,11 +117,7 @@ namespace DarkUI.Controls
             }
         }
 
-        public DarkTreeNode ParentNode
-        {
-            get { return _parentNode; }
-            set { _parentNode = value; }
-        }
+        public DarkTreeNode ParentNode { get; set; }
 
         public bool Odd { get; set; }
 
@@ -146,7 +134,7 @@ namespace DarkUI.Controls
 
                 while (parent != null)
                 {
-                    path = string.Format("{0}{1}{2}", parent.Text, "\\", path);
+                    path = $"{parent.Text}\\{path}";
                     parent = parent.ParentNode;
                 }
 
@@ -218,7 +206,7 @@ namespace DarkUI.Controls
 
         private void OnTextChanged()
         {
-            if (ParentTree != null && ParentTree.TreeViewNodeSorter != null)
+            if (ParentTree?.TreeViewNodeSorter != null)
             {
                 if (ParentNode != null)
                     ParentNode.Nodes.Sort(ParentTree.TreeViewNodeSorter);
@@ -226,8 +214,7 @@ namespace DarkUI.Controls
                     ParentTree.Nodes.Sort(ParentTree.TreeViewNodeSorter);
             }
 
-            if (TextChanged != null)
-                TextChanged(this, null);
+            TextChanged?.Invoke(this, null);
         }
 
         private void Nodes_ItemsAdded(object sender, ObservableListModified<DarkTreeNode> e)
@@ -238,11 +225,10 @@ namespace DarkUI.Controls
                 node.ParentTree = ParentTree;
             }
 
-            if (ParentTree != null && ParentTree.TreeViewNodeSorter != null)
+            if (ParentTree?.TreeViewNodeSorter != null)
                 Nodes.Sort(ParentTree.TreeViewNodeSorter);
 
-            if (ItemsAdded != null)
-                ItemsAdded(this, e);
+            ItemsAdded?.Invoke(this, e);
         }
 
         private void Nodes_ItemsRemoved(object sender, ObservableListModified<DarkTreeNode> e)
@@ -250,8 +236,7 @@ namespace DarkUI.Controls
             if (Nodes.Count == 0)
                 Expanded = false;
 
-            if (ItemsRemoved != null)
-                ItemsRemoved(this, e);
+            ItemsRemoved?.Invoke(this, e);
         }
 
         #endregion

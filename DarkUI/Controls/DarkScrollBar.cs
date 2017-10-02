@@ -1,5 +1,4 @@
 ﻿using DarkUI.Config;
-using DarkUI.Icons;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -247,7 +246,6 @@ namespace DarkUI.Controls
                     _initialValue = _thumbArea.Left;
 
                 Invalidate();
-                return;
             }
         }
 
@@ -291,33 +289,38 @@ namespace DarkUI.Controls
                 }
             }
 
-            if (_isScrolling)
+            if (!_isScrolling)
+                return;
+            
+            if (e.Button != MouseButtons.Left)
             {
-                if (e.Button != MouseButtons.Left)
-                {
-                    OnMouseUp(null);
-                    return;
-                }
+                OnMouseUp(null);
+                return;
+            }
 
-                var difference = new Point(e.Location.X - _initialContact.X, e.Location.Y - _initialContact.Y);
+            var difference = new Point(e.Location.X - _initialContact.X, e.Location.Y - _initialContact.Y);
 
-                if (_scrollOrientation == DarkScrollOrientation.Vertical)
+            switch (_scrollOrientation)
+            {
+                case DarkScrollOrientation.Vertical:
                 {
                     var thumbPos = (_initialValue - _trackArea.Top);
                     var newPosition = thumbPos + difference.Y;
 
                     ScrollToPhysical(newPosition);
+                    break;
                 }
-                else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
+                case DarkScrollOrientation.Horizontal:
                 {
                     var thumbPos = (_initialValue - _trackArea.Left);
                     var newPosition = thumbPos + difference.X;
 
                     ScrollToPhysical(newPosition);
+                    break;
                 }
-
-                UpdateScrollBar();
             }
+
+            UpdateScrollBar();
         }
 
         protected override void OnMouseLeave(EventArgs e)
@@ -389,25 +392,27 @@ namespace DarkUI.Controls
             var area = ClientRectangle;
 
             // Arrow buttons
-            if (_scrollOrientation == DarkScrollOrientation.Vertical)
+            switch (_scrollOrientation)
             {
-                _upArrowArea = new Rectangle(area.Left, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
-                _downArrowArea = new Rectangle(area.Left, area.Bottom - Consts.ArrowButtonSize, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
-            }
-            else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
-            {
-                _upArrowArea = new Rectangle(area.Left, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
-                _downArrowArea = new Rectangle(area.Right - Consts.ArrowButtonSize, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
+                case DarkScrollOrientation.Vertical:
+                    _upArrowArea = new Rectangle(area.Left, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
+                    _downArrowArea = new Rectangle(area.Left, area.Bottom - Consts.ArrowButtonSize, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
+                    break;
+                case DarkScrollOrientation.Horizontal:
+                    _upArrowArea = new Rectangle(area.Left, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
+                    _downArrowArea = new Rectangle(area.Right - Consts.ArrowButtonSize, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
+                    break;
             }
 
             // Track
-            if (_scrollOrientation == DarkScrollOrientation.Vertical)
+            switch (_scrollOrientation)
             {
-                _trackArea = new Rectangle(area.Left, area.Top + Consts.ArrowButtonSize, area.Width, area.Height - (Consts.ArrowButtonSize * 2));
-            }
-            else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
-            {
-                _trackArea = new Rectangle(area.Left + Consts.ArrowButtonSize, area.Top, area.Width - (Consts.ArrowButtonSize * 2), area.Height);
+                case DarkScrollOrientation.Vertical:
+                    _trackArea = new Rectangle(area.Left, area.Top + Consts.ArrowButtonSize, area.Width, area.Height - (Consts.ArrowButtonSize * 2));
+                    break;
+                case DarkScrollOrientation.Horizontal:
+                    _trackArea = new Rectangle(area.Left + Consts.ArrowButtonSize, area.Top, area.Width - (Consts.ArrowButtonSize * 2), area.Height);
+                    break;
             }
 
             // Thumb
@@ -432,29 +437,34 @@ namespace DarkUI.Controls
             var positionRatio = (float)Value / (float)viewAreaSize;
 
             // Update area
-            if (_scrollOrientation == DarkScrollOrientation.Vertical)
+            switch (_scrollOrientation)
             {
-                var thumbSize = (int)(_trackArea.Height * _viewContentRatio);
+                case DarkScrollOrientation.Vertical:
+                {
+                    var thumbSize = (int)(_trackArea.Height * _viewContentRatio);
 
-                if (thumbSize < Consts.MinimumThumbSize)
-                    thumbSize = Consts.MinimumThumbSize;
+                    if (thumbSize < Consts.MinimumThumbSize)
+                        thumbSize = Consts.MinimumThumbSize;
 
-                var trackAreaSize = _trackArea.Height - thumbSize;
-                var thumbPosition = (int)(trackAreaSize * positionRatio);
+                    var trackAreaSize = _trackArea.Height - thumbSize;
+                    var thumbPosition = (int)(trackAreaSize * positionRatio);
 
-                _thumbArea = new Rectangle(_trackArea.Left + 3, _trackArea.Top + thumbPosition, Consts.ScrollBarSize - 6, thumbSize);
-            }
-            else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
-            {
-                var thumbSize = (int)(_trackArea.Width * _viewContentRatio);
+                    _thumbArea = new Rectangle(_trackArea.Left + 3, _trackArea.Top + thumbPosition, Consts.ScrollBarSize - 6, thumbSize);
+                    break;
+                }
+                case DarkScrollOrientation.Horizontal:
+                {
+                    var thumbSize = (int)(_trackArea.Width * _viewContentRatio);
 
-                if (thumbSize < Consts.MinimumThumbSize)
-                    thumbSize = Consts.MinimumThumbSize;
+                    if (thumbSize < Consts.MinimumThumbSize)
+                        thumbSize = Consts.MinimumThumbSize;
 
-                var trackAreaSize = _trackArea.Width - thumbSize;
-                var thumbPosition = (int)(trackAreaSize * positionRatio);
+                    var trackAreaSize = _trackArea.Width - thumbSize;
+                    var thumbPosition = (int)(trackAreaSize * positionRatio);
 
-                _thumbArea = new Rectangle(_trackArea.Left + thumbPosition, _trackArea.Top + 3, thumbSize, Consts.ScrollBarSize - 6);
+                    _thumbArea = new Rectangle(_trackArea.Left + thumbPosition, _trackArea.Top + 3, thumbSize, Consts.ScrollBarSize - 6);
+                    break;
+                }
             }
 
             if (forceRefresh)
@@ -494,10 +504,15 @@ namespace DarkUI.Controls
             if (!Enabled)
                 upIcon = ScrollIcons.scrollbar_arrow_disabled;
 
-            if (_scrollOrientation == DarkScrollOrientation.Vertical)
-                upIcon.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
-                upIcon.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            switch (_scrollOrientation)
+            {
+                case DarkScrollOrientation.Vertical:
+                    upIcon.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                    break;
+                case DarkScrollOrientation.Horizontal:
+                    upIcon.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    break;
+            }
 
             g.DrawImage(upIcon,
                                 _upArrowArea.Left + (_upArrowArea.Width / 2) - (upIcon.Width / 2),
@@ -520,17 +535,17 @@ namespace DarkUI.Controls
                                 _downArrowArea.Top + (_downArrowArea.Height / 2) - (downIcon.Height / 2));
 
             // Draw thumb
-            if (Enabled)
+            if (!Enabled)
+                return;
+            
+            var scrollColor = _thumbHot ? Colors.GreyHighlight : Colors.GreySelection;
+
+            if (_isScrolling)
+                scrollColor = Colors.ActiveControl;
+
+            using (var b = new SolidBrush(scrollColor))
             {
-                var scrollColor = _thumbHot ? Colors.GreyHighlight : Colors.GreySelection;
-
-                if (_isScrolling)
-                    scrollColor = Colors.ActiveControl;
-
-                using (var b = new SolidBrush(scrollColor))
-                {
-                    g.FillRectangle(b, _thumbArea);
-                }
+                g.FillRectangle(b, _thumbArea);
             }
         }
 

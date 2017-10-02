@@ -29,6 +29,12 @@ namespace DarkUI.Docking
             get { return base.Padding; }
         }
 
+        public sealed override Color BackColor
+        {
+            get { return base.BackColor; }
+            set { base.BackColor = value; }
+        }
+
         #endregion
 
         #region Constructor Region
@@ -110,7 +116,6 @@ namespace DarkUI.Docking
                 if (_shouldDrag)
                 {
                     DockPanel.DragContent(this);
-                    return;
                 }
             }
         }
@@ -130,7 +135,6 @@ namespace DarkUI.Docking
             if (_headerRect.Contains(e.Location))
             {
                 _shouldDrag = true;
-                return;
             }
         }
 

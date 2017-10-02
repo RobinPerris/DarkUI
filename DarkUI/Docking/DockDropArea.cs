@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics;
+using System.Drawing;
 
 namespace DarkUI.Docking
 {
@@ -198,6 +199,7 @@ namespace DarkUI.Docking
                     break;
             }
 
+            Debug.Assert(DockPanel.ParentForm != null, "DockPanel.ParentForm != null");
             DropArea = Rectangle.Intersect(DropArea, DockPanel.ParentForm.Bounds);
             HighlightArea = Rectangle.Intersect(HighlightArea, DockPanel.ParentForm.Bounds);
         }

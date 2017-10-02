@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using DarkUI.Config;
 
 namespace DarkUI.Controls
 {
-    public class DarkGroupBox : GroupBox
+    public sealed class DarkGroupBox : GroupBox
     {
         private Color _borderColor = Colors.LightBorder;
 
@@ -19,33 +15,33 @@ namespace DarkUI.Controls
                     ControlStyles.ResizeRedraw |
                     ControlStyles.UserPaint, true);
             Paint += DarkGroupBox_Paint;
-            this.ForeColor = Color.Gainsboro;
-            this.BackColor = Colors.GreyBackground;
-            this.ResizeRedraw = true;
-            this.DoubleBuffered = true;
+            ForeColor = Color.Gainsboro;
+            BackColor = Colors.GreyBackground;
+            ResizeRedraw = true;
+            DoubleBuffered = true;
         }
 
         private void DarkGroupBox_Paint(object sender, PaintEventArgs e)
         {
-            if (this.Parent != null)
-                e.Graphics.Clear(this.Parent.BackColor);
-            Size tSize = TextRenderer.MeasureText(this.Text, this.Font);
-            Rectangle borderRect = this.ClientRectangle;
+            if (Parent != null)
+                e.Graphics.Clear(Parent.BackColor);
+            Size tSize = TextRenderer.MeasureText(Text, Font);
+            Rectangle borderRect = ClientRectangle;
             borderRect.Y = (borderRect.Y + (tSize.Height / 2));
             borderRect.Height = (borderRect.Height - (tSize.Height / 2));
-            e.Graphics.FillRectangle(new SolidBrush(this.BackColor), borderRect);
-            ControlPaint.DrawBorder(e.Graphics, borderRect, this._borderColor, ButtonBorderStyle.Solid);
-            Rectangle textRect = this.ClientRectangle;
+            e.Graphics.FillRectangle(new SolidBrush(BackColor), borderRect);
+            ControlPaint.DrawBorder(e.Graphics, borderRect, _borderColor, ButtonBorderStyle.Solid);
+            Rectangle textRect = ClientRectangle;
             textRect.X = (textRect.X + 6);
             textRect.Y += borderRect.Top;
             textRect.Width = tSize.Width + 6;
             textRect.Height = tSize.Height - borderRect.Top;
-            e.Graphics.FillRectangle(new SolidBrush(this.BackColor), textRect);
-            textRect = this.ClientRectangle;
+            e.Graphics.FillRectangle(new SolidBrush(BackColor), textRect);
+            textRect = ClientRectangle;
             textRect.X = (textRect.X + 6);
             textRect.Width = tSize.Width + 6;
             textRect.Height = tSize.Height;
-            e.Graphics.DrawString(this.Text, this.Font, new SolidBrush(this.ForeColor), textRect);
+            e.Graphics.DrawString(Text, Font, new SolidBrush(ForeColor), textRect);
 
         }
 

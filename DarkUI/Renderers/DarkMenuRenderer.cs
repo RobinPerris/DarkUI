@@ -1,5 +1,4 @@
 ﻿using DarkUI.Config;
-using DarkUI.Controls;
 using DarkUI.Icons;
 using System;
 using System.Drawing;
@@ -107,30 +106,30 @@ namespace DarkUI.Renderers
 
             e.Item.ForeColor = e.Item.Enabled ? Colors.LightText : Colors.DisabledText;
 
-            if (e.Item.Enabled)
+            if (!e.Item.Enabled)
+                return;
+
+            var bgColor = e.Item.Selected ? Colors.GreyHighlight : e.Item.BackColor;
+
+            // Normal item
+            var rect = new Rectangle(2, 0, e.Item.Width - 3, e.Item.Height);
+
+            using (var b = new SolidBrush(bgColor))
             {
+                g.FillRectangle(b, rect);
+            }
 
-                var bgColor = e.Item.Selected ? Colors.GreyHighlight : e.Item.BackColor;
+            // Header item on open menu
+            var menuItem = e.Item as ToolStripMenuItem;
+            if (menuItem == null)
+                return;
 
-                // Normal item
-                var rect = new Rectangle(2, 0, e.Item.Width - 3, e.Item.Height);
-
-                using (var b = new SolidBrush(bgColor))
-                {
-                    g.FillRectangle(b, rect);
-                }
-
-                // Header item on open menu
-                if (e.Item.GetType() == typeof(ToolStripMenuItem))
-                {
-                    if (((ToolStripMenuItem)e.Item).DropDown.Visible && e.Item.IsOnDropDown == false)
-                    {
-                        using (var b = new SolidBrush(Colors.GreySelection))
-                        {
-                            g.FillRectangle(b, rect);
-                        }
-                    }
-                }
+            if (!menuItem.DropDown.Visible || menuItem.IsOnDropDown)
+                return;
+            
+            using (var b = new SolidBrush(Colors.GreySelection))
+            {
+                g.FillRectangle(b, rect);
             }
         }
 

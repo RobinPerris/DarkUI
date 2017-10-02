@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
 using System.Security;
-using System.Text;
 using System.Windows.Forms;
 using DarkUI.Config;
-using DarkUI.Icons;
 
 namespace DarkUI.Controls
 {
-    public class DarkNumericUpDown : NumericUpDown
+    public sealed class DarkNumericUpDown : NumericUpDown
     {
         [Category("Data")]
         [Description("Determines increment value used with shift modifier.")]
@@ -22,33 +18,33 @@ namespace DarkUI.Controls
         [Description("Forces mousewheel to scroll by one increment.")]
         public bool MousewheelSingleIncrement { get; set; } = true;
 
-        private bool mouseDown = false;
-        private Point mousePos = new Point();
-        private Rectangle scrollButtons;
+        private bool _mouseDown = false;
+        private Point _mousePos = new Point();
+        private Rectangle _scrollButtons;
 
         public DarkNumericUpDown()
         {
-            this.ForeColor = Color.Gainsboro;
-            this.BackColor = Color.FromArgb(69, 73, 74);
+            ForeColor = Color.Gainsboro;
+            BackColor = Color.FromArgb(69, 73, 74);
             SetStyle(ControlStyles.OptimizedDoubleBuffer |
                    ControlStyles.ResizeRedraw |
                    ControlStyles.UserPaint, true);
-            this.Controls[0].Paint += DarkNumericUpDown_Paint;
-            this.MouseMove += DarkNumericUpDown_MouseMove;
-            this.MouseUp += DarkNumericUpDown_MouseUp;
-            this.MouseDown += DarkNumericUpDown_MouseDown;
+            Controls[0].Paint += DarkNumericUpDown_Paint;
+            MouseMove += DarkNumericUpDown_MouseMove;
+            MouseUp += DarkNumericUpDown_MouseUp;
+            MouseDown += DarkNumericUpDown_MouseDown;
             try
             {
                 // Prevent flickering, only if our assembly 
                 // has reflection permission. 
-                Type type = this.Controls[0].GetType();
+                Type type = Controls[0].GetType();
                 BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
                 MethodInfo method = type.GetMethod("SetStyle", flags);
 
                 if (method != null)
                 {
                     object[] param = { ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer, true };
-                    method.Invoke(this.Controls[0], param);
+                    method.Invoke(Controls[0], param);
                 }
             }
             catch (SecurityException)
@@ -59,17 +55,17 @@ namespace DarkUI.Controls
 
         private void DarkNumericUpDown_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseDown = true;
+            _mouseDown = true;
         }
 
         private void DarkNumericUpDown_MouseUp(object sender, MouseEventArgs e)
         {
-            mouseDown = false;
+            _mouseDown = false;
         }
 
         private void DarkNumericUpDown_MouseMove(object sender, MouseEventArgs e)
         {
-            mousePos = new Point(e.Location.X - (this.Width - scrollButtons.Width),e.Location.Y);
+            _mousePos = new Point(e.Location.X - (Width - _scrollButtons.Width),e.Location.Y);
         }
 
         private void DarkNumericUpDown_Paint(object sender, PaintEventArgs e)
@@ -81,9 +77,9 @@ namespace DarkUI.Controls
             // Up arrow
             var upIcon = ScrollIcons.scrollbar_arrow_standard;
             var upRect = new Rectangle(Controls[0].Size.Width / 2 - upIcon.Width / 2, Controls[0].Size.Height / 4 - upIcon.Height / 2,upIcon.Width, upIcon.Height);
-            upIcon = upRect.Contains(mousePos) ? ScrollIcons.scrollbar_arrow_hot : ScrollIcons.scrollbar_arrow_standard;
+            upIcon = upRect.Contains(_mousePos) ? ScrollIcons.scrollbar_arrow_hot : ScrollIcons.scrollbar_arrow_standard;
 
-            if (mouseDown && upRect.Contains(mousePos))
+            if (_mouseDown && upRect.Contains(_mousePos))
                 upIcon = ScrollIcons.scrollbar_arrow_clicked;
 
             upIcon.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -93,20 +89,20 @@ namespace DarkUI.Controls
             // Down arrow
             var downIcon = ScrollIcons.scrollbar_arrow_standard;
             var downRect = new Rectangle(Controls[0].Size.Width / 2 - upIcon.Width / 2, Controls[0].Size.Height / 2 + Controls[0].Size.Height / 4 - upIcon.Height / 2, upIcon.Width, upIcon.Height);
-            downIcon = downRect.Contains(mousePos) ? ScrollIcons.scrollbar_arrow_hot : ScrollIcons.scrollbar_arrow_standard;
+            downIcon = downRect.Contains(_mousePos) ? ScrollIcons.scrollbar_arrow_hot : ScrollIcons.scrollbar_arrow_standard;
 
-            if (mouseDown && downRect.Contains(mousePos))
+            if (_mouseDown && downRect.Contains(_mousePos))
                 downIcon = ScrollIcons.scrollbar_arrow_clicked;
 
             e.Graphics.DrawImage(downIcon, downRect);
 
-            scrollButtons = upDownRect;
+            _scrollButtons = upDownRect;
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.FromArgb(100,100,100), ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(100,100,100), ButtonBorderStyle.Solid);
         }
 
         protected override void OnMouseWheel(MouseEventArgs e)

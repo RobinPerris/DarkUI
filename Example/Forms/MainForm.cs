@@ -13,13 +13,13 @@ namespace Example
     {
         #region Field Region
 
-        private List<DarkDockContent> _toolWindows = new List<DarkDockContent>();
+        private readonly List<DarkDockContent> _toolWindows = new List<DarkDockContent>();
 
-        private DockProject _dockProject;
-        private DockProperties _dockProperties;
-        private DockConsole _dockConsole;
-        private DockLayers _dockLayers;
-        private DockHistory _dockHistory;
+        private readonly DockProject _dockProject;
+        private readonly DockProperties _dockProperties;
+        private readonly DockConsole _dockConsole;
+        private readonly DockLayers _dockLayers;
+        private readonly DockHistory _dockHistory;
 
         #endregion
 

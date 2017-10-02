@@ -258,17 +258,17 @@ namespace DarkUI.Controls
         {
             base.OnKeyUp(e);
 
-            if (e.KeyCode == Keys.Space)
-            {
-                _spacePressed = false;
+            if (e.KeyCode != Keys.Space)
+                return;
+            
+            _spacePressed = false;
 
-                var location = Cursor.Position;
+            var location = Cursor.Position;
 
-                if (!ClientRectangle.Contains(location))
-                    SetControlState(DarkControlState.Normal);
-                else
-                    SetControlState(DarkControlState.Hover);
-            }
+            if (!ClientRectangle.Contains(location))
+                SetControlState(DarkControlState.Normal);
+            else
+                SetControlState(DarkControlState.Hover);
         }
 
         #endregion
@@ -280,7 +280,7 @@ namespace DarkUI.Controls
             var g = e.Graphics;
             var rect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
 
-            var size = Consts.CheckBoxSize;
+            const int size = Consts.CheckBoxSize;
 
             var textColor = Colors.LightText;
             var borderColor = Colors.LightText;
@@ -294,15 +294,16 @@ namespace DarkUI.Controls
                     fillColor = Colors.BlueSelection;
                 }
 
-                if (_controlState == DarkControlState.Hover)
+                switch (_controlState)
                 {
-                    borderColor = Colors.BlueHighlight;
-                    fillColor = Colors.BlueSelection;
-                }
-                else if (_controlState == DarkControlState.Pressed)
-                {
-                    borderColor = Colors.GreyHighlight;
-                    fillColor = Colors.GreySelection;
+                    case DarkControlState.Hover:
+                        borderColor = Colors.BlueHighlight;
+                        fillColor = Colors.BlueSelection;
+                        break;
+                    case DarkControlState.Pressed:
+                        borderColor = Colors.GreyHighlight;
+                        fillColor = Colors.GreySelection;
+                        break;
                 }
             }
             else

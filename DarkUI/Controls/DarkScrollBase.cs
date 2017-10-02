@@ -17,18 +17,16 @@ namespace DarkUI.Controls
 
         #region Field Region
 
-        protected readonly DarkScrollBar _vScrollBar;
-        protected readonly DarkScrollBar _hScrollBar;
+        protected readonly DarkScrollBar VScrollBar;
+        protected readonly DarkScrollBar HScrollBar;
 
         private Size _visibleSize;
         private Size _contentSize;
 
         private Rectangle _viewport;
 
-        private Point _offsetMousePosition;
-
         private int _maxDragChange = 0;
-        private Timer _dragTimer;
+        private readonly Timer _dragTimer;
 
         private bool _hideScrollBars = true;
 
@@ -46,8 +44,7 @@ namespace DarkUI.Controls
             {
                 _viewport = value;
 
-                if (ViewportChanged != null)
-                    ViewportChanged(this, null);
+                ViewportChanged?.Invoke(this, null);
             }
         }
 
@@ -61,17 +58,13 @@ namespace DarkUI.Controls
                 _contentSize = value;
                 UpdateScrollBars();
 
-                if (ContentSizeChanged != null)
-                    ContentSizeChanged(this, null);
+                ContentSizeChanged?.Invoke(this, null);
             }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Point OffsetMousePosition
-        {
-            get { return _offsetMousePosition; }
-        }
+        public Point OffsetMousePosition { get; private set; }
 
         [Category("Behavior")]
         [Description("Determines the maximum scroll change when dragging.")]
@@ -112,20 +105,19 @@ namespace DarkUI.Controls
             SetStyle(ControlStyles.Selectable |
                      ControlStyles.UserMouse, true);
 
-            _vScrollBar = new DarkScrollBar { ScrollOrientation = DarkScrollOrientation.Vertical };
-            _hScrollBar = new DarkScrollBar { ScrollOrientation = DarkScrollOrientation.Horizontal };
+            VScrollBar = new DarkScrollBar { ScrollOrientation = DarkScrollOrientation.Vertical };
+            HScrollBar = new DarkScrollBar { ScrollOrientation = DarkScrollOrientation.Horizontal };
 
-            Controls.Add(_vScrollBar);
-            Controls.Add(_hScrollBar);
+            Controls.Add(VScrollBar);
+            Controls.Add(HScrollBar);
 
-            _vScrollBar.ValueChanged += delegate { UpdateViewport(); };
-            _hScrollBar.ValueChanged += delegate { UpdateViewport(); };
+            VScrollBar.ValueChanged += delegate { UpdateViewport(); };
+            HScrollBar.ValueChanged += delegate { UpdateViewport(); };
 
-            _vScrollBar.MouseDown += delegate { Select(); };
-            _hScrollBar.MouseDown += delegate { Select(); };
+            VScrollBar.MouseDown += delegate { Select(); };
+            HScrollBar.MouseDown += delegate { Select(); };
 
-            _dragTimer = new Timer();
-            _dragTimer.Interval = 1;
+            _dragTimer = new Timer {Interval = 1};
             _dragTimer.Tick += DragTimer_Tick;
         }
 
@@ -135,19 +127,19 @@ namespace DarkUI.Controls
 
         private void UpdateScrollBars()
         {
-            if (_vScrollBar.Maximum != ContentSize.Height)
-                _vScrollBar.Maximum = ContentSize.Height;
+            if (VScrollBar.Maximum != ContentSize.Height)
+                VScrollBar.Maximum = ContentSize.Height;
 
-            if (_hScrollBar.Maximum != ContentSize.Width)
-                _hScrollBar.Maximum = ContentSize.Width;
+            if (HScrollBar.Maximum != ContentSize.Width)
+                HScrollBar.Maximum = ContentSize.Width;
 
-            var scrollSize = Consts.ScrollBarSize;
+            const int scrollSize = Consts.ScrollBarSize;
 
-            _vScrollBar.Location = new Point(ClientSize.Width - scrollSize, 0);
-            _vScrollBar.Size = new Size(scrollSize, ClientSize.Height);
+            VScrollBar.Location = new Point(ClientSize.Width - scrollSize, 0);
+            VScrollBar.Size = new Size(scrollSize, ClientSize.Height);
 
-            _hScrollBar.Location = new Point(0, ClientSize.Height - scrollSize);
-            _hScrollBar.Size = new Size(ClientSize.Width, scrollSize);
+            HScrollBar.Location = new Point(0, ClientSize.Height - scrollSize);
+            HScrollBar.Size = new Size(ClientSize.Width, scrollSize);
 
             if (DesignMode)
                 return;
@@ -160,40 +152,40 @@ namespace DarkUI.Controls
             SetVisibleSize();
             SetScrollBarVisibility();
 
-            if (_vScrollBar.Visible)
-                _hScrollBar.Width -= scrollSize;
+            if (VScrollBar.Visible)
+                HScrollBar.Width -= scrollSize;
 
-            if (_hScrollBar.Visible)
-                _vScrollBar.Height -= scrollSize;
+            if (HScrollBar.Visible)
+                VScrollBar.Height -= scrollSize;
 
-            _vScrollBar.ViewSize = _visibleSize.Height;
-            _hScrollBar.ViewSize = _visibleSize.Width;
+            VScrollBar.ViewSize = _visibleSize.Height;
+            HScrollBar.ViewSize = _visibleSize.Width;
 
             UpdateViewport();
         }
 
         private void SetScrollBarVisibility()
         {
-            _vScrollBar.Enabled = _visibleSize.Height < ContentSize.Height;
-            _hScrollBar.Enabled = _visibleSize.Width < ContentSize.Width;
+            VScrollBar.Enabled = _visibleSize.Height < ContentSize.Height;
+            HScrollBar.Enabled = _visibleSize.Width < ContentSize.Width;
 
             if (_hideScrollBars)
             {
-                _vScrollBar.Visible = _vScrollBar.Enabled;
-                _hScrollBar.Visible = _hScrollBar.Enabled;
+                VScrollBar.Visible = VScrollBar.Enabled;
+                HScrollBar.Visible = HScrollBar.Enabled;
             }
         }
 
         private void SetVisibleSize()
         {
-            var scrollSize = Consts.ScrollBarSize;
+            const int scrollSize = Consts.ScrollBarSize;
 
             _visibleSize = new Size(ClientSize.Width, ClientSize.Height);
 
-            if (_vScrollBar.Visible)
+            if (VScrollBar.Visible)
                 _visibleSize.Width -= scrollSize;
 
-            if (_hScrollBar.Visible)
+            if (HScrollBar.Visible)
                 _visibleSize.Height -= scrollSize;
         }
 
@@ -204,22 +196,22 @@ namespace DarkUI.Controls
             var width = ClientSize.Width;
             var height = ClientSize.Height;
 
-            if (_hScrollBar.Visible)
+            if (HScrollBar.Visible)
             {
-                left = _hScrollBar.Value;
-                height -= _hScrollBar.Height;
+                left = HScrollBar.Value;
+                height -= HScrollBar.Height;
             }
 
-            if (_vScrollBar.Visible)
+            if (VScrollBar.Visible)
             {
-                top = _vScrollBar.Value;
-                width -= _vScrollBar.Width;
+                top = VScrollBar.Value;
+                width -= VScrollBar.Width;
             }
 
             Viewport = new Rectangle(left, top, width, height);
 
             var pos = PointToClient(MousePosition);
-            _offsetMousePosition = new Point(pos.X + Viewport.Left, pos.Y + Viewport.Top);
+            OffsetMousePosition = new Point(pos.X + Viewport.Left, pos.Y + Viewport.Top);
 
             Invalidate();
         }
@@ -232,14 +224,14 @@ namespace DarkUI.Controls
 
         public void VScrollTo(int value)
         {
-            if (_vScrollBar.Visible)
-                _vScrollBar.Value = value;
+            if (VScrollBar.Visible)
+                VScrollBar.Value = value;
         }
 
         public void HScrollTo(int value)
         {
-            if (_hScrollBar.Visible)
-                _hScrollBar.Value = value;
+            if (HScrollBar.Visible)
+                HScrollBar.Value = value;
         }
 
         protected virtual void StartDrag()
@@ -300,7 +292,7 @@ namespace DarkUI.Controls
         {
             base.OnMouseMove(e);
 
-            _offsetMousePosition = new Point(e.X + Viewport.Left, e.Y + Viewport.Top);
+            OffsetMousePosition = new Point(e.X + Viewport.Left, e.Y + Viewport.Top);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -315,27 +307,28 @@ namespace DarkUI.Controls
         {
             base.OnMouseWheel(e);
 
+            // ReSharper disable once ReplaceWithSingleAssignment.False
             var horizontal = false;
 
-            if (_hScrollBar.Visible && ModifierKeys == Keys.Control)
+            if (HScrollBar.Visible && ModifierKeys == Keys.Control)
                 horizontal = true;
 
-            if (_hScrollBar.Visible && !_vScrollBar.Visible)
+            if (HScrollBar.Visible && !VScrollBar.Visible)
                 horizontal = true;
 
             if (!horizontal)
             {
                 if (e.Delta > 0)
-                    _vScrollBar.ScrollByPhysical(3);
+                    VScrollBar.ScrollByPhysical(3);
                 else if (e.Delta < 0)
-                    _vScrollBar.ScrollByPhysical(-3);
+                    VScrollBar.ScrollByPhysical(-3);
             }
             else
             {
                 if (e.Delta > 0)
-                    _hScrollBar.ScrollByPhysical(3);
+                    HScrollBar.ScrollByPhysical(3);
                 else if (e.Delta < 0)
-                    _hScrollBar.ScrollByPhysical(-3);
+                    HScrollBar.ScrollByPhysical(-3);
             }
         }
 
@@ -362,13 +355,13 @@ namespace DarkUI.Controls
             var right = ClientRectangle.Right;
             var bottom = ClientRectangle.Bottom;
 
-            if (_vScrollBar.Visible)
-                right = _vScrollBar.Left;
+            if (VScrollBar.Visible)
+                right = VScrollBar.Left;
 
-            if (_hScrollBar.Visible)
-                bottom = _hScrollBar.Top;
+            if (HScrollBar.Visible)
+                bottom = HScrollBar.Top;
 
-            if (_vScrollBar.Visible)
+            if (VScrollBar.Visible)
             {
                 // Scroll up
                 if (pos.Y < ClientRectangle.Top)
@@ -378,7 +371,7 @@ namespace DarkUI.Controls
                     if (MaxDragChange > 0 && difference > MaxDragChange)
                         difference = MaxDragChange;
 
-                    _vScrollBar.Value = _vScrollBar.Value - difference;
+                    VScrollBar.Value = VScrollBar.Value - difference;
                 }
 
                 // Scroll down
@@ -389,11 +382,11 @@ namespace DarkUI.Controls
                     if (MaxDragChange > 0 && difference > MaxDragChange)
                         difference = MaxDragChange;
 
-                    _vScrollBar.Value = _vScrollBar.Value + difference;
+                    VScrollBar.Value = VScrollBar.Value + difference;
                 }
             }
 
-            if (_hScrollBar.Visible)
+            if (HScrollBar.Visible)
             {
                 // Scroll left
                 if (pos.X < ClientRectangle.Left)
@@ -403,7 +396,7 @@ namespace DarkUI.Controls
                     if (MaxDragChange > 0 && difference > MaxDragChange)
                         difference = MaxDragChange;
 
-                    _hScrollBar.Value = _hScrollBar.Value - difference;
+                    HScrollBar.Value = HScrollBar.Value - difference;
                 }
 
                 // Scroll right
@@ -414,7 +407,7 @@ namespace DarkUI.Controls
                     if (MaxDragChange > 0 && difference > MaxDragChange)
                         difference = MaxDragChange;
 
-                    _hScrollBar.Value = _hScrollBar.Value + difference;
+                    HScrollBar.Value = HScrollBar.Value + difference;
                 }
             }
         }

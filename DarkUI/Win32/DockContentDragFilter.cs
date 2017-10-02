@@ -2,6 +2,7 @@
 using DarkUI.Docking;
 using DarkUI.Forms;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,11 +12,11 @@ namespace DarkUI.Win32
     {
         #region Field Region
 
-        private DarkDockPanel _dockPanel;
+        private readonly DarkDockPanel _dockPanel;
 
         private DarkDockContent _dragContent;
 
-        private DarkTranslucentForm _highlightForm;
+        private readonly DarkTranslucentForm _highlightForm;
 
         private bool _isDragging = false;
         private DarkDockRegion _targetRegion;
@@ -157,6 +158,7 @@ namespace DarkUI.Win32
 
         private void HandleDrag()
         {
+            Debug.Assert(_dockPanel.ParentForm != null, "_dockPanel.ParentForm != null");
             if (!_dockPanel.ParentForm.RectangleToScreen(_dockPanel.Bounds).Contains(Cursor.Position))
                 return;
 
@@ -236,15 +238,12 @@ namespace DarkUI.Win32
                 }
 
                 // Don't allow content to be dragged on to itself
-                if (!sameGroup)
+                if (!sameGroup && collection.DropArea.DropArea.Contains(location))
                 {
-                    if (collection.DropArea.DropArea.Contains(location))
-                    {
-                        _insertType = DockInsertType.None;
-                        _targetGroup = collection.DropArea.DockGroup;
-                        UpdateHighlightForm(collection.DropArea.HighlightArea);
-                        return;
-                    }
+                    _insertType = DockInsertType.None;
+                    _targetGroup = collection.DropArea.DockGroup;
+                    UpdateHighlightForm(collection.DropArea.HighlightArea);
+                    return;
                 }
             }
 

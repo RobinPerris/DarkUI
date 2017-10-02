@@ -1,6 +1,4 @@
-﻿using DarkUI.Icons;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,7 +6,7 @@ namespace DarkUI.Forms
 {
     internal partial class DarkDialogMessageBox : DarkDialog
     {
-        private const int _maximumWidth = 700;
+        private const int MaximumWidth = 700;
 
         internal string Message { get; set; }
 
@@ -71,7 +69,7 @@ namespace DarkUI.Forms
             var totalWidth = lblText.Right + 25;
 
             // Make sure we're not making the dialog bigger than the maximum size
-            if (totalWidth < _maximumWidth)
+            if (totalWidth < MaximumWidth)
             {
                 // Width is smaller than the maximum width.
                 // This means we can have a single-line message box.
@@ -83,7 +81,7 @@ namespace DarkUI.Forms
             {
                 // Width is larger than the maximum width.
                 // Change the label size and wrap it.
-                width = _maximumWidth;
+                width = MaximumWidth;
                 var offsetHeight = Height - picIcon.Height;
                 lblText.AutoUpdateHeight = true;
                 lblText.Width = width - lblText.Left - 25;

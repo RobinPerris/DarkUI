@@ -9,10 +9,8 @@ namespace DarkUI.Docking
     {
         #region Field Region
 
-        private Dictionary<DarkDockContent, DarkDockTab> _tabs = new Dictionary<DarkDockContent, DarkDockTab>();
-
-        private List<ToolStripMenuItem> _menuItems = new List<ToolStripMenuItem>();
-        private DarkContextMenu _tabMenu = new DarkContextMenu();
+        private readonly List<ToolStripMenuItem> _menuItems = new List<ToolStripMenuItem>();
+        private readonly DarkContextMenu _tabMenu = new DarkContextMenu();
 
         #endregion
 
@@ -86,16 +84,14 @@ namespace DarkUI.Docking
 
             var orderedItems = new List<ToolStripMenuItem>();
 
-            var index = 0;
             for (var i = 0; i < _menuItems.Count; i++)
             {
                 foreach (var item in _menuItems)
                 {
                     var content = (DarkDockContent)item.Tag;
-                    if (content.Order == index)
+                    if (content.Order == i)
                         orderedItems.Add(item);
                 }
-                index++;
             }
 
             foreach (var item in orderedItems)

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Docking
 {
-    public class DarkDockPanel : UserControl
+    public sealed class DarkDockPanel : UserControl
     {
         #region Event Region
 
@@ -20,8 +20,8 @@ namespace DarkUI.Docking
 
         #region Field Region
 
-        private List<DarkDockContent> _contents;
-        private Dictionary<DarkDockArea, DarkDockRegion> _regions;
+        private readonly List<DarkDockContent> _contents;
+        private readonly Dictionary<DarkDockArea, DarkDockRegion> _regions;
 
         private DarkDockContent _activeContent;
         private bool _switchingContent = false;
@@ -51,8 +51,7 @@ namespace DarkUI.Docking
                 foreach (var region in _regions.Values)
                     region.Redraw();
 
-                if (ActiveContentChanged != null)
-                    ActiveContentChanged(this, new DockContentEventArgs(_activeContent));
+                ActiveContentChanged?.Invoke(this, new DockContentEventArgs(_activeContent));
 
                 _switchingContent = false;
             }
@@ -64,7 +63,7 @@ namespace DarkUI.Docking
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DarkDockGroup ActiveGroup { get; internal set; }
+        public DarkDockGroup ActiveGroup { get; private set; }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -153,8 +152,7 @@ namespace DarkUI.Docking
             var region = _regions[dockContent.DockArea];
             region.AddContent(dockContent, dockGroup);
 
-            if (ContentAdded != null)
-                ContentAdded(this, new DockContentEventArgs(dockContent));
+            ContentAdded?.Invoke(this, new DockContentEventArgs(dockContent));
 
             dockContent.Select();
         }
@@ -172,8 +170,7 @@ namespace DarkUI.Docking
             var region = _regions[dockGroup.DockArea];
             region.InsertContent(dockContent, dockGroup, insertType);
 
-            if (ContentAdded != null)
-                ContentAdded(this, new DockContentEventArgs(dockContent));
+            ContentAdded?.Invoke(this, new DockContentEventArgs(dockContent));
 
             dockContent.Select();
         }
@@ -198,8 +195,7 @@ namespace DarkUI.Docking
             var region = _regions[dockContent.DockArea];
             region.RemoveContent(dockContent);
 
-            if (ContentRemoved != null)
-                ContentRemoved(this, new DockContentEventArgs(dockContent));
+            ContentRemoved?.Invoke(this, new DockContentEventArgs(dockContent));
         }
 
         public bool ContainsContent(DarkDockContent dockContent)
@@ -258,7 +254,7 @@ namespace DarkUI.Docking
             state.Regions.Add(new DockRegionState(DarkDockArea.Right, _regions[DarkDockArea.Right].Size));
             state.Regions.Add(new DockRegionState(DarkDockArea.Bottom, _regions[DarkDockArea.Bottom].Size));
 
-            var _groupStates = new Dictionary<DarkDockGroup, DockGroupState>();
+            var groupStates = new Dictionary<DarkDockGroup, DockGroupState>();
 
             var orderedContent = _contents.OrderBy(c => c.Order);
             foreach (var content in orderedContent)
@@ -269,15 +265,15 @@ namespace DarkUI.Docking
                     {
                         DockGroupState groupState;
 
-                        if (_groupStates.ContainsKey(content.DockGroup))
+                        if (groupStates.ContainsKey(content.DockGroup))
                         {
-                            groupState = _groupStates[content.DockGroup];
+                            groupState = groupStates[content.DockGroup];
                         }
                         else
                         {
                             groupState = new DockGroupState();
                             region.Groups.Add(groupState);
-                            _groupStates.Add(content.DockGroup, groupState);
+                            groupStates.Add(content.DockGroup, groupState);
                         }
 
                         groupState.Contents.Add(content.SerializationKey);

@@ -38,16 +38,13 @@ namespace DarkUI.Collections
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposed)
-            {
-                if (ItemsAdded != null)
-                    ItemsAdded = null;
+            if (_disposed)
+                return;
+            
+            ItemsAdded = null;
+            ItemsRemoved = null;
 
-                if (ItemsRemoved != null)
-                    ItemsRemoved = null;
-
-                _disposed = true;
-            }
+            _disposed = true;
         }
 
         #endregion
@@ -58,8 +55,7 @@ namespace DarkUI.Collections
         {
             base.Add(item);
 
-            if (ItemsAdded != null)
-                ItemsAdded(this, new ObservableListModified<T>(new List<T> { item }));
+            ItemsAdded?.Invoke(this, new ObservableListModified<T>(new List<T> { item }));
         }
 
         public new void AddRange(IEnumerable<T> collection)
@@ -68,16 +64,14 @@ namespace DarkUI.Collections
 
             base.AddRange(list);
 
-            if (ItemsAdded != null)
-                ItemsAdded(this, new ObservableListModified<T>(list));
+            ItemsAdded?.Invoke(this, new ObservableListModified<T>(list));
         }
 
         public new void Remove(T item)
         {
             base.Remove(item);
 
-            if (ItemsRemoved != null)
-                ItemsRemoved(this, new ObservableListModified<T>(new List<T> { item }));
+            ItemsRemoved?.Invoke(this, new ObservableListModified<T>(new List<T> { item }));
         }
 
         #endregion

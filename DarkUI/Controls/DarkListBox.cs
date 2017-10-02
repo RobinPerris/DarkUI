@@ -1,15 +1,11 @@
 ﻿using DarkUI.Config;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public partial class DarkListBox : ListBox
+    public sealed class DarkListBox : ListBox
     {
         public DarkListBox()
         {
@@ -17,11 +13,11 @@ namespace DarkUI.Controls
             ForeColor = Colors.LightText;
             Padding = new Padding(2, 2, 2, 2);
             BorderStyle = BorderStyle.FixedSingle;
-            this.DrawMode = DrawMode.OwnerDrawFixed;
-            this.ItemHeight = 18;
+            DrawMode = DrawMode.OwnerDrawFixed;
+            ItemHeight = 18;
         }
 
-        public DarkListBox(IContainer container) : base()
+        public DarkListBox(IContainer container)
         {
             container.Add(this);
         }

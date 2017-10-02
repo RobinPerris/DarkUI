@@ -6,13 +6,6 @@ namespace DarkUI.Controls
 {
     public class DarkTitle : Label
     {
-        #region Constructor Region
-
-        public DarkTitle()
-        { }
-
-        #endregion
-
         #region Paint Region
 
         protected override void OnPaint(PaintEventArgs e)

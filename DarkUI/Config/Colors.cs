@@ -2,7 +2,7 @@
 
 namespace DarkUI.Config
 {
-    public sealed class Colors
+    public static class Colors
     {
         public static Color GreyBackground
         {

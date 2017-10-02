@@ -1,5 +1,6 @@
 ﻿using DarkUI.Config;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace DarkUI.Docking
 {
@@ -15,6 +16,12 @@ namespace DarkUI.Docking
             get { return base.DefaultDockArea; }
         }
 
+        public sealed override Color BackColor
+        {
+            get { return base.BackColor; }
+            set { base.BackColor = value; }
+        }
+        
         #endregion
 
         #region Constructor Region

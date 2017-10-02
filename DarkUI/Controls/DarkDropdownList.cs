@@ -1,11 +1,9 @@
 ﻿using DarkUI.Config;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace DarkUI.Controls
@@ -20,12 +18,9 @@ namespace DarkUI.Controls
 
         #region Field Region
 
-        private DarkControlState _controlState = DarkControlState.Normal;
-
-        private ObservableCollection<DarkDropdownItem> _items = new ObservableCollection<DarkDropdownItem>();
         private DarkDropdownItem _selectedItem;
 
-        private DarkContextMenu _menu = new DarkContextMenu();
+        private readonly DarkContextMenu _menu = new DarkContextMenu();
         private bool _menuOpen = false;
 
         private bool _showBorder = true;
@@ -33,7 +28,7 @@ namespace DarkUI.Controls
         private int _itemHeight = 22;
         private int _maxHeight = 130;
 
-        private readonly int _iconSize = 16;
+        private const int IconSize = 16;
 
         private ToolStripDropDownDirection _dropdownDirection = ToolStripDropDownDirection.Default;
 
@@ -43,10 +38,7 @@ namespace DarkUI.Controls
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public ObservableCollection<DarkDropdownItem> Items
-        {
-            get { return _items; }
-        }
+        public ObservableCollection<DarkDropdownItem> Items { get; } = new ObservableCollection<DarkDropdownItem>();
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -80,10 +72,7 @@ namespace DarkUI.Controls
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DarkControlState ControlState
-        {
-            get { return _controlState; }
-        }
+        public DarkControlState ControlState { get; private set; } = DarkControlState.Normal;
 
         [Category("Appearance")]
         [Description("Determines the height of the individual list view items.")]
@@ -161,9 +150,9 @@ namespace DarkUI.Controls
             if (_menuOpen)
                 return;
 
-            if (_controlState != controlState)
+            if (ControlState != controlState)
             {
-                _controlState = controlState;
+                ControlState = controlState;
                 Invalidate();
             }
         }
@@ -223,38 +212,39 @@ namespace DarkUI.Controls
 
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Add)
+            switch (e.Action)
             {
-                foreach (DarkDropdownItem item in e.NewItems)
-                {
-                    var menuItem = new ToolStripMenuItem(item.Text)
+                case NotifyCollectionChangedAction.Add:
+                    foreach (DarkDropdownItem item in e.NewItems)
                     {
-                        Image = item.Icon,
-                        AutoSize = false,
-                        Height = _itemHeight,
-                        Font = Font,
-                        Tag = item,
-                        TextAlign = ContentAlignment.MiddleLeft
-                    };
+                        var menuItem = new ToolStripMenuItem(item.Text)
+                        {
+                            Image = item.Icon,
+                            AutoSize = false,
+                            Height = _itemHeight,
+                            Font = Font,
+                            Tag = item,
+                            TextAlign = ContentAlignment.MiddleLeft
+                        };
 
-                    _menu.Items.Add(menuItem);
-                    menuItem.Click += Item_Select;
+                        _menu.Items.Add(menuItem);
+                        menuItem.Click += Item_Select;
 
-                    if (SelectedItem == null)
-                        SelectedItem = item;
-                }
-            }
-
-            if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (DarkDropdownItem item in e.OldItems)
-                {
-                    foreach (ToolStripMenuItem menuItem in _menu.Items)
-                    {
-                        if ((DarkDropdownItem)menuItem.Tag == item)
-                            _menu.Items.Remove(menuItem);
+                        if (SelectedItem == null)
+                            SelectedItem = item;
                     }
-                }
+                    break;
+                    
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (DarkDropdownItem item in e.OldItems)
+                    {
+                        foreach (ToolStripMenuItem menuItem in _menu.Items)
+                        {
+                            if ((DarkDropdownItem)menuItem.Tag == item)
+                                _menu.Items.Remove(menuItem);
+                        }
+                    }
+                    break;
             }
 
             ResizeMenu();
@@ -397,90 +387,97 @@ namespace DarkUI.Controls
             }
 
             // Draw normal state
-            if (ControlState == DarkControlState.Normal)
+            switch (ControlState)
             {
-                if (ShowBorder)
-                {
-                    using (var p = new Pen(Colors.LightBorder, 1))
+                case DarkControlState.Normal:
+                    if (ShowBorder)
                     {
-                        var modRect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
+                        using (var p = new Pen(Colors.LightBorder, 1))
+                        {
+                            var modRect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top,
+                                ClientRectangle.Width - 1, ClientRectangle.Height - 1);
+                            g.DrawRectangle(p, modRect);
+                        }
+                    }
+                    break;
+                case DarkControlState.Hover:
+                    using (var b = new SolidBrush(Colors.DarkBorder))
+                    {
+                        g.FillRectangle(b, ClientRectangle);
+                    }
+
+                    using (var b = new SolidBrush(Colors.DarkBackground))
+                    {
+                        var arrowRect = new Rectangle(ClientRectangle.Right - DropdownIcons.small_arrow.Width - 8,
+                            ClientRectangle.Top, DropdownIcons.small_arrow.Width + 8, ClientRectangle.Height);
+                        g.FillRectangle(b, arrowRect);
+                    }
+
+                    using (var p = new Pen(Colors.BlueSelection, 1))
+                    {
+                        var modRect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top,
+                            ClientRectangle.Width - 1 - DropdownIcons.small_arrow.Width - 8, ClientRectangle.Height - 1);
                         g.DrawRectangle(p, modRect);
                     }
-                }
+                    break;
+                case DarkControlState.Pressed:
+                    using (var b = new SolidBrush(Colors.DarkBorder))
+                    {
+                        g.FillRectangle(b, ClientRectangle);
+                    }
+
+                    using (var b = new SolidBrush(Colors.BlueSelection))
+                    {
+                        var arrowRect = new Rectangle(ClientRectangle.Right - DropdownIcons.small_arrow.Width - 8,
+                            ClientRectangle.Top, DropdownIcons.small_arrow.Width + 8, ClientRectangle.Height);
+                        g.FillRectangle(b, arrowRect);
+                    }
+                    break;
             }
 
             // Draw hover state
-            if (ControlState == DarkControlState.Hover)
-            {
-                using (var b = new SolidBrush(Colors.DarkBorder))
-                {
-                    g.FillRectangle(b, ClientRectangle);
-                }
-
-                using (var b = new SolidBrush(Colors.DarkBackground))
-                {
-                    var arrowRect = new Rectangle(ClientRectangle.Right - DropdownIcons.small_arrow.Width - 8, ClientRectangle.Top, DropdownIcons.small_arrow.Width + 8, ClientRectangle.Height);
-                    g.FillRectangle(b, arrowRect);
-                }
-
-                using (var p = new Pen(Colors.BlueSelection, 1))
-                {
-                    var modRect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1 - DropdownIcons.small_arrow.Width - 8, ClientRectangle.Height - 1);
-                    g.DrawRectangle(p, modRect);
-                }
-            }
 
             // Draw pressed state
-            if (ControlState == DarkControlState.Pressed)
-            {
-                using (var b = new SolidBrush(Colors.DarkBorder))
-                {
-                    g.FillRectangle(b, ClientRectangle);
-                }
-
-                using (var b = new SolidBrush(Colors.BlueSelection))
-                {
-                    var arrowRect = new Rectangle(ClientRectangle.Right - DropdownIcons.small_arrow.Width - 8, ClientRectangle.Top, DropdownIcons.small_arrow.Width + 8, ClientRectangle.Height);
-                    g.FillRectangle(b, arrowRect);
-                }
-            }
 
             // Draw dropdown arrow
             using (var img = DropdownIcons.small_arrow)
             {
-                g.DrawImage(img, ClientRectangle.Right - img.Width - 4, ClientRectangle.Top + (ClientRectangle.Height / 2) - (img.Height / 2));
+                g.DrawImage(img, ClientRectangle.Right - img.Width - 4,
+                    ClientRectangle.Top + (ClientRectangle.Height / 2) - (img.Height / 2));
             }
 
             // Draw selected item
-            if (SelectedItem != null)
+            if (SelectedItem == null)
+                return;
+            // Draw Icon
+            var hasIcon = SelectedItem.Icon != null;
+
+            if (hasIcon)
             {
-                // Draw Icon
-                var hasIcon = SelectedItem.Icon != null;
+                g.DrawImage(SelectedItem.Icon,
+                    new Point(ClientRectangle.Left + 5,
+                        ClientRectangle.Top + (ClientRectangle.Height / 2) - (IconSize / 2)));
+            }
+
+            // Draw Text
+            using (var b = new SolidBrush(Colors.LightText))
+            {
+                var stringFormat = new StringFormat
+                {
+                    Alignment = StringAlignment.Near,
+                    LineAlignment = StringAlignment.Center
+                };
+
+                var rect = new Rectangle(ClientRectangle.Left + 2, ClientRectangle.Top, ClientRectangle.Width - 16,
+                    ClientRectangle.Height);
 
                 if (hasIcon)
                 {
-                    g.DrawImage(SelectedItem.Icon, new Point(ClientRectangle.Left + 5, ClientRectangle.Top + (ClientRectangle.Height / 2) - (_iconSize / 2)));
+                    rect.X += IconSize + 7;
+                    rect.Width -= IconSize + 7;
                 }
 
-                // Draw Text
-                using (var b = new SolidBrush(Colors.LightText))
-                {
-                    var stringFormat = new StringFormat
-                    {
-                        Alignment = StringAlignment.Near,
-                        LineAlignment = StringAlignment.Center
-                    };
-
-                    var rect = new Rectangle(ClientRectangle.Left + 2, ClientRectangle.Top, ClientRectangle.Width - 16, ClientRectangle.Height);
-
-                    if (hasIcon)
-                    {
-                        rect.X += _iconSize + 7;
-                        rect.Width -= _iconSize + 7;
-                    }
-
-                    g.DrawString(SelectedItem.Text, Font, b, rect, stringFormat);
-                }
+                g.DrawString(SelectedItem.Text, Font, b, rect, stringFormat);
             }
         }
 

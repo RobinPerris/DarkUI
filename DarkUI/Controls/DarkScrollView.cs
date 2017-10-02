@@ -38,15 +38,15 @@ namespace DarkUI.Controls
             g.TranslateTransform(Viewport.Left, Viewport.Top);
 
             // Draw the bit where the scrollbars meet
-            if (_vScrollBar.Visible && _hScrollBar.Visible)
+            if (!VScrollBar.Visible || !HScrollBar.Visible)
+                return;
+            
+            using (var b = new SolidBrush(BackColor))
             {
-                using (var b = new SolidBrush(BackColor))
-                {
-                    var rect = new Rectangle(_hScrollBar.Right, _vScrollBar.Bottom, _vScrollBar.Width,
-                                             _hScrollBar.Height);
+                var rect = new Rectangle(HScrollBar.Right, VScrollBar.Bottom, VScrollBar.Width,
+                    HScrollBar.Height);
 
-                    g.FillRectangle(b, rect);
-                }
+                g.FillRectangle(b, rect);
             }
         }
 

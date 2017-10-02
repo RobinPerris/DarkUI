@@ -79,7 +79,7 @@ namespace DarkUI.Forms
 
             // Focus default button
             int i = 0;
-            foreach (Button button in Buttons)
+            foreach (var button in Buttons)
                 if (button.Visible)
                     if (i++ == defaultButtonIndex)
                     {
@@ -138,7 +138,7 @@ namespace DarkUI.Forms
             SetFlowSize();
         }
 
-        private void ShowButton(DarkButton button, bool isLast = false)
+        private static void ShowButton(Control button, bool isLast = false)
         {
             button.SendToBack();
 

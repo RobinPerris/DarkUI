@@ -21,12 +21,11 @@ namespace DarkUI.Controls
         #region Field Region
 
         private int _itemHeight = 20;
-        private bool _multiSelect;
 
-        private readonly int _iconSize = 16;
+        private const int IconSize = 16;
 
         private ObservableCollection<DarkListItem> _items;
-        private List<int> _selectedIndices;
+        private readonly List<int> _selectedIndices;
         private int _anchoredItemStart = -1;
         private int _anchoredItemEnd = -1;
 
@@ -75,11 +74,7 @@ namespace DarkUI.Controls
         [Category("Behaviour")]
         [Description("Determines whether multiple list view items can be selected at once.")]
         [DefaultValue(false)]
-        public bool MultiSelect
-        {
-            get { return _multiSelect; }
-            set { _multiSelect = value; }
-        }
+        public bool MultiSelect { get; set; }
 
         [Category("Appearance")]
         [Description("Determines whether icons are rendered with the list items.")]
@@ -145,8 +140,7 @@ namespace DarkUI.Controls
                 {
                     _selectedIndices.Clear();
 
-                    if (SelectedIndicesChanged != null)
-                        SelectedIndicesChanged(this, null);
+                    SelectedIndicesChanged?.Invoke(this, null);
                 }
             }
 
@@ -184,15 +178,15 @@ namespace DarkUI.Controls
             {
                 var rect = new Rectangle(0, i * ItemHeight, width, ItemHeight);
 
-                if (rect.Contains(pos))
-                {
-                    if (MultiSelect && ModifierKeys == Keys.Shift)
-                        SelectAnchoredRange(i);
-                    else if (MultiSelect && ModifierKeys == Keys.Control)
-                        ToggleItem(i);
-                    else
-                        SelectItem(i);
-                }
+                if (!rect.Contains(pos))
+                    continue;
+                
+                if (MultiSelect && ModifierKeys == Keys.Shift)
+                    SelectAnchoredRange(i);
+                else if (MultiSelect && ModifierKeys == Keys.Control)
+                    ToggleItem(i);
+                else
+                    SelectItem(i);
             }
         }
 
@@ -258,8 +252,7 @@ namespace DarkUI.Controls
             _selectedIndices.Clear();
             _selectedIndices.Add(index);
 
-            if (SelectedIndicesChanged != null)
-                SelectedIndicesChanged(this, null);
+            SelectedIndicesChanged?.Invoke(this, null);
 
             _anchoredItemStart = index;
             _anchoredItemEnd = index;
@@ -281,8 +274,7 @@ namespace DarkUI.Controls
                 _selectedIndices.Add(index);
             }
 
-            if (SelectedIndicesChanged != null)
-                SelectedIndicesChanged(this, null);
+            SelectedIndicesChanged?.Invoke(this, null);
 
             _anchoredItemStart = list[list.Count - 1];
             _anchoredItemEnd = list[list.Count - 1];
@@ -340,8 +332,7 @@ namespace DarkUI.Controls
                 _anchoredItemEnd = index;
             }
 
-            if (SelectedIndicesChanged != null)
-                SelectedIndicesChanged(this, null);
+            SelectedIndicesChanged?.Invoke(this, null);
 
             Invalidate();
         }
@@ -364,8 +355,7 @@ namespace DarkUI.Controls
                     _selectedIndices.Add(i);
             }
 
-            if (SelectedIndicesChanged != null)
-                SelectedIndicesChanged(this, null);
+            SelectedIndicesChanged?.Invoke(this, null);
 
             Invalidate();
         }
@@ -405,7 +395,7 @@ namespace DarkUI.Controls
             size.Width++;
 
             if (ShowIcons)
-                size.Width += _iconSize + 8;
+                size.Width += IconSize + 8;
 
             item.Area = new Rectangle(item.Area.Left, item.Area.Top, (int)size.Width, item.Area.Height);
         }
@@ -457,8 +447,7 @@ namespace DarkUI.Controls
             if (SelectedIndices.Count == 0)
                 return;
 
-            var itemTop = -1;
-
+            int itemTop;
             if (!MultiSelect)
                 itemTop = SelectedIndices[0] * ItemHeight;
             else
@@ -486,13 +475,6 @@ namespace DarkUI.Controls
                 bottom = Items.Count;
 
             var result = Enumerable.Range(top, bottom - top);
-            return result;
-        }
-
-        private IEnumerable<DarkListItem> ItemsInView()
-        {
-            var indexes = ItemIndexesInView();
-            var result = indexes.Select(index => Items[index]).ToList();
             return result;
         }
 
@@ -536,7 +518,7 @@ namespace DarkUI.Controls
                 // Icon
                 if (ShowIcons && Items[i].Icon != null)
                 {
-                    g.DrawImage(Items[i].Icon, new Point(rect.Left + 5, rect.Top + (rect.Height / 2) - (_iconSize / 2)));
+                    g.DrawImage(Items[i].Icon, new Point(rect.Left + 5, rect.Top + (rect.Height / 2) - (IconSize / 2)));
                 }
 
                 // Text
@@ -553,7 +535,7 @@ namespace DarkUI.Controls
                     var modRect = new Rectangle(rect.Left + 2, rect.Top, rect.Width, rect.Height);
 
                     if (ShowIcons)
-                        modRect.X += _iconSize + 8;
+                        modRect.X += IconSize + 8;
 
                     g.DrawString(Items[i].Text, modFont, b, modRect, stringFormat);
                 }

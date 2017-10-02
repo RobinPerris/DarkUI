@@ -34,8 +34,7 @@ namespace DarkUI.Docking
 
                 _dockText = value;
 
-                if (DockTextChanged != null)
-                    DockTextChanged(this, null);
+                DockTextChanged?.Invoke(this, null);
 
                 Invalidate();
             }
@@ -86,17 +85,13 @@ namespace DarkUI.Docking
 
         #region Constructor Region
 
-        public DarkDockContent()
-        { }
-
         #endregion
 
         #region Method Region
 
         public virtual void Close()
         {
-            if (DockPanel != null)
-                DockPanel.RemoveContent(this);
+            DockPanel?.RemoveContent(this);
         }
 
         #endregion

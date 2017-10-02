@@ -18,7 +18,7 @@ namespace DarkUI.Controls
         private bool _isDefault;
         private bool _spacePressed;
 
-        private int _padding = Consts.Padding / 2;
+        private const int _padding = Consts.Padding / 2;
         private int _imagePadding = 5; // Consts.Padding / 2
 
         #endregion
@@ -276,17 +276,17 @@ namespace DarkUI.Controls
         {
             base.OnKeyUp(e);
 
-            if (e.KeyCode == Keys.Space)
-            {
-                _spacePressed = false;
+            if (e.KeyCode != Keys.Space)
+                return;
+            
+            _spacePressed = false;
 
-                var location = Cursor.Position;
+            var location = Cursor.Position;
 
-                if (!ClientRectangle.Contains(location))
-                    SetButtonState(DarkControlState.Normal);
-                else
-                    SetButtonState(DarkControlState.Hover);
-            }
+            if (!ClientRectangle.Contains(location))
+                SetButtonState(DarkControlState.Normal);
+            else
+                SetButtonState(DarkControlState.Hover);
         }
 
         public override void NotifyDefault(bool value)
@@ -315,35 +315,36 @@ namespace DarkUI.Controls
 
             if (Enabled)
             {
-                if (ButtonStyle == DarkButtonStyle.Normal)
+                switch (ButtonStyle)
                 {
-                    if (Focused && TabStop)
-                        borderColor = Colors.BlueHighlight;
+                    case DarkButtonStyle.Normal:
+                        if (Focused && TabStop)
+                            borderColor = Colors.BlueHighlight;
 
-                    switch (ButtonState)
-                    {
-                        case DarkControlState.Hover:
-                            fillColor = _isDefault ? Colors.BlueBackground : Colors.LighterBackground;
-                            break;
-                        case DarkControlState.Pressed:
-                            fillColor = _isDefault ? Colors.DarkBackground : Colors.DarkBackground;
-                            break;
-                    }
-                }
-                else if (ButtonStyle == DarkButtonStyle.Flat)
-                {
-                    switch (ButtonState)
-                    {
-                        case DarkControlState.Normal:
-                            fillColor = Colors.GreyBackground;
-                            break;
-                        case DarkControlState.Hover:
-                            fillColor = Colors.MediumBackground;
-                            break;
-                        case DarkControlState.Pressed:
-                            fillColor = Colors.DarkBackground;
-                            break;
-                    }
+                        switch (ButtonState)
+                        {
+                            case DarkControlState.Hover:
+                                fillColor = _isDefault ? Colors.BlueBackground : Colors.LighterBackground;
+                                break;
+                            case DarkControlState.Pressed:
+                                fillColor = Colors.DarkBackground;
+                                break;
+                        }
+                        break;
+                    case DarkButtonStyle.Flat:
+                        switch (ButtonState)
+                        {
+                            case DarkControlState.Normal:
+                                fillColor = Colors.GreyBackground;
+                                break;
+                            case DarkControlState.Hover:
+                                fillColor = Colors.MediumBackground;
+                                break;
+                            case DarkControlState.Pressed:
+                                fillColor = Colors.DarkBackground;
+                                break;
+                        }
+                        break;
                 }
             }
             else

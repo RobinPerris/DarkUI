@@ -9,8 +9,8 @@ namespace DarkUI.Docking
     {
         #region Field Region
 
-        private Control _parentControl;
-        private Control _control;
+        private readonly Control _parentControl;
+        private readonly Control _control;
 
         private int _minimum;
         private int _maximum;
@@ -57,8 +57,7 @@ namespace DarkUI.Docking
 
         public void ShowOverlay()
         {
-            _overlayForm = new DarkTranslucentForm(Color.Black);
-            _overlayForm.Visible = true;
+            _overlayForm = new DarkTranslucentForm(Color.Black) {Visible = true};
 
             UpdateOverlay(new Point(0, 0));
         }
@@ -102,7 +101,7 @@ namespace DarkUI.Docking
                     var bottomY = Math.Max(bounds.Location.Y - difference.Y, _minimum);
 
                     if (_maximum != 0 && bottomY > _maximum)
-                        topY = _maximum;
+                        bottomY = _maximum;
 
                     bounds.Location = new Point(bounds.Location.X, bottomY);
                     break;

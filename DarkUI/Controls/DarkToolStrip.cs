@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public class DarkToolStrip : ToolStrip
+    public sealed class DarkToolStrip : ToolStrip
     {
         #region Constructor Region
 

@@ -21,7 +21,7 @@ namespace DarkUI.Renderers
                     item.Margin = new Padding(0, 0, 2, 0);
             }
 
-            if (item.GetType() == typeof(ToolStripButton))
+            if (item is ToolStripButton)
             {
                 item.AutoSize = false;
                 item.Size = new Size(24, 24);
@@ -38,7 +38,7 @@ namespace DarkUI.Renderers
 
             var g = e.Graphics;
 
-            if (e.ToolStrip.GetType() == typeof(ToolStripOverflow))
+            if (e.ToolStrip is ToolStripOverflow)
             {
                 using (var p = new Pen(Colors.GreyBackground))
                 {

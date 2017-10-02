@@ -16,6 +16,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+      <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,7 +65,6 @@
     <Compile Include="Controls\DarkDropdownList.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DarkContentAlignment.cs" />
     <Compile Include="Controls\DarkControlState.cs" />
     <Compile Include="Controls\DarkListBox.cs">
       <SubType>Component</SubType>
@@ -155,7 +155,6 @@
     <Compile Include="Docking\DockRegionState.cs" />
     <Compile Include="Docking\DockInsertType.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
-    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Forms\DarkDialog.cs">
       <SubType>Form</SubType>
     </Compile>
