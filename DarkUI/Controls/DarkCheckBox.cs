@@ -337,7 +337,7 @@ namespace DarkUI.Controls
                     Rectangle boxRect;
 
                     if (CheckAlign == ContentAlignment.MiddleRight)
-                        boxRect = new Rectangle(rect.Width, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
+                        boxRect = new Rectangle(rect.Width - size, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
                     else
                         boxRect = new Rectangle(2, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
 
