@@ -320,7 +320,13 @@ namespace DarkUI.Controls
 
             using (var p = new Pen(borderColor))
             {
-                var boxRect = new Rectangle(0, (rect.Height / 2) - (size / 2), size, size);
+                Rectangle boxRect;
+
+                if(CheckAlign == ContentAlignment.MiddleRight)
+                    boxRect = new Rectangle(rect.Width - size - 2, (rect.Height / 2) - (size / 2), size, size);
+                else
+                    boxRect = new Rectangle(0, (rect.Height / 2) - (size / 2), size, size);
+
                 g.DrawRectangle(p, boxRect);
             }
 
@@ -328,7 +334,13 @@ namespace DarkUI.Controls
             {
                 using (var b = new SolidBrush(fillColor))
                 {
-                    Rectangle boxRect = new Rectangle(2, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
+                    Rectangle boxRect;
+
+                    if (CheckAlign == ContentAlignment.MiddleRight)
+                        boxRect = new Rectangle(rect.Width, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
+                    else
+                        boxRect = new Rectangle(2, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
+
                     g.FillRectangle(b, boxRect);
                 }
             }
@@ -338,10 +350,16 @@ namespace DarkUI.Controls
                 var stringFormat = new StringFormat
                 {
                     LineAlignment = StringAlignment.Center,
-                    Alignment = StringAlignment.Near
+                    Alignment = (CheckAlign == ContentAlignment.MiddleRight) ? StringAlignment.Far : StringAlignment.Near
                 };
 
-                var modRect = new Rectangle(size + 4, 0, rect.Width - size, rect.Height);
+                Rectangle modRect;
+
+                if (CheckAlign == ContentAlignment.MiddleRight)
+                    modRect = new Rectangle(0, 0, rect.Width - size - 5, rect.Height);
+                else
+                    modRect = new Rectangle(size + 4, 0, rect.Width - size, rect.Height);
+
                 g.DrawString(Text, Font, b, modRect, stringFormat);
             }
         }
