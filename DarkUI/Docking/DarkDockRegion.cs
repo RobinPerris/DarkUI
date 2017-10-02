@@ -494,6 +494,12 @@ namespace DarkUI.Docking
             UpdateSplitterBounds();
         }
 
+        protected override void OnLocationChanged(EventArgs e)
+        {
+            base.OnLocationChanged(e);
+            UpdateSplitterBounds();
+        }
+
         protected override void OnLayout(LayoutEventArgs e)
         {
             base.OnLayout(e);
