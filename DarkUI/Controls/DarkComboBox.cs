@@ -60,8 +60,8 @@ namespace DarkUI.Controls
             FlatStyle = FlatStyle.Flat;
             DropDownStyle = ComboBoxStyle.DropDownList;
 
-            BackColor = Color.FromArgb(69, 73, 74);
-            ForeColor = Color.Gainsboro;
+            BackColor = Colors.LightBackground;
+            ForeColor = Colors.LightText;
 
             _focusColor = SystemColors.Highlight;
             _focusBrush = new SolidBrush(_focusColor);

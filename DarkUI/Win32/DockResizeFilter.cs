@@ -170,43 +170,65 @@ namespace DarkUI.Win32
         {
             if(_activeSplitter.SplitterMode == DarkSplitterMode.Region)
             {
-                Rectangle oppositeRegion;
-                Point maxPoint;
+                Rectangle oppositeRegion = new Rectangle();
+                Point maxPoint = new Point();
+                bool oppositeRegionPresent = true;
 
                 switch (_activeSplitter.SplitterType)
                 {
                     default:
                     case DarkSplitterType.Right:
-                        oppositeRegion = _dockPanel.Regions[DarkDockArea.Right].Bounds;
-                        oppositeRegion.X -= Consts.MinimumRegionSize;
-                        oppositeRegion.Width += Consts.MinimumRegionSize + _dockPanel.Regions[DarkDockArea.Right].Margin.Right;
-                        maxPoint = new Point(oppositeRegion.X, 0);
+                        if(!_dockPanel.Regions[DarkDockArea.Right].Visible)
+                            oppositeRegionPresent = false;
+                        else
+                        { 
+                            oppositeRegion = _dockPanel.Regions[DarkDockArea.Right].Bounds;
+                            oppositeRegion.X -= Consts.MinimumRegionSize;
+                            oppositeRegion.Width += Consts.MinimumRegionSize + _dockPanel.Regions[DarkDockArea.Right].Margin.Right;
+                            maxPoint = new Point(oppositeRegion.X, 0);
+                        }
                         break;
 
                     case DarkSplitterType.Left:
-                        oppositeRegion = _dockPanel.Regions[DarkDockArea.Left].Bounds;
-                        oppositeRegion.X -= _dockPanel.Regions[DarkDockArea.Left].Margin.Left;
-                        oppositeRegion.Width += Consts.MinimumRegionSize;
-                        maxPoint = new Point(oppositeRegion.X + oppositeRegion.Width, 0);
+                        if (!_dockPanel.Regions[DarkDockArea.Left].Visible)
+                            oppositeRegionPresent = false;
+                        else
+                        {
+                            oppositeRegion = _dockPanel.Regions[DarkDockArea.Left].Bounds;
+                            oppositeRegion.X -= _dockPanel.Regions[DarkDockArea.Left].Margin.Left;
+                            oppositeRegion.Width += Consts.MinimumRegionSize;
+                            maxPoint = new Point(oppositeRegion.X + oppositeRegion.Width, 0);
+                        }
                         break;
 
                     case DarkSplitterType.Top:
-                        oppositeRegion = _dockPanel.Regions[DarkDockArea.Document].Bounds;
-                        oppositeRegion.Y -= _dockPanel.Regions[DarkDockArea.Document].Margin.Top;
-                        oppositeRegion.Height = Consts.MinimumRegionSize;
-                        maxPoint = new Point(0, oppositeRegion.Y + oppositeRegion.Height);
+                        if (!_dockPanel.Regions[DarkDockArea.Document].Visible)
+                            oppositeRegionPresent = false;
+                        else
+                        {
+                            oppositeRegion = _dockPanel.Regions[DarkDockArea.Document].Bounds;
+                            oppositeRegion.Y -= _dockPanel.Regions[DarkDockArea.Document].Margin.Top;
+                            oppositeRegion.Height = Consts.MinimumRegionSize;
+                            maxPoint = new Point(0, oppositeRegion.Y + oppositeRegion.Height);
+                        }
                         break;
 
                     case DarkSplitterType.Bottom:
-                        oppositeRegion = _dockPanel.Regions[DarkDockArea.Bottom].Bounds;
-                        oppositeRegion.Y += oppositeRegion.Height - Consts.MinimumRegionSize;
-                        oppositeRegion.Height += Consts.MinimumRegionSize + _dockPanel.Regions[DarkDockArea.Bottom].Margin.Bottom;
-                        maxPoint = new Point(0, oppositeRegion.Y);
+                        if (!_dockPanel.Regions[DarkDockArea.Bottom].Visible)
+                            oppositeRegionPresent = false;
+                        else
+                        {
+                            oppositeRegion = _dockPanel.Regions[DarkDockArea.Bottom].Bounds;
+                            oppositeRegion.Y += oppositeRegion.Height - Consts.MinimumRegionSize;
+                            oppositeRegion.Height += Consts.MinimumRegionSize + _dockPanel.Regions[DarkDockArea.Bottom].Margin.Bottom;
+                            maxPoint = new Point(0, oppositeRegion.Y);
+                        }
                         break;
                 }
 
                 Debug.Assert(_dockPanel.ParentForm != null, "_dockPanel.ParentForm != null");
-                if(_dockPanel.ParentForm.RectangleToScreen(oppositeRegion).Contains(Cursor.Position))
+
+                if(oppositeRegionPresent && _dockPanel.ParentForm.RectangleToScreen(oppositeRegion).Contains(Cursor.Position))
                 {
                     maxPoint = _dockPanel.ParentForm.PointToScreen(maxPoint);
                     return new Point(_initialContact.X - maxPoint.X, _initialContact.Y - maxPoint.Y);

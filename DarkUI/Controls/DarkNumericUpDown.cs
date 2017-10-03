@@ -24,8 +24,8 @@ namespace DarkUI.Controls
 
         public DarkNumericUpDown()
         {
-            ForeColor = Color.Gainsboro;
-            BackColor = Color.FromArgb(69, 73, 74);
+            BackColor = Colors.LightBackground;
+            ForeColor = Colors.LightText;
             SetStyle(ControlStyles.OptimizedDoubleBuffer |
                    ControlStyles.ResizeRedraw |
                    ControlStyles.UserPaint, true);

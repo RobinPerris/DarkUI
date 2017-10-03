@@ -15,7 +15,7 @@ namespace DarkUI.Controls
                     ControlStyles.ResizeRedraw |
                     ControlStyles.UserPaint, true);
             Paint += DarkGroupBox_Paint;
-            ForeColor = Color.Gainsboro;
+            ForeColor = Colors.LightText;
             BackColor = Colors.GreyBackground;
             ResizeRedraw = true;
             DoubleBuffered = true;
