@@ -35,8 +35,8 @@ namespace DarkUI.Controls
             MouseDown += DarkNumericUpDown_MouseDown;
             try
             {
-                // Prevent flickering, only if our assembly 
-                // has reflection permission. 
+                // Prevent flickering, only if our assembly
+                // has reflection permission.
                 Type type = Controls[0].GetType();
                 BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
                 MethodInfo method = type.GetMethod("SetStyle", flags);
@@ -112,16 +112,11 @@ namespace DarkUI.Controls
                 decimal newValue = Value;
 
                 if (e.Delta > 0)
-                    newValue += (ModifierKeys == Keys.Shift) ? IncrementAlternate: Increment;
+                    newValue += (ModifierKeys == Keys.Shift) ? IncrementAlternate : Increment;
                 else
                     newValue -= (ModifierKeys == Keys.Shift) ? IncrementAlternate : Increment;
-                if (newValue > Maximum)
-                    newValue = Maximum;
-                else
-                    if (newValue < Minimum)
-                    newValue = Minimum;
 
-                Value = newValue;
+                Value = Math.Min(Maximum, Math.Max(Minimum, newValue));
             }
             else
                 base.OnMouseWheel(e);
@@ -130,9 +125,7 @@ namespace DarkUI.Controls
         public override void UpButton()
         {
             if (ModifierKeys.HasFlag(Keys.Shift))
-            {
-                Value += IncrementAlternate;
-            }
+                Value = Math.Min(Maximum, Value + IncrementAlternate);
             else
                 base.UpButton();
         }
@@ -140,9 +133,7 @@ namespace DarkUI.Controls
         public override void DownButton()
         {
             if (ModifierKeys.HasFlag(Keys.Shift))
-            {
-                Value -= IncrementAlternate;
-            }
+                Value = Math.Max(Minimum, Value - IncrementAlternate);
             else
                 base.DownButton();
         }
