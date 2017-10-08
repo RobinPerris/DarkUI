@@ -374,23 +374,12 @@ namespace DarkUI.Docking
                     MinimumSize = new Size(minRegionSize, 0);
                     break;
 
-                case DarkDockArea.Bottom:
-                    {
-                        bool tabsVisible = false;
-
-                        foreach (var group in _groups)
-                        {
-                            if (minRegionSize < group.MinimumSize.Height)
-                                minRegionSize = group.MinimumSize.Height + 2;
-
-                            if (group.ContentCount > 1)
-                                tabsVisible = true;
-                        }
-                        if (tabsVisible)
-                            minRegionSize += Consts.ToolWindowTabAreaSize;
-                        MinimumSize = new Size(0, minRegionSize);
-                        break;
-                    }
+            case DarkDockArea.Bottom:
+                    foreach (var group in _groups)
+                        if (minRegionSize < group.MinimumSize.Height)
+                            minRegionSize = group.MinimumSize.Height + 2;
+                    MinimumSize = new Size(0, minRegionSize);
+                    break;
             }
         }
 

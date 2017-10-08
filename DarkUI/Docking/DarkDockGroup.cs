@@ -238,9 +238,6 @@ namespace DarkUI.Docking
             
             Size maxMinSize = new Size(Consts.ToolWindowHeaderSize, Consts.ToolWindowHeaderSize);
 
-            if(DockArea != DarkDockArea.Bottom && _contents.Count > 1)
-                maxMinSize.Height += Consts.ToolWindowTabAreaSize;
-
             foreach (var currContent in _contents)
             {
                 switch (DockArea)
@@ -262,6 +259,9 @@ namespace DarkUI.Docking
                 if (currContent.MinimumSize.Width > maxMinSize.Width)
                     maxMinSize.Width = currContent.MinimumSize.Width;
             }
+
+            if (_contents.Count > 1)
+                maxMinSize.Height += Consts.ToolWindowTabAreaSize;
 
             MinimumSize = maxMinSize;
 
