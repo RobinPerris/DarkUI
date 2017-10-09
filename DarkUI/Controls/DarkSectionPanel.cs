@@ -30,6 +30,12 @@ namespace DarkUI.Controls
             set
             {
                 _sectionHeader = value;
+
+                if(_sectionHeader == null)
+                    base.Padding = new Padding(1, 1, 1, 1);
+                else
+                    base.Padding = new Padding(1, 25, 1, 1);
+
                 Invalidate();
             }
         }
@@ -43,8 +49,6 @@ namespace DarkUI.Controls
             SetStyle(ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw |
                      ControlStyles.UserPaint, true);
-
-            base.Padding = new Padding(1, 25, 1, 1);
         }
 
         #endregion
@@ -89,44 +93,47 @@ namespace DarkUI.Controls
             }
 
             // Draw header
-            var bgColor = ContainsFocus ? Colors.BlueBackground : Colors.HeaderBackground;
-            var darkColor = ContainsFocus ? Colors.DarkBlueBorder : Colors.DarkBorder;
-            var lightColor = ContainsFocus ? Colors.LightBlueBorder : Colors.LightBorder;
-
-            using (var b = new SolidBrush(bgColor))
+            if(_sectionHeader != null)
             {
-                var bgRect = new Rectangle(0, 0, rect.Width, 25);
-                g.FillRectangle(b, bgRect);
-            }
+                var bgColor = ContainsFocus ? Colors.BlueBackground : Colors.HeaderBackground;
+                var darkColor = ContainsFocus ? Colors.DarkBlueBorder : Colors.DarkBorder;
+                var lightColor = ContainsFocus ? Colors.LightBlueBorder : Colors.LightBorder;
 
-            using (var p = new Pen(darkColor))
-            {
-                g.DrawLine(p, rect.Left, 0, rect.Right, 0);
-                g.DrawLine(p, rect.Left, 25 - 1, rect.Right, 25 - 1);
-            }
-
-            using (var p = new Pen(lightColor))
-            {
-                g.DrawLine(p, rect.Left, 1, rect.Right, 1);
-            }
-
-            var xOffset = 3;
-
-            using (var b = new SolidBrush(Colors.LightText))
-            {
-                var textRect = new Rectangle(xOffset, 0, rect.Width - 4 - xOffset, 25);
-
-                var format = new StringFormat
+                using (var b = new SolidBrush(bgColor))
                 {
-                    Alignment = StringAlignment.Near,
-                    LineAlignment = StringAlignment.Center,
-                    FormatFlags = StringFormatFlags.NoWrap,
-                    Trimming = StringTrimming.EllipsisCharacter
-                };
+                    var bgRect = new Rectangle(0, 0, rect.Width, 25);
+                    g.FillRectangle(b, bgRect);
+                }
 
-                g.DrawString(SectionHeader, Font, b, textRect, format);
+                using (var p = new Pen(darkColor))
+                {
+                    g.DrawLine(p, rect.Left, 0, rect.Right, 0);
+                    g.DrawLine(p, rect.Left, 25 - 1, rect.Right, 25 - 1);
+                }
+
+                using (var p = new Pen(lightColor))
+                {
+                    g.DrawLine(p, rect.Left, 1, rect.Right, 1);
+                }
+
+                var xOffset = 3;
+
+                using (var b = new SolidBrush(Colors.LightText))
+                {
+                    var textRect = new Rectangle(xOffset, 0, rect.Width - 4 - xOffset, 25);
+
+                    var format = new StringFormat
+                    {
+                        Alignment = StringAlignment.Near,
+                        LineAlignment = StringAlignment.Center,
+                        FormatFlags = StringFormatFlags.NoWrap,
+                        Trimming = StringTrimming.EllipsisCharacter
+                    };
+
+                    g.DrawString(SectionHeader, Font, b, textRect, format);
+                }
             }
-
+            
             // Draw border
             using (var p = new Pen(Colors.DarkBorder, 1))
             {
