@@ -180,7 +180,7 @@ namespace DarkUI.Controls
 
                 if (!rect.Contains(pos))
                     continue;
-                
+
                 if (MultiSelect && ModifierKeys == Keys.Shift)
                     SelectAnchoredRange(i);
                 else if (MultiSelect && ModifierKeys == Keys.Control)
@@ -486,59 +486,59 @@ namespace DarkUI.Controls
         {
             var range = ItemIndexesInView().ToList();
 
-            if (range.Count == 0)
-                return;
-
-            var top = range.Min();
-            var bottom = range.Max();
-
-            for (var i = top; i <= bottom; i++)
+            if (range.Count != 0)
             {
-                var width = Math.Max(ContentSize.Width, Viewport.Width);
-                var rect = new Rectangle(0, i * ItemHeight, width, ItemHeight);
+                var top = range.Min();
+                var bottom = range.Max();
 
-                // Background
-                var odd = i % 2 != 0;
-                var bgColor = !odd ? Colors.HeaderBackground : Colors.GreyBackground;
-
-                if (SelectedIndices.Count > 0 && SelectedIndices.Contains(i))
-                    bgColor = Focused ? Colors.BlueSelection : Colors.GreySelection;
-
-                using (var b = new SolidBrush(bgColor))
+                for (var i = top; i <= bottom; i++)
                 {
-                    g.FillRectangle(b, rect);
-                }
+                    var width = Math.Max(ContentSize.Width, Viewport.Width);
+                    var rect = new Rectangle(0, i * ItemHeight, width, ItemHeight);
 
-                // DEBUG: Border
-                /*using (var p = new Pen(Colors.DarkBorder))
-                {
-                    g.DrawLine(p, new Point(rect.Left, rect.Bottom - 1), new Point(rect.Right, rect.Bottom - 1));
-                }*/
+                    // Background
+                    var odd = i % 2 != 0;
+                    var bgColor = !odd ? Colors.HeaderBackground : Colors.GreyBackground;
 
-                // Icon
-                if (ShowIcons && Items[i].Icon != null)
-                {
-                    g.DrawImage(Items[i].Icon, new Point(rect.Left + 5, rect.Top + (rect.Height / 2) - (IconSize / 2)));
-                }
+                    if (SelectedIndices.Count > 0 && SelectedIndices.Contains(i))
+                        bgColor = Focused ? Colors.BlueSelection : Colors.GreySelection;
 
-                // Text
-                using (var b = new SolidBrush(Items[i].TextColor))
-                {
-                    var stringFormat = new StringFormat
+                    using (var b = new SolidBrush(bgColor))
                     {
-                        Alignment = StringAlignment.Near,
-                        LineAlignment = StringAlignment.Center
-                    };
+                        g.FillRectangle(b, rect);
+                    }
 
-                    var modFont = new Font(Font, Items[i].FontStyle);
+                    // Icon
+                    if (ShowIcons && Items[i].Icon != null)
+                    {
+                        g.DrawImage(Items[i].Icon, new Point(rect.Left + 5, rect.Top + (rect.Height / 2) - (IconSize / 2)));
+                    }
 
-                    var modRect = new Rectangle(rect.Left + 2, rect.Top, rect.Width, rect.Height);
+                    // Text
+                    using (var b = new SolidBrush(Items[i].TextColor))
+                    {
+                        var stringFormat = new StringFormat
+                        {
+                            Alignment = StringAlignment.Near,
+                            LineAlignment = StringAlignment.Center
+                        };
 
-                    if (ShowIcons)
-                        modRect.X += IconSize + 8;
+                        var modFont = new Font(Font, Items[i].FontStyle);
 
-                    g.DrawString(Items[i].Text, modFont, b, modRect, stringFormat);
+                        var modRect = new Rectangle(rect.Left + 2, rect.Top, rect.Width, rect.Height);
+
+                        if (ShowIcons)
+                            modRect.X += IconSize + 8;
+
+                        g.DrawString(Items[i].Text, modFont, b, modRect, stringFormat);
+                    }
                 }
+            }
+
+            // Border
+            using (var p = new Pen(Colors.LightBorder))
+            {
+                g.DrawRectangle(p, new Rectangle(new Point(), ClientSize - new Size(1, 1)));
             }
         }
 
