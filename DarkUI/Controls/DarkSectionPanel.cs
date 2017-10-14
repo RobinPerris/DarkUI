@@ -29,7 +29,7 @@ namespace DarkUI.Controls
             get { return _sectionHeader; }
             set
             {
-                _sectionHeader = value;
+                _sectionHeader = (value == "" ? null : value);
 
                 if(_sectionHeader == null)
                     base.Padding = new Padding(1, 1, 1, 1);
