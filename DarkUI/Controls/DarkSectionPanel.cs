@@ -29,9 +29,9 @@ namespace DarkUI.Controls
             get { return _sectionHeader; }
             set
             {
-                _sectionHeader = (value == "" ? null : value);
+                _sectionHeader = value;
 
-                if(_sectionHeader == null)
+                if (string.IsNullOrEmpty(_sectionHeader))
                     base.Padding = new Padding(1, 1, 1, 1);
                 else
                     base.Padding = new Padding(1, 25, 1, 1);
