@@ -323,7 +323,7 @@ namespace DarkUI.Controls
             // Draw drag
             if (DragPosition < 0 || DragPosition > Rows.Count)
                 return;
-            
+
             int positionY = GetCellDisplayY(DragPosition);
 
             e.Graphics.FillRectangle(_dragDrawBrush, DragDrawSideMargin,
@@ -565,7 +565,6 @@ namespace DarkUI.Controls
         public bool AllowUserToResizeColumns { get { return _base.AllowUserToResizeColumns; } set { _base.AllowUserToResizeColumns = value; } }
         [DefaultValue(false)]
         public bool AllowUserToResizeRows { get { return _base.AllowUserToResizeRows; } set { _base.AllowUserToResizeRows = value; } }
-        [Browsable(false)]
         [DefaultValue(true)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public bool AutoGenerateColumns { get { return _base.AutoGenerateColumns; } set { _base.AutoGenerateColumns = value; } }
@@ -988,7 +987,7 @@ namespace DarkUI.Controls
                                              IServiceProvider provider, object value)
             {
                 Debug.Assert(context != null, nameof(context) + " != null");
-                
+
                 var field = context.Instance.GetType().GetField("_base", BindingFlags.NonPublic | BindingFlags.Instance);
                 Debug.Assert(field != null, nameof(field) + " != null");
 
@@ -996,10 +995,10 @@ namespace DarkUI.Controls
                 _base.Site = ((Control)context.Instance).Site;
                 var columnsProperty = TypeDescriptor.GetProperties(_base)["Columns"];
                 var tdc = new TypeDescriptionContext(_base, columnsProperty);
-                
+
                 var editor = (UITypeEditor)columnsProperty.GetEditor(typeof(UITypeEditor));
                 Debug.Assert(editor != null, nameof(editor) + " != null");
-                
+
                 var result = editor.EditValue(tdc, provider, value);
                 _base.Site = null;
                 return result;
