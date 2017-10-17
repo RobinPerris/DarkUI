@@ -46,6 +46,8 @@ namespace DarkUI.Controls
         }
 
         [Category("Appearance")]
+        [ReadOnly(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BorderColor
         {
             get { return _borderColor; }
@@ -54,6 +56,22 @@ namespace DarkUI.Controls
                 _borderColor = value;
                 Invalidate(); // causes control to be redrawn
             }
+        }
+
+        [ReadOnly(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color BackColor
+        {
+            get { return base.BackColor; }
+            set { base.BackColor = value; }
+        }
+
+        [ReadOnly(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color ForeColor
+        {
+            get { return base.ForeColor; }
+            set { base.ForeColor = value; }
         }
     }
 }

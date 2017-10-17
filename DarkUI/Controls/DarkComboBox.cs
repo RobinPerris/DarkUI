@@ -71,13 +71,37 @@ namespace DarkUI.Controls
 
             _buttonColor = Colors.DarkBackground;
             _buttonIcon = DefaultButtonIcon;
-            
+
             _textPadding = new Padding(2);
         }
         #endregion Constructor
 
         #region Properties
+        [DefaultValue(DrawMode.OwnerDrawVariable)]
+        [RefreshProperties(RefreshProperties.Repaint)]
+        public new DrawMode DrawMode
+        {
+            get { return base.DrawMode; }
+            set { base.DrawMode = value; }
+        }
+
+        [DefaultValue(FlatStyle.Flat)]
+        public new FlatStyle FlatStyle
+        {
+            get { return base.FlatStyle; }
+            set { base.FlatStyle = value; }
+        }
+
+        [DefaultValue(ComboBoxStyle.DropDownList)]
+        public new ComboBoxStyle DropDownStyle
+        {
+            get { return base.DropDownStyle; }
+            set { base.DropDownStyle = value; }
+        }
+
         [Category("Appearance")]
+        [ReadOnly(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public sealed override Color ForeColor
         {
             get { return base.ForeColor; }
@@ -89,6 +113,8 @@ namespace DarkUI.Controls
         }
 
         [Category("Appearance")]
+        [ReadOnly(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public sealed override Color BackColor
         {
             get { return base.BackColor; }
@@ -100,6 +126,7 @@ namespace DarkUI.Controls
         }
 
         [Category("Appearance")]
+        [ReadOnly(true)]
         public Color ButtonColor
         {
             get { return _buttonColor; }
@@ -111,6 +138,7 @@ namespace DarkUI.Controls
         }
 
         [Category("Appearance")]
+        [ReadOnly(true)]
         public Bitmap ButtonIcon
         {
             get { return _buttonIcon; }
@@ -122,6 +150,7 @@ namespace DarkUI.Controls
         }
 
         [Category("Appearance")]
+        [ReadOnly(true)]
         public Color BorderColor
         {
             get { return _borderColor; }
@@ -133,6 +162,7 @@ namespace DarkUI.Controls
         }
 
         [Category("Appearance")]
+        [DefaultValue(ButtonBorderStyle.Solid)]
         public ButtonBorderStyle BorderStyle
         {
             get { return _borderStyle; }
@@ -144,12 +174,15 @@ namespace DarkUI.Controls
         }
 
         [Category("Appearance")]
+        [DefaultValue(false)]
         public bool DrawDropdownHoverOutline { get; set; }
 
         [Category("Appearance")]
+        [DefaultValue(false)]
         public bool DrawFocusRectangle { get; set; }
 
         [Category("Appearance")]
+        [ReadOnly(true)]
         public Padding TextPadding
         {
             get { return _textPadding; }
@@ -255,7 +288,7 @@ namespace DarkUI.Controls
 
             if (Items.Count <= e.Index || e.Index <= -1)
                 return;
-            
+
             e.Graphics.DrawString(Items[e.Index].ToString(), e.Font, _foreBrush, e.Bounds, StringFormat.GenericDefault);
 
             if (DrawDropdownHoverOutline)

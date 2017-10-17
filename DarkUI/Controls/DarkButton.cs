@@ -45,6 +45,15 @@ namespace DarkUI.Controls
             }
         }
 
+        [Localizable(true)]
+        [ReadOnly(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Padding Padding
+        {
+            get { return base.Padding; }
+            set { base.Padding = value; }
+        }
+
         [Category("Appearance")]
         [Description("Determines the style of the button.")]
         [DefaultValue(DarkButtonStyle.Normal)]
@@ -278,7 +287,7 @@ namespace DarkUI.Controls
 
             if (e.KeyCode != Keys.Space)
                 return;
-            
+
             _spacePressed = false;
 
             var location = Cursor.Position;
