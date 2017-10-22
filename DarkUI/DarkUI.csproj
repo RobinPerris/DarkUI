@@ -16,7 +16,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-      <LangVersion>6</LangVersion>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,6 +70,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DarkProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkRadioButton.cs">
@@ -155,6 +158,7 @@
     <Compile Include="Docking\DockRegionState.cs" />
     <Compile Include="Docking\DockInsertType.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
+    <Compile Include="Extensions\ProgressBarExtensions.cs" />
     <Compile Include="Forms\DarkDialog.cs">
       <SubType>Form</SubType>
     </Compile>
