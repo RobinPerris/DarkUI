@@ -53,6 +53,8 @@ namespace DarkUI.Controls
         private List<DarkTreeNode> _dragNodes;
         private Point _dragPos;
 
+        private Color _borderColor = Color.FromArgb(255, 80, 81, 85);
+
         #endregion
 
         #region Property Region
@@ -1086,6 +1088,16 @@ namespace DarkUI.Controls
         #endregion
 
         #region Paint Region
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            using (var b = new Pen(new SolidBrush(_borderColor)))
+            {
+                e.Graphics.DrawRectangle(b, new Rectangle(0, 0, Width - 1, Height - 1));
+            }
+        }
 
         protected override void PaintContent(Graphics g)
         {

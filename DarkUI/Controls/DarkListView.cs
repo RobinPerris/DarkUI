@@ -508,6 +508,11 @@ namespace DarkUI.Controls
                         g.FillRectangle(b, rect);
                     }
 
+                    using (var b = new Pen(Brushes.White))
+                    {
+                        g.DrawRectangle(b, rect);
+                    }
+
                     // Icon
                     if (ShowIcons && Items[i].Icon != null)
                     {
