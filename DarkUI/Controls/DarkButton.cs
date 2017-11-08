@@ -335,6 +335,7 @@ namespace DarkUI.Controls
             var textColor = Colors.LightText;
             var borderColor = Colors.GreySelection;
             var fillColor = _useGenericBackColor ? (_isDefault ? Colors.DarkBlueBackground : Colors.LightBackground) : BackColor;
+            var hoverColor = _useGenericBackColor ? (_isDefault ? Colors.BlueBackground : Colors.LighterBackground) : ControlPaint.Light(BackColor);
 
             if (Enabled)
             {
@@ -347,7 +348,7 @@ namespace DarkUI.Controls
                         switch (ButtonState)
                         {
                             case DarkControlState.Hover:
-                                fillColor = _isDefault ? Colors.BlueBackground : Colors.LighterBackground;
+                                fillColor = hoverColor;
                                 break;
                             case DarkControlState.Pressed:
                                 fillColor = Colors.DarkBackground;
