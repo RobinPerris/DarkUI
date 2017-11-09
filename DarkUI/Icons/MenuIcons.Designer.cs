@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DarkUI.Icons {
+namespace DarkUI {
     using System;
     
     
@@ -66,6 +66,16 @@ namespace DarkUI.Icons {
         public static System.Drawing.Bitmap grip {
             get {
                 object obj = ResourceManager.GetObject("grip", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap grip_fill {
+            get {
+                object obj = ResourceManager.GetObject("grip_fill", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

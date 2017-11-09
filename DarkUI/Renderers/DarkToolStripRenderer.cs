@@ -72,7 +72,7 @@ namespace DarkUI.Renderers
             {
                 var castItem = (ToolStripButton)e.Item;
 
-                if (castItem.Checked)
+                if (castItem.Checked && e.ToolStrip.Enabled)
                 {
                     using (var b = new SolidBrush(Colors.MenuItemToggledOnFill))
                     {
@@ -136,16 +136,33 @@ namespace DarkUI.Renderers
                 return;
             }
 
-            var rect = new Rectangle(3, 3, 2, e.Item.Height - 4);
-
-            using (var p = new Pen(Colors.DarkBorder))
+            if(e.ToolStrip.LayoutStyle == ToolStripLayoutStyle.VerticalStackWithOverflow)
             {
-                g.DrawLine(p, rect.Left, rect.Top, rect.Left, rect.Height);
+                var rect = new Rectangle(3, 3, e.Item.Width - 2, 2);
+
+                using (var p = new Pen(Colors.DarkBorder))
+                {
+                    g.DrawLine(p, rect.Left, rect.Top - 1, rect.Width, rect.Top - 1);
+                }
+
+                using (var p = new Pen(Colors.LightBorder))
+                {
+                    g.DrawLine(p, rect.Left, rect.Top, rect.Width, rect.Top);
+                }
             }
-
-            using (var p = new Pen(Colors.LightBorder))
+            else
             {
-                g.DrawLine(p, rect.Left + 1, rect.Top, rect.Left + 1, rect.Height);
+                var rect = new Rectangle(3, 3, 2, e.Item.Height - 4);
+
+                using (var p = new Pen(Colors.DarkBorder))
+                {
+                    g.DrawLine(p, rect.Left, rect.Top, rect.Left, rect.Height);
+                }
+
+                using (var p = new Pen(Colors.LightBorder))
+                {
+                    g.DrawLine(p, rect.Left + 1, rect.Top, rect.Left + 1, rect.Height);
+                }
             }
         }
 

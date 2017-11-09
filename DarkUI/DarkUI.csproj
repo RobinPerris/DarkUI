@@ -58,6 +58,7 @@
     <Compile Include="Controls\DarkDataGridView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\DarkFloatingToolBox.cs" />
     <Compile Include="Controls\DarkGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -231,6 +232,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DockIcons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DarkUI</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\DropdownIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -241,6 +243,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MenuIcons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DarkUI</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\MessageBoxIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -334,10 +337,10 @@
     <None Include="Resources\scrollbar_disabled.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\question.bmp" />
+    <None Include="Resources\Question.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Question.png" />
+    <Content Include="Resources\grip_fill.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
