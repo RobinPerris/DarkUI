@@ -88,7 +88,7 @@ namespace DarkUI.Controls
                                     break;
 
                                 case DarkProgressBarMode.XOfN:
-                                    g.DrawString(Value + " / " + (Maximum + 1), Font, b, ClientRectangle, _textAlignment);
+                                    g.DrawString((Minimum == 0 ? Value + 1 : Value) + " / " + (Minimum == 0 ? Maximum + 1 : Maximum), Font, b, ClientRectangle, _textAlignment);
                                     break;
 
                                 default:
