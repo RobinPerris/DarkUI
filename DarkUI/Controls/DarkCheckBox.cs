@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace DarkUI.Controls
@@ -260,7 +261,7 @@ namespace DarkUI.Controls
 
             if (e.KeyCode != Keys.Space)
                 return;
-            
+
             _spacePressed = false;
 
             var location = Cursor.Position;
@@ -344,12 +345,21 @@ namespace DarkUI.Controls
                 g.DrawRectangle(p, boxRect);
             }
 
-            if (Checked)
+            switch (CheckState)
             {
-                using (var b = new SolidBrush(fillColor))
-                {
-                    g.FillRectangle(b, checkBoxRect);
-                }
+                case CheckState.Checked:
+                    Rectangle checkBoxRectCross = checkBoxRect;
+                    checkBoxRectCross.Inflate(new Size(-1, -1));
+                    using (var p = new Pen(fillColor, 2) { StartCap = LineCap.Round, EndCap = LineCap.Round } )
+                    {
+                        g.DrawLine(p, new Point(checkBoxRectCross.Left, checkBoxRectCross.Top), new Point(checkBoxRectCross.Right - 2, checkBoxRectCross.Bottom - 2));
+                        g.DrawLine(p, new Point(checkBoxRectCross.Left, checkBoxRectCross.Bottom - 1), new Point(checkBoxRectCross.Right - 1, checkBoxRectCross.Top));
+                    }
+                    break;
+                case CheckState.Indeterminate:
+                    using (var b = new SolidBrush(fillColor))
+                        g.FillRectangle(b, checkBoxRect);
+                    break;
             }
 
             using (var b = new SolidBrush(textColor))
