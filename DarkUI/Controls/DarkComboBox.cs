@@ -9,38 +9,20 @@ namespace DarkUI.Controls
     public class DarkComboBox : ComboBox
     {
         #region Static
-        public Bitmap DefaultButtonIcon { get { return ScrollIcons.scrollbar_arrow_standard; } }
+        public static Bitmap DefaultButtonIcon { get { return ScrollIcons.scrollbar_arrow_standard; } }
         #endregion
 
         #region Fields
-        /* Buffers */
-        private Bitmap _drawBuffer;
-        private Bitmap _drawTextBuffer;
+        // Visual look
+        private static readonly Brush _focusBrush = new SolidBrush(SystemColors.Highlight);
+        private Color _borderColor = Colors.LightBorder;
+        private ButtonBorderStyle _borderStyle = ButtonBorderStyle.Solid;
+        private Color _buttonColor = Colors.DarkBackground;
+        private Bitmap _buttonIcon = DefaultButtonIcon;
 
-        /* Focus */
-        private readonly Color _focusColor;
-        private readonly Brush _focusBrush;
-
-        /* Background/Foreground */
-        private Brush _backBrush;
-        private Brush _foreBrush;
-
-
-        /* Border */
-        private Color _borderColor;
-        private ButtonBorderStyle _borderStyle;
-
-        /* Button */
-        private Rectangle _buttonRect;
-        private Color _buttonColor;
-        private Brush _buttonBrush;
-        private Rectangle _buttonIconRect;
-        private Bitmap _buttonIcon;
-
-        /* Text */
+        // Text
         private string _text;
-        private Rectangle _textRect;
-        private Padding _textPadding;
+        private Padding _textPadding = new Padding(2);
         #endregion Fields
 
         #region Constructor
@@ -54,25 +36,11 @@ namespace DarkUI.Controls
 
             DrawMode = DrawMode.OwnerDrawVariable;
 
-            _drawBuffer = null;
-            _drawTextBuffer = null;
-
             FlatStyle = FlatStyle.Flat;
             DropDownStyle = ComboBoxStyle.DropDownList;
 
             BackColor = Colors.LightBackground;
             ForeColor = Colors.LightText;
-
-            _focusColor = SystemColors.Highlight;
-            _focusBrush = new SolidBrush(_focusColor);
-
-            _borderColor = Colors.LightBorder;
-            _borderStyle = ButtonBorderStyle.Solid;
-
-            _buttonColor = Colors.DarkBackground;
-            _buttonIcon = DefaultButtonIcon;
-
-            _textPadding = new Padding(2);
         }
         #endregion Constructor
 
@@ -214,42 +182,6 @@ namespace DarkUI.Controls
 
         #region On Events
 
-        #region Lifecycle Events
-        protected override void OnInvalidated(InvalidateEventArgs e)
-        {
-            _foreBrush = new SolidBrush(ForeColor);
-            _backBrush = new SolidBrush(BackColor);
-            _buttonBrush = new SolidBrush(_buttonColor);
-
-            _buttonRect = new Rectangle(ClientRectangle.Width - (SystemInformation.VerticalScrollBarWidth + 1), 0, SystemInformation.VerticalScrollBarWidth + 1, ClientRectangle.Height);
-            _buttonIconRect = new Rectangle(_buttonRect.Left + (_buttonRect.Width - _buttonIcon.Width) / 2, _buttonRect.Top + (_buttonRect.Height - _buttonIcon.Height) / 2, _buttonIcon.Width, _buttonIcon.Height);
-
-            _textRect = new Rectangle(1 + _textPadding.Left, 1 + _textPadding.Top, ClientRectangle.Width - (2 + _buttonRect.Width + _textPadding.Horizontal), ClientRectangle.Height - (2 + _textPadding.Vertical));
-
-            _drawBuffer = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
-            _drawBuffer.MakeTransparent(Color.Transparent);
-
-            using (var bufferGraphics = Graphics.FromImage(_drawBuffer))
-            {
-                bufferGraphics.Clear(BackColor);
-                bufferGraphics.FillRectangle(_buttonBrush, _buttonRect);
-                bufferGraphics.DrawImage(_buttonIcon, _buttonIconRect);
-                ControlPaint.DrawBorder(bufferGraphics, ClientRectangle, _borderColor, ButtonBorderStyle.Solid);
-            }
-
-            _drawTextBuffer = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
-            _drawTextBuffer.MakeTransparent(Color.Transparent);
-            using (var graphics = Graphics.FromImage(_drawTextBuffer))
-            {
-                graphics.Clear(Color.Transparent);
-                graphics.FillRectangle((Focused && DrawFocusRectangle) ? _focusBrush : _backBrush, _textRect);
-                graphics.DrawString(SelectedItem?.ToString() ?? Text, Font, _foreBrush, _textRect, StringFormat.GenericDefault);
-            }
-
-            base.OnInvalidated(e);
-        }
-        #endregion
-
         #region Data Events
         protected override void OnTextChanged(EventArgs e)
         {
@@ -278,8 +210,8 @@ namespace DarkUI.Controls
         {
             if (!DroppedDown && !DrawDropdownHoverOutline)
             {
-                _backBrush = new SolidBrush(BackColor);
-                e.Graphics.FillRectangle(_backBrush,e.Bounds);
+                using (var backBrush = new SolidBrush(BackColor))
+                    e.Graphics.FillRectangle(backBrush, e.Bounds);
             }
             else
             {
@@ -289,7 +221,8 @@ namespace DarkUI.Controls
             if (Items.Count <= e.Index || e.Index <= -1)
                 return;
 
-            e.Graphics.DrawString(Items[e.Index].ToString(), e.Font, _foreBrush, e.Bounds, StringFormat.GenericDefault);
+            using (var foreBrush = new SolidBrush(ForeColor))
+                e.Graphics.DrawString(Items[e.Index].ToString(), e.Font, foreBrush, e.Bounds, StringFormat.GenericDefault);
 
             if (DrawDropdownHoverOutline)
             {
@@ -299,9 +232,22 @@ namespace DarkUI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.DrawImage(_drawBuffer, Point.Empty);
-            e.Graphics.DrawImage(_drawTextBuffer, Point.Empty);
-            if (DesignMode && Items.Count > 0 && Text != Items[0].ToString()) Text = Items[0].ToString();
+            Rectangle buttonRect = new Rectangle(ClientRectangle.Width - (SystemInformation.VerticalScrollBarWidth + 1), 0, SystemInformation.VerticalScrollBarWidth + 1, ClientRectangle.Height);
+            Rectangle buttonIconRect = new Rectangle(buttonRect.Left + (buttonRect.Width - _buttonIcon.Width) / 2, buttonRect.Top + (buttonRect.Height - _buttonIcon.Height) / 2, _buttonIcon.Width, _buttonIcon.Height);
+            Rectangle textRect = new Rectangle(1 + _textPadding.Left, 1 + _textPadding.Top, ClientRectangle.Width - (2 + buttonRect.Width + _textPadding.Horizontal), ClientRectangle.Height - (2 + _textPadding.Vertical));
+
+            // Draw background
+            using (var buttonBrush = new SolidBrush(_buttonColor))
+                e.Graphics.FillRectangle(buttonBrush, buttonRect);
+            e.Graphics.DrawImage(_buttonIcon, buttonIconRect);
+            ControlPaint.DrawBorder(e.Graphics, buttonRect, _borderColor, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, _borderColor, ButtonBorderStyle.Solid);
+
+            // Draw text
+            using (var backBrush = new SolidBrush(BackColor))
+                e.Graphics.FillRectangle((Focused && DrawFocusRectangle) ? _focusBrush : backBrush, textRect);
+            using (var foreBrush = new SolidBrush(ForeColor))
+                e.Graphics.DrawString(SelectedItem?.ToString() ?? Text, Font, foreBrush, textRect, StringFormat.GenericDefault);
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
