@@ -179,6 +179,11 @@
     <Compile Include="Forms\DarkTranslucentForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Icons\ComboBoxIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComboBoxIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Icons\DockIcons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -228,6 +233,10 @@
     <EmbeddedResource Include="Forms\DarkDialogMessageBox.resx">
       <DependentUpon>DarkDialogMessageBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Icons\ComboBoxIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ComboBoxIcons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Icons\DockIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DockIcons.Designer.cs</LastGenOutput>
@@ -252,8 +261,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\ScrollIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ScrollIcons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DarkUI</CustomToolNamespace>
+      <LastGenOutput>ScrollIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\TreeViewIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -340,6 +349,8 @@
     <None Include="Resources\Question.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\combobox_arrow.bmp" />
+    <None Include="Resources\combobox_arrow.png" />
     <Content Include="Resources\grip_fill.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

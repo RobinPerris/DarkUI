@@ -9,15 +9,15 @@ namespace DarkUI.Controls
     public class DarkComboBox : ComboBox
     {
         #region Static
-        public static Bitmap DefaultButtonIcon { get { return ScrollIcons.scrollbar_arrow_standard; } }
+        public static Bitmap DefaultButtonIcon { get { return Icons.ComboBoxIcons.combobox_arrow; } }
         #endregion
 
         #region Fields
         // Visual look
         private static readonly Brush _focusBrush = new SolidBrush(SystemColors.Highlight);
-        private Color _borderColor = Colors.LightBorder;
+        private Color _borderColor = Colors.GreySelection;
         private ButtonBorderStyle _borderStyle = ButtonBorderStyle.Solid;
-        private Color _buttonColor = Colors.DarkBackground;
+        private Color _buttonColor = Colors.LightBackground;
         private Bitmap _buttonIcon = DefaultButtonIcon;
 
         // Text
@@ -253,18 +253,6 @@ namespace DarkUI.Controls
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             e.Graphics.Clear(BackColor);
-        }
-
-        protected override void OnDropDown(EventArgs e)
-        {
-            base.OnDropDown(e);
-            ButtonIcon = ScrollIcons.scrollbar_arrow_clicked;
-        }
-
-        protected override void OnDropDownClosed(EventArgs e)
-        {
-            base.OnDropDownClosed(e);
-            ButtonIcon = ScrollIcons.scrollbar_arrow_standard;
         }
         #endregion Drawing
 
