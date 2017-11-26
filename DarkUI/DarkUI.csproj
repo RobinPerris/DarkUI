@@ -204,6 +204,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MessageBoxIcons.resx</DependentUpon>
     </Compile>
+    <Compile Include="Icons\NumericUpDownIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NumericUpDownIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Icons\ScrollIcons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -258,6 +263,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MessageBoxIcons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DarkUI</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icons\NumericUpDownIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>NumericUpDownIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\ScrollIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -349,6 +358,7 @@
     <None Include="Resources\Question.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\numericUpDown_arrow.png" />
     <None Include="Resources\combobox_arrow.bmp" />
     <None Include="Resources\combobox_arrow.png" />
     <Content Include="Resources\grip_fill.png" />

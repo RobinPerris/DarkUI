@@ -19,8 +19,7 @@ namespace DarkUI.Controls
         public bool MousewheelSingleIncrement { get; set; } = true;
 
         private bool _mouseDown = false;
-        private Point _mousePos = new Point();
-        private Rectangle _scrollButtons;
+        private Point? _mousePos;
 
         public DarkNumericUpDown()
         {
@@ -29,10 +28,7 @@ namespace DarkUI.Controls
             SetStyle(ControlStyles.OptimizedDoubleBuffer |
                    ControlStyles.ResizeRedraw |
                    ControlStyles.UserPaint, true);
-            Controls[0].Paint += DarkNumericUpDown_Paint;
-            MouseMove += DarkNumericUpDown_MouseMove;
-            MouseUp += DarkNumericUpDown_MouseUp;
-            MouseDown += DarkNumericUpDown_MouseDown;
+            Controls[0].Paint += SubControlPaint_Paint;
             try
             {
                 // Prevent flickering, only if our assembly
@@ -53,61 +49,76 @@ namespace DarkUI.Controls
             }
         }
 
-        private void DarkNumericUpDown_MouseDown(object sender, MouseEventArgs e)
+        protected override void OnMouseDown(MouseEventArgs mevent)
         {
+            base.OnMouseDown(mevent);
             _mouseDown = true;
+            Controls[0].Invalidate();
         }
 
-        private void DarkNumericUpDown_MouseUp(object sender, MouseEventArgs e)
+        protected override void OnMouseUp(MouseEventArgs mevent)
         {
+            base.OnMouseUp(mevent);
             _mouseDown = false;
+            Controls[0].Invalidate();
         }
 
-        private void DarkNumericUpDown_MouseMove(object sender, MouseEventArgs e)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            _mousePos = new Point(e.Location.X - (Width - _scrollButtons.Width),e.Location.Y);
+            base.OnMouseMove(e);
+            _mousePos = new Point(e.Location.X - (Width - Controls[0].Width), e.Location.Y);
+            Controls[0].Invalidate();
         }
 
-        private void DarkNumericUpDown_Paint(object sender, PaintEventArgs e)
+        protected override void OnMouseLeave(EventArgs e)
         {
-            // Up-down background
+            base.OnMouseLeave(e);
+            _mousePos = null;
+            _mouseDown = false;
+            Controls[0].Invalidate();
+        }
+
+        private void SubControlPaint_Paint(object sender, PaintEventArgs e)
+        {
             var upDownRect = new Rectangle(0, 0, Controls[0].Width, Controls[0].Height);
-            e.Graphics.FillRectangle(new SolidBrush(Colors.DarkBackground), upDownRect);
 
             // Up arrow
-            var upIcon = ScrollIcons.scrollbar_arrow_standard;
-            var upRect = new Rectangle(Controls[0].Size.Width / 2 - upIcon.Width / 2, Controls[0].Size.Height / 4 - upIcon.Height / 2,upIcon.Width, upIcon.Height);
-            upIcon = upRect.Contains(_mousePos) ? ScrollIcons.scrollbar_arrow_hot : ScrollIcons.scrollbar_arrow_standard;
-
-            if (_mouseDown && upRect.Contains(_mousePos))
-                upIcon = ScrollIcons.scrollbar_arrow_clicked;
-
-            upIcon.RotateFlip(RotateFlipType.RotateNoneFlipY);
-
-            e.Graphics.DrawImage(upIcon,upRect);
+            Bitmap flippedIcon = Icons.NumericUpDownIcons.numericUpDown_arrow;
+            flippedIcon.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            RenderArrow(flippedIcon, new Rectangle(upDownRect.X, upDownRect.Y, upDownRect.Width, upDownRect.Height / 2), e);
 
             // Down arrow
-            var downIcon = ScrollIcons.scrollbar_arrow_standard;
-            var downRect = new Rectangle(Controls[0].Size.Width / 2 - upIcon.Width / 2, Controls[0].Size.Height / 2 + Controls[0].Size.Height / 4 - upIcon.Height / 2, upIcon.Width, upIcon.Height);
-            downIcon = downRect.Contains(_mousePos) ? ScrollIcons.scrollbar_arrow_hot : ScrollIcons.scrollbar_arrow_standard;
+            RenderArrow(Icons.NumericUpDownIcons.numericUpDown_arrow,
+                new Rectangle(upDownRect.X, upDownRect.Y + upDownRect.Height / 2, upDownRect.Width, upDownRect.Height - (upDownRect.Height / 2)), e);
+        }
 
-            if (_mouseDown && downRect.Contains(_mousePos))
-                downIcon = ScrollIcons.scrollbar_arrow_clicked;
+        private void RenderArrow(Image image, Rectangle area, PaintEventArgs e)
+        {
+            Color backColor;
+            if (!Enabled)
+                backColor = Colors.DarkGreySelection;
+            else if (!_mousePos.HasValue || !area.Contains(_mousePos.Value))
+                backColor = Colors.LightBackground;
+            else if (!_mouseDown)
+                backColor = Colors.LighterBackground;
+            else
+                backColor = Colors.LightestBackground;
 
-            e.Graphics.DrawImage(downIcon, downRect);
-
-            _scrollButtons = upDownRect;
+            using (Brush brush = new SolidBrush(backColor))
+                e.Graphics.FillRectangle(brush, area);
+            e.Graphics.DrawImage(image, new Point(area.X + (area.Width - image.Width) / 2, area.Y + (area.Height - image.Height) / 2));
+            ControlPaint.DrawBorder(e.Graphics, area, Colors.GreySelection, ButtonBorderStyle.Solid);
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(100,100,100), ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(100, 100, 100), ButtonBorderStyle.Solid);
         }
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
-            if(MousewheelSingleIncrement)
+            if (MousewheelSingleIncrement)
             {
                 decimal newValue = Value;
 
