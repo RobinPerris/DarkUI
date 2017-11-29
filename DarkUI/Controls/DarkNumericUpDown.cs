@@ -26,8 +26,9 @@ namespace DarkUI.Controls
             BackColor = Colors.LightBackground;
             ForeColor = Colors.LightText;
             SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                   ControlStyles.ResizeRedraw |
-                   ControlStyles.UserPaint, true);
+                     ControlStyles.AllPaintingInWmPaint |
+                     ControlStyles.ResizeRedraw |
+                     ControlStyles.UserPaint, true);
             Controls[0].Paint += SubControlPaint_Paint;
             try
             {
@@ -80,7 +81,7 @@ namespace DarkUI.Controls
 
         private void SubControlPaint_Paint(object sender, PaintEventArgs e)
         {
-            var upDownRect = new Rectangle(0, 0, Controls[0].Width, Controls[0].Height);
+            var upDownRect = new Rectangle(0, 0, Controls[0].Width+1, Controls[0].Height);
 
             // Up arrow
             Bitmap flippedIcon = Icons.NumericUpDownIcons.numericUpDown_arrow;

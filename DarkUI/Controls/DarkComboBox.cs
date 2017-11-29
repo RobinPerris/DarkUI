@@ -232,8 +232,8 @@ namespace DarkUI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Rectangle buttonRect = new Rectangle(ClientRectangle.Width - (SystemInformation.VerticalScrollBarWidth + 1), 0, SystemInformation.VerticalScrollBarWidth + 1, ClientRectangle.Height);
-            Rectangle buttonIconRect = new Rectangle(buttonRect.Left + (buttonRect.Width - _buttonIcon.Width) / 2, buttonRect.Top + (buttonRect.Height - _buttonIcon.Height) / 2, _buttonIcon.Width, _buttonIcon.Height);
+            Rectangle buttonRect = new Rectangle(ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth, 0, SystemInformation.VerticalScrollBarWidth, ClientRectangle.Height);
+            Rectangle buttonIconRect = new Rectangle(buttonRect.Left + (buttonRect.Width - _buttonIcon.Width) / 2, buttonRect.Top + (buttonRect.Height / 2 - _buttonIcon.Height / 2), _buttonIcon.Width, _buttonIcon.Height);
             Rectangle textRect = new Rectangle(1 + _textPadding.Left, 1 + _textPadding.Top, ClientRectangle.Width - (2 + buttonRect.Width + _textPadding.Horizontal), ClientRectangle.Height - (2 + _textPadding.Vertical));
 
             // Draw background
