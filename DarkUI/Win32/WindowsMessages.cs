@@ -1082,7 +1082,7 @@ namespace DarkUI.Win32
         /// <summary>
         /// Sent when the contents of the clipboard have changed.
         /// </summary>
-        CLIPBOARDUPDATE = 0x031D,
+        ClipboardChanged = 0x031D,
 
         /// <summary>
         /// The system will send a window the WM_DWMCOMPOSITIONCHANGED message to indicate that the availability of desktop composition has changed.
