@@ -67,6 +67,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkControlState.cs" />
+    <Compile Include="Controls\DarkCheckedListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkListBox.cs">
       <SubType>Component</SubType>
     </Compile>
