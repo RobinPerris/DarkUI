@@ -69,12 +69,8 @@ namespace DarkUI.Controls
             get { return _value; }
             set
             {
-                if (value < Minimum)
-                    value = Minimum;
-
-                var maximumValue = Maximum - ViewSize;
-                if (value > maximumValue)
-                    value = maximumValue;
+                value = Math.Max(value, Minimum);
+                value = Math.Min(value, Maximum - ViewSize);
 
                 if (_value == value)
                     return;
@@ -291,7 +287,7 @@ namespace DarkUI.Controls
 
             if (!_isScrolling)
                 return;
-            
+
             if (e.Button != MouseButtons.Left)
             {
                 OnMouseUp(null);
@@ -537,7 +533,7 @@ namespace DarkUI.Controls
             // Draw thumb
             if (!Enabled)
                 return;
-            
+
             var scrollColor = _thumbHot ? Colors.GreyHighlight : Colors.GreySelection;
 
             if (_isScrolling)
