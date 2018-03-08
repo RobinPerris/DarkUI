@@ -39,7 +39,10 @@ namespace DarkUI.Controls
             using (var b = new SolidBrush(bgColor))
                 e.Graphics.FillRectangle(b, bounds);
 
-            e.Graphics.DrawString(Items[index].ToString(), e.Font, Brushes.White, bounds, StringFormat.GenericDefault);
+            var formatE = new ListControlConvertEventArgs(null, typeof(string), Items[e.Index]);
+            OnFormat(formatE);
+            string text = formatE.Value?.ToString() ?? Items[e.Index].ToString();
+            e.Graphics.DrawString(text, e.Font, Brushes.White, bounds, StringFormat.GenericDefault);
         }
     }
 }
