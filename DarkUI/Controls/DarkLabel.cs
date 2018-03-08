@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public sealed class DarkLabel : Label
+    public class DarkLabel : Label
     {
         #region Field Region
 

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public sealed class DarkStatusStrip : StatusStrip
+    public class DarkStatusStrip : StatusStrip
     {
         #region Constructor Region
 

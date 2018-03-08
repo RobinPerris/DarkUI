@@ -5,7 +5,7 @@ using DarkUI.Config;
 
 namespace DarkUI.Controls
 {
-    public sealed class DarkGroupBox : GroupBox
+    public class DarkGroupBox : GroupBox
     {
         private Color _borderColor = Colors.LightBorder;
 

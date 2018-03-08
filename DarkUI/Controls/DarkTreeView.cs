@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public sealed class DarkTreeView : DarkScrollView
+    public class DarkTreeView : DarkScrollView
     {
         #region Event Region
 

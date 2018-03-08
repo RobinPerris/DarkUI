@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public sealed class DarkCheckedListBox : CheckedListBox
+    public class DarkCheckedListBox : CheckedListBox
     {
         public DarkCheckedListBox()
         {

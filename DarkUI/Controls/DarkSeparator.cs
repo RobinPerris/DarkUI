@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public sealed class DarkSeparator : Control
+    public class DarkSeparator : Control
     {
         #region Constructor Region
 

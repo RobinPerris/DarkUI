@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace DarkUI.Win32
 {
-    internal sealed class Native
+    internal static class Native
     {
         [DllImport("user32.dll")]
         internal static extern IntPtr WindowFromPoint(Point point);

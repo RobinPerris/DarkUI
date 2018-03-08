@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DarkUI.Controls
 {
-    public sealed class DarkTextBox : TextBox
+    public class DarkTextBox : TextBox
     {
         #region Constructor Region
 

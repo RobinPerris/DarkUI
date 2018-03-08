@@ -8,7 +8,7 @@ using DarkUI.Config;
 
 namespace DarkUI.Controls
 {
-    public sealed class DarkNumericUpDown : NumericUpDown
+    public class DarkNumericUpDown : NumericUpDown
     {
         [Category("Data")]
         [Description("Determines increment value used with shift modifier.")]
