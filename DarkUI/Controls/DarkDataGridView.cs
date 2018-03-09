@@ -81,6 +81,7 @@ namespace DarkUI.Controls
             _base.ColumnHeadersDefaultCellStyle = _cellStyleHeader;
             _base.RowHeadersDefaultCellStyle = _cellStyleHeader;
 
+            _base.CellFormatting += BaseCellFormatting;
             _base.CellValueChanged += BaseCellValueChanged;
             _base.MouseWheel += BaseMouseWheel;
             _base.KeyDown += BaseKeyDown;
@@ -425,7 +426,7 @@ namespace DarkUI.Controls
                     Rectangle vScrollBarBounds = new Rectangle(size.Width - _scrollSize - BorderWidth, BorderWidth, _scrollSize, size.Height - BorderWidth * 2);
 
                     // Setup rows
-                    int rowCount = _base.Rows.Count;
+                    int rowCount = _base.Rows.Count + 1;
                     int rowInView = CountVisibleRows(_base.FirstDisplayedScrollingRowIndex, size.Height - _scrollSize);
                     bool rowScrollVisible = _scrollBars.HasFlag(ScrollBars.Vertical) && (rowInView < rowCount);
                     if (rowScrollVisible)
@@ -467,6 +468,39 @@ namespace DarkUI.Controls
                 _updateScrollBarLayout = false;
             }
         }
+
+        private void BaseCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (CellFormattingSafe == null)
+                return;
+            if (e.RowIndex < 0 || e.RowIndex >= Rows.Count)
+                return;
+            if (e.ColumnIndex < 0 || e.ColumnIndex >= Rows.Count)
+                return;
+
+            // Try to get row or column (yes, sometimes, this can fail even though the row index and column index are in range.
+            DataGridViewRow row;
+            DataGridViewColumn column;
+            try
+            {
+                row = Rows[e.RowIndex];
+                column = Columns[e.ColumnIndex];
+                object unused = row.DataBoundItem;
+            }
+            catch
+            {
+                return;
+            }
+
+            // Invoke event
+            var args = new DarkDataGridViewSafeCellFormattingEventArgs(e.ColumnIndex, e.RowIndex, e.Value, e.DesiredType, e.CellStyle, column, row);
+            CellFormattingSafe?.Invoke(sender, args);
+            e.CellStyle = args.CellStyle;
+            e.Value = args.Value;
+            e.FormattingApplied = args.FormattingApplied;
+        }
+
+        public event DarkDataGridViewSafeCellFormattingEventHandler CellFormattingSafe;
 
         public IList EditableRowCollection
         {
@@ -1191,4 +1225,20 @@ namespace DarkUI.Controls
             get { return FlatStyle.Flat; }
         }
     }
+
+    public class DarkDataGridViewSafeCellFormattingEventArgs : DataGridViewCellFormattingEventArgs
+    {
+        public DataGridViewColumn Column { get; }
+        public DataGridViewRow Row { get; }
+
+        public DarkDataGridViewSafeCellFormattingEventArgs(int columnIndex, int rowIndex, object value,
+            Type desiredType, DataGridViewCellStyle style, DataGridViewColumn column, DataGridViewRow row)
+            : base(columnIndex, rowIndex, value, desiredType, style)
+        {
+            Column = column;
+            Row = row;
+        }
+    }
+
+    public delegate void DarkDataGridViewSafeCellFormattingEventHandler(object sender, DarkDataGridViewSafeCellFormattingEventArgs e);
 }
