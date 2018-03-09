@@ -98,6 +98,8 @@ namespace DarkUI.Controls
             _base.ColumnWidthChanged += delegate { UpdateScrollBarLayout(); };
             _base.ColumnAdded += delegate { UpdateScrollBarLayout(); };
             _base.ColumnRemoved += delegate { UpdateScrollBarLayout(); };
+            _base.Click += delegate { OnClick(EventArgs.Empty); };
+            _base.DoubleClick += delegate { OnDoubleClick(EventArgs.Empty); };
             _base.Scroll += BaseScrolled;
 
             // Configure scroll bars
