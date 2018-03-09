@@ -35,10 +35,10 @@ namespace DarkUI.Controls
         #region Property Region
 
 
-        [DefaultValue(20.0f)]
+        [DefaultValue(0.42f)]
         public float MouseWheelScrollSpeedV { get; set; } = 0.42f;
 
-        [DefaultValue(20.0f)]
+        [DefaultValue(0.42f)]
         public float MouseWheelScrollSpeedH { get; set; } = 0.42f;
 
         [Browsable(false)]
