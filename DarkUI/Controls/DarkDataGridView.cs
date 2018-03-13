@@ -353,12 +353,12 @@ namespace DarkUI.Controls
 
         private void _hScrollBar_ValueChanged(object sender, ScrollValueEventArgs e)
         {
-            _base.HorizontalScrollingOffset = Math.Max(0, Math.Min(TotalColumnsWidth - 1, e.Value));
+            _base.HorizontalScrollingOffset = Math.Max(0, Math.Min(Math.Max(TotalColumnsWidth - 1, 0), e.Value));
         }
 
         private void _vScrollBar_ValueChanged(object sender, ScrollValueEventArgs e)
         {
-            _base.FirstDisplayedScrollingRowIndex = Math.Max(0, Math.Min(_base.Rows.Count - 1, e.Value));
+            _base.FirstDisplayedScrollingRowIndex = Math.Max(0, Math.Min(Math.Max(_base.Rows.Count - 1 , 0), e.Value));
         }
 
         private void BaseScrolled(object sender, ScrollEventArgs e)
