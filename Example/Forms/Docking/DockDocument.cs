@@ -1,11 +1,10 @@
-﻿using DarkUI.Config;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using DarkUI.Controls;
 using DarkUI.Docking;
 using DarkUI.Forms;
-using System.Drawing;
-using System.Windows.Forms;
 
-namespace Example
+namespace Example.Forms.Docking
 {
     public partial class DockDocument : DarkDocument
     {

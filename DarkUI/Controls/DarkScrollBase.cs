@@ -25,7 +25,7 @@ namespace DarkUI.Controls
 
         private Rectangle _viewport;
 
-        private int _maxDragChange = 0;
+        private int _maxDragChange;
         private readonly Timer _dragTimer;
 
         private bool _hideScrollBars = true;

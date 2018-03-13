@@ -1,7 +1,7 @@
-﻿using DarkUI.Forms;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using DarkUI.Forms;
 
-namespace Example
+namespace Example.Forms.Dialogs
 {
     public partial class DialogAbout : DarkDialog
     {
@@ -11,7 +11,7 @@ namespace Example
         {
             InitializeComponent();
 
-            lblVersion.Text = $"Version: {Application.ProductVersion.ToString()}";
+            lblVersion.Text = $"Version: {Application.ProductVersion}";
             btnOk.Text = "Close";
         }
 

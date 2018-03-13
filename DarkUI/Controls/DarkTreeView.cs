@@ -53,7 +53,7 @@ namespace DarkUI.Controls
         private List<DarkTreeNode> _dragNodes;
         private Point _dragPos;
 
-        private Color _borderColor = Color.FromArgb(255, 80, 81, 85);
+        private readonly Color _borderColor = Color.FromArgb(255, 80, 81, 85);
 
         #endregion
 
@@ -546,10 +546,10 @@ namespace DarkUI.Controls
 
         private void UpdateNodeBounds(DarkTreeNode node, int yOffset, int indent)
         {
-            var expandTop = yOffset + (ItemHeight / 2) - (ExpandAreaSize / 2);
+            var expandTop = yOffset + ItemHeight / 2 - ExpandAreaSize / 2;
             node.ExpandArea = new Rectangle(indent + 3, expandTop, ExpandAreaSize, ExpandAreaSize);
 
-            var iconTop = yOffset + (ItemHeight / 2) - (IconSize / 2);
+            var iconTop = yOffset + ItemHeight / 2 - IconSize / 2;
 
             if (ShowIcons)
                 node.IconArea = new Rectangle(node.ExpandArea.Right + 2, iconTop, IconSize, IconSize);
@@ -558,11 +558,11 @@ namespace DarkUI.Controls
 
             using (var g = CreateGraphics())
             {
-                var textSize = (int)(g.MeasureString(node.Text, Font).Width);
+                var textSize = (int)g.MeasureString(node.Text, Font).Width;
                 node.TextArea = new Rectangle(node.IconArea.Right + 2, yOffset, textSize + 1, ItemHeight);
             }
 
-            node.FullArea = new Rectangle(indent, yOffset, (node.TextArea.Right - indent), ItemHeight);
+            node.FullArea = new Rectangle(indent, yOffset, node.TextArea.Right - indent, ItemHeight);
 
             if (ContentSize.Width < node.TextArea.Right + 2)
                 ContentSize = new Size(node.TextArea.Right + 2, ContentSize.Height);
@@ -876,7 +876,7 @@ namespace DarkUI.Controls
                 VScrollTo(itemTop);
 
             if (itemBottom > Viewport.Bottom)
-                VScrollTo((itemBottom - Viewport.Height));
+                VScrollTo(itemBottom - Viewport.Height);
         }
 
         public void Sort()

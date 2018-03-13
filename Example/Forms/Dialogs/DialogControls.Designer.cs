@@ -1,6 +1,6 @@
 ﻿using DarkUI.Controls;
 
-namespace Example
+namespace Example.Forms.Dialogs
 {
     partial class DialogControls
     {

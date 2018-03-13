@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DarkUI.Icons;
 
 namespace DarkUI.Forms
 {
@@ -75,7 +76,7 @@ namespace DarkUI.Forms
                 // This means we can have a single-line message box.
                 // Move the label to accomodate this.
                 width = totalWidth;
-                lblText.Top = picIcon.Top + (picIcon.Height / 2) - (lblText.Height / 2);
+                lblText.Top = picIcon.Top + picIcon.Height / 2 - lblText.Height / 2;
             }
             else
             {

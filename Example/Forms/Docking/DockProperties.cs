@@ -1,6 +1,6 @@
 ﻿using DarkUI.Docking;
 
-namespace Example
+namespace Example.Forms.Docking
 {
     public partial class DockProperties : DarkToolWindow
     {

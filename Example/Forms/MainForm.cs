@@ -1,13 +1,15 @@
-﻿using DarkUI.Docking;
-using DarkUI.Forms;
-using DarkUI.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using DarkUI.Docking;
+using DarkUI.Forms;
+using DarkUI.Win32;
+using Example.Forms.Dialogs;
+using Example.Forms.Docking;
 
-namespace Example
+namespace Example.Forms
 {
     public partial class MainForm : DarkForm
     {

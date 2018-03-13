@@ -40,7 +40,7 @@ namespace DarkUI.Docking
 
         #region Comparison Region
 
-        public bool Equals(DockRegionState other) => (Area == other.Area) && (Size == other.Size) && Groups.SequenceEqual(other.Groups);
+        public bool Equals(DockRegionState other) => Area == other.Area && Size == other.Size && Groups.SequenceEqual(other.Groups);
         public static bool operator ==(DockRegionState first, DockRegionState second) => first.Equals(second);
         public static bool operator !=(DockRegionState first, DockRegionState second) => !first.Equals(second);
         public override int GetHashCode() => base.GetHashCode();

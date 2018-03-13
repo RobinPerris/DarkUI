@@ -1,8 +1,7 @@
-﻿using System;
-using DarkUI.Controls;
+﻿using DarkUI.Controls;
 using DarkUI.Docking;
 
-namespace Example
+namespace Example.Forms.Docking
 {
     public partial class DockLayers : DarkToolWindow
     {

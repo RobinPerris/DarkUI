@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using DarkUI.Icons;
 
 namespace DarkUI.Controls
 {
@@ -21,7 +22,7 @@ namespace DarkUI.Controls
         private DarkDropdownItem _selectedItem;
 
         private readonly DarkContextMenu _menu = new DarkContextMenu();
-        private bool _menuOpen = false;
+        private bool _menuOpen;
 
         private bool _showBorder = true;
 
@@ -183,7 +184,7 @@ namespace DarkUI.Controls
         private void ResizeMenu()
         {
             var width = ClientRectangle.Width;
-            var height = (_menu.Items.Count * _itemHeight) + 4;
+            var height = _menu.Items.Count * _itemHeight + 4;
 
             if (height > _maxHeight)
                 height = _maxHeight;
@@ -443,7 +444,7 @@ namespace DarkUI.Controls
             using (var img = DropdownIcons.small_arrow)
             {
                 g.DrawImage(img, ClientRectangle.Right - img.Width - 4,
-                    ClientRectangle.Top + (ClientRectangle.Height / 2) - (img.Height / 2));
+                    ClientRectangle.Top + ClientRectangle.Height / 2 - img.Height / 2);
             }
 
             // Draw selected item
@@ -456,7 +457,7 @@ namespace DarkUI.Controls
             {
                 g.DrawImage(SelectedItem.Icon,
                     new Point(ClientRectangle.Left + 5,
-                        ClientRectangle.Top + (ClientRectangle.Height / 2) - (IconSize / 2)));
+                        ClientRectangle.Top + ClientRectangle.Height / 2 - IconSize / 2));
             }
 
             // Draw Text

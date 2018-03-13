@@ -273,11 +273,11 @@ namespace DarkUI.Docking
                         foreach (var group in _groups)
                         {
                             if (group.Location.Y >= ClientRectangle.Height - group.MinimumSize.Height)
-                                restart = CropLargestGroup((group.MinimumSize.Height > 0) ? group.MinimumSize.Height : Consts.ToolWindowHeaderSize);
+                                restart = CropLargestGroup(@group.MinimumSize.Height > 0 ? group.MinimumSize.Height : Consts.ToolWindowHeaderSize);
 
                             if (group.Height <= 0)
-                                group.Size = new Size(ClientRectangle.Width, ((group.MinimumSize.Height > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize));
-                            else if ((group.Order == lastGroup.Order) && (group.Location.Y > ClientRectangle.Height))
+                                group.Size = new Size(ClientRectangle.Width, @group.MinimumSize.Height > 0 ? @group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
+                            else if (@group.Order == lastGroup.Order && @group.Location.Y > ClientRectangle.Height)
                                 group.Size = new Size(ClientRectangle.Width, group.Location.Y - ClientRectangle.Height);
                             else
                                 group.Size = new Size(ClientRectangle.Width, group.Height);
@@ -292,11 +292,11 @@ namespace DarkUI.Docking
                         foreach (var group in _groups)
                         {
                             if (group.Location.X >= ClientRectangle.Width - group.MinimumSize.Width)
-                                restart = CropLargestGroup((group.MinimumSize.Width > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
+                                restart = CropLargestGroup(@group.MinimumSize.Width > 0 ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize);
 
                             if (group.Width <= 0)
-                                group.Size = new Size(((group.MinimumSize.Width > 0) ? group.MinimumSize.Width : Consts.ToolWindowHeaderSize), ClientRectangle.Height);
-                            else if ((group.Order == lastGroup.Order) && (group.Location.X > ClientRectangle.Width))
+                                group.Size = new Size(@group.MinimumSize.Width > 0 ? @group.MinimumSize.Width : Consts.ToolWindowHeaderSize, ClientRectangle.Height);
+                            else if (@group.Order == lastGroup.Order && @group.Location.X > ClientRectangle.Width)
                                 group.Size = new Size(group.Location.X - ClientRectangle.Width, ClientRectangle.Height);
                             else
                                 group.Size = new Size(group.Width, ClientRectangle.Height);
@@ -311,7 +311,7 @@ namespace DarkUI.Docking
         {
             DarkDockGroup largestGroup = null;
 
-            if ((_groups.Count <= 1) || (spaceToCut == 0) || (DockArea == DarkDockArea.Document))
+            if (_groups.Count <= 1 || spaceToCut == 0 || DockArea == DarkDockArea.Document)
                 return false;
 
             int maxSize = 0;
@@ -329,7 +329,7 @@ namespace DarkUI.Docking
                             maxSize = group.Height;
                             largestGroup = group;
                         }
-                    if((largestGroup != null) && (largestGroup.Size.Height > spaceToCut) && (largestGroup.Size.Height > largestGroup.MinimumSize.Height))
+                    if(largestGroup != null && largestGroup.Size.Height > spaceToCut && largestGroup.Size.Height > largestGroup.MinimumSize.Height)
                     {
                         largestGroup.Size = new Size(largestGroup.Size.Width, largestGroup.Size.Height - spaceToCut);
                         return true;
@@ -343,7 +343,7 @@ namespace DarkUI.Docking
                             maxSize = group.Width;
                             largestGroup = group;
                         }
-                    if ((largestGroup != null) && (largestGroup.Size.Width > spaceToCut) && (largestGroup.Size.Width > largestGroup.MinimumSize.Width))
+                    if (largestGroup != null && largestGroup.Size.Width > spaceToCut && largestGroup.Size.Width > largestGroup.MinimumSize.Width)
                     {
                         largestGroup.Size = new Size(largestGroup.Size.Width - spaceToCut, largestGroup.Size.Height);
                         return true;
@@ -458,7 +458,7 @@ namespace DarkUI.Docking
             
             foreach (var regionGroup in Groups)
             {
-                if ((Groups.Count <= 1) || (regionGroup.Order == _groups.OrderByDescending(g => g.Order).First().Order))
+                if (Groups.Count <= 1 || regionGroup.Order == _groups.OrderByDescending(g => g.Order).First().Order)
                     regionGroup.RemoveSplitter();
                 else
                     regionGroup.CreateSplitter();

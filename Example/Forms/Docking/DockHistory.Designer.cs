@@ -1,8 +1,6 @@
-﻿using DarkUI.Config;
-using DarkUI.Controls;
-using DarkUI.Docking;
+﻿using DarkUI.Controls;
 
-namespace Example
+namespace Example.Forms.Docking
 {
     partial class DockHistory
     {

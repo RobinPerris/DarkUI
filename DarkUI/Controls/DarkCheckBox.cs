@@ -293,16 +293,16 @@ namespace DarkUI.Controls
             switch(CheckAlign)
             {
                 case ContentAlignment.MiddleRight:
-                    boxRect = new Rectangle(rect.Width - size - 2, (rect.Height / 2) - (size / 2), size, size);
-                    checkBoxRect = new Rectangle(rect.Width - size, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
+                    boxRect = new Rectangle(rect.Width - size - 2, rect.Height / 2 - size / 2, size, size);
+                    checkBoxRect = new Rectangle(rect.Width - size, rect.Height / 2 - (size - 4) / 2, size - 3, size - 3);
                     labelRect = new Rectangle(0, 0, rect.Width - size - 5, rect.Height);
                     labelAlignment = StringAlignment.Far;
                     break;
 
                 case ContentAlignment.MiddleLeft:
                 default:
-                    boxRect = new Rectangle(0, (rect.Height / 2) - (size / 2), size, size);
-                    checkBoxRect = new Rectangle(2, (rect.Height / 2) - ((size - 4) / 2), size - 3, size - 3);
+                    boxRect = new Rectangle(0, rect.Height / 2 - size / 2, size, size);
+                    checkBoxRect = new Rectangle(2, rect.Height / 2 - (size - 4) / 2, size - 3, size - 3);
                     labelRect = new Rectangle(size + 4, 0, rect.Width - size, rect.Height);
                     labelAlignment = StringAlignment.Near;
                     break;

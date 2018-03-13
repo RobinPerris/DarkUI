@@ -399,21 +399,21 @@ namespace DarkUI.Controls
             {
                 var stringSize = g.MeasureString(Text, Font, rect.Size);
 
-                var x = (ClientSize.Width / 2) - (Image.Size.Width / 2);
-                var y = (ClientSize.Height / 2) - (Image.Size.Height / 2);
+                var x = ClientSize.Width / 2 - Image.Size.Width / 2;
+                var y = ClientSize.Height / 2 - Image.Size.Height / 2;
 
                 switch (TextImageRelation)
                 {
                     case TextImageRelation.ImageAboveText:
-                        textOffsetY = (Image.Size.Height / 2) + (ImagePadding / 2);
-                        y = y - ((int)(stringSize.Height / 2) + (ImagePadding / 2));
+                        textOffsetY = Image.Size.Height / 2 + ImagePadding / 2;
+                        y = y - ((int)(stringSize.Height / 2) + ImagePadding / 2);
                         break;
                     case TextImageRelation.TextAboveImage:
-                        textOffsetY = ((Image.Size.Height / 2) + (ImagePadding / 2)) * -1;
-                        y = y + ((int)(stringSize.Height / 2) + (ImagePadding / 2));
+                        textOffsetY = (Image.Size.Height / 2 + ImagePadding / 2) * -1;
+                        y = y + (int)(stringSize.Height / 2) + ImagePadding / 2;
                         break;
                     case TextImageRelation.ImageBeforeText:
-                        textOffsetX = Image.Size.Width + (ImagePadding / 2);
+                        textOffsetX = Image.Size.Width + ImagePadding / 2;
                         x = ImagePadding;
                         break;
                     case TextImageRelation.TextBeforeImage:

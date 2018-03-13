@@ -18,7 +18,7 @@ namespace DarkUI.Win32
 
         private readonly DarkTranslucentForm _highlightForm;
 
-        private bool _isDragging = false;
+        private bool _isDragging;
         private DarkDockRegion _targetRegion;
         private DarkDockGroup _targetGroup;
         private DockInsertType _insertType = DockInsertType.None;

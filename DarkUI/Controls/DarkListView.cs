@@ -110,7 +110,7 @@ namespace DarkUI.Controls
                 }
 
                 // Find the starting index of the new item list and update anything past that
-                if (e.NewStartingIndex < (Items.Count - 1))
+                if (e.NewStartingIndex < Items.Count - 1)
                 {
                     for (var i = e.NewStartingIndex; i <= Items.Count - 1; i++)
                     {
@@ -125,7 +125,7 @@ namespace DarkUI.Controls
                     item.TextChanged -= Item_TextChanged;
 
                 // Find the starting index of the old item list and update anything past that
-                if (e.OldStartingIndex < (Items.Count - 1))
+                if (e.OldStartingIndex < Items.Count - 1)
                 {
                     for (var i = e.OldStartingIndex; i <= Items.Count - 1; i++)
                     {
@@ -402,7 +402,7 @@ namespace DarkUI.Controls
 
         private void UpdateItemPosition(DarkListItem item, int index)
         {
-            item.Area = new Rectangle(2, (index * ItemHeight), item.Area.Width, ItemHeight);
+            item.Area = new Rectangle(2, index * ItemHeight, item.Area.Width, ItemHeight);
         }
 
         private void UpdateContentSize()
@@ -459,17 +459,17 @@ namespace DarkUI.Controls
                 VScrollTo(itemTop);
 
             if (itemBottom > Viewport.Bottom)
-                VScrollTo((itemBottom - Viewport.Height));
+                VScrollTo(itemBottom - Viewport.Height);
         }
 
         private IEnumerable<int> ItemIndexesInView()
         {
-            var top = (Viewport.Top / ItemHeight) - 1;
+            var top = Viewport.Top / ItemHeight - 1;
 
             if (top < 0)
                 top = 0;
 
-            var bottom = ((Viewport.Top + Viewport.Height) / ItemHeight) + 1;
+            var bottom = (Viewport.Top + Viewport.Height) / ItemHeight + 1;
 
             if (bottom > Items.Count)
                 bottom = Items.Count;
@@ -511,7 +511,7 @@ namespace DarkUI.Controls
                     // Icon
                     if (ShowIcons && Items[i].Icon != null)
                     {
-                        g.DrawImage(Items[i].Icon, new Point(rect.Left + 5, rect.Top + (rect.Height / 2) - (IconSize / 2)));
+                        g.DrawImage(Items[i].Icon, new Point(rect.Left + 5, rect.Top + rect.Height / 2 - IconSize / 2));
                     }
 
                     // Text

@@ -1,8 +1,8 @@
 ﻿using DarkUI.Config;
 using DarkUI.Extensions;
-using DarkUI.Icons;
 using System.Drawing;
 using System.Windows.Forms;
+using DarkUI.Icons;
 
 namespace DarkUI.Renderers
 {

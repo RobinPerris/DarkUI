@@ -257,7 +257,7 @@ namespace DarkUI.Controls
                 text = formatE.Value?.ToString() ?? SelectedItem.ToString();
             }
             using (var backBrush = new SolidBrush(BackColor))
-                e.Graphics.FillRectangle((Focused && DrawFocusRectangle) ? _focusBrush : backBrush, textRect);
+                e.Graphics.FillRectangle(Focused && DrawFocusRectangle ? _focusBrush : backBrush, textRect);
             using (var foreBrush = new SolidBrush(ForeColor))
                 e.Graphics.DrawString(text ?? Text, Font, foreBrush, textRect, StringFormat.GenericDefault);
         }

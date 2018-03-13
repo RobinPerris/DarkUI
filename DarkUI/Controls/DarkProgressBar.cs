@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using DarkUI.Config;
 
@@ -63,7 +60,7 @@ namespace DarkUI.Controls
 
             if (m.Msg == 0x000F)
             {
-                float percentage = (float)(Value - Minimum) / (float)(Maximum - Minimum);
+                float percentage = (Value - Minimum) / (float)(Maximum - Minimum);
 
                 using (Graphics g = CreateGraphics())
                 {

@@ -1,8 +1,8 @@
-﻿using DarkUI.Controls;
+﻿using System.Windows.Forms;
+using DarkUI.Controls;
 using DarkUI.Forms;
-using System.Windows.Forms;
 
-namespace Example
+namespace Example.Forms.Dialogs
 {
     public partial class DialogControls : DarkDialog
     {

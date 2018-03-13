@@ -24,7 +24,7 @@ namespace DarkUI.Docking
         private readonly Dictionary<DarkDockArea, DarkDockRegion> _regions;
 
         private DarkDockContent _activeContent;
-        private bool _switchingContent = false;
+        private bool _switchingContent;
 
         #endregion
 

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DarkUI.Icons;
 
 namespace DarkUI.Docking
 {
@@ -19,7 +20,7 @@ namespace DarkUI.Docking
 
         private readonly DarkDockTabArea _tabArea;
 
-        private DarkDockTab _dragTab = null;
+        private DarkDockTab _dragTab;
 
         private DarkDockSplitter _splitter;
 
@@ -161,10 +162,10 @@ namespace DarkUI.Docking
 
         private void UpdateTabArea()
         {
-            if ((DockArea == DarkDockArea.Document) && (Consts.DisableSingleDocumentTab == false))
-                _tabArea.Visible = (_contents.Count > 0);
+            if (DockArea == DarkDockArea.Document && Consts.DisableSingleDocumentTab == false)
+                _tabArea.Visible = _contents.Count > 0;
             else
-                _tabArea.Visible = (_contents.Count > 1);
+                _tabArea.Visible = _contents.Count > 1;
 
             var size = 0;
 
@@ -376,7 +377,7 @@ namespace DarkUI.Docking
                 {
                     var tab = _tabs[content];
                     var closeRect = new Rectangle(tab.ClientRectangle.Right - 7 - closeButtonSize - 1,
-                                                  tab.ClientRectangle.Top + (tab.ClientRectangle.Height / 2) - (closeButtonSize / 2) - 1,
+                                                  tab.ClientRectangle.Top + tab.ClientRectangle.Height / 2 - closeButtonSize / 2 - 1,
                                                   closeButtonSize, closeButtonSize);
                     tab.CloseButtonRectangle = closeRect;
                 }
@@ -744,8 +745,8 @@ namespace DarkUI.Docking
 
             using (var img = DockIcons.arrow)
             {
-                g.DrawImage(img, dropdownRect.Left + (dropdownRect.Width / 2) - (img.Width / 2),
-                    dropdownRect.Top + (dropdownRect.Height / 2) - (img.Height / 2) + 1);
+                g.DrawImage(img, dropdownRect.Left + dropdownRect.Width / 2 - img.Width / 2,
+                    dropdownRect.Top + dropdownRect.Height / 2 - img.Height / 2 + 1);
             }
         }
 

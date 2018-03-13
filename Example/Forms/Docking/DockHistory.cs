@@ -1,7 +1,7 @@
 ﻿using DarkUI.Controls;
 using DarkUI.Docking;
 
-namespace Example
+namespace Example.Forms.Docking
 {
     public partial class DockHistory : DarkToolWindow
     {

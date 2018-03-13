@@ -1,7 +1,4 @@
-﻿using DarkUI.Config;
-using DarkUI.Docking;
-
-namespace Example
+﻿namespace Example.Forms.Docking
 {
     partial class DockProperties
     {

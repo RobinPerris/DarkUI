@@ -1,4 +1,4 @@
-﻿namespace Example
+﻿namespace Example.Forms.Docking
 {
     partial class DockDocument
     {

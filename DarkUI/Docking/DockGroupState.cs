@@ -33,9 +33,9 @@ namespace DarkUI.Docking
         #region Comparison Region
 
         public bool Equals(DockGroupState other) =>
-            (VisibleContent == other.VisibleContent) &&
-            (Order == other.Order) &&
-            (Size == other.Size) &&
+            VisibleContent == other.VisibleContent &&
+            Order == other.Order &&
+            Size == other.Size &&
             Contents.SequenceEqual(other.Contents);
         public static bool operator ==(DockGroupState first, DockGroupState second) => first.Equals(second);
         public static bool operator !=(DockGroupState first, DockGroupState second) => !first.Equals(second);

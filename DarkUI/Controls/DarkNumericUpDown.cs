@@ -18,7 +18,7 @@ namespace DarkUI.Controls
         [Description("Forces mousewheel to scroll by one increment.")]
         public bool MousewheelSingleIncrement { get; set; } = true;
 
-        private bool _mouseDown = false;
+        private bool _mouseDown;
         private Point? _mousePos;
 
         public DarkNumericUpDown()
@@ -90,7 +90,7 @@ namespace DarkUI.Controls
 
             // Down arrow
             RenderArrow(Icons.NumericUpDownIcons.numericUpDown_arrow,
-                new Rectangle(upDownRect.X, upDownRect.Y + upDownRect.Height / 2, upDownRect.Width, upDownRect.Height - (upDownRect.Height / 2)), e);
+                new Rectangle(upDownRect.X, upDownRect.Y + upDownRect.Height / 2, upDownRect.Width, upDownRect.Height - upDownRect.Height / 2), e);
         }
 
         private void RenderArrow(Image image, Rectangle area, PaintEventArgs e)
@@ -124,9 +124,9 @@ namespace DarkUI.Controls
                 decimal newValue = Value;
 
                 if (e.Delta > 0)
-                    newValue += (ModifierKeys == Keys.Shift) ? IncrementAlternate : Increment;
+                    newValue += ModifierKeys == Keys.Shift ? IncrementAlternate : Increment;
                 else
-                    newValue -= (ModifierKeys == Keys.Shift) ? IncrementAlternate : Increment;
+                    newValue -= ModifierKeys == Keys.Shift ? IncrementAlternate : Increment;
 
                 Value = Math.Min(Maximum, Math.Max(Minimum, newValue));
             }

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System;
+using DarkUI.Icons;
 
 namespace DarkUI.Docking
 {
@@ -12,8 +13,8 @@ namespace DarkUI.Docking
         #region Field Region
 
         private Rectangle _closeButtonRect;
-        private bool _closeButtonHot = false;
-        private bool _closeButtonPressed = false;
+        private bool _closeButtonHot;
+        private bool _closeButtonPressed;
 
         private Rectangle _headerRect;
         private bool _shouldDrag;
@@ -76,7 +77,7 @@ namespace DarkUI.Docking
             _closeButtonRect = new Rectangle
             {
                 X = ClientRectangle.Right - DockIcons.tw_close.Width - 5 - 3,
-                Y = ClientRectangle.Top + (Consts.ToolWindowHeaderSize / 2) - (DockIcons.tw_close.Height / 2),
+                Y = ClientRectangle.Top + Consts.ToolWindowHeaderSize / 2 - DockIcons.tw_close.Height / 2,
                 Width = DockIcons.tw_close.Width,
                 Height = DockIcons.tw_close.Height
             };
@@ -196,7 +197,7 @@ namespace DarkUI.Docking
             // Draw icon
             if (Icon != null)
             {
-                g.DrawImage(Icon, ClientRectangle.Left + 5, ClientRectangle.Top + (Consts.ToolWindowHeaderSize / 2) - (Icon.Height / 2) + 1);
+                g.DrawImage(Icon, ClientRectangle.Left + 5, ClientRectangle.Top + Consts.ToolWindowHeaderSize / 2 - Icon.Height / 2 + 1);
                 xOffset = Icon.Width + 8;
             }
 

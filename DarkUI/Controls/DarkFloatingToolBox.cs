@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using DarkUI.Config;
+using DarkUI.Icons;
 
 namespace DarkUI.Controls
 {
@@ -17,7 +18,7 @@ namespace DarkUI.Controls
         public DarkFloatingToolboxContainer(DarkFloatingToolbox toolbox) { Toolbox = toolbox; }
     }
 
-    public partial class DarkFloatingToolbox : UserControl
+    public class DarkFloatingToolbox : UserControl
     {
         [Category("Layout")]
         [Description("Determines snapping distance to parent control")]
@@ -35,7 +36,7 @@ namespace DarkUI.Controls
             get { return _autoAnchor; }
             set { _autoAnchor = value; }
         }
-        private bool _autoAnchor = false;
+        private bool _autoAnchor;
 
         [Category("Layout")]
         [Description("Determines if resize grip is horizontal or vertical.")]
@@ -167,7 +168,7 @@ namespace DarkUI.Controls
             dragBounds.Width -= Width;
             dragBounds.Height -= Height;
 
-            dragOffset = (offset);
+            dragOffset = offset;
 
             isDragging = true;
             DoDragDrop(new DarkFloatingToolboxContainer(this), DragDropEffects.Move);
@@ -178,7 +179,7 @@ namespace DarkUI.Controls
         protected override void WndProc(ref Message m)
         {
             const int WM_NCHITTEST = 0x0084;
-            const int HTTRANSPARENT = (-1);
+            const int HTTRANSPARENT = -1;
 
             if (isDragging && m.Msg == WM_NCHITTEST)
                 m.Result = (IntPtr)HTTRANSPARENT;
@@ -227,10 +228,10 @@ namespace DarkUI.Controls
                 var nextLocation = Parent.PointToClient(new Point(Cursor.Position.X - dragOffset.X, Cursor.Position.Y - dragOffset.Y));
 
                 // Snap toolbox to parent border
-                nextLocation.Offset((nextLocation.X < _dragSnappingMargin.Width ? -nextLocation.X : 0), (nextLocation.Y < _dragSnappingMargin.Height ? -nextLocation.Y : 0));
-                nextLocation.Offset((nextLocation.X > dragBounds.Width - _dragSnappingMargin.Width ? -(nextLocation.X - dragBounds.Width) : 0), (nextLocation.Y > dragBounds.Height - _dragSnappingMargin.Height ? -(nextLocation.Y - dragBounds.Height) : 0));
+                nextLocation.Offset(nextLocation.X < _dragSnappingMargin.Width ? -nextLocation.X : 0, nextLocation.Y < _dragSnappingMargin.Height ? -nextLocation.Y : 0);
+                nextLocation.Offset(nextLocation.X > dragBounds.Width - _dragSnappingMargin.Width ? -(nextLocation.X - dragBounds.Width) : 0, nextLocation.Y > dragBounds.Height - _dragSnappingMargin.Height ? -(nextLocation.Y - dragBounds.Height) : 0);
 
-                this.Location = nextLocation;
+                Location = nextLocation;
                 Refresh(); // We need to invalidate all controls behind
             }
         }

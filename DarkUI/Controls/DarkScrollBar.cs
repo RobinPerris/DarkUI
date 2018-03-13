@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using DarkUI.Icons;
 
 namespace DarkUI.Controls
 {
@@ -19,7 +20,7 @@ namespace DarkUI.Controls
         private DarkScrollOrientation _scrollOrientation;
 
         private int _value;
-        private int _minimum = 0;
+        private int _minimum;
         private int _maximum = 100;
 
         private int _viewSize;
@@ -42,7 +43,7 @@ namespace DarkUI.Controls
         private int _initialValue;
         private Point _initialContact;
 
-        private Timer _scrollTimer;
+        private readonly Timer _scrollTimer;
 
         #endregion
 
@@ -300,7 +301,7 @@ namespace DarkUI.Controls
             {
                 case DarkScrollOrientation.Vertical:
                 {
-                    var thumbPos = (_initialValue - _trackArea.Top);
+                    var thumbPos = _initialValue - _trackArea.Top;
                     var newPosition = thumbPos + difference.Y;
 
                     ScrollToPhysical(newPosition);
@@ -308,7 +309,7 @@ namespace DarkUI.Controls
                 }
                 case DarkScrollOrientation.Horizontal:
                 {
-                    var thumbPos = (_initialValue - _trackArea.Left);
+                    var thumbPos = _initialValue - _trackArea.Left;
                     var newPosition = thumbPos + difference.X;
 
                     ScrollToPhysical(newPosition);
@@ -359,8 +360,8 @@ namespace DarkUI.Controls
 
             var trackAreaSize = isVert ? _trackArea.Height - _thumbArea.Height : _trackArea.Width - _thumbArea.Width;
 
-            var positionRatio = (float)positionInPixels / (float)trackAreaSize;
-            var viewScrollSize = (Maximum - ViewSize);
+            var positionRatio = positionInPixels / (float)trackAreaSize;
+            var viewScrollSize = Maximum - ViewSize;
 
             var newValue = (int)(positionRatio * viewScrollSize);
             Value = newValue;
@@ -376,7 +377,7 @@ namespace DarkUI.Controls
         {
             var isVert = _scrollOrientation == DarkScrollOrientation.Vertical;
 
-            var thumbPos = isVert ? (_thumbArea.Top - _trackArea.Top) : (_thumbArea.Left - _trackArea.Left);
+            var thumbPos = isVert ? _thumbArea.Top - _trackArea.Top : _thumbArea.Left - _trackArea.Left;
 
             var newPosition = thumbPos - offsetInPixels;
 
@@ -404,10 +405,10 @@ namespace DarkUI.Controls
             switch (_scrollOrientation)
             {
                 case DarkScrollOrientation.Vertical:
-                    _trackArea = new Rectangle(area.Left, area.Top + Consts.ArrowButtonSize, area.Width, area.Height - (Consts.ArrowButtonSize * 2));
+                    _trackArea = new Rectangle(area.Left, area.Top + Consts.ArrowButtonSize, area.Width, area.Height - Consts.ArrowButtonSize * 2);
                     break;
                 case DarkScrollOrientation.Horizontal:
-                    _trackArea = new Rectangle(area.Left + Consts.ArrowButtonSize, area.Top, area.Width - (Consts.ArrowButtonSize * 2), area.Height);
+                    _trackArea = new Rectangle(area.Left + Consts.ArrowButtonSize, area.Top, area.Width - Consts.ArrowButtonSize * 2, area.Height);
                     break;
             }
 
@@ -428,9 +429,9 @@ namespace DarkUI.Controls
                 Value = maximumValue;
 
             // Calculate size ratio
-            _viewContentRatio = (float)ViewSize / (float)Maximum;
+            _viewContentRatio = ViewSize / (float)Maximum;
             var viewAreaSize = Maximum - ViewSize;
-            var positionRatio = (float)Value / (float)viewAreaSize;
+            var positionRatio = Value / (float)viewAreaSize;
 
             // Update area
             switch (_scrollOrientation)
@@ -511,8 +512,8 @@ namespace DarkUI.Controls
             }
 
             g.DrawImage(upIcon,
-                                _upArrowArea.Left + (_upArrowArea.Width / 2) - (upIcon.Width / 2),
-                                _upArrowArea.Top + (_upArrowArea.Height / 2) - (upIcon.Height / 2));
+                                _upArrowArea.Left + _upArrowArea.Width / 2 - upIcon.Width / 2,
+                                _upArrowArea.Top + _upArrowArea.Height / 2 - upIcon.Height / 2);
 
             // Down arrow
             var downIcon = _downArrowHot ? ScrollIcons.scrollbar_arrow_hot : ScrollIcons.scrollbar_arrow_standard;
@@ -527,8 +528,8 @@ namespace DarkUI.Controls
                 downIcon.RotateFlip(RotateFlipType.Rotate270FlipNone);
 
             g.DrawImage(downIcon,
-                                _downArrowArea.Left + (_downArrowArea.Width / 2) - (downIcon.Width / 2),
-                                _downArrowArea.Top + (_downArrowArea.Height / 2) - (downIcon.Height / 2));
+                                _downArrowArea.Left + _downArrowArea.Width / 2 - downIcon.Width / 2,
+                                _downArrowArea.Top + _downArrowArea.Height / 2 - downIcon.Height / 2);
 
             // Draw thumb
             if (!Enabled)

@@ -10,7 +10,7 @@ namespace DarkUI.Forms
     {
         private MessageBoxButtons _dialogButtons = MessageBoxButtons.OK;
 
-        private IEnumerable<DarkButton> Buttons => new DarkButton[] { btnYes, btnNo, btnOk, btnAbort, btnRetry, btnIgnore, btnCancel };
+        private IEnumerable<DarkButton> Buttons => new[] { btnYes, btnNo, btnOk, btnAbort, btnRetry, btnIgnore, btnCancel };
 
         [Description("Determines the type of the dialog window.")]
         [DefaultValue(MessageBoxButtons.OK)]
