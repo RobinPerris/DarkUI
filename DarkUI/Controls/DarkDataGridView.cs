@@ -475,7 +475,7 @@ namespace DarkUI.Controls
                 return;
             if (e.RowIndex < 0 || e.RowIndex >= Rows.Count)
                 return;
-            if (e.ColumnIndex < 0 || e.ColumnIndex >= Rows.Count)
+            if (e.ColumnIndex < 0 || e.ColumnIndex >= Columns.Count)
                 return;
 
             // Try to get row or column (yes, sometimes, this can fail even though the row index and column index are in range.
