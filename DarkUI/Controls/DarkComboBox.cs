@@ -21,7 +21,6 @@ namespace DarkUI.Controls
         private Bitmap _buttonIcon = DefaultButtonIcon;
 
         // Text
-        private string _text;
         private Padding _textPadding = new Padding(2);
         #endregion Fields
 
@@ -161,16 +160,6 @@ namespace DarkUI.Controls
             }
         }
 
-        [Category("Appearance")]
-        public override string Text
-        {
-            get { return _text; }
-            set
-            {
-                _text = value;
-                Invalidate();
-            }
-        }
         #endregion Properties
 
         #region Methods
