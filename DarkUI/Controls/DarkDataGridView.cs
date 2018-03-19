@@ -358,7 +358,8 @@ namespace DarkUI.Controls
 
         private void _vScrollBar_ValueChanged(object sender, ScrollValueEventArgs e)
         {
-            _base.FirstDisplayedScrollingRowIndex = Math.Max(0, Math.Min(Math.Max(_base.Rows.Count - 1 , 0), e.Value));
+            if (_base.Rows.Count != 0)
+                _base.FirstDisplayedScrollingRowIndex = Math.Max(0, Math.Min(Math.Max(_base.Rows.Count - 1 , 0), e.Value));
         }
 
         private void BaseScrolled(object sender, ScrollEventArgs e)
