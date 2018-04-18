@@ -93,14 +93,22 @@ namespace DarkUI.Controls
             _base.Paint += BasePaint;
             _base.GotFocus += BaseGotFocus;
             _base.LostFocus += BaseLostFocus;
-            _base.RowsAdded += delegate { UpdateScrollBarLayout(); };
-            _base.RowsRemoved += delegate { UpdateScrollBarLayout(); };
-            _base.ColumnStateChanged += delegate { UpdateScrollBarLayout(); };
-            _base.ColumnWidthChanged += delegate { UpdateScrollBarLayout(); };
-            _base.ColumnAdded += delegate { UpdateScrollBarLayout(); };
-            _base.ColumnRemoved += delegate { UpdateScrollBarLayout(); };
-            _base.Click += delegate { OnClick(EventArgs.Empty); };
-            _base.DoubleClick += delegate { OnDoubleClick(EventArgs.Empty); };
+            _base.RowsAdded += delegate
+            { UpdateScrollBarLayout(); };
+            _base.RowsRemoved += delegate
+            { UpdateScrollBarLayout(); };
+            _base.ColumnStateChanged += delegate
+            { UpdateScrollBarLayout(); };
+            _base.ColumnWidthChanged += delegate
+            { UpdateScrollBarLayout(); };
+            _base.ColumnAdded += delegate
+            { UpdateScrollBarLayout(); };
+            _base.ColumnRemoved += delegate
+            { UpdateScrollBarLayout(); };
+            _base.Click += delegate
+            { OnClick(EventArgs.Empty); };
+            _base.DoubleClick += delegate
+            { OnDoubleClick(EventArgs.Empty); };
             _base.Scroll += BaseScrolled;
 
             // Configure scroll bars
@@ -359,7 +367,7 @@ namespace DarkUI.Controls
         private void _vScrollBar_ValueChanged(object sender, ScrollValueEventArgs e)
         {
             if (_base.Rows.Count != 0)
-                _base.FirstDisplayedScrollingRowIndex = Math.Max(0, Math.Min(Math.Max(_base.Rows.Count - 1 , 0), e.Value));
+                _base.FirstDisplayedScrollingRowIndex = Math.Max(0, Math.Min(Math.Max(_base.Rows.Count - 1, 0), e.Value));
         }
 
         private void BaseScrolled(object sender, ScrollEventArgs e)
@@ -1073,6 +1081,7 @@ namespace DarkUI.Controls
             {
                 if (value != Enabled)
                     _enabled = value;
+                DataGridView?.InvalidateCell(this);
             }
         }
 
@@ -1180,6 +1189,8 @@ namespace DarkUI.Controls
 
     public class DarkDataGridViewButtonColumn : DataGridViewButtonColumn
     {
+        private bool _enabled = true;
+
         public DarkDataGridViewButtonColumn()
         {
             CellTemplate = new DarkDataGridViewButtonCell();
@@ -1207,11 +1218,19 @@ namespace DarkUI.Controls
         }
 
         [DefaultValue(true)]
-        public bool Enabled { get; set; } = true;
+        public bool Enabled
+        {
+            get { return _enabled; }
+            set
+            {
+                _enabled = value;
+                DataGridView?.InvalidateColumn(Index);
+            }
+        }
     }
 
     public class DarkDataGridViewCheckBoxCell : DataGridViewCheckBoxCell
-    {}
+    { }
 
     public class DarkDataGridViewCheckBoxColumn : DataGridViewCheckBoxColumn
     {
