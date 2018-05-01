@@ -1079,8 +1079,9 @@ namespace DarkUI.Controls
             }
             set
             {
-                if (value != Enabled)
-                    _enabled = value;
+                if (value == Enabled)
+                    return;
+                _enabled = value;
                 DataGridView?.InvalidateCell(this);
             }
         }
@@ -1223,6 +1224,8 @@ namespace DarkUI.Controls
             get { return _enabled; }
             set
             {
+                if (value == _enabled)
+                    return;
                 _enabled = value;
                 DataGridView?.InvalidateColumn(Index);
             }
