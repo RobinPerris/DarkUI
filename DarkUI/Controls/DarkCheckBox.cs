@@ -352,8 +352,10 @@ namespace DarkUI.Controls
                     checkBoxRectCross.Inflate(new Size(-1, -1));
                     using (var p = new Pen(fillColor, 2) { StartCap = LineCap.Round, EndCap = LineCap.Round } )
                     {
-                        g.DrawLine(p, new Point(checkBoxRectCross.Left, checkBoxRectCross.Top), new Point(checkBoxRectCross.Right - 2, checkBoxRectCross.Bottom - 2));
-                        g.DrawLine(p, new Point(checkBoxRectCross.Left, checkBoxRectCross.Bottom - 1), new Point(checkBoxRectCross.Right - 1, checkBoxRectCross.Top));
+                        g.SmoothingMode = SmoothingMode.HighQuality;
+                        g.DrawLine(p, new Point(checkBoxRectCross.Left, checkBoxRectCross.Bottom - checkBoxRectCross.Height / 2 - 1), new Point(checkBoxRectCross.Right / 2 + 1, checkBoxRectCross.Bottom - 1));
+                        g.DrawLine(p, new Point(checkBoxRectCross.Right / 2 + 1, checkBoxRectCross.Bottom - 1), new Point(checkBoxRectCross.Right - 1, checkBoxRectCross.Top));
+                        g.SmoothingMode = SmoothingMode.Default;
                     }
                     break;
                 case CheckState.Indeterminate:
