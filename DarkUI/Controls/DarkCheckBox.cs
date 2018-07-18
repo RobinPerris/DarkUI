@@ -353,8 +353,12 @@ namespace DarkUI.Controls
                     using (var p = new Pen(fillColor, 2) { StartCap = LineCap.Round, EndCap = LineCap.Round } )
                     {
                         g.SmoothingMode = SmoothingMode.HighQuality;
-                        g.DrawLine(p, new Point(checkBoxRectCross.Left, checkBoxRectCross.Bottom - checkBoxRectCross.Height / 2 - 1), new Point(checkBoxRectCross.Right / 2 + 1, checkBoxRectCross.Bottom - 1));
-                        g.DrawLine(p, new Point(checkBoxRectCross.Right / 2 + 1, checkBoxRectCross.Bottom - 1), new Point(checkBoxRectCross.Right - 1, checkBoxRectCross.Top));
+                        g.DrawLines(p, new Point[]
+                            {
+                                new Point(checkBoxRectCross.Left - 1, checkBoxRectCross.Bottom - checkBoxRectCross.Height / 2 - 1),
+                                new Point(checkBoxRectCross.Left + checkBoxRectCross.Width / 2 - 1, checkBoxRectCross.Bottom - 1),
+                                new Point(checkBoxRectCross.Right - 1, checkBoxRectCross.Top)
+                            });
                         g.SmoothingMode = SmoothingMode.Default;
                     }
                     break;
