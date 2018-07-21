@@ -322,7 +322,7 @@
     <None Include="Resources\node_open_empty.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\active-inactive-close.png" />
+    <None Include="Resources\active_inactive_close.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow.png" />
@@ -331,13 +331,13 @@
     <None Include="Resources\close.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\close-selected.png" />
+    <None Include="Resources\close_selected.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\inactive-close.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\inactive-close-selected.png" />
+    <None Include="Resources\inactive_close_selected.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tw_close.png" />
@@ -355,7 +355,7 @@
     <None Include="Resources\small_arrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\scrollbar_disabled.png" />
+    <None Include="Resources\scrollbar_arrow_disabled.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Question.png" />

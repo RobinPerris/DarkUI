@@ -236,7 +236,7 @@ namespace DarkUI.Docking
 
             if (_contents.Count <= 0)
                 return maxSize;
-            
+
             Size maxMinSize = new Size(Consts.ToolWindowHeaderSize, Consts.ToolWindowHeaderSize);
 
             foreach (var currContent in _contents)
@@ -612,7 +612,7 @@ namespace DarkUI.Docking
                         EnsureVisible();
 
                         _dragTab = tab;
-   
+
                         return;
                     }
                 }
@@ -723,7 +723,7 @@ namespace DarkUI.Docking
 
             if (DockArea != DarkDockArea.Document)
                 return;
-            
+
             // Color divider
             var isActiveGroup = DockPanel.ActiveGroup == this;
             var divColor = isActiveGroup ? Colors.BlueSelection : Colors.GreySelection;
