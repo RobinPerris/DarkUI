@@ -362,7 +362,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\numericUpDown_arrow.png" />
-    <None Include="Resources\combobox_arrow.bmp" />
     <None Include="Resources\combobox_arrow.png" />
     <Content Include="Resources\grip_fill.png" />
   </ItemGroup>
