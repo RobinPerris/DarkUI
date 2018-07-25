@@ -145,7 +145,7 @@ namespace DarkUI.Controls
         {
             // Raise a data event update if necessary
             var dataSource = DataSource as IBindingList;
-            if (dataSource != null)
+            if (dataSource != null && e.RowIndex >= 0)
             {
                 object obj = dataSource[e.RowIndex];
                 if (!(obj is INotifyPropertyChanged))
