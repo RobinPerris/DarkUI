@@ -1064,7 +1064,7 @@ namespace DarkUI.Controls
             Trimming = StringTrimming.EllipsisCharacter
         };
 
-        private int? _mouseCurserCell;
+        private int? _mouseCursorCell;
         private bool? _enabled;
 
         [Browsable(false)]
@@ -1091,8 +1091,8 @@ namespace DarkUI.Controls
         {
             base.OnMouseEnter(rowIndex);
 
-            int? previousMousePositionCellCell = _mouseCurserCell;
-            _mouseCurserCell = rowIndex;
+            int? previousMousePositionCellCell = _mouseCursorCell;
+            _mouseCursorCell = rowIndex;
 
             // Update
             if (previousMousePositionCellCell.HasValue)
@@ -1107,7 +1107,7 @@ namespace DarkUI.Controls
         {
             base.OnMouseLeave(rowIndex);
 
-            _mouseCurserCell = null;
+            _mouseCursorCell = null;
             DataGridView.InvalidateCell(ColumnIndex, RowIndex);
         }
 
@@ -1162,7 +1162,7 @@ namespace DarkUI.Controls
             }
             else if (ButtonState.HasFlag(ButtonState.Checked) || ButtonState.HasFlag(ButtonState.Pushed))
                 fillColor = Colors.DarkBackground;
-            else if (_mouseCurserCell == rowIndex) // Hover
+            else if (_mouseCursorCell == rowIndex) // Hover
                 fillColor = Colors.LighterBackground;
 
             // Paint button
