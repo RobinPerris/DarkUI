@@ -56,6 +56,15 @@ namespace DarkUI.Controls
         }
 
         [Category("Appearance")]
+        [Description("Determines if button can be selectable or not.")]
+        [DefaultValue(true)]
+        public bool Selectable
+        {
+            get { return GetStyle(ControlStyles.Selectable); }
+            set { SetStyle(ControlStyles.Selectable, value); }
+        }
+
+        [Category("Appearance")]
         [Description("Determines if system BackColor should be used or not.")]
         [DefaultValue(true)]
         public bool BackColorUseGeneric
