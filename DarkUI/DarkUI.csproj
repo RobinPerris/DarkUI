@@ -162,6 +162,7 @@
     <Compile Include="Docking\DockRegionState.cs" />
     <Compile Include="Docking\DockInsertType.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
+    <Compile Include="Extensions\ProgressBarExtensions.cs" />
     <Compile Include="Forms\DarkDialog.cs">
       <SubType>Form</SubType>
     </Compile>
