@@ -247,7 +247,7 @@ namespace DarkUI.Controls
             }
             using (var backBrush = new SolidBrush(BackColor))
                 e.Graphics.FillRectangle(Focused && DrawFocusRectangle ? _focusBrush : backBrush, textRect);
-            using (var foreBrush = new SolidBrush(ForeColor))
+            using (var foreBrush = new SolidBrush(Enabled ? ForeColor : Color.FromArgb(ForeColor.ToArgb() - 0x00404040)))
                 e.Graphics.DrawString(text ?? Text, Font, foreBrush, textRect, StringFormat.GenericDefault);
         }
 
