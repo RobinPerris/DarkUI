@@ -124,9 +124,9 @@ namespace DarkUI.Controls
                 decimal newValue = Value;
 
                 if (e.Delta > 0)
-                    newValue += ModifierKeys == Keys.Shift ? IncrementAlternate : Increment;
-                else
                     newValue -= ModifierKeys == Keys.Shift ? IncrementAlternate : Increment;
+                else
+                    newValue += ModifierKeys == Keys.Shift ? IncrementAlternate : Increment;
 
                 Value = Math.Min(Maximum, Math.Max(Minimum, newValue));
             }
