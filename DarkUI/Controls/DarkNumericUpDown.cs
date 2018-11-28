@@ -129,6 +129,9 @@ namespace DarkUI.Controls
                     newValue += ModifierKeys == Keys.Shift ? IncrementAlternate : Increment;
 
                 Value = Math.Min(Maximum, Math.Max(Minimum, newValue));
+
+                var eH = e as HandledMouseEventArgs;
+                if (eH != null) eH.Handled = true;
             }
             else
                 base.OnMouseWheel(e);
