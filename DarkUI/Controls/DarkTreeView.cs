@@ -652,6 +652,19 @@ namespace DarkUI.Controls
                 CheckNodeHover(childNode, location);
         }
 
+        public void ExpandAllNodes()
+        {
+            foreach (var node in Nodes)
+                ExpandNodes(node);
+        }
+
+        private void ExpandNodes(DarkTreeNode parent)
+        {
+            parent.EnsureVisible();
+            foreach (var node in parent.Nodes)
+                ExpandNodes(node);
+        }
+
         private void CheckNodeClick(DarkTreeNode node, Point location, MouseButtons button)
         {
             var rect = GetNodeFullRowArea(node);
