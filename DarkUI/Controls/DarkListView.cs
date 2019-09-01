@@ -534,12 +534,6 @@ namespace DarkUI.Controls
                     }
                 }
             }
-
-            // Border
-            using (var p = new Pen(Colors.LightBorder))
-            {
-                g.DrawRectangle(p, new Rectangle(new Point(), ClientSize - new Size(1, 1)));
-            }
         }
 
         #endregion

@@ -141,11 +141,13 @@ namespace DarkUI.Controls
 
             const int scrollSize = Consts.ScrollBarSize;
 
-            VScrollBar.Location = new Point(ClientSize.Width - scrollSize, 0);
-            VScrollBar.Size = new Size(scrollSize, ClientSize.Height);
+            VScrollBar.Location = new Point(ClientSize.Width - scrollSize - 1, 1);
+            VScrollBar.Size = new Size(scrollSize, ClientSize.Height - 2 - (HScrollBar.Visible ? scrollSize : 0));
+            VScrollBar.BackColor = Colors.MediumBackground;
 
-            HScrollBar.Location = new Point(0, ClientSize.Height - scrollSize);
-            HScrollBar.Size = new Size(ClientSize.Width, scrollSize);
+            HScrollBar.Location = new Point(1, ClientSize.Height - scrollSize - 1);
+            HScrollBar.Size = new Size(ClientSize.Width - 2 - (VScrollBar.Visible ? scrollSize : 0), scrollSize);
+            HScrollBar.BackColor = Colors.MediumBackground;
 
             if (DesignMode)
                 return;

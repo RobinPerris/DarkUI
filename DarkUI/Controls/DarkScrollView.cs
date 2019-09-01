@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using DarkUI.Config;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DarkUI.Controls
@@ -38,16 +39,18 @@ namespace DarkUI.Controls
             g.TranslateTransform(Viewport.Left, Viewport.Top);
 
             // Draw the bit where the scrollbars meet
-            if (!VScrollBar.Visible || !HScrollBar.Visible)
-                return;
-            
-            using (var b = new SolidBrush(BackColor))
-            {
-                var rect = new Rectangle(HScrollBar.Right, VScrollBar.Bottom, VScrollBar.Width,
-                    HScrollBar.Height);
+            if (VScrollBar.Visible && HScrollBar.Visible)
+                using (var b = new SolidBrush(BackColor))
+                {
+                    var rect = new Rectangle(HScrollBar.Right, VScrollBar.Bottom, VScrollBar.Width,
+                        HScrollBar.Height);
 
-                g.FillRectangle(b, rect);
-            }
+                    g.FillRectangle(b, rect);
+                }
+
+            // Border
+            using (var p = new Pen(Colors.LightBorder))
+                e.Graphics.DrawRectangle(p, new Rectangle(new Point(), ClientSize - new Size(1, 1)));
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
