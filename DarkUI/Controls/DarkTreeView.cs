@@ -881,7 +881,7 @@ namespace DarkUI.Controls
             if (!MultiSelect)
                 itemTop = SelectedNodes[0].FullArea.Top;
             else
-                itemTop = _anchoredNodeEnd.FullArea.Top;
+                itemTop = SelectedNodes.Last().FullArea.Top;
 
             var itemBottom = itemTop + ItemHeight;
 
