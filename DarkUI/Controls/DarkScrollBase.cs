@@ -326,19 +326,19 @@ namespace DarkUI.Controls
 
             if (!horizontal)
             {
-                float speed = MouseWheelScrollSpeedV * e.Delta;
+                float speed = MouseWheelScrollSpeedV * -e.Delta;
                 int speedInt = (int)Math.Min(1073741824, Math.Max(-1073741824, speed));
                 if (speedInt == 0)
                     speedInt = speed > 0 ? 1 : -1;
-                VScrollBar.ScrollByPhysical(speedInt);
+                VScrollBar.ScrollBy(speedInt);
             }
             else
             {
-                float speed = MouseWheelScrollSpeedH * e.Delta;
+                float speed = MouseWheelScrollSpeedH * -e.Delta;
                 int speedInt = (int)Math.Min(1073741824, Math.Max(-1073741824, speed));
                 if (speedInt == 0)
                     speedInt = speed > 0 ? 1 : -1;
-                HScrollBar.ScrollByPhysical(speedInt);
+                HScrollBar.ScrollBy(speedInt);
             }
         }
 
