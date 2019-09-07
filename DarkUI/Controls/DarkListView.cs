@@ -282,6 +282,9 @@ namespace DarkUI.Controls
             Invalidate();
         }
 
+        public DarkListItem SelectedItem => (SelectedIndices.Count == 0) ? null : Items[SelectedIndices[0]];
+        public List<DarkListItem> SelectedItems => Items.Where(item => SelectedIndices.Any(index => Items.IndexOf(item) == index)).ToList();
+
         public void ToggleItem(int index)
         {
             if (_selectedIndices.Contains(index))
