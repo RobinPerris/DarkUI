@@ -133,8 +133,16 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DarkTreeNode.cs" />
+    <Compile Include="Controls\IToolStripSpring.cs" />
     <Compile Include="Controls\ScrollValueEventArgs.cs" />
     <Compile Include="Controls\ToolStripDarkComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolStripDarkTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolStripSpring.cs" />
+    <Compile Include="Controls\ToolStripSpringControlHost.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Docking\DarkDockArea.cs" />

@@ -5,7 +5,7 @@ using System.Windows.Forms.Design;
 namespace DarkUI.Controls
 {
     [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.ToolStrip | ToolStripItemDesignerAvailability.StatusStrip)]
-    public class ToolStripDarkComboBox : ToolStripControlHost
+    public class ToolStripDarkComboBox : ToolStripSpringControlHost
     {
         // Call the base constructor passing in a DarkComboBox instance.
         public ToolStripDarkComboBox() : this(new DarkComboBox()) { }
@@ -15,6 +15,9 @@ namespace DarkUI.Controls
         {
             get { return Control as DarkComboBox; }
         }
+
+        // Declare the SelectedIndexChanged event.
+        public event EventHandler SelectedIndexChanged;
 
         // Expose the DarkComboBox.SelectedIndex as a property.
         public int SelectedIndex
@@ -48,14 +51,10 @@ namespace DarkUI.Controls
             combo.SelectedIndexChanged -= new EventHandler(OnSelectedIndexChanged);
         }
 
-        // Declare the SelectedIndexChanged event.
-        public event EventHandler SelectedIndexChanged;
-
         // Raise the SelectedIndexChanged event.
         private void OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SelectedIndexChanged != null)
-                SelectedIndexChanged(this, e);
+            SelectedIndexChanged?.Invoke(this, e);
         }
     }
 }
