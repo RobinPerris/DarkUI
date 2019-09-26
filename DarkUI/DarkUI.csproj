@@ -58,6 +58,9 @@
     <Compile Include="Controls\DarkDataGridView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\DarkDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkFloatingToolBox.cs" />
     <Compile Include="Controls\DarkGroupBox.cs">
       <SubType>Component</SubType>
