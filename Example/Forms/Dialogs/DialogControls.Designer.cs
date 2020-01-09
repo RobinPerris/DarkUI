@@ -39,6 +39,9 @@ namespace Example
             this.lstTest = new DarkUI.Controls.DarkListView();
             this.pnlMessageBox = new DarkUI.Controls.DarkSectionPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.darkComboBox1 = new DarkUI.Controls.DarkComboBox();
+            this.darkTitle4 = new DarkUI.Controls.DarkTitle();
             this.panel5 = new System.Windows.Forms.Panel();
             this.darkRadioButton3 = new DarkUI.Controls.DarkRadioButton();
             this.darkRadioButton2 = new DarkUI.Controls.DarkRadioButton();
@@ -59,6 +62,7 @@ namespace Example
             this.pnlListView.SuspendLayout();
             this.pnlMessageBox.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -150,6 +154,7 @@ namespace Example
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
@@ -160,6 +165,45 @@ namespace Example
             this.panel1.Padding = new System.Windows.Forms.Padding(10);
             this.panel1.Size = new System.Drawing.Size(220, 374);
             this.panel1.TabIndex = 0;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.darkComboBox1);
+            this.panel6.Controls.Add(this.darkTitle4);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(10, 285);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(200, 100);
+            this.panel6.TabIndex = 13;
+            // 
+            // darkComboBox1
+            // 
+            this.darkComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
+            this.darkComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.darkComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.darkComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.darkComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.darkComboBox1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkComboBox1.FormattingEnabled = true;
+            this.darkComboBox1.Items.AddRange(new object[] {
+            "Item 1",
+            "Item 2",
+            "Item 3",
+            "Item 4"});
+            this.darkComboBox1.Location = new System.Drawing.Point(0, 26);
+            this.darkComboBox1.Name = "darkComboBox1";
+            this.darkComboBox1.Size = new System.Drawing.Size(200, 24);
+            this.darkComboBox1.TabIndex = 17;
+            this.darkComboBox1.Text = "Item 1";
+            // 
+            // darkTitle4
+            // 
+            this.darkTitle4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.darkTitle4.Location = new System.Drawing.Point(0, 0);
+            this.darkTitle4.Name = "darkTitle4";
+            this.darkTitle4.Size = new System.Drawing.Size(200, 26);
+            this.darkTitle4.TabIndex = 16;
+            this.darkTitle4.Text = "Additional controls";
             // 
             // panel5
             // 
@@ -331,6 +375,7 @@ namespace Example
             this.pnlMessageBox.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel6.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -365,5 +410,8 @@ namespace Example
         private DarkTitle darkTitle1;
         private DarkTitle darkTitle2;
         private DarkTitle darkTitle3;
+        private System.Windows.Forms.Panel panel6;
+        private DarkTitle darkTitle4;
+        private DarkComboBox darkComboBox1;
     }
 }

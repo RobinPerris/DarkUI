@@ -50,6 +50,9 @@
     <Compile Include="Controls\DarkCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkContentAlignment.cs" />
     <Compile Include="Controls\DarkControlState.cs" />
     <Compile Include="Controls\DarkRadioButton.cs">
