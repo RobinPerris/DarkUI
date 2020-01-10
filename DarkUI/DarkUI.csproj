@@ -55,6 +55,9 @@
     </Compile>
     <Compile Include="Controls\DarkContentAlignment.cs" />
     <Compile Include="Controls\DarkControlState.cs" />
+    <Compile Include="Controls\DarkGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>

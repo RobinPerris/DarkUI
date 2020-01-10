@@ -39,9 +39,8 @@ namespace Example
             this.lstTest = new DarkUI.Controls.DarkListView();
             this.pnlMessageBox = new DarkUI.Controls.DarkSectionPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.darkGroupBox1 = new DarkUI.Controls.DarkGroupBox();
             this.darkComboBox1 = new DarkUI.Controls.DarkComboBox();
-            this.darkTitle4 = new DarkUI.Controls.DarkTitle();
             this.panel5 = new System.Windows.Forms.Panel();
             this.darkRadioButton3 = new DarkUI.Controls.DarkRadioButton();
             this.darkRadioButton2 = new DarkUI.Controls.DarkRadioButton();
@@ -62,7 +61,7 @@ namespace Example
             this.pnlListView.SuspendLayout();
             this.pnlMessageBox.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.darkGroupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -76,7 +75,7 @@ namespace Example
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Padding = new System.Windows.Forms.Padding(5, 10, 5, 0);
-            this.pnlMain.Size = new System.Drawing.Size(708, 410);
+            this.pnlMain.Size = new System.Drawing.Size(708, 619);
             this.pnlMain.TabIndex = 2;
             // 
             // tblMain
@@ -93,7 +92,7 @@ namespace Example
             this.tblMain.Name = "tblMain";
             this.tblMain.RowCount = 1;
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblMain.Size = new System.Drawing.Size(698, 400);
+            this.tblMain.Size = new System.Drawing.Size(698, 609);
             this.tblMain.TabIndex = 0;
             // 
             // pnlTreeView
@@ -104,7 +103,7 @@ namespace Example
             this.pnlTreeView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.pnlTreeView.Name = "pnlTreeView";
             this.pnlTreeView.SectionHeader = "Tree view test";
-            this.pnlTreeView.Size = new System.Drawing.Size(224, 400);
+            this.pnlTreeView.Size = new System.Drawing.Size(224, 609);
             this.pnlTreeView.TabIndex = 14;
             // 
             // treeTest
@@ -116,7 +115,7 @@ namespace Example
             this.treeTest.MultiSelect = true;
             this.treeTest.Name = "treeTest";
             this.treeTest.ShowIcons = true;
-            this.treeTest.Size = new System.Drawing.Size(222, 374);
+            this.treeTest.Size = new System.Drawing.Size(222, 583);
             this.treeTest.TabIndex = 0;
             this.treeTest.Text = "darkTreeView1";
             // 
@@ -128,7 +127,7 @@ namespace Example
             this.pnlListView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.pnlListView.Name = "pnlListView";
             this.pnlListView.SectionHeader = "List view test";
-            this.pnlListView.Size = new System.Drawing.Size(222, 400);
+            this.pnlListView.Size = new System.Drawing.Size(222, 609);
             this.pnlListView.TabIndex = 13;
             // 
             // lstTest
@@ -137,7 +136,7 @@ namespace Example
             this.lstTest.Location = new System.Drawing.Point(1, 25);
             this.lstTest.MultiSelect = true;
             this.lstTest.Name = "lstTest";
-            this.lstTest.Size = new System.Drawing.Size(220, 374);
+            this.lstTest.Size = new System.Drawing.Size(220, 583);
             this.lstTest.TabIndex = 7;
             this.lstTest.Text = "darkListView1";
             // 
@@ -149,12 +148,12 @@ namespace Example
             this.pnlMessageBox.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.pnlMessageBox.Name = "pnlMessageBox";
             this.pnlMessageBox.SectionHeader = "Controls test";
-            this.pnlMessageBox.Size = new System.Drawing.Size(222, 400);
+            this.pnlMessageBox.Size = new System.Drawing.Size(222, 609);
             this.pnlMessageBox.TabIndex = 12;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.panel6);
+            this.panel1.Controls.Add(this.darkGroupBox1);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
@@ -163,18 +162,23 @@ namespace Example
             this.panel1.Location = new System.Drawing.Point(1, 25);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10);
-            this.panel1.Size = new System.Drawing.Size(220, 374);
+            this.panel1.Size = new System.Drawing.Size(220, 583);
             this.panel1.TabIndex = 0;
             // 
-            // panel6
+            // darkGroupBox1
             // 
-            this.panel6.Controls.Add(this.darkComboBox1);
-            this.panel6.Controls.Add(this.darkTitle4);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(10, 285);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(200, 100);
-            this.panel6.TabIndex = 13;
+            this.darkGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            this.darkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.darkGroupBox1.Controls.Add(this.darkComboBox1);
+            this.darkGroupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.darkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkGroupBox1.Location = new System.Drawing.Point(10, 285);
+            this.darkGroupBox1.Name = "darkGroupBox1";
+            this.darkGroupBox1.Padding = new System.Windows.Forms.Padding(10);
+            this.darkGroupBox1.Size = new System.Drawing.Size(200, 144);
+            this.darkGroupBox1.TabIndex = 14;
+            this.darkGroupBox1.TabStop = false;
+            this.darkGroupBox1.Text = "DarkUI 2.0 Controls";
             // 
             // darkComboBox1
             // 
@@ -186,19 +190,10 @@ namespace Example
             "Item 2",
             "This is a really long item in the collection to check out how text is clipped",
             "Item 4"});
-            this.darkComboBox1.Location = new System.Drawing.Point(0, 26);
+            this.darkComboBox1.Location = new System.Drawing.Point(10, 26);
             this.darkComboBox1.Name = "darkComboBox1";
-            this.darkComboBox1.Size = new System.Drawing.Size(200, 24);
-            this.darkComboBox1.TabIndex = 17;
-            // 
-            // darkTitle4
-            // 
-            this.darkTitle4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.darkTitle4.Location = new System.Drawing.Point(0, 0);
-            this.darkTitle4.Name = "darkTitle4";
-            this.darkTitle4.Size = new System.Drawing.Size(200, 26);
-            this.darkTitle4.TabIndex = 16;
-            this.darkTitle4.Text = "Additional controls";
+            this.darkComboBox1.Size = new System.Drawing.Size(180, 24);
+            this.darkComboBox1.TabIndex = 18;
             // 
             // panel5
             // 
@@ -355,7 +350,7 @@ namespace Example
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 455);
+            this.ClientSize = new System.Drawing.Size(708, 664);
             this.Controls.Add(this.pnlMain);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -370,7 +365,7 @@ namespace Example
             this.pnlMessageBox.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel6.ResumeLayout(false);
+            this.darkGroupBox1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -405,8 +400,7 @@ namespace Example
         private DarkTitle darkTitle1;
         private DarkTitle darkTitle2;
         private DarkTitle darkTitle3;
-        private System.Windows.Forms.Panel panel6;
-        private DarkTitle darkTitle4;
+        private DarkGroupBox darkGroupBox1;
         private DarkComboBox darkComboBox1;
     }
 }
