@@ -88,18 +88,18 @@ namespace DarkUI.Controls
                     
                 using (var b = new SolidBrush(textColor))
                 {
-                    var textOffsetX = 2;
-                    var textOffsetY = 2;
+                    var padding = 2;
 
-                    var modRect = new Rectangle(rect.Left + textOffsetX,
-                        rect.Top + textOffsetY,
-                        rect.Width - textOffsetX,
-                        rect.Height - textOffsetY);
+                    var modRect = new Rectangle(rect.Left + padding,
+                        rect.Top + padding,
+                        rect.Width - (padding * 2),
+                        rect.Height - (padding * 2));
 
                     var stringFormat = new StringFormat
                     {
                         LineAlignment = StringAlignment.Center,
                         Alignment = StringAlignment.Near,
+                        FormatFlags = StringFormatFlags.NoWrap,
                         Trimming = StringTrimming.EllipsisCharacter
                     };
 
@@ -140,18 +140,18 @@ namespace DarkUI.Controls
 
             using (var b = new SolidBrush(textColor))
             {
-                var textOffsetX = 2;
-                var textOffsetY = 2;
+                var padding = 2;
 
-                var modRect = new Rectangle(rect.Left + textOffsetX,
-                                            rect.Top + textOffsetY, 
-                                            rect.Width - textOffsetX,
-                                            rect.Height - textOffsetY);
+                var modRect = new Rectangle(rect.Left + padding,
+                                            rect.Top + padding, 
+                                            rect.Width - icon.Width - (Consts.Padding / 2) - (padding * 2),
+                                            rect.Height - (padding * 2));
 
                 var stringFormat = new StringFormat
                 {
                     LineAlignment = StringAlignment.Center,
                     Alignment = StringAlignment.Near,
+                    FormatFlags = StringFormatFlags.NoWrap,
                     Trimming = StringTrimming.EllipsisCharacter
                 };
 

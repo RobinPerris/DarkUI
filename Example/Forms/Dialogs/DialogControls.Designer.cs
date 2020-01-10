@@ -178,23 +178,18 @@ namespace Example
             // 
             // darkComboBox1
             // 
-            this.darkComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
             this.darkComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.darkComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.darkComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.darkComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.darkComboBox1.ForeColor = System.Drawing.Color.Gainsboro;
             this.darkComboBox1.FormattingEnabled = true;
             this.darkComboBox1.Items.AddRange(new object[] {
             "Item 1",
             "Item 2",
-            "Item 3",
+            "This is a really long item in the collection to check out how text is clipped",
             "Item 4"});
             this.darkComboBox1.Location = new System.Drawing.Point(0, 26);
             this.darkComboBox1.Name = "darkComboBox1";
             this.darkComboBox1.Size = new System.Drawing.Size(200, 24);
             this.darkComboBox1.TabIndex = 17;
-            this.darkComboBox1.Text = "Item 1";
             // 
             // darkTitle4
             // 
