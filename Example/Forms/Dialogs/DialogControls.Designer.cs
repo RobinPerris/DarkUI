@@ -39,8 +39,13 @@ namespace Example
             this.lstTest = new DarkUI.Controls.DarkListView();
             this.pnlMessageBox = new DarkUI.Controls.DarkSectionPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.darkGroupBox1 = new DarkUI.Controls.DarkGroupBox();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.darkComboBox1 = new DarkUI.Controls.DarkComboBox();
+            this.darkTitle4 = new DarkUI.Controls.DarkTitle();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.darkNumericUpDown1 = new DarkUI.Controls.DarkNumericUpDown();
+            this.darkTitle5 = new DarkUI.Controls.DarkTitle();
             this.panel5 = new System.Windows.Forms.Panel();
             this.darkRadioButton3 = new DarkUI.Controls.DarkRadioButton();
             this.darkRadioButton2 = new DarkUI.Controls.DarkRadioButton();
@@ -61,7 +66,10 @@ namespace Example
             this.pnlListView.SuspendLayout();
             this.pnlMessageBox.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.darkGroupBox1.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown1)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -153,7 +161,8 @@ namespace Example
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.darkGroupBox1);
+            this.panel1.Controls.Add(this.panel7);
+            this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
@@ -165,20 +174,15 @@ namespace Example
             this.panel1.Size = new System.Drawing.Size(220, 583);
             this.panel1.TabIndex = 0;
             // 
-            // darkGroupBox1
+            // panel7
             // 
-            this.darkGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
-            this.darkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.darkGroupBox1.Controls.Add(this.darkComboBox1);
-            this.darkGroupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.darkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.darkGroupBox1.Location = new System.Drawing.Point(10, 285);
-            this.darkGroupBox1.Name = "darkGroupBox1";
-            this.darkGroupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.darkGroupBox1.Size = new System.Drawing.Size(200, 144);
-            this.darkGroupBox1.TabIndex = 14;
-            this.darkGroupBox1.TabStop = false;
-            this.darkGroupBox1.Text = "DarkUI 2.0 Controls";
+            this.panel7.Controls.Add(this.darkComboBox1);
+            this.panel7.Controls.Add(this.darkTitle4);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(10, 371);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(200, 63);
+            this.panel7.TabIndex = 23;
             // 
             // darkComboBox1
             // 
@@ -190,10 +194,57 @@ namespace Example
             "Item 2",
             "This is a really long item in the collection to check out how text is clipped",
             "Item 4"});
-            this.darkComboBox1.Location = new System.Drawing.Point(10, 26);
+            this.darkComboBox1.Location = new System.Drawing.Point(0, 26);
             this.darkComboBox1.Name = "darkComboBox1";
-            this.darkComboBox1.Size = new System.Drawing.Size(180, 24);
-            this.darkComboBox1.TabIndex = 18;
+            this.darkComboBox1.Size = new System.Drawing.Size(200, 24);
+            this.darkComboBox1.TabIndex = 20;
+            // 
+            // darkTitle4
+            // 
+            this.darkTitle4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.darkTitle4.Location = new System.Drawing.Point(0, 0);
+            this.darkTitle4.Name = "darkTitle4";
+            this.darkTitle4.Size = new System.Drawing.Size(200, 26);
+            this.darkTitle4.TabIndex = 21;
+            this.darkTitle4.Text = "ComboBox";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.numericUpDown1);
+            this.panel6.Controls.Add(this.darkNumericUpDown1);
+            this.panel6.Controls.Add(this.darkTitle5);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(10, 285);
+            this.panel6.Margin = new System.Windows.Forms.Padding(0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(200, 86);
+            this.panel6.TabIndex = 22;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.numericUpDown1.Location = new System.Drawing.Point(0, 49);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(200, 23);
+            this.numericUpDown1.TabIndex = 25;
+            // 
+            // darkNumericUpDown1
+            // 
+            this.darkNumericUpDown1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.darkNumericUpDown1.Location = new System.Drawing.Point(0, 26);
+            this.darkNumericUpDown1.Name = "darkNumericUpDown1";
+            this.darkNumericUpDown1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.darkNumericUpDown1.Size = new System.Drawing.Size(200, 23);
+            this.darkNumericUpDown1.TabIndex = 24;
+            // 
+            // darkTitle5
+            // 
+            this.darkTitle5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.darkTitle5.Location = new System.Drawing.Point(0, 0);
+            this.darkTitle5.Name = "darkTitle5";
+            this.darkTitle5.Size = new System.Drawing.Size(200, 26);
+            this.darkTitle5.TabIndex = 23;
+            this.darkTitle5.Text = "Numeric Up/Down";
             // 
             // panel5
             // 
@@ -365,7 +416,10 @@ namespace Example
             this.pnlMessageBox.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.darkGroupBox1.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown1)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -400,7 +454,12 @@ namespace Example
         private DarkTitle darkTitle1;
         private DarkTitle darkTitle2;
         private DarkTitle darkTitle3;
-        private DarkGroupBox darkGroupBox1;
+        private System.Windows.Forms.Panel panel7;
         private DarkComboBox darkComboBox1;
+        private DarkTitle darkTitle4;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private DarkNumericUpDown darkNumericUpDown1;
+        private DarkTitle darkTitle5;
     }
 }
