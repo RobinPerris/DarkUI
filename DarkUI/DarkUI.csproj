@@ -50,6 +50,10 @@
     <Compile Include="Controls\DarkCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkDropdownItem.cs" />
+    <Compile Include="Controls\DarkDropdownList.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkContentAlignment.cs" />
     <Compile Include="Controls\DarkControlState.cs" />
     <Compile Include="Controls\DarkRadioButton.cs">
@@ -161,6 +165,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DockIcons.resx</DependentUpon>
     </Compile>
+    <Compile Include="Icons\DropdownIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DropdownIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Icons\MenuIcons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,6 +209,11 @@
     <EmbeddedResource Include="Icons\DockIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DockIcons.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DarkUI</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icons\DropdownIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DropdownIcons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DarkUI</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\MenuIcons.resx">
@@ -291,6 +305,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tw_active_close_selected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\small_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scrollbar_disabled.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

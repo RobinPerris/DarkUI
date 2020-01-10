@@ -388,15 +388,7 @@ namespace DarkUI.Controls
 
         public void UpdateScrollBar()
         {
-            if (ViewSize >= Maximum)
-                return;
-
             var area = ClientRectangle;
-
-            // Cap to maximum value
-            var maximumValue = Maximum - ViewSize;
-            if (Value > maximumValue)
-                Value = maximumValue;
 
             // Arrow buttons
             if (_scrollOrientation == DarkScrollOrientation.Vertical)
@@ -427,7 +419,15 @@ namespace DarkUI.Controls
         }
 
         private void UpdateThumb(bool forceRefresh = false)
-        {
+        { 
+            if (ViewSize >= Maximum)
+                return;
+
+            // Cap to maximum value
+            var maximumValue = Maximum - ViewSize;
+            if (Value > maximumValue)
+                Value = maximumValue;
+
             // Calculate size ratio
             _viewContentRatio = (float)ViewSize / (float)Maximum;
             var viewAreaSize = Maximum - ViewSize;
@@ -493,6 +493,9 @@ namespace DarkUI.Controls
             if (_upArrowClicked)
                 upIcon = ScrollIcons.scrollbar_arrow_clicked;
 
+            if (!Enabled)
+                upIcon = ScrollIcons.scrollbar_arrow_disabled;
+
             if (_scrollOrientation == DarkScrollOrientation.Vertical)
                 upIcon.RotateFlip(RotateFlipType.RotateNoneFlipY);
             else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
@@ -508,6 +511,9 @@ namespace DarkUI.Controls
             if (_downArrowClicked)
                 downIcon = ScrollIcons.scrollbar_arrow_clicked;
 
+            if (!Enabled)
+                downIcon = ScrollIcons.scrollbar_arrow_disabled;
+
             if (_scrollOrientation == DarkScrollOrientation.Horizontal)
                 downIcon.RotateFlip(RotateFlipType.Rotate270FlipNone);
 
@@ -516,14 +522,17 @@ namespace DarkUI.Controls
                                 _downArrowArea.Top + (_downArrowArea.Height / 2) - (downIcon.Height / 2));
 
             // Draw thumb
-            var scrollColor = _thumbHot ? Colors.GreyHighlight : Colors.GreySelection;
-
-            if (_isScrolling)
-                scrollColor = Colors.ActiveControl;
-
-            using (var b = new SolidBrush(scrollColor))
+            if (Enabled)
             {
-                g.FillRectangle(b, _thumbArea);
+                var scrollColor = _thumbHot ? Colors.GreyHighlight : Colors.GreySelection;
+
+                if (_isScrolling)
+                    scrollColor = Colors.ActiveControl;
+
+                using (var b = new SolidBrush(scrollColor))
+                {
+                    g.FillRectangle(b, _thumbArea);
+                }
             }
         }
 

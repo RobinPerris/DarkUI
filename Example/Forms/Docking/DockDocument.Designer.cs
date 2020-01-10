@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.txtDocument = new System.Windows.Forms.TextBox();
+            this.cmbOptions = new DarkUI.Controls.DarkDropdownList();
             this.SuspendLayout();
             // 
             // txtDocument
@@ -44,10 +45,24 @@
             this.txtDocument.TabIndex = 1;
             this.txtDocument.Text = "This is some example text";
             // 
+            // cmbOptions
+            // 
+            this.cmbOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmbOptions.DropdownDirection = System.Windows.Forms.ToolStripDropDownDirection.AboveRight;
+            this.cmbOptions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbOptions.Location = new System.Drawing.Point(0, 158);
+            this.cmbOptions.MaxHeight = 300;
+            this.cmbOptions.Name = "cmbOptions";
+            this.cmbOptions.ShowBorder = false;
+            this.cmbOptions.Size = new System.Drawing.Size(65, 15);
+            this.cmbOptions.TabIndex = 2;
+            this.cmbOptions.Text = "darkComboBox1";
+            // 
             // DockDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbOptions);
             this.Controls.Add(this.txtDocument);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DockDocument";
@@ -60,5 +75,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtDocument;
+        private DarkUI.Controls.DarkDropdownList cmbOptions;
     }
 }
