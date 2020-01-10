@@ -4,24 +4,11 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using DarkUI.Extensions;
 
 namespace DarkUI.Controls
 {
     public class DarkComboBox : ComboBox
     {
-        public DarkComboBox() : base()
-        {
-            SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                     ControlStyles.ResizeRedraw |
-                     ControlStyles.UserPaint, true);
-
-            DrawMode = DrawMode.OwnerDrawVariable;
-
-            base.FlatStyle = FlatStyle.Flat;
-            base.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Color ForeColor { get; set; }
@@ -38,30 +25,139 @@ namespace DarkUI.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new ComboBoxStyle DropDownStyle { get; set; }
 
-        public new void Invalidate()
+        private Bitmap _buffer;
+
+        public DarkComboBox() : base()
         {
-            base.Invalidate();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw |
+                     ControlStyles.UserPaint, true);
+
+            DrawMode = DrawMode.OwnerDrawVariable;
+
+            base.FlatStyle = FlatStyle.Flat;
+            base.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                _buffer = null;
+
+            base.Dispose(disposing);
+        }
+
+        protected override void OnTabStopChanged(EventArgs e)
+        {
+            base.OnTabStopChanged(e);
+            Invalidate();
+        }
+
+        protected override void OnTabIndexChanged(EventArgs e)
+        {
+            base.OnTabIndexChanged(e);
+            Invalidate();
+        }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            Invalidate();
+        }
+
+        protected override void OnLostFocus(EventArgs e)
+        {
+            base.OnLostFocus(e);
+            Invalidate();
         }
 
         protected override void OnTextChanged(EventArgs e)
         {
-            Invalidate();
-
             base.OnTextChanged(e);
+            Invalidate();
         }
 
         protected override void OnTextUpdate(EventArgs e)
         {
-            Invalidate();
-
             base.OnTextUpdate(e);
+            Invalidate();
         }
 
         protected override void OnSelectedValueChanged(EventArgs e)
         {
-            Invalidate();
-
             base.OnSelectedValueChanged(e);
+            Invalidate();
+        }
+
+        protected override void OnInvalidated(InvalidateEventArgs e)
+        {
+            base.OnInvalidated(e);
+            PaintCombobox();
+        }
+
+        private void PaintCombobox()
+        {
+            if (_buffer == null)
+                _buffer = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
+
+            using (var g = Graphics.FromImage(_buffer))
+            {
+                var rect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
+
+                var textColor = Colors.LightText;
+                var borderColor = Colors.GreySelection;
+                var fillColor = Colors.LightBackground;
+
+                if (Focused && TabStop)
+                    borderColor = Colors.BlueHighlight;
+
+                using (var b = new SolidBrush(fillColor))
+                {
+                    g.FillRectangle(b, rect);
+                }
+
+                using (var p = new Pen(borderColor, 1))
+                {
+                    var modRect = new Rectangle(rect.Left, rect.Top, rect.Width - 1, rect.Height - 1);
+                    g.DrawRectangle(p, modRect);
+                }
+
+                var icon = ScrollIcons.scrollbar_arrow_hot;
+                g.DrawImageUnscaled(icon,
+                                    rect.Right - icon.Width - (Consts.Padding / 2),
+                                    (rect.Height / 2) - (icon.Height / 2));
+
+                var text = SelectedItem != null ? SelectedItem.ToString() : Text;
+
+                using (var b = new SolidBrush(textColor))
+                {
+                    var padding = 2;
+
+                    var modRect = new Rectangle(rect.Left + padding,
+                                                rect.Top + padding,
+                                                rect.Width - icon.Width - (Consts.Padding / 2) - (padding * 2),
+                                                rect.Height - (padding * 2));
+
+                    var stringFormat = new StringFormat
+                    {
+                        LineAlignment = StringAlignment.Center,
+                        Alignment = StringAlignment.Near,
+                        FormatFlags = StringFormatFlags.NoWrap,
+                        Trimming = StringTrimming.EllipsisCharacter
+                    };
+
+                    g.DrawString(text, Font, b, modRect, stringFormat);
+                }
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            if (_buffer == null)
+                PaintCombobox();
+
+            var g = e.Graphics;
+            g.DrawImageUnscaled(_buffer, Point.Empty);
         }
 
         protected override void OnDrawItem(DrawItemEventArgs e)
@@ -72,8 +168,8 @@ namespace DarkUI.Controls
             var textColor = Colors.LightText;
             var fillColor = Colors.LightBackground;
 
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected || 
-                (e.State & DrawItemState.Focus) == DrawItemState.Focus || 
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected ||
+                (e.State & DrawItemState.Focus) == DrawItemState.Focus ||
                 (e.State & DrawItemState.NoFocusRect) != DrawItemState.NoFocusRect)
                 fillColor = Colors.BlueSelection;
 
@@ -85,7 +181,7 @@ namespace DarkUI.Controls
             if (e.Index >= 0 && e.Index < Items.Count)
             {
                 var text = Items[e.Index].ToString();
-                    
+
                 using (var b = new SolidBrush(textColor))
                 {
                     var padding = 2;
@@ -105,57 +201,6 @@ namespace DarkUI.Controls
 
                     g.DrawString(text, Font, b, modRect, stringFormat);
                 }
-            }
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            var g = e.Graphics;
-            var rect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
-
-            var textColor = Colors.LightText;
-            var borderColor = Colors.GreySelection;
-            var fillColor = Colors.LightBackground;
-
-            if (Focused && TabStop)
-                borderColor = Colors.BlueHighlight;
-
-            using (var b = new SolidBrush(fillColor))
-            {
-                g.FillRectangle(b, rect);
-            }
-
-            using (var p = new Pen(borderColor, 1))
-            {
-                var modRect = new Rectangle(rect.Left, rect.Top, rect.Width - 1, rect.Height - 1);
-                g.DrawRectangle(p, modRect);
-            }
-
-            var icon = ScrollIcons.scrollbar_arrow_hot;
-            g.DrawImageUnscaled(icon,
-                                rect.Right - icon.Width - (Consts.Padding / 2),
-                                (rect.Height / 2) - (icon.Height / 2));
-
-            var text = SelectedItem != null ? SelectedItem.ToString() : Text;
-
-            using (var b = new SolidBrush(textColor))
-            {
-                var padding = 2;
-
-                var modRect = new Rectangle(rect.Left + padding,
-                                            rect.Top + padding, 
-                                            rect.Width - icon.Width - (Consts.Padding / 2) - (padding * 2),
-                                            rect.Height - (padding * 2));
-
-                var stringFormat = new StringFormat
-                {
-                    LineAlignment = StringAlignment.Center,
-                    Alignment = StringAlignment.Near,
-                    FormatFlags = StringFormatFlags.NoWrap,
-                    Trimming = StringTrimming.EllipsisCharacter
-                };
-
-                g.DrawString(text, Font, b, modRect, stringFormat);
             }
         }
     }
