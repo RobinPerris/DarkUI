@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>DarkUI</id>
+    <version>2.0.0</version>
+    <title>DarkUI</title>
+    <authors>Robin Perris</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>http://www.darkui.com/</projectUrl>
+    <icon>icon-64.png</icon>
+    <iconUrl>http://www.darkui.com/images/icon-64.png</iconUrl>
+    <description>Dark themed control and docking library for .NET WinForms</description>
+    <releaseNotes>Expanded with new DarkComboBox, DarkGroupBox, and DarkNumericUpDown controls</releaseNotes>
+    <copyright>Copyright © Robin Perris</copyright>
+    <tags>docking winforms net-winforms docking-library docking-application c-sharp dotnet dotnet-framework visual-studio visual-studio-themes windows windows-desktop windows-forms</tags>
+  </metadata>
+  <files>
+    <file src="DarkUI\bin\Release\DarkUI.dll" target="lib" />
+    <file src="icon-64.png" target="" />
+  </files>
+</package>
