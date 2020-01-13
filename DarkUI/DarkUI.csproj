@@ -54,8 +54,17 @@
     <Compile Include="Controls\DarkDropdownList.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DarkComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkContentAlignment.cs" />
     <Compile Include="Controls\DarkControlState.cs" />
+    <Compile Include="Controls\DarkGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DarkNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DarkRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -311,6 +320,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\scrollbar_disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scrollbar_arrow_small_clicked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scrollbar_arrow_small_hot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scrollbar_arrow_small_standard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
