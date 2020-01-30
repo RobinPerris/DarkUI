@@ -277,12 +277,12 @@ namespace DarkUI.Controls
             {
                 if ((DarkDropdownItem)item.Tag == SelectedItem)
                 {
-                    item.BackColor = Colors.DarkBlueBackground;
+                    item.BackColor = ThemeProvider.Theme.Colors.DarkBlueBackground;
                     item.Font = new Font(Font, FontStyle.Bold);
                 }
                 else
                 {
-                    item.BackColor = Colors.GreyBackground;
+                    item.BackColor = ThemeProvider.Theme.Colors.GreyBackground;
                     item.Font = new Font(Font, FontStyle.Regular);
                 }
             }
@@ -391,7 +391,7 @@ namespace DarkUI.Controls
             var g = e.Graphics;
 
             // Draw background
-            using (var b = new SolidBrush(Colors.MediumBackground))
+            using (var b = new SolidBrush(ThemeProvider.Theme.Colors.MediumBackground))
             {
                 g.FillRectangle(b, ClientRectangle);
             }
@@ -401,7 +401,7 @@ namespace DarkUI.Controls
             {
                 if (ShowBorder)
                 {
-                    using (var p = new Pen(Colors.LightBorder, 1))
+                    using (var p = new Pen(ThemeProvider.Theme.Colors.LightBorder, 1))
                     {
                         var modRect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
                         g.DrawRectangle(p, modRect);
@@ -412,18 +412,18 @@ namespace DarkUI.Controls
             // Draw hover state
             if (ControlState == DarkControlState.Hover)
             {
-                using (var b = new SolidBrush(Colors.DarkBorder))
+                using (var b = new SolidBrush(ThemeProvider.Theme.Colors.DarkBorder))
                 {
                     g.FillRectangle(b, ClientRectangle);
                 }
 
-                using (var b = new SolidBrush(Colors.DarkBackground))
+                using (var b = new SolidBrush(ThemeProvider.Theme.Colors.DarkBackground))
                 {
                     var arrowRect = new Rectangle(ClientRectangle.Right - DropdownIcons.small_arrow.Width - 8, ClientRectangle.Top, DropdownIcons.small_arrow.Width + 8, ClientRectangle.Height);
                     g.FillRectangle(b, arrowRect);
                 }
 
-                using (var p = new Pen(Colors.BlueSelection, 1))
+                using (var p = new Pen(ThemeProvider.Theme.Colors.BlueSelection, 1))
                 {
                     var modRect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1 - DropdownIcons.small_arrow.Width - 8, ClientRectangle.Height - 1);
                     g.DrawRectangle(p, modRect);
@@ -433,12 +433,12 @@ namespace DarkUI.Controls
             // Draw pressed state
             if (ControlState == DarkControlState.Pressed)
             {
-                using (var b = new SolidBrush(Colors.DarkBorder))
+                using (var b = new SolidBrush(ThemeProvider.Theme.Colors.DarkBorder))
                 {
                     g.FillRectangle(b, ClientRectangle);
                 }
 
-                using (var b = new SolidBrush(Colors.BlueSelection))
+                using (var b = new SolidBrush(ThemeProvider.Theme.Colors.BlueSelection))
                 {
                     var arrowRect = new Rectangle(ClientRectangle.Right - DropdownIcons.small_arrow.Width - 8, ClientRectangle.Top, DropdownIcons.small_arrow.Width + 8, ClientRectangle.Height);
                     g.FillRectangle(b, arrowRect);
@@ -463,7 +463,7 @@ namespace DarkUI.Controls
                 }
 
                 // Draw Text
-                using (var b = new SolidBrush(Colors.LightText))
+                using (var b = new SolidBrush(ThemeProvider.Theme.Colors.LightText))
                 {
                     var stringFormat = new StringFormat
                     {

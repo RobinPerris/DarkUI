@@ -1,4 +1,5 @@
-﻿using DarkUI.Controls;
+﻿using DarkUI.Config;
+using DarkUI.Controls;
 using DarkUI.Docking;
 
 namespace Example
@@ -10,6 +11,8 @@ namespace Example
         public DockProperties()
         {
             InitializeComponent();
+
+            panel1.BackColor = panel2.BackColor = panel3.BackColor = System.Drawing.Color.Transparent;
 
             // Build dummy dropdown data
             cmbList.Items.Add(new DarkDropdownItem("Item1"));

@@ -33,7 +33,7 @@ namespace DarkUI.Win32
         {
             _dockPanel = dockPanel;
 
-            _highlightForm = new DarkTranslucentForm(Colors.BlueSelection);
+            _highlightForm = new DarkTranslucentForm(ThemeProvider.Theme.Colors.BlueSelection);
         }
 
         #endregion

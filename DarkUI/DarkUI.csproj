@@ -44,7 +44,12 @@
   <ItemGroup>
     <Compile Include="Collections\ObservableList.cs" />
     <Compile Include="Collections\ObservableListModified.cs" />
+    <Compile Include="Config\LightTheme.cs" />
+    <Compile Include="Config\ThemeProvider.cs" />
+    <Compile Include="Config\Sizes.cs" />
+    <Compile Include="Config\DarkTheme.cs" />
     <Compile Include="Config\Colors.cs" />
+    <Compile Include="Config\ITheme.cs" />
     <Compile Include="Config\Consts.cs" />
     <Compile Include="Controls\DarkButtonStyle.cs" />
     <Compile Include="Controls\DarkCheckBox.cs">

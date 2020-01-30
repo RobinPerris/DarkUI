@@ -24,12 +24,12 @@ namespace DarkUI.Controls
         {
             var g = e.Graphics;
 
-            using (var p = new Pen(Colors.DarkBorder))
+            using (var p = new Pen(ThemeProvider.Theme.Colors.DarkBorder))
             {
                 g.DrawLine(p, ClientRectangle.Left, 0, ClientRectangle.Right, 0);
             }
 
-            using (var p = new Pen(Colors.LightBorder))
+            using (var p = new Pen(ThemeProvider.Theme.Colors.LightBorder))
             {
                 g.DrawLine(p, ClientRectangle.Left, 1, ClientRectangle.Right, 1);
             }

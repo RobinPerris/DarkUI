@@ -122,7 +122,7 @@ namespace DarkUI.Docking
             _regions = new Dictionary<DarkDockArea, DarkDockRegion>();
             _contents = new List<DarkDockContent>();
 
-            BackColor = Colors.GreyBackground;
+            BackColor = ThemeProvider.Theme.Colors.GreyBackground;
 
             CreateRegions();
         }

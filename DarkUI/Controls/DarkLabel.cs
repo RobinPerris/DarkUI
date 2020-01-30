@@ -53,7 +53,7 @@ namespace DarkUI.Controls
 
         public DarkLabel()
         {
-            ForeColor = Colors.LightText;
+            ForeColor = ThemeProvider.Theme.Colors.LightText;
         }
 
         #endregion

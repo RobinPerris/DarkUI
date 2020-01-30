@@ -34,7 +34,7 @@ namespace DarkUI.Controls
 
         public Rectangle Area { get; set; }
 
-        public Color TextColor { get; set; }
+        //public Color TextColor { get; set; }
 
         public FontStyle FontStyle { get; set; }
 
@@ -48,7 +48,7 @@ namespace DarkUI.Controls
 
         public DarkListItem()
         {
-            TextColor = Colors.LightText;
+            //TextColor = ThemeProvider.Theme.Colors.LightText;
             FontStyle = FontStyle.Regular;
         }
 

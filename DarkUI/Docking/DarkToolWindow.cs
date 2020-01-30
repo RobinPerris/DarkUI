@@ -39,8 +39,8 @@ namespace DarkUI.Docking
                      ControlStyles.ResizeRedraw |
                      ControlStyles.UserPaint, true);
 
-            BackColor = Colors.GreyBackground;
-            base.Padding = new Padding(0, Consts.ToolWindowHeaderSize, 0, 0);
+            //BackColor = ThemeProvider.Theme.Colors.GreyBackground;
+            base.Padding = new Padding(0, ThemeProvider.Theme.Sizes.ToolWindowHeaderSize, 0, 0);
 
             UpdateCloseButton();
         }
@@ -64,13 +64,13 @@ namespace DarkUI.Docking
                 X = ClientRectangle.Left,
                 Y = ClientRectangle.Top,
                 Width = ClientRectangle.Width,
-                Height = Consts.ToolWindowHeaderSize
+                Height = ThemeProvider.Theme.Sizes.ToolWindowHeaderSize
             };
 
             _closeButtonRect = new Rectangle
             {
                 X = ClientRectangle.Right - DockIcons.tw_close.Width - 5 - 3,
-                Y = ClientRectangle.Top + (Consts.ToolWindowHeaderSize / 2) - (DockIcons.tw_close.Height / 2),
+                Y = ClientRectangle.Top + (ThemeProvider.Theme.Sizes.ToolWindowHeaderSize / 2) - (DockIcons.tw_close.Height / 2),
                 Width = DockIcons.tw_close.Width,
                 Height = DockIcons.tw_close.Height
             };
@@ -158,7 +158,7 @@ namespace DarkUI.Docking
             var g = e.Graphics;
 
             // Fill body
-            using (var b = new SolidBrush(Colors.GreyBackground))
+            using (var b = new SolidBrush(ThemeProvider.Theme.Colors.GreyBackground))
             {
                 g.FillRectangle(b, ClientRectangle);
             }
@@ -166,20 +166,20 @@ namespace DarkUI.Docking
             var isActive = IsActive();
 
             // Draw header
-            var bgColor = isActive ? Colors.BlueBackground : Colors.HeaderBackground;
-            var darkColor = isActive ? Colors.DarkBlueBorder : Colors.DarkBorder;
-            var lightColor = isActive ? Colors.LightBlueBorder : Colors.LightBorder;
+            var bgColor = isActive ? ThemeProvider.Theme.Colors.BlueBackground : ThemeProvider.Theme.Colors.HeaderBackground;
+            var darkColor = isActive ? ThemeProvider.Theme.Colors.DarkBlueBorder : ThemeProvider.Theme.Colors.DarkBorder;
+            var lightColor = isActive ? ThemeProvider.Theme.Colors.LightBlueBorder : ThemeProvider.Theme.Colors.LightBorder;
 
             using (var b = new SolidBrush(bgColor))
             {
-                var bgRect = new Rectangle(0, 0, ClientRectangle.Width, Consts.ToolWindowHeaderSize);
+                var bgRect = new Rectangle(0, 0, ClientRectangle.Width, ThemeProvider.Theme.Sizes.ToolWindowHeaderSize);
                 g.FillRectangle(b, bgRect);
             }
 
             using (var p = new Pen(darkColor))
             {
                 g.DrawLine(p, ClientRectangle.Left, 0, ClientRectangle.Right, 0);
-                g.DrawLine(p, ClientRectangle.Left, Consts.ToolWindowHeaderSize - 1, ClientRectangle.Right, Consts.ToolWindowHeaderSize - 1);
+                g.DrawLine(p, ClientRectangle.Left, ThemeProvider.Theme.Sizes.ToolWindowHeaderSize - 1, ClientRectangle.Right, ThemeProvider.Theme.Sizes.ToolWindowHeaderSize - 1);
             }
 
             using (var p = new Pen(lightColor))
@@ -192,14 +192,14 @@ namespace DarkUI.Docking
             // Draw icon
             if (Icon != null)
             {
-                g.DrawImageUnscaled(Icon, ClientRectangle.Left + 5, ClientRectangle.Top + (Consts.ToolWindowHeaderSize / 2) - (Icon.Height / 2) + 1);
+                g.DrawImageUnscaled(Icon, ClientRectangle.Left + 5, ClientRectangle.Top + (ThemeProvider.Theme.Sizes.ToolWindowHeaderSize / 2) - (Icon.Height / 2) + 1);
                 xOffset = Icon.Width + 8;
             }
 
             // Draw text
-            using (var b = new SolidBrush(Colors.LightText))
+            using (var b = new SolidBrush(ThemeProvider.Theme.Colors.LightText))
             {
-                var textRect = new Rectangle(xOffset, 0, ClientRectangle.Width - 4 - xOffset, Consts.ToolWindowHeaderSize);
+                var textRect = new Rectangle(xOffset, 0, ClientRectangle.Width - 4 - xOffset, ThemeProvider.Theme.Sizes.ToolWindowHeaderSize);
 
                 var format = new StringFormat
                 {

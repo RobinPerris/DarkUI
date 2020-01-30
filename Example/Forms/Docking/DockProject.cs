@@ -11,6 +11,8 @@ namespace Example
         {
             InitializeComponent();
 
+            BackColor = System.Drawing.Color.Transparent;
+
             // Build dummy nodes
             var childCount = 0;
             for (var i = 0; i < 20; i++)

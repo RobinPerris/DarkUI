@@ -18,8 +18,8 @@ namespace DarkUI.Controls
         private bool _isDefault;
         private bool _spacePressed;
 
-        private int _padding = Consts.Padding / 2;
-        private int _imagePadding = 5; // Consts.Padding / 2
+        private int _padding = ThemeProvider.Theme.Sizes.Padding / 2;
+        private int _imagePadding = 5; // ThemeProvider.Theme.Sizes.Padding / 2
 
         #endregion
 
@@ -309,24 +309,24 @@ namespace DarkUI.Controls
             var g = e.Graphics;
             var rect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
 
-            var textColor = Colors.LightText;
-            var borderColor = Colors.GreySelection;
-            var fillColor = _isDefault ? Colors.DarkBlueBackground : Colors.LightBackground;
+            var textColor = ThemeProvider.Theme.Colors.LightText;
+            var borderColor = ThemeProvider.Theme.Colors.GreySelection;
+            var fillColor = _isDefault ? ThemeProvider.Theme.Colors.DarkBlueBackground : ThemeProvider.Theme.Colors.LightBackground;
 
             if (Enabled)
             {
                 if (ButtonStyle == DarkButtonStyle.Normal)
                 {
                     if (Focused && TabStop)
-                        borderColor = Colors.BlueHighlight;
+                        borderColor = ThemeProvider.Theme.Colors.BlueHighlight;
 
                     switch (ButtonState)
                     {
                         case DarkControlState.Hover:
-                            fillColor = _isDefault ? Colors.BlueBackground : Colors.LighterBackground;
+                            fillColor = _isDefault ? ThemeProvider.Theme.Colors.BlueBackground : ThemeProvider.Theme.Colors.LighterBackground;
                             break;
                         case DarkControlState.Pressed:
-                            fillColor = _isDefault ? Colors.DarkBackground : Colors.DarkBackground;
+                            fillColor = _isDefault ? ThemeProvider.Theme.Colors.DarkBackground : ThemeProvider.Theme.Colors.DarkBackground;
                             break;
                     }
                 }
@@ -335,21 +335,21 @@ namespace DarkUI.Controls
                     switch (ButtonState)
                     {
                         case DarkControlState.Normal:
-                            fillColor = Colors.GreyBackground;
+                            fillColor = ThemeProvider.Theme.Colors.GreyBackground;
                             break;
                         case DarkControlState.Hover:
-                            fillColor = Colors.MediumBackground;
+                            fillColor = ThemeProvider.Theme.Colors.MediumBackground;
                             break;
                         case DarkControlState.Pressed:
-                            fillColor = Colors.DarkBackground;
+                            fillColor = ThemeProvider.Theme.Colors.DarkBackground;
                             break;
                     }
                 }
             }
             else
             {
-                textColor = Colors.DisabledText;
-                fillColor = Colors.DarkGreySelection;
+                textColor = ThemeProvider.Theme.Colors.DisabledText;
+                fillColor = ThemeProvider.Theme.Colors.DarkGreySelection;
             }
 
             using (var b = new SolidBrush(fillColor))
