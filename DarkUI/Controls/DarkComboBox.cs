@@ -95,6 +95,13 @@ namespace DarkUI.Controls
             PaintCombobox();
         }
 
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            _buffer = null;
+            Invalidate();
+        }
+
         private void PaintCombobox()
         {
             if (_buffer == null)
