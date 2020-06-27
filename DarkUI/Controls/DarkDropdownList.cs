@@ -257,6 +257,12 @@ namespace DarkUI.Controls
                 }
             }
 
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                _menu.Items.Clear();
+                SelectedItem = null;
+            }
+
             ResizeMenu();
         }
 
