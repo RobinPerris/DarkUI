@@ -393,23 +393,23 @@ namespace DarkUI.Controls
             // Arrow buttons
             if (_scrollOrientation == DarkScrollOrientation.Vertical)
             {
-                _upArrowArea = new Rectangle(area.Left, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
-                _downArrowArea = new Rectangle(area.Left, area.Bottom - Consts.ArrowButtonSize, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
+                _upArrowArea = new Rectangle(area.Left, area.Top, ThemeProvider.Theme.Sizes.ArrowButtonSize, ThemeProvider.Theme.Sizes.ArrowButtonSize);
+                _downArrowArea = new Rectangle(area.Left, area.Bottom - ThemeProvider.Theme.Sizes.ArrowButtonSize, ThemeProvider.Theme.Sizes.ArrowButtonSize, ThemeProvider.Theme.Sizes.ArrowButtonSize);
             }
             else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
             {
-                _upArrowArea = new Rectangle(area.Left, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
-                _downArrowArea = new Rectangle(area.Right - Consts.ArrowButtonSize, area.Top, Consts.ArrowButtonSize, Consts.ArrowButtonSize);
+                _upArrowArea = new Rectangle(area.Left, area.Top, ThemeProvider.Theme.Sizes.ArrowButtonSize, ThemeProvider.Theme.Sizes.ArrowButtonSize);
+                _downArrowArea = new Rectangle(area.Right - ThemeProvider.Theme.Sizes.ArrowButtonSize, area.Top, ThemeProvider.Theme.Sizes.ArrowButtonSize, ThemeProvider.Theme.Sizes.ArrowButtonSize);
             }
 
             // Track
             if (_scrollOrientation == DarkScrollOrientation.Vertical)
             {
-                _trackArea = new Rectangle(area.Left, area.Top + Consts.ArrowButtonSize, area.Width, area.Height - (Consts.ArrowButtonSize * 2));
+                _trackArea = new Rectangle(area.Left, area.Top + ThemeProvider.Theme.Sizes.ArrowButtonSize, area.Width, area.Height - (ThemeProvider.Theme.Sizes.ArrowButtonSize * 2));
             }
             else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
             {
-                _trackArea = new Rectangle(area.Left + Consts.ArrowButtonSize, area.Top, area.Width - (Consts.ArrowButtonSize * 2), area.Height);
+                _trackArea = new Rectangle(area.Left + ThemeProvider.Theme.Sizes.ArrowButtonSize, area.Top, area.Width - (ThemeProvider.Theme.Sizes.ArrowButtonSize * 2), area.Height);
             }
 
             // Thumb
@@ -438,25 +438,25 @@ namespace DarkUI.Controls
             {
                 var thumbSize = (int)(_trackArea.Height * _viewContentRatio);
 
-                if (thumbSize < Consts.MinimumThumbSize)
-                    thumbSize = Consts.MinimumThumbSize;
+                if (thumbSize < ThemeProvider.Theme.Sizes.MinimumThumbSize)
+                    thumbSize = ThemeProvider.Theme.Sizes.MinimumThumbSize;
 
                 var trackAreaSize = _trackArea.Height - thumbSize;
                 var thumbPosition = (int)(trackAreaSize * positionRatio);
 
-                _thumbArea = new Rectangle(_trackArea.Left + 3, _trackArea.Top + thumbPosition, Consts.ScrollBarSize - 6, thumbSize);
+                _thumbArea = new Rectangle(_trackArea.Left + 3, _trackArea.Top + thumbPosition, ThemeProvider.Theme.Sizes.ScrollBarSize - 6, thumbSize);
             }
             else if (_scrollOrientation == DarkScrollOrientation.Horizontal)
             {
                 var thumbSize = (int)(_trackArea.Width * _viewContentRatio);
 
-                if (thumbSize < Consts.MinimumThumbSize)
-                    thumbSize = Consts.MinimumThumbSize;
+                if (thumbSize < ThemeProvider.Theme.Sizes.MinimumThumbSize)
+                    thumbSize = ThemeProvider.Theme.Sizes.MinimumThumbSize;
 
                 var trackAreaSize = _trackArea.Width - thumbSize;
                 var thumbPosition = (int)(trackAreaSize * positionRatio);
 
-                _thumbArea = new Rectangle(_trackArea.Left + thumbPosition, _trackArea.Top + 3, thumbSize, Consts.ScrollBarSize - 6);
+                _thumbArea = new Rectangle(_trackArea.Left + thumbPosition, _trackArea.Top + 3, thumbSize, ThemeProvider.Theme.Sizes.ScrollBarSize - 6);
             }
 
             if (forceRefresh)
@@ -475,10 +475,10 @@ namespace DarkUI.Controls
             var g = e.Graphics;
 
             // DEBUG: Scrollbar bg
-            /*using (var b = new SolidBrush(Colors.MediumBackground))
+            using (var b = new SolidBrush(ThemeProvider.Theme.Colors.GreyBackground))
             {
                 g.FillRectangle(b, ClientRectangle);
-            }*/
+            }/**/
 
             // DEBUG: Arrow backgrounds
             /*using (var b = new SolidBrush(Color.White))
@@ -524,10 +524,10 @@ namespace DarkUI.Controls
             // Draw thumb
             if (Enabled)
             {
-                var scrollColor = _thumbHot ? Colors.GreyHighlight : Colors.GreySelection;
+                var scrollColor = _thumbHot ? ThemeProvider.Theme.Colors.GreyHighlight : ThemeProvider.Theme.Colors.GreySelection;
 
                 if (_isScrolling)
-                    scrollColor = Colors.ActiveControl;
+                    scrollColor = ThemeProvider.Theme.Colors.ActiveControl;
 
                 using (var b = new SolidBrush(scrollColor))
                 {

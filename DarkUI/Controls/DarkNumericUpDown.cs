@@ -27,7 +27,7 @@ namespace DarkUI.Controls
                    ControlStyles.UserPaint, true);
 
             base.ForeColor = Color.Gainsboro;
-            base.BackColor = Colors.LightBackground;
+            base.BackColor = ThemeProvider.Theme.Colors.LightBackground;
             
             Controls[0].Paint += DarkNumericUpDown_Paint;
 
@@ -102,7 +102,7 @@ namespace DarkUI.Controls
             var g = e.Graphics;
             var rect = e.ClipRectangle;
 
-            var fillColor = Colors.HeaderBackground;
+            var fillColor = ThemeProvider.Theme.Colors.HeaderBackground;
 
             using (var b = new SolidBrush(fillColor))
             {
@@ -138,10 +138,10 @@ namespace DarkUI.Controls
             var g = e.Graphics;
             var rect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
 
-            var borderColor = Colors.GreySelection;
+            var borderColor = ThemeProvider.Theme.Colors.GreySelection;
 
             if (Focused && TabStop)
-                borderColor = Colors.BlueHighlight;
+                borderColor = ThemeProvider.Theme.Colors.BlueHighlight;
 
             using (var p = new Pen(borderColor, 1))
             {

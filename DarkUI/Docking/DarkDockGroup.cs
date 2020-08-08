@@ -164,18 +164,18 @@ namespace DarkUI.Docking
             switch (DockArea)
             {
                 case DarkDockArea.Document:
-                    size = _tabArea.Visible ? Consts.DocumentTabAreaSize : 0;
+                    size = _tabArea.Visible ? ThemeProvider.Theme.Sizes.DocumentTabAreaSize : 0;
                     Padding = new Padding(0, size, 0, 0);
                     _tabArea.ClientRectangle = new Rectangle(Padding.Left, 0, ClientRectangle.Width - Padding.Horizontal, size);
                     break;
                 case DarkDockArea.Left:
                 case DarkDockArea.Right:
-                    size = _tabArea.Visible ? Consts.ToolWindowTabAreaSize : 0;
+                    size = _tabArea.Visible ? ThemeProvider.Theme.Sizes.ToolWindowTabAreaSize : 0;
                     Padding = new Padding(0, 0, 0, size);
                     _tabArea.ClientRectangle = new Rectangle(Padding.Left, ClientRectangle.Bottom - size, ClientRectangle.Width - Padding.Horizontal, size);
                     break;
                 case DarkDockArea.Bottom:
-                    size = _tabArea.Visible ? Consts.ToolWindowTabAreaSize : 0;
+                    size = _tabArea.Visible ? ThemeProvider.Theme.Sizes.ToolWindowTabAreaSize : 0;
                     Padding = new Padding(1, 0, 0, size);
                     _tabArea.ClientRectangle = new Rectangle(Padding.Left, ClientRectangle.Bottom - size, ClientRectangle.Width - Padding.Horizontal, size);
                     break;
@@ -183,7 +183,7 @@ namespace DarkUI.Docking
 
             if (DockArea == DarkDockArea.Document)
             {
-                var dropdownSize = Consts.DocumentTabAreaSize;
+                var dropdownSize = ThemeProvider.Theme.Sizes.DocumentTabAreaSize;
                 _tabArea.DropdownRectangle = new Rectangle(_tabArea.ClientRectangle.Right - dropdownSize, 0, dropdownSize, dropdownSize);
             }
 
@@ -231,8 +231,8 @@ namespace DarkUI.Docking
                 tab.ShowSeparator = true;
                 width += 1;
 
-                var y = DockArea == DarkDockArea.Document ? 0 : ClientRectangle.Height - Consts.ToolWindowTabAreaSize;
-                var height = DockArea == DarkDockArea.Document ? Consts.DocumentTabAreaSize : Consts.ToolWindowTabAreaSize;
+                var y = DockArea == DarkDockArea.Document ? 0 : ClientRectangle.Height - ThemeProvider.Theme.Sizes.ToolWindowTabAreaSize;
+                var height = DockArea == DarkDockArea.Document ? ThemeProvider.Theme.Sizes.DocumentTabAreaSize : ThemeProvider.Theme.Sizes.ToolWindowTabAreaSize;
 
                 var tabRect = new Rectangle(_tabArea.ClientRectangle.Left + totalSize, y, width, height);
                 tab.ClientRectangle = tabRect;
@@ -629,7 +629,7 @@ namespace DarkUI.Docking
         {
             var g = e.Graphics;
 
-            using (var b = new SolidBrush(Colors.GreyBackground))
+            using (var b = new SolidBrush(ThemeProvider.Theme.Colors.GreyBackground))
             {
                 g.FillRectangle(b, ClientRectangle);
             }
@@ -637,7 +637,7 @@ namespace DarkUI.Docking
             if (!_tabArea.Visible)
                 return;
 
-            using (var b = new SolidBrush(Colors.MediumBackground))
+            using (var b = new SolidBrush(ThemeProvider.Theme.Colors.MediumBackground))
             {
                 g.FillRectangle(b, _tabArea.ClientRectangle);
             }
@@ -654,7 +654,7 @@ namespace DarkUI.Docking
             {
                 // Color divider
                 var isActiveGroup = DockPanel.ActiveGroup == this;
-                var divColor = isActiveGroup ? Colors.BlueSelection : Colors.GreySelection;
+                var divColor = isActiveGroup ? ThemeProvider.Theme.Colors.BlueSelection : ThemeProvider.Theme.Colors.GreySelection;
                 using (var b = new SolidBrush(divColor))
                 {
                     var divRect = new Rectangle(_tabArea.ClientRectangle.Left, _tabArea.ClientRectangle.Bottom - 2, _tabArea.ClientRectangle.Width, 2);
@@ -664,7 +664,7 @@ namespace DarkUI.Docking
                 // Content dropdown list
                 var dropdownRect = new Rectangle(_tabArea.DropdownRectangle.Left, _tabArea.DropdownRectangle.Top, _tabArea.DropdownRectangle.Width, _tabArea.DropdownRectangle.Height - 2);
 
-                using (var b = new SolidBrush(Colors.MediumBackground))
+                using (var b = new SolidBrush(ThemeProvider.Theme.Colors.MediumBackground))
                 {
                     g.FillRectangle(b, dropdownRect);
                 }
@@ -683,13 +683,13 @@ namespace DarkUI.Docking
             var isVisibleTab = VisibleContent == tab.DockContent;
             var isActiveGroup = DockPanel.ActiveGroup == this;
 
-            var bgColor = isVisibleTab ? Colors.BlueSelection : Colors.DarkBackground;
+            var bgColor = isVisibleTab ? ThemeProvider.Theme.Colors.BlueSelection : ThemeProvider.Theme.Colors.DarkBackground;
 
             if (!isActiveGroup)
-                bgColor = isVisibleTab ? Colors.GreySelection : Colors.DarkBackground;
+                bgColor = isVisibleTab ? ThemeProvider.Theme.Colors.GreySelection : ThemeProvider.Theme.Colors.DarkBackground;
 
             if (tab.Hot && !isVisibleTab)
-                bgColor = Colors.MediumBackground;
+                bgColor = ThemeProvider.Theme.Colors.MediumBackground;
 
             using (var b = new SolidBrush(bgColor))
             {
@@ -699,7 +699,7 @@ namespace DarkUI.Docking
             // Draw separators
             if (tab.ShowSeparator)
             {
-                using (var p = new Pen(Colors.DarkBorder))
+                using (var p = new Pen(ThemeProvider.Theme.Colors.DarkBorder))
                 {
                     g.DrawLine(p, tabRect.Right - 1, tabRect.Top, tabRect.Right - 1, tabRect.Bottom);
                 }
@@ -723,7 +723,7 @@ namespace DarkUI.Docking
             };
 
             // Draw text
-            var textColor = isVisibleTab ? Colors.LightText : Colors.DisabledText;
+            var textColor = isVisibleTab ? ThemeProvider.Theme.Colors.LightText : ThemeProvider.Theme.Colors.DisabledText;
             using (var b = new SolidBrush(textColor))
             {
                 var textRect = new Rectangle(tabRect.Left + 5 + xOffset, tabRect.Top, tabRect.Width - tab.CloseButtonRectangle.Width - 7 - 5 - xOffset, tabRect.Height);
@@ -751,10 +751,10 @@ namespace DarkUI.Docking
 
             var isVisibleTab = VisibleContent == tab.DockContent;
 
-            var bgColor = isVisibleTab ? Colors.GreyBackground : Colors.DarkBackground;
+            var bgColor = isVisibleTab ? ThemeProvider.Theme.Colors.GreyBackground : ThemeProvider.Theme.Colors.DarkBackground;
 
             if (tab.Hot && !isVisibleTab)
-                bgColor = Colors.MediumBackground;
+                bgColor = ThemeProvider.Theme.Colors.MediumBackground;
 
             using (var b = new SolidBrush(bgColor))
             {
@@ -764,7 +764,7 @@ namespace DarkUI.Docking
             // Draw separators
             if (tab.ShowSeparator)
             {
-                using (var p = new Pen(Colors.DarkBorder))
+                using (var p = new Pen(ThemeProvider.Theme.Colors.DarkBorder))
                 {
                     g.DrawLine(p, tabRect.Right - 1, tabRect.Top, tabRect.Right - 1, tabRect.Bottom);
                 }
@@ -778,7 +778,7 @@ namespace DarkUI.Docking
                 Trimming = StringTrimming.EllipsisCharacter
             };
 
-            var textColor = isVisibleTab ? Colors.BlueHighlight : Colors.DisabledText;
+            var textColor = isVisibleTab ? ThemeProvider.Theme.Colors.BlueHighlight : ThemeProvider.Theme.Colors.DisabledText;
             using (var b = new SolidBrush(textColor))
             {
                 var textRect = new Rectangle(tabRect.Left + 5, tabRect.Top, tabRect.Width - 5, tabRect.Height);

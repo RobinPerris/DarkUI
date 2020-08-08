@@ -1,6 +1,6 @@
 ﻿namespace DarkUI.Config
 {
-    public sealed class Consts
+    public sealed class Consts2
     {
         public static int Padding = 10;
 

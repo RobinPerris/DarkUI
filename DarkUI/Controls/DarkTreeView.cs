@@ -644,12 +644,12 @@ namespace DarkUI.Controls
         {
             DisposeIcons();
 
-            _nodeClosed = TreeViewIcons.node_closed_empty.SetColor(Colors.LightText);
-            _nodeClosedHover = TreeViewIcons.node_closed_empty.SetColor(Colors.BlueHighlight);
-            _nodeClosedHoverSelected = TreeViewIcons.node_closed_full.SetColor(Colors.LightText);
-            _nodeOpen = TreeViewIcons.node_open.SetColor(Colors.LightText);
-            _nodeOpenHover = TreeViewIcons.node_open.SetColor(Colors.BlueHighlight);
-            _nodeOpenHoverSelected = TreeViewIcons.node_open_empty.SetColor(Colors.LightText);
+            _nodeClosed = TreeViewIcons.node_closed_empty.SetColor(ThemeProvider.Theme.Colors.LightText);
+            _nodeClosedHover = TreeViewIcons.node_closed_empty.SetColor(ThemeProvider.Theme.Colors.BlueHighlight);
+            _nodeClosedHoverSelected = TreeViewIcons.node_closed_full.SetColor(ThemeProvider.Theme.Colors.LightText);
+            _nodeOpen = TreeViewIcons.node_open.SetColor(ThemeProvider.Theme.Colors.LightText);
+            _nodeOpenHover = TreeViewIcons.node_open.SetColor(ThemeProvider.Theme.Colors.BlueHighlight);
+            _nodeOpenHoverSelected = TreeViewIcons.node_open_empty.SetColor(ThemeProvider.Theme.Colors.LightText);
         }
 
         private void DisposeIcons()
@@ -1193,6 +1193,12 @@ namespace DarkUI.Controls
 
         protected override void PaintContent(Graphics g)
         {
+            // Fill body
+            using (var b = new SolidBrush(ThemeProvider.Theme.Colors.GreyBackground))
+            {
+                g.FillRectangle(b, ClientRectangle);
+            }
+
             foreach (var node in Nodes)
             {
                 DrawNode(node, g);
@@ -1204,13 +1210,13 @@ namespace DarkUI.Controls
             var rect = GetNodeFullRowArea(node);
 
             // 1. Draw background
-            var bgColor = node.Odd ? Colors.HeaderBackground : Colors.GreyBackground;
+            var bgColor = node.Odd ? ThemeProvider.Theme.Colors.HeaderBackground : ThemeProvider.Theme.Colors.GreyBackground;
 
             if (SelectedNodes.Count > 0 && SelectedNodes.Contains(node))
-                bgColor = Focused ? Colors.BlueSelection : Colors.GreySelection;
+                bgColor = Focused ? ThemeProvider.Theme.Colors.BlueSelection : ThemeProvider.Theme.Colors.GreySelection;
 
             if (IsDragging && _dropNode == node)
-                bgColor = Focused ? Colors.BlueSelection : Colors.GreySelection;
+                bgColor = Focused ? ThemeProvider.Theme.Colors.BlueSelection : ThemeProvider.Theme.Colors.GreySelection;
 
             using (var b = new SolidBrush(bgColor))
             {
@@ -1250,7 +1256,7 @@ namespace DarkUI.Controls
             }
 
             // 4. Draw text
-            using (var b = new SolidBrush(Colors.LightText))
+            using (var b = new SolidBrush(ThemeProvider.Theme.Colors.LightText))
             {
                 var stringFormat = new StringFormat
                 {

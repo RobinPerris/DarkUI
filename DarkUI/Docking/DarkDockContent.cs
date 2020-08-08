@@ -87,7 +87,9 @@ namespace DarkUI.Docking
         #region Constructor Region
 
         public DarkDockContent()
-        { }
+        {
+            BackColor = System.Drawing.Color.Transparent;// ThemeProvider.Theme.Colors.GreyBackground;
+        }
 
         #endregion
 

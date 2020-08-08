@@ -40,7 +40,7 @@ namespace DarkUI.Renderers
 
             if (e.ToolStrip.GetType() == typeof(ToolStripOverflow))
             {
-                using (var p = new Pen(Colors.GreyBackground))
+                using (var p = new Pen(ThemeProvider.Theme.Colors.GreyBackground))
                 {
                     var rect = new Rectangle(e.AffectedBounds.Left, e.AffectedBounds.Top, e.AffectedBounds.Width - 1, e.AffectedBounds.Height - 1);
                     g.DrawRectangle(p, rect);
@@ -62,7 +62,7 @@ namespace DarkUI.Renderers
 
             if (e.Item.Selected || e.Item.Pressed)
             {
-                using (var b = new SolidBrush(Colors.GreySelection))
+                using (var b = new SolidBrush(ThemeProvider.Theme.Colors.GreySelection))
                 {
                     g.FillRectangle(b, rect);
                 }
@@ -74,7 +74,7 @@ namespace DarkUI.Renderers
 
                 if (castItem.Checked)
                 {
-                    using (var b = new SolidBrush(Colors.GreySelection))
+                    using (var b = new SolidBrush(ThemeProvider.Theme.Colors.GreySelection))
                     {
                         g.FillRectangle(b, rect);
                     }
@@ -83,7 +83,7 @@ namespace DarkUI.Renderers
                 if (castItem.Checked && castItem.Selected)
                 {
                     var modRect = new Rectangle(rect.Left, rect.Top, rect.Width - 1, rect.Height - 1);
-                    using (var p = new Pen(Colors.GreyHighlight))
+                    using (var p = new Pen(ThemeProvider.Theme.Colors.GreyHighlight))
                     {
                         g.DrawRectangle(p, modRect);
                     }
@@ -99,7 +99,7 @@ namespace DarkUI.Renderers
 
             if (e.Item.Selected || e.Item.Pressed)
             {
-                using (var b = new SolidBrush(Colors.GreySelection))
+                using (var b = new SolidBrush(ThemeProvider.Theme.Colors.GreySelection))
                 {
                     g.FillRectangle(b, rect);
                 }
@@ -113,7 +113,7 @@ namespace DarkUI.Renderers
 
             var g = e.Graphics;
 
-            using (var img = MenuIcons.grip.SetColor(Colors.LightBorder))
+            using (var img = MenuIcons.grip.SetColor(ThemeProvider.Theme.Colors.LightBorder))
             {
                 g.DrawImageUnscaled(img, new Point(e.AffectedBounds.Left, e.AffectedBounds.Top));
             }
@@ -132,12 +132,12 @@ namespace DarkUI.Renderers
 
             var rect = new Rectangle(3, 3, 2, e.Item.Height - 4);
 
-            using (var p = new Pen(Colors.DarkBorder))
+            using (var p = new Pen(ThemeProvider.Theme.Colors.DarkBorder))
             {
                 g.DrawLine(p, rect.Left, rect.Top, rect.Left, rect.Height);
             }
 
-            using (var p = new Pen(Colors.LightBorder))
+            using (var p = new Pen(ThemeProvider.Theme.Colors.LightBorder))
             {
                 g.DrawLine(p, rect.Left + 1, rect.Top, rect.Left + 1, rect.Height);
             }
@@ -164,22 +164,22 @@ namespace DarkUI.Renderers
 
             var castItem = (ToolStripOverflowButton)e.Item;
 
-            var bgColor = BasicColors.White;
+            var bgColor = BasicThemeProvider.Theme.Colors.White;
             if (castItem.Selected)
-                bgColor = StyleColors.Weak(style);
+                bgColor = StyleThemeProvider.Theme.Colors.Weak(style);
             if (castItem.Pressed)
-                bgColor = StyleColors.Medium(style);
+                bgColor = StyleThemeProvider.Theme.Colors.Medium(style);
 
             using (var b = new SolidBrush(bgColor))
             {
                 g.FillRectangle(b, rect);
             }
 
-            var fgColor = BasicColors.Grey;
+            var fgColor = BasicThemeProvider.Theme.Colors.Grey;
             if (castItem.Selected)
-                fgColor = StyleColors.Medium(style);
+                fgColor = StyleThemeProvider.Theme.Colors.Medium(style);
             if (castItem.Pressed)
-                fgColor = StyleColors.Strong(style);
+                fgColor = StyleThemeProvider.Theme.Colors.Strong(style);
 
             using (var p = new Pen(fgColor))
             {
@@ -187,7 +187,7 @@ namespace DarkUI.Renderers
                 g.DrawRectangle(p, modRect);
             }
 
-            using (var img = MenuIcons.overflow.SetColor(BasicColors.MediumGrey))
+            using (var img = MenuIcons.overflow.SetColor(BasicThemeProvider.Theme.Colors.MediumGrey))
             {
                 g.DrawImageUnscaled(img, e.Item.Width - 13, e.Item.Height - 9);
             }*/

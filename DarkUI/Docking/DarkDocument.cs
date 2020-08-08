@@ -21,7 +21,7 @@ namespace DarkUI.Docking
 
         public DarkDocument()
         {
-            BackColor = Colors.GreyBackground;
+            BackColor = ThemeProvider.Theme.Colors.GreyBackground;
             base.DefaultDockArea = DarkDockArea.Document;
         }
 

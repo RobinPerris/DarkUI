@@ -31,7 +31,9 @@ namespace Example
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlMain = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cmbList = new DarkUI.Controls.DarkDropdownList();
+            this.darkTitle3 = new DarkUI.Controls.DarkTitle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.darkRadioButton3 = new DarkUI.Controls.DarkRadioButton();
             this.darkRadioButton2 = new DarkUI.Controls.DarkRadioButton();
@@ -43,26 +45,40 @@ namespace Example
             this.darkCheckBox1 = new DarkUI.Controls.DarkCheckBox();
             this.darkTitle2 = new DarkUI.Controls.DarkTitle();
             this.darkScrollBar1 = new DarkUI.Controls.DarkScrollBar();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.darkTitle3 = new DarkUI.Controls.DarkTitle();
-            this.cmbList = new DarkUI.Controls.DarkDropdownList();
-            this.pnlMain.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlMain
+            // panel3
             // 
-            this.pnlMain.Controls.Add(this.panel3);
-            this.pnlMain.Controls.Add(this.panel1);
-            this.pnlMain.Controls.Add(this.panel2);
-            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(0, 25);
-            this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Padding = new System.Windows.Forms.Padding(10, 10, 5, 10);
-            this.pnlMain.Size = new System.Drawing.Size(265, 425);
-            this.pnlMain.TabIndex = 0;
+            this.panel3.AutoSize = true;
+            this.panel3.Controls.Add(this.cmbList);
+            this.panel3.Controls.Add(this.darkTitle3);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(10, 196);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.panel3.Size = new System.Drawing.Size(250, 62);
+            this.panel3.TabIndex = 3;
+            // 
+            // cmbList
+            // 
+            this.cmbList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cmbList.Location = new System.Drawing.Point(0, 26);
+            this.cmbList.Name = "cmbList";
+            this.cmbList.Size = new System.Drawing.Size(250, 26);
+            this.cmbList.TabIndex = 8;
+            this.cmbList.Text = "darkDropdownList1";
+            // 
+            // darkTitle3
+            // 
+            this.darkTitle3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.darkTitle3.Location = new System.Drawing.Point(0, 0);
+            this.darkTitle3.Name = "darkTitle3";
+            this.darkTitle3.Size = new System.Drawing.Size(250, 26);
+            this.darkTitle3.TabIndex = 7;
+            this.darkTitle3.Text = "Lists";
             // 
             // panel1
             // 
@@ -190,41 +206,13 @@ namespace Example
             this.darkScrollBar1.TabIndex = 1;
             this.darkScrollBar1.Text = "darkScrollBar1";
             // 
-            // panel3
-            // 
-            this.panel3.AutoSize = true;
-            this.panel3.Controls.Add(this.cmbList);
-            this.panel3.Controls.Add(this.darkTitle3);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(10, 196);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.panel3.Size = new System.Drawing.Size(250, 62);
-            this.panel3.TabIndex = 3;
-            // 
-            // darkTitle3
-            // 
-            this.darkTitle3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.darkTitle3.Location = new System.Drawing.Point(0, 0);
-            this.darkTitle3.Name = "darkTitle3";
-            this.darkTitle3.Size = new System.Drawing.Size(250, 26);
-            this.darkTitle3.TabIndex = 7;
-            this.darkTitle3.Text = "Lists";
-            // 
-            // cmbList
-            // 
-            this.cmbList.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cmbList.Location = new System.Drawing.Point(0, 26);
-            this.cmbList.Name = "cmbList";
-            this.cmbList.Size = new System.Drawing.Size(250, 26);
-            this.cmbList.TabIndex = 8;
-            this.cmbList.Text = "darkDropdownList1";
-            // 
             // DockProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnlMain);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.darkScrollBar1);
             this.DefaultDockArea = DarkUI.Docking.DarkDockArea.Right;
             this.DockText = "Properties";
@@ -233,20 +221,17 @@ namespace Example
             this.Name = "DockProperties";
             this.SerializationKey = "DockProperties";
             this.Size = new System.Drawing.Size(280, 450);
-            this.pnlMain.ResumeLayout(false);
-            this.pnlMain.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel panel1;
         private DarkUI.Controls.DarkRadioButton darkRadioButton3;
         private DarkUI.Controls.DarkRadioButton darkRadioButton2;

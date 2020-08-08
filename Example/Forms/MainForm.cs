@@ -1,4 +1,5 @@
-﻿using DarkUI.Docking;
+﻿using DarkUI.Config;
+using DarkUI.Docking;
 using DarkUI.Forms;
 using DarkUI.Win32;
 using System;
@@ -191,6 +192,20 @@ namespace Example
         {
             var about = new DialogAbout();
             about.ShowDialog();
+        }
+
+        private void darkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThemeProvider.Theme = new DarkTheme();
+            BackColor = ThemeProvider.Theme.Colors.GreyBackground;
+            this.Refresh();
+        }
+
+        private void lightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThemeProvider.Theme = new LightTheme();
+            BackColor = ThemeProvider.Theme.Colors.GreyBackground;
+            this.Refresh();
         }
 
         #endregion

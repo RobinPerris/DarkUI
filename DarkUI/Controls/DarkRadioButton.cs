@@ -246,39 +246,39 @@ namespace DarkUI.Controls
             var g = e.Graphics;
             var rect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
 
-            var size = Consts.RadioButtonSize;
+            var size = ThemeProvider.Theme.Sizes.RadioButtonSize;
 
-            var textColor = Colors.LightText;
-            var borderColor = Colors.LightText;
-            var fillColor = Colors.LightestBackground;
+            var textColor = ThemeProvider.Theme.Colors.LightText;
+            var borderColor = ThemeProvider.Theme.Colors.LightText;
+            var fillColor = ThemeProvider.Theme.Colors.LightestBackground;
 
             if (Enabled)
             {
                 if (Focused)
                 {
-                    borderColor = Colors.BlueHighlight;
-                    fillColor = Colors.BlueSelection;
+                    borderColor = ThemeProvider.Theme.Colors.BlueHighlight;
+                    fillColor = ThemeProvider.Theme.Colors.BlueSelection;
                 }
 
                 if (_controlState == DarkControlState.Hover)
                 {
-                    borderColor = Colors.BlueHighlight;
-                    fillColor = Colors.BlueSelection;
+                    borderColor = ThemeProvider.Theme.Colors.BlueHighlight;
+                    fillColor = ThemeProvider.Theme.Colors.BlueSelection;
                 }
                 else if (_controlState == DarkControlState.Pressed)
                 {
-                    borderColor = Colors.GreyHighlight;
-                    fillColor = Colors.GreySelection;
+                    borderColor = ThemeProvider.Theme.Colors.GreyHighlight;
+                    fillColor = ThemeProvider.Theme.Colors.GreySelection;
                 }
             }
             else
             {
-                textColor = Colors.DisabledText;
-                borderColor = Colors.GreyHighlight;
-                fillColor = Colors.GreySelection;
+                textColor = ThemeProvider.Theme.Colors.DisabledText;
+                borderColor = ThemeProvider.Theme.Colors.GreyHighlight;
+                fillColor = ThemeProvider.Theme.Colors.GreySelection;
             }
 
-            using (var b = new SolidBrush(Colors.GreyBackground))
+            using (var b = new SolidBrush(ThemeProvider.Theme.Colors.GreyBackground))
             {
                 g.FillRectangle(b, rect);
             }
