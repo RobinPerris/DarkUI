@@ -104,6 +104,8 @@ namespace DarkUI.Controls
 
         private void PaintCombobox()
         {
+            if (ClientRectangle.Width <= 0 || ClientRectangle.Height <= 0)
+                _buffer = new Bitmap(1, 1);
             if (_buffer == null)
                 _buffer = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
 
