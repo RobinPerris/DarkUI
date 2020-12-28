@@ -1265,7 +1265,17 @@ namespace DarkUI.Controls
             if (node.Expanded)
             {
                 foreach (var childNode in node.Nodes)
-                    DrawNode(childNode, g);
+                {
+                    // bool isInTopView =  Viewport.Top  <= childNode.FullArea.Y; // TODO, doesn't work well for childNodes of childNodes.
+                    bool isInBottomView = childNode.FullArea.Y < Viewport.Top + Viewport.Height;
+                    bool isPastBottomView = childNode.FullArea.Y > Viewport.Top + Viewport.Height;
+
+                    if (/*isInTopView &&*/ isInBottomView)
+                        DrawNode(childNode, g);
+
+                    if (isPastBottomView)
+                        break;
+                }
             }
         }
 
