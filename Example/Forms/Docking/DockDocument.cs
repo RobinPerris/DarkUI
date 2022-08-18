@@ -1,5 +1,4 @@
-﻿using DarkUI.Config;
-using DarkUI.Controls;
+﻿using DarkUI.Controls;
 using DarkUI.Docking;
 using DarkUI.Forms;
 using System.Drawing;

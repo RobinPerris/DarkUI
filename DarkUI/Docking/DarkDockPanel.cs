@@ -332,4 +332,3 @@ namespace DarkUI.Docking
         #endregion
     }
 }
-    

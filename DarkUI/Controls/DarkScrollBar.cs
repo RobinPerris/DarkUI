@@ -1,5 +1,4 @@
 ﻿using DarkUI.Config;
-using DarkUI.Icons;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -36,7 +35,6 @@ namespace DarkUI.Controls
         private bool _upArrowHot;
         private bool _downArrowHot;
 
-        private bool _thumbClicked;
         private bool _upArrowClicked;
         private bool _downArrowClicked;
 
@@ -258,7 +256,6 @@ namespace DarkUI.Controls
 
             _isScrolling = false;
 
-            _thumbClicked = false;
             _upArrowClicked = false;
             _downArrowClicked = false;
 
@@ -419,7 +416,7 @@ namespace DarkUI.Controls
         }
 
         private void UpdateThumb(bool forceRefresh = false)
-        { 
+        {
             if (ViewSize >= Maximum)
                 return;
 

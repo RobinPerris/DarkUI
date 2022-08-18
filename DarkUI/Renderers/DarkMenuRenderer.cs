@@ -1,5 +1,4 @@
 ﻿using DarkUI.Config;
-using DarkUI.Controls;
 using DarkUI.Icons;
 using System;
 using System.Drawing;
@@ -109,7 +108,7 @@ namespace DarkUI.Renderers
 
             if (e.Item.Enabled)
             {
-                
+
                 var bgColor = e.Item.Selected ? Colors.GreyHighlight : e.Item.BackColor;
 
                 // Normal item

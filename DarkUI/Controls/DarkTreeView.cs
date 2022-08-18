@@ -575,7 +575,7 @@ namespace DarkUI.Controls
             var isOdd = false;
             var index = 0;
             DarkTreeNode prevNode = null;
-            
+
             for (var i = 0; i <= Nodes.Count - 1; i++)
             {
                 var node = Nodes[i];

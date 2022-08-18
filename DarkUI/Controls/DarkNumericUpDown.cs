@@ -28,7 +28,7 @@ namespace DarkUI.Controls
 
             base.ForeColor = Color.Gainsboro;
             base.BackColor = Colors.LightBackground;
-            
+
             Controls[0].Paint += DarkNumericUpDown_Paint;
 
             try

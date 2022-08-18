@@ -35,7 +35,7 @@ namespace DarkUI.Docking
         public DarkDockTab ClickedCloseButton { get; set; }
 
         #endregion
-        
+
         #region Constructor Region
 
         public DarkDockTabArea(DarkDockArea dockArea)

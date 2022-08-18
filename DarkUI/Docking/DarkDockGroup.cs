@@ -439,7 +439,7 @@ namespace DarkUI.Docking
                     if (_dragTab.DockContent.Order < maxOrder)
                     {
                         var otherTabs = _tabs.Values.Where(t => t.DockContent.Order == _dragTab.DockContent.Order + 1).ToList();
-                        if(otherTabs.Count == 0)
+                        if (otherTabs.Count == 0)
                             return;
 
                         var otherTab = otherTabs.First();
@@ -531,7 +531,7 @@ namespace DarkUI.Docking
                         EnsureVisible();
 
                         _dragTab = tab;
-   
+
                         return;
                     }
                 }
