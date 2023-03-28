@@ -2,7 +2,6 @@
 using DarkUI.Config;
 using DarkUI.Extensions;
 using DarkUI.Forms;
-using DarkUI.Icons;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
